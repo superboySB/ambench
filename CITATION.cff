@@ -46,10 +46,10 @@ authors:
   - given-names: Guanya
     family-names: Shi
 preferred-citation:
-  type: conference-paper
+  type: article
   title: "AM-Bench: A Modular Simulation Suite and Benchmark for Aerial Manipulation Policy Learning"
   year: 2026
-  collection-title: "Proceedings of the Conference on Robot Learning (CoRL)"
+  journal: "arXiv preprint arXiv:2609.00641"
   identifiers:
     - type: other
       value: "arXiv:2609.00641"

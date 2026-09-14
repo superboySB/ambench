@@ -102,17 +102,17 @@ configuration, formatting, building the docs, and simulator performance tuning.
 If you use AM-Bench in your research, please cite:
 
 ```bibtex
-@inproceedings{wang2026ambench,
-  title     = {{AM-Bench}: A Modular Simulation Suite and Benchmark for Aerial Manipulation Policy Learning},
-  author    = {Wang, Yutong and Lee, Dongjae and Guo, Xiaofeng and Zhan, Yuanzhu
-               and Jiang, Yufei and Saravanan, Bavin and Cao, Muqing and Xie, Jia
-               and Mao, Chenyang and Scherer, Sebastian and Geng, Junyi and Shi, Guanya},
-  booktitle = {Conference on Robot Learning (CoRL)},
-  year      = {2026},
-  eprint    = {2609.00641},
+@article{wang2026ambench,
+  title  = {{AM-Bench}: A Modular Simulation Suite and Benchmark for Aerial Manipulation Policy Learning},
+  author = {Wang, Yutong and Lee, Dongjae and Guo, Xiaofeng and Zhan, Yuanzhu and
+            Jiang, Yufei and Saravanan, Bavin and Cao, Muqing and Xie, Jia and
+            Mao, Chenyang and Scherer, Sebastian and Geng, Junyi and Shi, Guanya},
+  year   = {2026},
+  journal = {arXiv preprint arXiv:2609.00641},
+  eprint = {2609.00641},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.RO},
-  url       = {https://arxiv.org/abs/2609.00641}
+  primaryClass = {cs.RO},
+  url = {https://arxiv.org/abs/2609.00641}
 }
 ```
 

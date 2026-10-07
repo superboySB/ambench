@@ -11,6 +11,28 @@
 | 仿真、低层控制、数据采集 | 本地 RTX 4070 Ti SUPER 16 GiB | `ambench-sim-research` | 仓库的 `datasets/`、`outputs/`、`videos/`（均不提交） |
 | 高层策略训练与推理 | `tencent-86` 上空闲编号最小的 GPU；部署时重新检查 | `ambench-policy-research` | `/diff/dzp_is_sb/ambench-research` |
 
+```mermaid
+flowchart LR
+  subgraph Local[本地仿真 Docker]
+    Isaac[Isaac Sim / Isaac Lab]
+    Low[PID / L1 / MPC 与 IK]
+    Expert[十二类脚本专家]
+    Isaac --> Low
+    Expert --> Low
+  end
+  Data[Canonical LeRobot 数据]
+  subgraph Remote[远端策略 Docker：一张空闲 GPU]
+    Model[ACT / DP / π₀ / π₀.₅]
+    Train[数据转换与训练]
+    Train --> Model
+  end
+  Isaac --> Data
+  Data -->|rsync| Train
+  Isaac -->|观察：SSH 隧道| Model
+  Model -->|动作：HTTP / WebSocket| Low
+  Low --> Isaac
+```
+
 本机已经把现有 `~/.ssh/id_ed25519.pub` 安装到 `tencent-86`，可用下面的只读检查确认免密登录。换一台本地机器时，先准备自己的公钥并执行 `ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 22 tencent-86`，输入一次该服务器的登录凭据，随后再运行检查命令。不要把密码、私钥、Hugging Face token 或模型文件写进 Git。
 
 ```bash
@@ -84,7 +106,7 @@ docker exec -it ambench-sim-research python scripts/environments/teleop_se3_agen
 docker compose -f docker/compose.sim.yml up -d --no-deps --force-recreate sim
 ```
 
-正式录制人工示范时在容器内执行 `python scripts/data/record_demos_teleop.py --help`，选择 keyboard、SpaceMouse 或 gamepad，再按 `usage.md` 的 canonical 数据验证步骤检查产物。设备透传取决于设备类型；键盘使用 X11 会话。无桌面的服务器继续使用上一节的无头 compose 配置。
+正式录制人工示范时在容器内执行 `python scripts/data/record_demos_teleop.py --task PressButton-Am-EE-Abs-PID-Direct-v0 --help`，选择 keyboard、SpaceMouse 或 gamepad，再按 `usage.md` 的 canonical 数据验证步骤检查产物。Isaac Lab 2.3.2 会在显示帮助前预解析必填参数，因此这里也传入 task。设备透传取决于设备类型；键盘使用 X11 会话。无桌面的服务器继续使用上一节的无头 compose 配置。
 
 ## 4. 上传并启动远端策略容器
 

@@ -106,6 +106,7 @@ from openpi_client import websocket_client_policy
 import ambench.tasks  # noqa: F401
 from ambench.evaluation import SuccessCriteriaTracker
 from ambench.recording import RecordVideo
+from ambench.recording.paths import write_env_cfg
 from ambench_learn.data.action_resampling import compute_stride
 from ambench_learn.data.action_semantics import (
     resolve_eval_action_semantics as _resolve_eval_action_semantics,
@@ -280,6 +281,7 @@ def main() -> None:
         scene_camera_cfg=scene_camera_cfg,
     )
     env = gym.make(args.task, cfg=env_cfg).unwrapped
+    write_env_cfg(run_dir, env_cfg)
     env_fps = round(1.0 / float(env.unwrapped.dt))
     args.action_execution_stride = 1
     if args.policy_target_hz is not None:

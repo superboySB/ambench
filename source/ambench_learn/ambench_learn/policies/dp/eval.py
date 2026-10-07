@@ -84,6 +84,7 @@ from isaaclab_tasks.utils import parse_env_cfg
 import ambench.tasks  # noqa: F401
 from ambench.evaluation import SuccessCriteriaTracker
 from ambench.recording import RecordVideo
+from ambench.recording.paths import write_env_cfg
 from ambench.utils.camera_utils import get_camera_rgb
 from ambench_learn.data.action_semantics import (
     BASE_JOINT_ABSOLUTE,
@@ -549,6 +550,7 @@ def main():
     video_camera_names = validate_video_camera_names(env, args_cli.video_camera_names) if args_cli.save_video else []
 
     eval_save_dir = resolve_eval_output_dir(policy="DP", task=env_name, output_dir=args_cli.output_dir)
+    write_env_cfg(eval_save_dir, env_cfg)
     eval_run = EvalRun(
         output_dir=eval_save_dir,
         policy="DP",
@@ -563,6 +565,7 @@ def main():
             "DP action mode": action_mode,
             "Hydra workspace": hydra_workspace,
             "Policy ID": args_cli.policy_id,
+            "Server metadata": server_info,
         },
     )
     eval_run.print_startup()

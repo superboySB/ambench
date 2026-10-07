@@ -125,6 +125,7 @@ from isaaclab_tasks.utils import parse_env_cfg
 import ambench.tasks  # noqa: F401
 from ambench.evaluation import SuccessCriteriaTracker
 from ambench.recording import RecordVideo
+from ambench.recording.paths import write_env_cfg
 from ambench.utils.camera_utils import get_camera_rgb
 from ambench.utils.image_processing import prepare_rgb_tensor
 
@@ -546,6 +547,7 @@ def main() -> None:
         else ["ee_pos", "ee_quat", "gripper_width"]
     )
     eval_save_dir = resolve_eval_output_dir(policy="ACT", task=env_name, output_dir=args_cli.output_dir)
+    write_env_cfg(eval_save_dir, env_cfg)
 
     env, video_folder = wrap_video(
         env,
@@ -577,6 +579,7 @@ def main() -> None:
         metadata={
             **build_common_eval_metadata(args_cli, output_dir=eval_save_dir),
             "Policy ID": args_cli.policy_id,
+            "Server metadata": server_info if remote_client is not None else None,
             "Eval overrides": eval_overrides or None,
         },
     )

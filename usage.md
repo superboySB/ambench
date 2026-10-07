@@ -234,7 +234,7 @@ python scripts/data/record_demos_scripted.py \
   --repo_id am_bench/pressbutton_ee_absolute \
   --state_keys ee_pos ee_quat gripper_width \
   --task_prompt "press the button" \
-  --step_hz 120 --num_envs 1 --num_demos 1 --env_length_s 20 \
+  --step_hz 120 --num_envs 1 --num_demos 1 --env_length_s 20 --seed 42 \
   --camera_names ee_camera --video --headless --device cuda:0
 ```
 
@@ -262,7 +262,7 @@ python scripts/data/record_demos_scripted.py \
   --repo_id am_bench/press_button_base_joint_absolute \
   --state_keys base_pos base_quat arm_joint_pos gripper_width \
   --task_prompt "press the button" \
-  --step_hz 120 --num_envs 1 --num_demos 1 --env_length_s 20 \
+  --step_hz 120 --num_envs 1 --num_demos 1 --env_length_s 20 --seed 42 \
   --camera_names ee_camera \
   --headless --device cuda:0
 ```
@@ -283,7 +283,7 @@ python scripts/research/merge_scripted_results.py \
   --expect-families 12
 ```
 
-人工遥操作使用 `python scripts/data/record_demos_teleop.py --help` 查看设备选项；它需要可见的 Isaac Sim 窗口和受支持输入设备。与脚本录制相同，遥操作输出也是 canonical LeRobot 数据。
+人工遥操作使用 `python scripts/data/record_demos_teleop.py --task PressButton-Am-EE-Abs-PID-Direct-v0 --help` 查看设备选项；它需要可见的 Isaac Sim 窗口和受支持输入设备。与脚本录制相同，遥操作输出也是 canonical LeRobot 数据。
 
 ### 4.1 数据格式与派生格式
 

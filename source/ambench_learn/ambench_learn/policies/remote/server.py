@@ -47,6 +47,7 @@ class ACTBackend:
         pretrained_dir = checkpoint if checkpoint.name == "pretrained_model" else checkpoint / "pretrained_model"
         if not pretrained_dir.is_dir():
             raise FileNotFoundError(f"LeRobot pretrained_model directory not found: {pretrained_dir}")
+        self.checkpoint = pretrained_dir
         lerobot_act_processor.make_act_pre_post_processors = make_act_pre_post_processors
         cli_overrides = [f"--device={device}"]
         if n_action_steps is not None:
@@ -77,6 +78,7 @@ class ACTBackend:
         }
         return {
             "policy": self.policy_name,
+            "checkpoint": str(self.checkpoint),
             "image_features": image_features,
             "action_representation": getattr(self.config, "action_representation", None),
             "n_action_steps": getattr(self.config, "n_action_steps", None),
@@ -171,6 +173,7 @@ class DPBackend:
 
         if not checkpoint.is_file():
             raise FileNotFoundError(f"Diffusion Policy checkpoint not found: {checkpoint}")
+        self.checkpoint = checkpoint
         OmegaConf.register_new_resolver("eval", eval, replace=True)
         with checkpoint.open("rb") as file:
             payload = torch.load(file, map_location="cpu", pickle_module=dill)
@@ -215,6 +218,7 @@ class DPBackend:
         }
         return {
             "policy": self.policy_name,
+            "checkpoint": str(self.checkpoint),
             "action_mode": self.action_mode,
             "action_pose_repr": self.cfg.task.pose_repr.action_pose_repr,
             "hydra_workspace": self.cfg._target_,

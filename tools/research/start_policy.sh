@@ -5,6 +5,7 @@ set -euo pipefail
 
 SSH_TARGET=tencent-86
 SSH_OPTIONS=(-p 22 -o BatchMode=yes -o PasswordAuthentication=no -o PreferredAuthentications=publickey -o StrictHostKeyChecking=accept-new)
+INFERENCE_SEED=42
 
 if [[ $# -lt 2 || $# -gt 3 ]]; then
   echo "Usage: $0 act|dp CHECKPOINT | pi CONFIG CHECKPOINT" >&2
@@ -29,12 +30,13 @@ else
   exit 2
 fi
 
-printf -v REMOTE_ARGS '%q ' "$POLICY" "$CHECKPOINT" "$CONFIG"
+printf -v REMOTE_ARGS '%q ' "$POLICY" "$CHECKPOINT" "$CONFIG" "$INFERENCE_SEED"
 ssh "${SSH_OPTIONS[@]}" "$SSH_TARGET" "bash -s -- $REMOTE_ARGS" <<'REMOTE'
 set -euo pipefail
 policy="$1"
 checkpoint="$2"
 config="$3"
+inference_seed="$4"
 container=ambench-policy-research
 
 if docker info >/dev/null 2>&1; then
@@ -47,13 +49,35 @@ else
 fi
 
 "${docker_command[@]}" container inspect "$container" >/dev/null
-"${docker_command[@]}" exec -i "$container" bash -s -- "$policy" "$checkpoint" "$config" <<'CONTAINER'
+"${docker_command[@]}" exec -i "$container" bash -s -- "$policy" "$checkpoint" "$config" "$inference_seed" <<'CONTAINER'
 set -euo pipefail
 policy="$1"
 checkpoint="$2"
 config="$3"
+inference_seed="$4"
 pid_file=/data/outputs/policy-server.pid
 log_file="/data/outputs/policy-server-${policy}.log"
+seed_runner='
+import random
+import runpy
+import sys
+
+import numpy as np
+import torch
+
+target, seed = sys.argv[1:3]
+del sys.argv[1:3]
+seed = int(seed)
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
+sys.argv[0] = target
+print(f"REMOTE_INFERENCE_SEED={seed}", flush=True)
+if target.endswith(".py"):
+    runpy.run_path(target, run_name="__main__")
+else:
+    runpy.run_module(target, run_name="__main__")
+'
 
 if [[ -s "$pid_file" ]]; then
   previous_pid="$(cat "$pid_file")"
@@ -76,13 +100,15 @@ fi
 case "$policy" in
   act)
     [[ -e "$checkpoint" ]] || { echo "Missing ACT checkpoint: $checkpoint" >&2; exit 1; }
-    nohup /opt/venvs/act/bin/python -m ambench_learn.policies.remote.server \
+    nohup env PYTHONHASHSEED="$inference_seed" /opt/venvs/act/bin/python \
+      -c "$seed_runner" ambench_learn.policies.remote.server "$inference_seed" \
       --policy act --checkpoint "$checkpoint" --host 0.0.0.0 --port 8001 --device cuda:0 \
       > "$log_file" 2>&1 < /dev/null &
     ;;
   dp)
     [[ -e "$checkpoint" ]] || { echo "Missing DP checkpoint: $checkpoint" >&2; exit 1; }
-    nohup /opt/venvs/dp/bin/python -m ambench_learn.policies.remote.server \
+    nohup env PYTHONHASHSEED="$inference_seed" /opt/venvs/dp/bin/python \
+      -c "$seed_runner" ambench_learn.policies.remote.server "$inference_seed" \
       --policy dp --checkpoint "$checkpoint" --host 0.0.0.0 --port 8001 --device cuda:0 \
       > "$log_file" 2>&1 < /dev/null &
     ;;
@@ -94,7 +120,8 @@ case "$policy" in
     cd /opt/openpi
     # OpenPI wraps sample_actions with torch.compile(max-autotune). Disable the
     # first-request compile for reproducible short inference checks.
-    nohup env TORCHDYNAMO_DISABLE=1 /opt/openpi/.venv/bin/python scripts/serve_policy.py \
+    nohup env TORCHDYNAMO_DISABLE=1 PYTHONHASHSEED="$inference_seed" /opt/openpi/.venv/bin/python \
+      -c "$seed_runner" scripts/serve_policy.py "$inference_seed" \
       --port 8000 policy:checkpoint "--policy.config=$config" "--policy.dir=$checkpoint" \
       > "$log_file" 2>&1 < /dev/null &
     ;;

@@ -86,7 +86,13 @@ def run_probe() -> dict[str, object]:
     env = None
     stage = "configure"
     started = time.monotonic()
-    result: dict[str, object] = {"task_id": args.task, "status": "failed", "stage": stage, "steps_completed": 0}
+    result: dict[str, object] = {
+        "task_id": args.task,
+        "status": "failed",
+        "stage": stage,
+        "steps_completed": 0,
+        "seed": args.seed,
+    }
     try:
         print(f"AMBENCH_RESEARCH_STAGE={stage}", flush=True)
         env_cfg = parse_env_cfg(

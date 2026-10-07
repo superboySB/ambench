@@ -4,9 +4,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "cabinetpickplace_ee_pid.png",
-    "image_sha256": "d2f345bf5efb1b72117c4d404eabd48c06a4c98945bd4984923fd7b4bdc00a84",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/CabinetPickPlace-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "7a1728da5632496709bbe9e7bcc3f11858530b8ec42e7458a78289e565e5ed36",
+    "image_sha256": "a395d5b0d9fa46cd209b67c5fdf54c2f918d2a20f329d3e9f7ddffa5a518e2ec",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/CabinetPickPlace-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "10d4745e8dba33b9c9cbeb0917f154461d5ba0f5a424134bee73fffa6a8bd3c0",
     "task_id": "CabinetPickPlace-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -14,9 +14,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "frameassembly_ee_pid.png",
-    "image_sha256": "de2d460c51df5bec9685a05143e9d6c65677e64b566eab94cce44a68caa68bfd",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/FrameAssembly-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "a53974258f7f771affb0826ae620bdaf16bdef2bff88c9163342e69fc77dd2eb",
+    "image_sha256": "b0ae01531d952c7a76ad6d1627c970ae15d1c5cf6a7fc145d1129f231a2d4a22",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/FrameAssembly-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "1ec291e9711aedad8b9936dd1d0437dff05fcc22de92801ad4c432be9733a8f6",
     "task_id": "FrameAssembly-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -24,9 +24,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "lemonharvesting_ee_pid.png",
-    "image_sha256": "023a71b459933f6c0537cf1fb6cc345d5c22da14d92934d3dbf18f1c29d2d842",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/LemonHarvesting-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "a5d40f4b27bd8bbe071c46e84cf3916a8628546d577e76ff9b5738f5d1d2247b",
+    "image_sha256": "0392ec7e546662db85c9cce0ec8a2cb84daba7fd660d1e10afc8f18413dd67c3",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/LemonHarvesting-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "29447d00b85a7a98492a1076b77976c5b7f166c1b655a29903b25caaaa01d65a",
     "task_id": "LemonHarvesting-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -34,9 +34,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "ndt_ee_pid.png",
-    "image_sha256": "eb6472cc1b01559ecdb0dfa40c8c7fdb774e42de3b9814c9c6479a526caeae3b",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/NDT-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "7685e8c1a486824ad248a5dc62efad6fb2bc3b929f3efe0925d4cd22f4b14c1e",
+    "image_sha256": "af7f4d253d34def2ce037895e6c411b3e7fdcccdc50511bd87f89e8ef1c39efd",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/NDT-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "aaa4f8aaa312161d3b73a49f0ee8153692aaea3e71a35e29f5d2f84d919cdbc2",
     "task_id": "NDT-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -44,9 +44,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "opendoor_ee_pid.png",
-    "image_sha256": "d7ad665777401dfc3df4c5c30800c96a018c17d4a09f41a7c69232e625198712",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/OpenDoor-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "8826616234d9eda3b19369aad136cfa0a65763db8472963a29d729cfa18fde65",
+    "image_sha256": "0bbd8289b85aaae8a1398211e60a86309f9f6c162793fa61d1ffef32ac7be59c",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/OpenDoor-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "a1031a8e0026a497821074ae38691f2da23ad5c75b84b89e5ce73b6f580b17fe",
     "task_id": "OpenDoor-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -54,9 +54,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "peginhole_ee_pid.png",
-    "image_sha256": "4f0c4bf79a0a1760b63b3becf8f5f413a5e0c94e3fe3000ac2c7eed81f29033f",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/PegInHole-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "0b9f0b2df38bfbf629584f112d31037f999effd5c677aef950d7d41b37167c2c",
+    "image_sha256": "9df26e2f0486ca002635878e0d24006428edee7bc6e306fdf2f3adf78fa6d5b2",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/PegInHole-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "3dffd14d1cdabb2f5a379fa938039daeaec0300d52ffab787d672bddeadfc8fb",
     "task_id": "PegInHole-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -64,9 +64,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "pressbutton_ee_pid.png",
-    "image_sha256": "18d54d7d799a72659636597ee7f2993269b2f4d4bea03d7a5b2fd7043cbaf496",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/PressButton-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "9069f78a83e9d81fe73e70351e5e0bc77ef0d69c1d64458636b4569c942b3198",
+    "image_sha256": "9283355824620284e8040afcbdaa5069634795ae2bafaf7b6d87e7430d0427d0",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/PressButton-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "42b97ab1c08019ef0ac5d0f5b7b23a4e00942e2ddb24deb5642d9efd8b68bce5",
     "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -74,9 +74,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "pulllever_ee_pid.png",
-    "image_sha256": "3c2a3457c3a9f798788fce5544667356362d06d47e3ef9c4da0ddc8595b6ab8a",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/PullLever-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "fade6c5fe7e53481830a85304d2a4bf682245e62402f3f3016ded19910fa1abf",
+    "image_sha256": "558e4e5de07c4749988e8ca857728c8239cef6eef7e5c38cdadfc75af3e9caec",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/PullLever-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "9f69e4336ea63408d855db7793ee1d8c2c89c86eddd0546cd17cbbe8f53c129c",
     "task_id": "PullLever-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -84,9 +84,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "pushslider_ee_pid.png",
-    "image_sha256": "8237f83781c50da0c0cfebf263415b14b3e55b41e5edeb18b9dd3855ff7764be",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/PushSlider-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "6674db92455daf05a2ca95afb853176c2dcd39be2afdfbd3bf7e4073f88a2cad",
+    "image_sha256": "d8cea3845dd78f7aa4b16aa6d12c38f2abeb3b78dc1483d4edbc1e3f176cc686",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/PushSlider-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "6c4b42bed8af171e201eb21a5d0d411ff11dfb1b2a47e6236f099d4b786eb159",
     "task_id": "PushSlider-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -94,9 +94,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "rotatevalve_ee_pid.png",
-    "image_sha256": "afaac95942f960334a2aabad1da76b0aef9f4f19e546b33fa704c61b5acda337",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/RotateValve-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "ba28d23b509be66f148b830838d0c0ff1706f05b8d9aeec45f8ca161e549461e",
+    "image_sha256": "de97aaefb0511487c9a1bd52d83ad70e1c1b4081f415773e41e4aebb31baba2f",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/RotateValve-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "744399b3424ede6712dee8bf4fe89315e63499d43b7a4621d513eac6cbedae95",
     "task_id": "RotateValve-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -104,9 +104,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "tossball_ee_pid.png",
-    "image_sha256": "853530e37f84d37cea52ce0a625d0e9aac751d2acc703e1a3f0a335fb60fb348",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/TossBall-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "e92985e177aced034faec9efb2826506bb4100119f423da15bb87b0297eac39b",
+    "image_sha256": "8119e69f722112ec808f2c83100ee16a88a84e535b2f688457e78a8030de0af7",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/TossBall-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "24e410baf3efebd2f862d149220a0f0d9617b122c336c801c6a6f9d30e117c3a",
     "task_id": "TossBall-Am-EE-Abs-PID-Direct-v0"
   },
   {
@@ -114,9 +114,9 @@
     "frame_count": 61,
     "frame_number": 30,
     "image": "wipewindow_ee_pid.png",
-    "image_sha256": "3708393d5e48b88d28c164dc61446393e05e59d892ba9136448639631d374555",
-    "source_video": "/workspace/ambench/outputs/research/full-matrix-20260930T1748/videos/WipeWindow-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
-    "source_video_sha256": "3fe27740b6bcddbfb068c65fc8c716b366cd266d1f92b34bae766521b4e61d58",
+    "image_sha256": "dbba2091c4292988d9b20fc5b76edfc1841ff1423853943a4bc203ae8806ac96",
+    "source_video": "/workspace/ambench/outputs/research/rebuild-20261007/matrix/videos/WipeWindow-Am-EE-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "source_video_sha256": "79ada556b3ea14b44d982aadbfbfbf4e93a46512d0150eefb04de5046e6a8099",
     "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0"
   }
 ]

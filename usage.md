@@ -21,7 +21,7 @@
 | 层级 | 通过条件 | 结果位置 |
 | --- | --- | --- |
 | 注册 | Isaac Sim 启动后 Gym registry 恰好含 106 个 AM-Bench ID，12 个任务族且各有脚本专家入口 | `list_envs.py` 输出、矩阵 JSON |
-| 场景与低层 | 每个 ID 能构造、reset、执行至少 8 步；进程按上限退出 | `outputs/research/combined-final/verified_106_after_wipe_fix.json` 与逐 ID 日志 |
+| 场景与低层 | 每个 ID 能构造、reset、执行至少 8 步；进程按上限退出 | `outputs/research/rebuild-20261007/matrix_verified.json` 与逐 ID 日志 |
 | 脚本专家 | 对应任务生成至少 1 个完成成功判定的 episode | `<session>/lerobot/meta/episodes/` 与图像帧；使用 `--video` 时另存 MP4 |
 | 数据 | canonical LeRobot validator 成功；DP/OpenPI 派生数据各自验证 | `<session>/lerobot/meta/info.json`、转换结果 |
 | 模型 | 匹配 checkpoint 经过远端服务完成闭环 rollout | `eval_summary.json` 中 `status: "completed"` 和足量 rollout |
@@ -96,21 +96,19 @@ WipeWindow 的公开评估时限是 20 秒。修正夹持并缩短后续局部�
 
 ```bash
 python scripts/research/verify_matrix.py \
-  --all --steps 8 --timeout-s 600 \
+  --all --steps 8 --seed 42 --timeout-s 600 \
   --video-family-representatives --video-steps 60 \
-  --output-dir outputs/research/full_matrix
+  --output-dir outputs/research/rebuild-20261007/matrix
 ```
 
 已有矩阵输出时，按 `results.json` 中的失败 ID 用 `--task-id` 重跑；修复后重新执行全量命令并换一个空的 `--output-dir` 生成新记录。工具会拒绝非空输出目录，防止旧结果混入。`--family PressButton` 与 `--robot FAHexa` 可用于缩小范围。NDT 首次加载远端仓库资产时，本次单项超过 240 秒，因此冷启动的全量命令使用 600 秒上限。机器上只有一张仿真 GPU，不要同时跑多个矩阵任务。
 
-本次首轮的 3 个失败在修正后逐 ID 复测通过。擦窗夹持修复后又重跑了该任务全部 8 个 ID。下面的合并器读取三份报告和每个 child JSON，逐项核对步数、退出状态、日志与来源 SHA-256，同时保留先前尝试；在仿真容器内运行：
+2026-10-07 删除旧镜像、重新构建后，固定 seed 42 的整份矩阵一次通过 106/106；12 个 EE PID 代表各录制 60 步，其他 ID 各推进 8 步。下面的合并器读取这份新报告和每个 child JSON，逐项核对步数、退出状态、日志、seed 与来源 SHA-256；在仿真容器内运行。以下输出目录是本次验收路径，重复运行应换成新的空目录。2026-09-30 的首轮失败及修复记录作为历史保留在 `outputs/research/combined-final/`，不混入本次复测：
 
 ```bash
 python scripts/research/merge_matrix_results.py \
-  outputs/research/full-matrix-20260930T1748/results.json \
-  outputs/research/matrix-retry-final-20260930T1845/results.json \
-  outputs/research/wipe-fixed-all-eight-20260930T2000/results.json \
-  --output outputs/research/combined-final/verified_106_after_wipe_fix.json \
+  outputs/research/rebuild-20261007/matrix/results.json \
+  --output outputs/research/rebuild-20261007/matrix_verified.json \
   --expect-count 106 --expect-families 12
 ```
 
@@ -118,13 +116,13 @@ python scripts/research/merge_matrix_results.py \
 
 ```bash
 python scripts/research/extract_scene_frames.py \
-  --results-json outputs/research/full_matrix/results.json \
-  --output-dir outputs/research/full_matrix/scene_frames
+  --results-json outputs/research/rebuild-20261007/matrix/results.json \
+  --output-dir outputs/research/rebuild-20261007/scene_frames
 ```
 
 ### 2.1 十二类场景的实测相机帧
 
-下图均来自本分支在 Isaac Sim 5.1 Docker 中运行的 EE PID 场景录像。每类运行 60 步，从 MP4 提取中间帧；[帧清单](usage_assets/scenes/manifest.json)记录源录像路径、帧位置和文件 SHA-256。它们证明场景和相机可运行，不表示任务成功。
+下图均来自 2026-10-07 删除旧镜像并重新构建后，固定 seed 42 的 Isaac Sim 5.1 Docker EE PID 场景录像。来源是 `outputs/research/rebuild-20261007/matrix/results.json`：每类运行 60 步，从 MP4 提取中间帧；[帧清单](usage_assets/scenes/manifest.json)记录源录像路径、帧位置和文件 SHA-256。它们证明场景和相机可运行，不表示任务成功。
 
 | CabinetPickPlace | FrameAssembly |
 | --- | --- |
@@ -162,11 +160,11 @@ timeout --signal=INT 45s python scripts/environments/zero_agent.py \
 
 这会在忽略目录 `videos/` 产生 MP4。`zero_agent.py` 是连续运行器，超时应发生在 scene/reset/step 已开始之后；检查子进程确实退出。该录像展示相机和场景，不代表专家动作。
 
-下图来自本分支一次实际 Docker 运行：`PressButton-Am-EE-Abs-PID-Direct-v0`、`verify_matrix.py --task-id ... --video-task-id ... --video-steps 8`、单环境、EE 相机；8/8 步通过。帧取自 `outputs/research/press-ee-video-20260930T1744/` 的 MP4 中间帧，画面显示灰墙、红色按钮和白色夹爪。它是场景检查，不是按下按钮后的成功画面。
+下图保留 2026-09-30 的历史 Docker 实测：`PressButton-Am-EE-Abs-PID-Direct-v0`、`verify_matrix.py --task-id ... --video-task-id ... --video-steps 8`、单环境、EE 相机；8/8 步通过。帧取自 `outputs/research/press-ee-video-20260930T1744/` 的 MP4 中间帧，画面显示灰墙、红色按钮和白色夹爪。它是场景检查，不是按下按钮后的成功画面。
 
 ![PressButton EE PID 在 Isaac Sim 5.1 Docker 中的 EE 相机实测帧](usage_assets/press_button_ee_pid.png)
 
-物理机型也已跑通独立相机：UAQuad PID 在 PressButton 场景用 `base_camera` 录制 30 步，下面是第 14 帧。容器内复现命令为：
+物理机型也已跑通独立相机：下面保留 2026-09-30 的历史画面，UAQuad PID 在 PressButton 场景用 `base_camera` 录制 30 步，取第 14 帧。容器内复现命令为：
 
 ```bash
 python scripts/research/verify_matrix.py \
@@ -249,7 +247,7 @@ python scripts/data/validate_lerobotdataset.py \
   --repo_id am_bench/pressbutton_ee_absolute --target_hz 20
 ```
 
-下面这张图来自成功 PressButton 脚本示范的 EE 相机 MP4 第 237 帧，画面显示夹爪已靠近按钮。该 session 的一条 episode 和 validator 都通过；成功由环境终止条件判定，不靠图片推断。[附加图像清单](usage_assets/evidence_manifest.json)记录这个视频和上方 UAQuad 视频的 SHA-256、帧号及源报告。
+下面保留 2026-09-30 的历史成功 PressButton 脚本示范画面，来自 EE 相机 MP4 第 237 帧，画面显示夹爪已靠近按钮。该 session 的一条 episode 和 validator 都通过；成功由环境终止条件判定，不靠图片推断。[附加图像清单](usage_assets/evidence_manifest.json)记录这个视频和上方 UAQuad 视频的 SHA-256、帧号及源报告。
 
 ![PressButton 脚本专家成功示范接近结束时的 EE 相机帧](usage_assets/press_button_scripted_success_near_final.png)
 
@@ -324,89 +322,91 @@ OpenPI 固定 reader 的 v2.1 派生导出在远端策略容器的 ACT 环境执
 
 ## 5. ACT、Diffusion Policy 与 OpenPI 的双容器闭环
 
-远端策略服务持有模型与 checkpoint，Isaac 容器负责环境、相机与状态采集、低层控制和结果记录；各模型所需的预处理在对应容器内完成。执行前按 [note.md](note.md) 部署策略镜像、启动恰好一种服务并建立 SSH 隧道。远端的 checkpoint 要与所选 EE 或 BaseJoint 环境、state keys、相机和动作频率相符。
+远端策略 Docker 持有 checkpoint 和高层模型；本地 Isaac Docker 采集相机与状态、运行低层控制并保存评估。先按 [note.md](note.md) 部署两个镜像并建立 SSH 隧道。2026-10-07 重建使用新采集的 seed 42 PressButton canonical 数据；本节的训练各为 **1 步接口验证**，EE 评估 20 秒、BaseJoint 评估 0.5 秒。此前 2026-09-30 的 OpenPI 两步训练和旧目录属于历史记录。
 
-以下训练命令在远端策略容器内运行；从本地进入：
+以下路径使用空的新目录。再次复现时统一更换 `rebuild-20261007` 这个运行名，保留已有结果。当前的新模型结果待重建后门禁完成，更新到第 5.5 节。
+
+### 5.0 同步本次 canonical 数据
+
+在本地仿真容器分别采集并验证 EE 与 BaseJoint fixture，两个命令各执行一次：
+
+```bash
+python scripts/research/verify_scripted.py \
+  --family PressButton --seed 42 --video --timeout-s 600 \
+  --output-dir outputs/research/rebuild-20261007/scripted_press_ee
+python scripts/research/verify_scripted.py \
+  --task-id PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0 \
+  --seed 42 --video --timeout-s 600 \
+  --output-dir outputs/research/rebuild-20261007/scripted_press_base_joint
+```
+
+本次 EE 得到 1 个成功 episode / 994 个 120 Hz 帧，state/action 为 8 维 `ee_absolute`；BaseJoint 为 1 个成功 episode / 999 帧、12 维 `base_joint_absolute`。两者均在默认 20 秒任务内成功，canonical validator 通过，`env_cfg.yaml` 记录 seed 42。从本地宿主机定位对应 session 并上传：
+
+```bash
+EE_INFO=$(find outputs/research/rebuild-20261007/scripted_press_ee -type f -path '*/lerobot/meta/info.json' | sort | tail -n 1)
+BJ_INFO=$(find outputs/research/rebuild-20261007/scripted_press_base_joint -type f -path '*/lerobot/meta/info.json' | sort | tail -n 1)
+EE_SESSION=${EE_INFO%/lerobot/meta/info.json}
+BJ_SESSION=${BJ_INFO%/lerobot/meta/info.json}
+test -f "$EE_SESSION/lerobot/meta/info.json"
+test -f "$BJ_SESSION/lerobot/meta/info.json"
+bash tools/research/sync_dataset.sh "$EE_SESSION" press_button_ee_rebuild_20261007
+bash tools/research/sync_dataset.sh "$BJ_SESSION" press_button_base_joint_rebuild_20261007
+```
+
+上传脚本拒绝覆盖已有远端目录。后续训练与导出命令均在**远端策略容器**执行：
 
 ```bash
 ssh -t tencent-86 'docker exec -it -w /workspace/ambench ambench-policy-research bash'
 ```
 
-三个模型族分别使用 `/opt/venvs/act/bin/python`、`/opt/venvs/dp/bin/python` 与 `/opt/openpi/.venv/bin/python`。本地仿真容器用自己的 `python` 执行评估命令。同步脚本上传的示范位于远端 `/data/datasets/<remote-name>`。
-
-**无任务数据时的真实模型接口检查。** 下面脚本在远端容器生成随机小权重，实际加载 ACT/DP 模型并做前向推理；`synthetic_inference_report.json` 留在 `/data/checkpoints`。ACT 使用 384×384，与 EE 环境默认相机一致。随机权重只证明模型调用和跨机传输可运行，不代表学会任务。
-
-```bash
-/opt/venvs/act/bin/python source/ambench_learn/tests/policies/remote/smoke_model_inference.py \
-  --policy act --act-image-size 384 --output-dir /data/checkpoints/research-smoke-act
-/opt/venvs/dp/bin/python source/ambench_learn/tests/policies/remote/smoke_model_inference.py \
-  --policy dp --output-dir /data/checkpoints/research-smoke-dp
-```
-
-返回本地宿主机后，保持 [note.md](note.md) 的 SSH 隧道运行，再依次切换服务并让仿真容器发出真实 HTTP 推理请求：
-
-```bash
-bash tools/research/start_policy.sh act /data/checkpoints/research-smoke-act/pretrained_model
-bash tools/research/wait_policy.sh act
-docker exec ambench-sim-research python \
-  source/ambench_learn/tests/policies/remote/smoke_remote_transport.py \
-  --policy act --remote-url http://127.0.0.1:8001
-
-bash tools/research/start_policy.sh dp /data/checkpoints/research-smoke-dp/latest.ckpt
-bash tools/research/wait_policy.sh dp
-docker exec ambench-sim-research python \
-  source/ambench_learn/tests/policies/remote/smoke_remote_transport.py \
-  --policy dp --remote-url http://127.0.0.1:8001
-```
-
-ACT 应连续收到两个有限的 8 维动作；DP 应收到有限的 `(8, 8)` 动作计划。该检查不启动 Isaac Sim；真实环境闭环仍需运行各自的 `eval` 命令并核对 `eval_summary.json`。
-
 ### 5.1 ACT
 
-ACT 直接训练已验证的 canonical LeRobot 数据。远端训练时采用 `ee_local_relative` 或 `base_joint_relative`，保留原始数据；一个短训练检查可把 `--steps` 设为 1，正式步骤按实验配置决定。训练入口：
+ACT 直接读取 canonical LeRobot，在训练时从绝对源计算相对动作。EE 使用以下固定的 20 Hz、一训练步配置：
 
 ```bash
 /opt/venvs/act/bin/python -m ambench_learn.policies.act.train \
   --dataset.repo_id=am_bench/pressbutton_ee_absolute \
-  --dataset.root=/data/datasets/press_button_ee/lerobot \
+  --dataset.root=/data/datasets/press_button_ee_rebuild_20261007/lerobot \
   --dataset.use_imagenet_stats=true \
   --policy.type=act --policy.chunk_size=16 --policy.n_action_steps=8 \
   --policy.device=cuda --policy.push_to_hub=false \
-  --output_dir=/data/checkpoints/act_press_button_smoke --job_name=press_button_act \
-  --batch_size=8 --steps=1 --num_workers=0 --save_freq=1 \
-  --wandb.enable=false --policy_target_hz=20 \
+  --output_dir=/data/checkpoints/rebuild-20261007/act_press_button_smoke \
+  --job_name=press_button_ee_act_rebuild --batch_size=8 --steps=1 --seed=42 \
+  --num_workers=0 --save_freq=1 --wandb.enable=false --policy_target_hz=20 \
   --policy_action_representation=ee_local_relative
 ```
 
-训练完成后，LeRobot 的 `checkpoints/last` 符号链接指向最新 step。从本地宿主机启动该权重，再让本地仿真容器通过隧道做已验证的 0.5 秒闭环烟测：
+BaseJoint 的命令替换四项：
 
-```bash
-bash tools/research/start_policy.sh act \
-  /data/checkpoints/act_press_button_smoke/checkpoints/last/pretrained_model
-bash tools/research/wait_policy.sh act
-docker exec ambench-sim-research \
-  python -m ambench_learn.policies.act.eval \
-  --task PressButton-Am-EE-Abs-PID-Direct-v0 \
-  --remote-url http://127.0.0.1:8001 \
-  --policy-id press_button_act_step1 \
-  --num-rollouts 1 --num-envs 1 --n-action-steps 8 \
-  --policy-target-hz 20 --episode-length-s 0.5 \
-  --output-dir outputs/policy_rpc/act_isaac_step1 \
-  --save-video --video-camera-names ee_camera --progress-every 10 \
-  --headless --device cuda:0
-```
+| 参数 | BaseJoint 值 |
+| --- | --- |
+| `--dataset.repo_id` | `am_bench/press_button_base_joint_absolute` |
+| `--dataset.root` | `/data/datasets/press_button_base_joint_rebuild_20261007/lerobot` |
+| `--output_dir` | `/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke` |
+| `--policy_action_representation` | `base_joint_relative` |
 
-该命令实测 `eval_summary.json` 为 `completed`、1 次 rollout、59 步，生成 MP4，任务成功 0/1。相同 checkpoint 的 20 秒完整 episode 已用 `--seed 42 --episode-length-s 20 --output-dir outputs/policy_rpc/act_isaac_full20s --progress-every 240` 跑完：`completed`、2399 步、0/1 成功。复现时将上面命令的短时、输出和录像选项替换为这四项。短训练 checkpoint 仅用于接口闭环检查，不构成有效策略成绩；测成功率应增加 rollout 数。ACT 对相对动作不能做跨锚点 temporal ensembling。
+保持其余参数不变并用独立 job name。`benchmark_dataset_report.json` 记录实际逻辑帧数：EE 为 `994 // 6 = 165`，BaseJoint 为 `999 // 6 = 166`；不足一个完整采样间隔的尾部帧不进入训练。ACT 相对动作不能跨观测锚点做 temporal ensembling。
 
 ### 5.2 Diffusion Policy
 
-DP 训练输入为从 canonical 导出的 UMI zarr。下面的一步 smoke 把固定 Hydra config 的视觉编码器改为随机初始化的 ResNet18，避免下载默认预训练权重；正式训练可恢复原配置并记录实际权重版本：
+在远端容器从相同 canonical session 导出 UMI zarr 并验证：
+
+```bash
+/opt/venvs/dp/bin/python scripts/data/dp/lerobot_to_zarr.py \
+  --input_path /data/datasets/press_button_ee_rebuild_20261007 \
+  --output_path /data/datasets/press_button_ee_rebuild_20261007.zarr.zip --omit_base_image
+/opt/venvs/dp/bin/python scripts/data/dp/validate_zarr.py \
+  /data/datasets/press_button_ee_rebuild_20261007.zarr.zip --image_size 224
+```
+
+BaseJoint 导出使用同样命令，将两个 `press_button_ee_rebuild_20261007` 改为 `press_button_base_joint_rebuild_20261007`。下面一步训练使用随机初始化的 ResNet18，不下载默认视觉编码器权重；checkpoint 保存完整 Hydra config：
 
 ```bash
 cd source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface
 WANDB_MODE=disabled /opt/venvs/dp/bin/python train.py \
   --config-name=train_diffusion_unet_timm_umi_workspace \
-  task=umi_drone_ee_pos task.dataset_path=/data/datasets/press_button_ee.zarr.zip \
+  task=umi_drone_ee_pos \
+  task.dataset_path=/data/datasets/press_button_ee_rebuild_20261007.zarr.zip \
   task.obs_down_sample_steps=6 task.action_horizon=16 \
   task.pose_repr.obs_pose_repr=relative task.pose_repr.action_pose_repr=relative \
   policy.obs_encoder.model_name=resnet18 policy.obs_encoder.pretrained=false \
@@ -414,254 +414,171 @@ WANDB_MODE=disabled /opt/venvs/dp/bin/python train.py \
   'policy.down_dims=[64,128]' policy.diffusion_step_embed_dim=64 \
   policy.num_inference_steps=4 policy.noise_scheduler.num_train_timesteps=8 \
   training.num_epochs=1 training.max_train_steps=1 training.max_val_steps=1 \
-  training.device=cuda:0 dataloader.batch_size=1 dataloader.num_workers=0 \
-  dataloader.persistent_workers=false val_dataloader.batch_size=1 \
-  val_dataloader.num_workers=0 val_dataloader.persistent_workers=false \
-  exp_name=press_button_dp_smoke logging.name=press_button_dp_smoke \
-  logging.mode=disabled hydra.run.dir=/data/outputs/press_button_dp_smoke
+  training.device=cuda:0 training.seed=42 \
+  dataloader.batch_size=1 dataloader.num_workers=0 dataloader.persistent_workers=false \
+  val_dataloader.batch_size=1 val_dataloader.num_workers=0 val_dataloader.persistent_workers=false \
+  exp_name=press_button_dp_ee_rebuild logging.name=press_button_dp_ee_rebuild \
+  logging.mode=disabled hydra.run.dir=/data/outputs/rebuild-20261007/press_button_dp_smoke
 ```
 
-从本地宿主机启动远端服务，再让本地仿真容器做已验证的 0.5 秒闭环烟测：
-
-```bash
-bash tools/research/start_policy.sh dp /data/outputs/press_button_dp_smoke/checkpoints/latest.ckpt
-bash tools/research/wait_policy.sh dp
-docker exec ambench-sim-research \
-  python -m ambench_learn.policies.dp.eval \
-  --task PressButton-Am-EE-Abs-PID-Direct-v0 \
-  --remote-url http://127.0.0.1:8001 \
-  --policy-id press_button_dp_step1 \
-  --num-rollouts 1 --num-envs 1 --episode-length-s 0.5 \
-  --output-dir outputs/policy_rpc/dp_isaac_step1 \
-  --save-video --video-camera-names ee_camera --progress-every 10 \
-  --headless --device cuda:0
-```
-
-DP 当前每次只评估一个环境。选择 BaseJoint 训练时，替换为 `task=umi_drone_base_joint` 并配同语义数据和注册环境。
-该命令实测 `eval_summary.json` 为 `completed`、1 次 rollout、59 步，生成 MP4，任务成功 0/1。相同 checkpoint 的 20 秒完整 episode 已用 `--seed 42 --episode-length-s 20 --output-dir outputs/policy_rpc/dp_isaac_full20s --progress-every 240` 跑完：`completed`、2399 步、0/1 成功。复现时将上面命令的短时、输出和录像选项替换为这四项。只有一个示范 episode 时，DP 训练的验证集为空；一步 checkpoint 只用于数据、训练和推理链路检查，不代表任务成功率。
+BaseJoint 使用 `task=umi_drone_base_joint`、对应 BaseJoint zarr、独立的 exp/logging name 和 `hydra.run.dir=/data/outputs/rebuild-20261007/press_button_dp_base_joint_smoke`。只有一个示范 episode 时，验证集为空；一步训练检查数据、优化和 checkpoint 保存。DP evaluator 当前每次运行一个环境。
 
 ### 5.3 OpenPI π₀ / π₀.₅
 
-OpenPI 使用 `ext/openpi` 固定版本和独立 Python 环境。仿真端通过 `openpi-client` 连接 WebSocket，远端服务由 `start_policy.sh` 调用 `/opt/openpi/.venv/bin/python scripts/serve_policy.py policy:checkpoint`。这两个模型共享 canonical 源，训练前派生 v2.1 数据，并各自计算 norm stats、准备 base 权重、训练及服务；不能用未经适配的原始 base 权重宣称 AM-Bench 任务成绩。
+OpenPI 使用 `ext/openpi` 的固定版本和独立 Python 环境。两个模型共享 canonical 源；训练前分别准备配置、norm stats 和官方 base 权重。以下两个配置对应 EE：
 
-| 模型 | EE 配置名 |
+| 模型 | 配置名 |
 | --- | --- |
 | π₀ | `pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative` |
 | π₀.₅ | `pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative` |
 
-BaseJoint 对应配置名分别含 `multitask_base_joint_openpi_original_20hz_h50_base_joint_relative`。导出的 v2.1 repo ID、config、stats 和 checkpoint 必须相互匹配。先从**本地宿主机**调用脚本，在本地无 GPU 策略 Docker 内下载到忽略目录 `outputs/openpi-cache/` 并逐文件验证官方 base checkpoint；随后同步到远端策略 Docker 的持久 `/data/cache/openpi` 并再次验证。校验报告分别保存在本地 `outputs/` 与远端 `/data/outputs/`：
+先从**本地宿主机**执行校验和同步脚本；下载与文件校验在无 GPU 策略 Docker 内执行，已有有效缓存可复用：
 
 ```bash
 bash tools/research/fetch_openpi_base.sh pi0
 bash tools/research/fetch_openpi_base.sh pi05
 ```
 
-然后在远端容器内 `cd /opt/openpi` 执行转换、统计量计算和训练。以下是已完成转换及两步训练的 π₀.₅ EE 示例；运行 π₀ 时把开头两项赋值改为 `PI_CONFIG=pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative` 和 `BASE_NAME=pi0_base`：
-
-```bash
-PI_CONFIG=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative
-BASE_NAME=pi05_base
-JAX_PLATFORMS=cpu /opt/openpi/.venv/bin/python examples/convert_jax_model_to_pytorch.py \
-  --checkpoint-dir "/data/cache/openpi/openpi-assets/checkpoints/$BASE_NAME" \
-  --config-name "$PI_CONFIG" \
-  --output-path "/data/checkpoints/openpi/${BASE_NAME}_pytorch"
-
-/opt/openpi/.venv/bin/python -m scripts.compute_norm_stats \
-  --config-name "$PI_CONFIG" \
-  --assets-base-dir /data/assets \
-  --repo-id am_bench/multitask_openpi_original_20hz_ee_local_relative \
-  --num-workers 2
-
-JAX_PLATFORMS=cpu /opt/openpi/.venv/bin/torchrun --standalone --nnodes=1 --nproc_per_node=1 \
-  -m scripts.train_pytorch "$PI_CONFIG" \
-  --exp-name smoke --pytorch-weight-path "/data/checkpoints/openpi/${BASE_NAME}_pytorch" \
-  --assets-base-dir /data/assets --checkpoint-base-dir /data/checkpoints/openpi \
-  --data.repo-id am_bench/multitask_openpi_original_20hz_ee_local_relative \
-  --batch-size 1 --num-train-steps 2 --num-workers 0 \
-  --save-interval 1 --no-resume --no-overwrite --no-wandb-enabled
-```
-
-π₀、π₀.₅ 官方 base 权重来自 OpenPI 固定 README 的 `gs://openpi-assets/checkpoints/pi0_base` 与 `pi05_base`。`--pytorch-weight-path` 必须指向包含 `model.safetensors` 的**目录**。π₀.₅ 已按以上配置训练两步，有限 loss 为 0.0944、0.1177，checkpoint 位于 `/data/checkpoints/openpi/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/smoke/2/`。从本地宿主机启动远端服务后，可先在仿真容器做无需 Isaac 的真实权重 WebSocket 前向：
-
-```bash
-PI_CONFIG=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative
-bash tools/research/start_policy.sh pi "$PI_CONFIG" \
-  "/data/checkpoints/openpi/$PI_CONFIG/smoke/2"
-bash tools/research/wait_policy.sh pi
-docker exec ambench-sim-research \
-  python source/ambench_learn/tests/policies/remote/smoke_openpi_transport.py \
-  --host 127.0.0.1 --port 8000
-```
-
-实测连续两次返回 `action_representation=ee_local_relative`、有限的 `(50, 8)` 动作块。该检查不启动环境；以下为已验证的 0.5 秒 Isaac 闭环烟测：
-
-```bash
-docker exec ambench-sim-research \
-  python -m ambench_learn.policies.pi.eval \
-  --host 127.0.0.1 --port 8000 \
-  --task PressButton-Am-EE-Abs-PID-Direct-v0 \
-  --prompt "press the button" --num-rollouts 1 --num-envs 1 \
-  --episode-length-s 0.5 --n-action-steps 8 --policy-target-hz 20 \
-  --policy-id pi05_ee_smoke_step2 \
-  --output-dir outputs/policy_rpc/pi05_isaac_step2 \
-  --save-video --video-camera-names ee_camera --progress-every 10 \
-  --headless --device cuda:0
-```
-
-π₀.₅ 该次 `eval_summary.json` 为 `completed`、1 次 rollout、59 步，生成 MP4，任务成功 0/1。π₀ 用同一份 canonical 派生数据及其独立的 norm stats、base 权重做了相同的两步训练；把上面两段中的 `PI_CONFIG`、`--policy-id` 和 `--output-dir` 分别换为 `pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative`、`pi0_ee_smoke_step2` 和 `outputs/policy_rpc/pi0_isaac_step2`，其短闭环也返回 `completed`、59 步、0/1 成功并生成 MP4。π₀ 的训练 checkpoint 位于 `/data/checkpoints/openpi/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/smoke/2/`。
-
-两种模型的 20 秒 episode 都已使用 `--seed 42 --episode-length-s 20 --progress-every 240` 跑完，不保存录像，输出目录分别为 `outputs/policy_rpc/pi0_isaac_full20s` 和 `outputs/policy_rpc/pi05_isaac_full20s`；两份 `eval_summary.json` 均为 `completed`、2399 步、0/1 成功。复现时将上述短闭环命令的时长、输出目录和录像选项替换为这些实测选项。两步训练仅验证全链路调用；测任务成功率应增加示范、训练步数和 rollout 数。
-
-2026-09-30 的远端验证使用 GPU 0 RTX PRO 5000 72 GB；部署脚本每次重新检查并选择没有计算进程的最小 GPU ID。π₀.₅ 不与本地 16 GB 仿真 GPU 争显存；SSH 隧道将观察与动作传输到远端。`start_policy.sh pi` 设置 `TORCHDYNAMO_DISABLE=1`，避免首次推理进行长时间编译；比较速度时应记录这个服务设置。
-
-### 5.4 FAHexa BaseJoint 的 12 维模型链路
-
-`PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0` 的成功专家示范使用 `base_joint_absolute`，state/action 均为 12 维。本次源 session 在本地主机的 `outputs/research/scripted-press-basejoint-20260930T2005/datasets/PressButton/PressButtonFAHexaBaseJointAbsPID/demo-20260930_115956`，1 episode / 1019 个 120 Hz 帧，LeRobot validator 已通过。在本地主机上传这个 canonical session；若重新采集，替换第一行的路径即可：
-
-```bash
-BJ_SESSION=outputs/research/scripted-press-basejoint-20260930T2005/datasets/PressButton/PressButtonFAHexaBaseJointAbsPID/demo-20260930_115956
-bash tools/research/sync_dataset.sh "$BJ_SESSION" press_button_base_joint
-```
-
-以下训练与转换命令在**远端策略容器**中运行。ACT 从同一 canonical session 以 20 Hz 逻辑帧训练，checkpoint 记录 `base_joint_relative`；DP 先将相同 session 导成 UMI zarr 并验证，再用 BaseJoint Hydra task 训练。每种只训练一步，用于验证 12 维数据和模型调用接口。
-
-```bash
-/opt/venvs/act/bin/python -m ambench_learn.policies.act.train \
-  --dataset.repo_id=am_bench/press_button_base_joint_absolute \
-  --dataset.root=/data/datasets/press_button_base_joint/lerobot \
-  --dataset.use_imagenet_stats=true \
-  --policy.type=act --policy.chunk_size=16 --policy.n_action_steps=8 \
-  --policy.device=cuda --policy.push_to_hub=false \
-  --output_dir=/data/checkpoints/act_press_button_base_joint_smoke \
-  --job_name=press_button_base_joint_act --batch_size=8 --steps=1 \
-  --num_workers=0 --save_freq=1 --wandb.enable=false \
-  --policy_target_hz=20 --policy_action_representation=base_joint_relative
-
-/opt/venvs/dp/bin/python scripts/data/dp/lerobot_to_zarr.py \
-  --input_path /data/datasets/press_button_base_joint \
-  --output_path /data/datasets/press_button_base_joint.zarr.zip --omit_base_image
-/opt/venvs/dp/bin/python scripts/data/dp/validate_zarr.py \
-  /data/datasets/press_button_base_joint.zarr.zip --image_size 224
-cd source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface
-WANDB_MODE=disabled /opt/venvs/dp/bin/python train.py \
-  --config-name=train_diffusion_unet_timm_umi_workspace \
-  task=umi_drone_base_joint task.dataset_path=/data/datasets/press_button_base_joint.zarr.zip \
-  task.obs_down_sample_steps=6 task.action_horizon=16 \
-  task.pose_repr.obs_pose_repr=relative task.pose_repr.action_pose_repr=relative \
-  policy.obs_encoder.model_name=resnet18 policy.obs_encoder.pretrained=false \
-  policy.obs_encoder.feature_aggregation=avg policy.obs_encoder.transforms=null \
-  'policy.down_dims=[64,128]' policy.diffusion_step_embed_dim=64 \
-  policy.num_inference_steps=4 policy.noise_scheduler.num_train_timesteps=8 \
-  training.num_epochs=1 training.max_train_steps=1 training.max_val_steps=1 \
-  training.device=cuda:0 dataloader.batch_size=1 dataloader.num_workers=0 \
-  dataloader.persistent_workers=false val_dataloader.batch_size=1 \
-  val_dataloader.num_workers=0 val_dataloader.persistent_workers=false \
-  exp_name=press_button_dp_base_joint_smoke \
-  logging.name=press_button_dp_base_joint_smoke logging.mode=disabled \
-  hydra.run.dir=/data/outputs/press_button_dp_base_joint_smoke
-```
-
-返回本地主机，先启动 ACT，再切换 DP；以下命令均用真实一步 checkpoint、SSH 隧道和本地 Isaac Sim 运行。切换服务会停止 8001 端口上的前一个模型。
-
-```bash
-BJ_TASK=PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0
-bash tools/research/start_policy.sh act \
-  /data/checkpoints/act_press_button_base_joint_smoke/checkpoints/last/pretrained_model
-bash tools/research/wait_policy.sh act
-docker exec ambench-sim-research python \
-  source/ambench_learn/tests/policies/remote/smoke_remote_transport.py \
-  --policy act --action-semantics base_joint_absolute \
-  --remote-url http://127.0.0.1:8001
-docker exec ambench-sim-research python -m ambench_learn.policies.act.eval \
-  --task "$BJ_TASK" --remote-url http://127.0.0.1:8001 \
-  --policy-id press_button_base_joint_act_step1 \
-  --num-rollouts 1 --num-envs 1 --n-action-steps 8 --policy-target-hz 20 \
-  --episode-length-s 0.5 --output-dir outputs/policy_rpc/act_base_joint_isaac_step1 \
-  --save-video --video-camera-names ee_camera --progress-every 10 \
-  --headless --device cuda:0
-
-bash tools/research/start_policy.sh dp \
-  /data/outputs/press_button_dp_base_joint_smoke/checkpoints/latest.ckpt
-bash tools/research/wait_policy.sh dp
-docker exec ambench-sim-research python \
-  source/ambench_learn/tests/policies/remote/smoke_remote_transport.py \
-  --policy dp --action-semantics base_joint_absolute \
-  --remote-url http://127.0.0.1:8001
-docker exec ambench-sim-research python -m ambench_learn.policies.dp.eval \
-  --task "$BJ_TASK" --remote-url http://127.0.0.1:8001 \
-  --policy-id press_button_base_joint_dp_step1 \
-  --num-rollouts 1 --num-envs 1 --episode-length-s 0.5 \
-  --output-dir outputs/policy_rpc/dp_base_joint_isaac_step1 \
-  --save-video --video-camera-names ee_camera --progress-every 10 \
-  --headless --device cuda:0
-```
-
-ACT 的真实 HTTP 请求连续两次返回 12 维动作；DP 返回有限的 `(96, 12)` 计划。两个 `eval_summary.json` 均为 `completed`、59 步、0/1 成功，均保存 MP4。一步训练和半秒评估仅验证 BaseJoint 接口，不能推断 20 秒任务成功率。
-
-OpenPI 从**同一** canonical session 导出独立的 BaseJoint v2.1 数据。在远端策略容器的仓库根目录运行导出，再到 `/opt/openpi` 分别计算两种配置的 stats、从第 5.3 节已转换的官方 base 权重训练一步：
+远端策略容器的 ACT 环境将同一份 canonical 数据导出成固定 reader 的 LeRobot v2.1。此次使用独立的 dataset home 保存新导出，同时保留配置要求的 repo ID：
 
 ```bash
 cd /workspace/ambench
 /opt/venvs/act/bin/python scripts/data/export_lerobot_to_openpi.py \
-  --dataset_roots /data/datasets/press_button_base_joint \
-  --repo_id am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative \
-  --output_root /data/datasets/openpi/am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative \
-  --target_hz 20 --omit_base_image --task_prompt "press the button"
-cd /opt/openpi
-for MODEL in pi0 pi05; do
-  PI_CONFIG="${MODEL}_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative"
-  BASE_NAME="${MODEL}_base"
-  /opt/openpi/.venv/bin/python -m scripts.compute_norm_stats \
-    --config-name "$PI_CONFIG" --assets-base-dir /data/assets \
-    --repo-id am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative \
-    --num-workers 2
-  JAX_PLATFORMS=cpu /opt/openpi/.venv/bin/torchrun --standalone --nnodes=1 --nproc_per_node=1 \
-    -m scripts.train_pytorch "$PI_CONFIG" \
-    --exp-name base_joint_smoke \
-    --pytorch-weight-path "/data/checkpoints/openpi/${BASE_NAME}_pytorch" \
-    --assets-base-dir /data/assets --checkpoint-base-dir /data/checkpoints/openpi \
-    --data.repo-id am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative \
-    --batch-size 1 --num-train-steps 1 --num-workers 0 \
-    --save-interval 1 --no-resume --no-overwrite --no-wandb-enabled
-done
+  --dataset_roots /data/datasets/press_button_ee_rebuild_20261007 \
+  --repo_id am_bench/multitask_openpi_original_20hz_ee_local_relative \
+  --output_root /data/datasets/openpi-rebuild-20261007/am_bench/multitask_openpi_original_20hz_ee_local_relative \
+  --target_hz 20 --omit_base_image --task_prompt 'press the button'
 ```
 
-本次两种 norm stats 均生成，π₀/π₀.₅ 的有限单步 loss 分别为 5.0940/0.0332。返回本地主机，下面以 π₀ 为例；复现 π₀.₅ 时将 `PI_CONFIG` 的 `pi0_` 前缀、`--policy-id` 和 `--output-dir` 中的 `pi0` 改为 `pi05`，并加 `--seed 42`。两个服务均返回 `base_joint_relative` 元数据和连续两个有限的 `(50, 12)` 动作块，两种模型均已完成本地 Isaac 闭环。
+BaseJoint 替换源为 `/data/datasets/press_button_base_joint_rebuild_20261007`，repo ID 和 output root 末尾替换为 `am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative`。多任务导出把各任务 canonical session 传给 `--dataset_roots`，并用 `--task_prompt_map scripts/data/am_bench_language_instructions.json --require_task_prompt_map` 保持任务语言映射。
+
+以下以 π₀.₅ EE 为例，转换在 CPU 上执行，norm stats 和训练读取新的 dataset home。运行 π₀ 时将开头的 `pi05` 改为 `pi0`：
 
 ```bash
-PI_CONFIG=pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative
-bash tools/research/start_policy.sh pi "$PI_CONFIG" \
-  "/data/checkpoints/openpi/$PI_CONFIG/base_joint_smoke/1"
-bash tools/research/wait_policy.sh pi
-docker exec ambench-sim-research python \
-  source/ambench_learn/tests/policies/remote/smoke_openpi_transport.py \
-  --host 127.0.0.1 --port 8000 --action-semantics base_joint_absolute
-docker exec ambench-sim-research python -m ambench_learn.policies.pi.eval \
-  --host 127.0.0.1 --port 8000 \
-  --task PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0 \
-  --prompt "press the button" --num-rollouts 1 --num-envs 1 \
-  --episode-length-s 0.5 --n-action-steps 8 --policy-target-hz 20 \
-  --policy-id pi0_base_joint_smoke_step1 \
-  --output-dir outputs/policy_rpc/pi0_base_joint_isaac_step1 \
-  --save-video --video-camera-names ee_camera --progress-every 10 \
-  --headless --device cuda:0
+cd /opt/openpi
+export HF_LEROBOT_HOME=/data/datasets/openpi-rebuild-20261007
+export JAX_PLATFORMS=cpu
+PI_CONFIG=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative
+BASE_NAME=pi05_base
+/opt/openpi/.venv/bin/python examples/convert_jax_model_to_pytorch.py \
+  --checkpoint-dir "/data/cache/openpi/openpi-assets/checkpoints/$BASE_NAME" \
+  --config-name "$PI_CONFIG" \
+  --output-path "/data/checkpoints/openpi-rebuild-20261007/${BASE_NAME}_pytorch"
+/opt/openpi/.venv/bin/python -m scripts.compute_norm_stats \
+  --config-name "$PI_CONFIG" --assets-base-dir /data/assets/rebuild-20261007 \
+  --repo-id am_bench/multitask_openpi_original_20hz_ee_local_relative --num-workers 2
+/opt/openpi/.venv/bin/torchrun --standalone --nnodes=1 --nproc_per_node=1 \
+  -m scripts.train_pytorch "$PI_CONFIG" --exp-name rebuild-20261007 \
+  --pytorch-weight-path "/data/checkpoints/openpi-rebuild-20261007/${BASE_NAME}_pytorch" \
+  --assets-base-dir /data/assets/rebuild-20261007 \
+  --checkpoint-base-dir /data/checkpoints/openpi-rebuild-20261007 \
+  --data.repo-id am_bench/multitask_openpi_original_20hz_ee_local_relative \
+  --batch-size 1 --num-train-steps 1 --num-workers 0 --seed 42 \
+  --save-interval 1 --no-resume --no-overwrite --no-wandb-enabled
 ```
 
-π₀、π₀.₅ 的 BaseJoint `eval_summary.json` 均为 `completed`、1 次 rollout、59 步、0/1 成功并保存 MP4，结果分别在 `outputs/policy_rpc/pi0_base_joint_isaac_step1` 和 `pi05_base_joint_isaac_step1`。π₀.₅ 的闭环在 2026-10-07 补齐，wall time 3.22 秒。该示范验证 12 维跨容器控制链路；一步训练和半秒评估不能推断默认 20 秒任务成功率。
+`--pytorch-weight-path` 指向包含 `model.safetensors` 的目录。BaseJoint 使用 `pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative` 或对应 `pi05_...` 配置、BaseJoint repo ID，并单独计算 norm stats 和训练；两个模型可复用各自已经转换的 base PyTorch 目录。数据 repo ID、配置、stats 和 checkpoint 必须匹配。
+
+### 5.4 启动真实模型服务并运行 Isaac 闭环
+
+从本地宿主机启动服务，等待健康检查完成。`start_policy.sh` 顶部显式配置 `INFERENCE_SEED=42`，在远端 Python 中设置 random、NumPy 和 Torch 的随机种子，日志输出 `REMOTE_INFERENCE_SEED=42`。每次启动会停止前一个高层服务；重启恢复远端随机推理的起点。ACT/DP 用 HTTP 8001，OpenPI 用 WebSocket 8000；SSH 隧道只向本地 loopback 转发。
+
+先以 EE ACT 为例检查真实权重调用，再重新启动同一服务开始固定 seed 的评估：
+
+```bash
+bash tools/research/start_policy.sh act \
+  /data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/last/pretrained_model
+bash tools/research/wait_policy.sh act
+docker exec ambench-sim-research python \
+  source/ambench_learn/tests/policies/remote/smoke_remote_transport.py \
+  --policy act --remote-url http://127.0.0.1:8001
+
+bash tools/research/start_policy.sh act \
+  /data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/last/pretrained_model
+bash tools/research/wait_policy.sh act
+docker exec ambench-sim-research python -m ambench_learn.policies.act.eval \
+  --task PressButton-Am-EE-Abs-PID-Direct-v0 \
+  --remote-url http://127.0.0.1:8001 --policy-id act_ee_rebuild_step1 \
+  --num-rollouts 1 --num-envs 1 --seed 42 --n-action-steps 8 --policy-target-hz 20 \
+  --episode-length-s 20 --output-dir outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s \
+  --save-video --video-camera-names ee_camera --progress-every 240 --headless --device cuda:0
+```
+
+DP 对应的真实 checkpoint 与评估如下；可在评估前用 `smoke_remote_transport.py --policy dp` 做 HTTP 前向，再重启同一服务：
+
+```bash
+bash tools/research/start_policy.sh dp \
+  /data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt
+bash tools/research/wait_policy.sh dp
+docker exec ambench-sim-research python -m ambench_learn.policies.dp.eval \
+  --task PressButton-Am-EE-Abs-PID-Direct-v0 \
+  --remote-url http://127.0.0.1:8001 --policy-id dp_ee_rebuild_step1 \
+  --num-rollouts 1 --num-envs 1 --seed 42 --episode-length-s 20 \
+  --output-dir outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s \
+  --save-video --video-camera-names ee_camera --progress-every 240 --headless --device cuda:0
+```
+
+OpenPI 从训练生成的一步目录加载；把下面 `pi05` 改为 `pi0`，即可运行另一模型。WebSocket 前向检查用 `smoke_openpi_transport.py --host 127.0.0.1 --port 8000`，随后重启服务再评估：
+
+```bash
+PI_CONFIG=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative
+bash tools/research/start_policy.sh pi "$PI_CONFIG" \
+  "/data/checkpoints/openpi-rebuild-20261007/$PI_CONFIG/rebuild-20261007/1"
+bash tools/research/wait_policy.sh pi
+docker exec ambench-sim-research python -m ambench_learn.policies.pi.eval \
+  --host 127.0.0.1 --port 8000 --task PressButton-Am-EE-Abs-PID-Direct-v0 \
+  --prompt 'press the button' --policy-id pi05_ee_rebuild_step1 \
+  --num-rollouts 1 --num-envs 1 --seed 42 --n-action-steps 8 --policy-target-hz 20 \
+  --episode-length-s 20 --output-dir outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s \
+  --save-video --video-camera-names ee_camera --progress-every 240 --headless --device cuda:0
+```
+
+BaseJoint 分别启动下表的真实一步权重，再用相应 `eval` 命令。共同替换环境为 `PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0`，设置 `--seed 42 --episode-length-s 0.5 --progress-every 10`，保持相机录像和单环境。输出目录使用 `outputs/research/rebuild-20261007/policy_rpc/<model>_base_joint_isaac_step1`，policy ID 使用 `<model>_base_joint_rebuild_step1`：
+
+| 模型 | BaseJoint checkpoint |
+| --- | --- |
+| ACT | `/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/last/pretrained_model` |
+| DP | `/data/outputs/rebuild-20261007/press_button_dp_base_joint_smoke/checkpoints/latest.ckpt` |
+| π₀ | `/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1` |
+| π₀.₅ | `/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1` |
+
+OpenPI 的 BaseJoint 服务配置也替换成表内 checkpoint 的配置名。模型名在路径中分别为 `act`、`dp`、`pi0`、`pi05`。HTTP/WS 前向检查的 BaseJoint 参数为 `--action-semantics base_joint_absolute`。
+
+### 5.5 本次重建的策略结果
+
+待新镜像的数据、训练和八项闭环门禁完成后填写。成功完成一个 rollout 证明跨容器模型接口可用；一步训练与单条示范不能作为论文性能复现。
+
+生产镜像没有开发测试工具。以下命令在远端策略 Docker 内安装固定版本 pytest，再核对动作变换、数据导出、评估记录与协议；测试依赖只写入容器：
+
+```bash
+uv pip install --python /opt/venvs/act/bin/python pytest==8.4.2
+uv pip install --python /opt/venvs/dp/bin/python pytest==8.4.2
+uv pip install --python /opt/openpi/.venv/bin/python pytest==8.4.2 pynvml==13.0.1 nvidia-ml-py==13.590.48
+cd /workspace/ambench
+/opt/venvs/act/bin/python -m pytest -q \
+  source/ambench_learn/tests/data/test_action_contract.py \
+  source/ambench_learn/tests/data/test_openpi_export.py \
+  source/ambench_learn/tests/policies/act/test_act_eval_utils.py \
+  source/ambench_learn/tests/policies/act/test_se_relative_processor.py \
+  source/ambench_learn/tests/policies/pi/test_pi_eval_utils.py \
+  source/ambench_learn/tests/eval/test_eval_common.py \
+  source/ambench_learn/tests/eval/test_eval_run.py \
+  source/ambench_learn/tests/policies/remote/test_protocol.py
+/opt/venvs/dp/bin/python -m pytest -q \
+  source/ambench_learn/tests/data/test_dp_zarr_export.py \
+  source/ambench_learn/tests/policies/dp/test_dp_eval_utils.py \
+  source/ambench_learn/tests/policies/remote/test_protocol.py
+cd /opt/openpi
+JAX_PLATFORMS=cpu /opt/openpi/.venv/bin/python -m pytest -q src/openpi/policies/am_bench_policy_test.py
+```
 
 ## 6. 评估记录与可视化
 
-三种 evaluator 均应输出 `results.txt`、`eval_summary.json`、tracking JSONL/analysis，可选 MP4。`--save-video --video-camera-names ee_camera` 可留下可视证据。只有 `eval_summary.json` 记录 `status: "completed"` 且 rollout 数量足够，才能计算任务成功率、子任务完成率与 tracking 指标。
+三个公共 evaluator 均保存解析后的完整 `env_cfg.yaml`、`results.txt`、`eval_summary.json`、tracking JSONL 和 `tracking/analysis.json`。ACT/DP 的远端 checkpoint 路径记录在 summary 的 `metadata.Server metadata`；OpenPI 的来源按服务配置、实际启动参数和 checkpoint 哈希核对。所有本次公开命令显式指定 seed 42。
 
-有界可视化的最小顺序：
+验收一个评估目录时，同时检查 `status: "completed"`、rollout 数、步骤、环境 ID、seed、动作语义、服务来源和 checkpoint。保存录像时用 `--save-video --video-camera-names ee_camera`，还要实际解码 MP4 并确认帧数大于零。进程 exit 0 而缺少 summary 不算通过；本次曾遇到长期运行的旧容器失去 GPU 访问，恢复方法见 [note.md](note.md)。
 
-1. 跑 EE PID 的场景录像并检查画面。
-2. 跑同一任务的一个脚本成功示范，检查录像及 canonical 数据。
-3. 从该 canonical 数据训练一个短模型 checkpoint。
-4. 启动远端服务，完成一个闭环 rollout，检查 summary 与 MP4。
-5. 全量矩阵验证五种机型和全部 12 族，再扩大训练与评估。
-
-生成的录像、checkpoint、数据、训练日志留在忽略目录，不放入 Git。可以把经核验的代表帧放到 `usage_assets/` 并在本文标明任务、机型、seed、命令和帧时间；不能用项目概念图代替实测画面。
+EE 20 秒评估与 BaseJoint 0.5 秒评估分别记录。任务成功以环境的终止条件判定，视频仅提供画面证据；`completed` 本身不能推断任务成功。原始录像、checkpoint、示范和日志保持在忽略目录；经核验的代表帧及小型结果摘要放到 `usage_assets/`，并记录出处与哈希。
 
 ## 7. 本分支验证记录
 

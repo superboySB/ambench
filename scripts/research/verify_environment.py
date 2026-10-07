@@ -37,6 +37,10 @@ parser.add_argument(
 AppLauncher.add_app_launcher_args(parser)
 args = parser.parse_args()
 args.enable_cameras = True
+if args.result_json is not None:
+    args.result_json = args.result_json.expanduser().resolve()
+if args.video_dir is not None:
+    args.video_dir = args.video_dir.expanduser().resolve()
 
 app_launcher = AppLauncher(args)
 simulation_app = app_launcher.app

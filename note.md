@@ -56,7 +56,7 @@ bash tools/research/build_images.sh policy
 
 镜像分别是 `ambench:research-sim` 和 `ambench:research-policy`。仿真镜像基于 NVIDIA 官方 `nvcr.io/nvidia/isaac-lab:2.3.2`，其配套 Isaac Sim 为 5.1.0，Python 为 3.11，Torch 为 2.7.0+cu128。第一次拉取镜像较大，应留出磁盘空间。构建只在容器内安装 Pyroki、acados、AM-Bench 和策略依赖；宿主机不需要安装 Conda、Isaac Lab Python 包或模型包。
 
-本次实测的两张镜像约为 18.9 GB 和 32.8 GB；策略镜像传输包约 15.3 GB。构建机还需要 Docker 层、下载缓存和该传输包的临时空间；远端需要镜像与传输包的空间。传输包放在本机 `~/.cache/ambench-research/` 和远端研究目录的 `images/`，均不属于 Git 仓库。
+2026-10-07 重建的最终两张镜像约为 18.9 GB 和 32.4 GB；策略镜像传输包约 15.1 GB。构建机还需要 Docker 层、下载缓存和该传输包的临时空间；远端需要镜像与传输包的空间。传输包放在本机 `~/.cache/ambench-research/` 和远端研究目录的 `images/`，均不属于 Git 仓库。
 
 OpenPI 的 π₀ 和 π₀.₅ 官方 base checkpoint 各约 11–12 GiB。`fetch_openpi_base.sh` 只在本地无 GPU Docker 中下载到忽略目录 `outputs/openpi-cache/`，校验后用 rsync 传到远端持久缓存并再次校验；同时使用两个模型时，本地和远端分别预留至少 25 GiB 权重空间。
 
@@ -131,13 +131,13 @@ bash tools/research/tunnel_policy.sh
 在另一个本地终端选择一个策略服务：
 
 ```bash
-# ACT：第 5 节随机模型烟测的目录；正式训练目录见 usage.md
+# ACT：先按 usage.md 第 5 节完成一步训练
 bash tools/research/start_policy.sh act \
-  /data/checkpoints/research-smoke-act/pretrained_model
+  /data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/last/pretrained_model
 
-# Diffusion Policy：第 5 节随机模型烟测的 Hydra .ckpt 文件
+# Diffusion Policy：同一 canonical 数据的一步训练 checkpoint
 bash tools/research/start_policy.sh dp \
-  /data/checkpoints/research-smoke-dp/latest.ckpt
+  /data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt
 
 # OpenPI：分别给出固定配置名和含 model.safetensors 的 step 目录
 bash tools/research/start_policy.sh pi \
@@ -145,7 +145,7 @@ bash tools/research/start_policy.sh pi \
   '/data/checkpoints/openpi/<config>/<experiment>/<step>'
 ```
 
-ACT/DP 两个示例要求先按 `usage.md` 第 5 节生成随机烟测 checkpoint；正式训练后换成实际输出路径。OpenPI 的 `<config>/<experiment>/<step>` 必须替换为真实训练 step 目录，并保证对应的 norm stats 已生成。
+ACT/DP 两个示例要求先按 `usage.md` 第 5 节生成训练 checkpoint；再次复现时统一改用新的运行名和空输出目录。OpenPI 的 `<config>/<experiment>/<step>` 必须替换为真实训练 step 目录，并保证对应的 norm stats 已生成。
 
 启动后在本地宿主机等待服务加载完 checkpoint；把 `act` 替换为实际选择的 `dp` 或 `pi`：
 
@@ -153,7 +153,7 @@ ACT/DP 两个示例要求先按 `usage.md` 第 5 节生成随机烟测 checkpoin
 bash tools/research/wait_policy.sh act 300
 ```
 
-这三个命令是互斥服务选择，先停止旧服务再启动另一种策略。ACT/DP 的仿真侧评估命令使用 `--remote-url http://127.0.0.1:8001`；OpenPI 使用 `--host 127.0.0.1 --port 8000`。跨机器流量经过 SSH 隧道，不需要打开公网推理端口。
+这三个命令是互斥服务选择，先停止旧服务再启动另一种策略。脚本顶部 `INFERENCE_SEED=42` 固定远端 Python、NumPy 与 Torch 的随机种子，日志包含 `REMOTE_INFERENCE_SEED=42`；本地评估也使用 `--seed 42`。前向 smoke 会消耗模型随机状态，开始可复现的评估前重新启动对应服务。ACT/DP 的仿真侧评估命令使用 `--remote-url http://127.0.0.1:8001`；OpenPI 使用 `--host 127.0.0.1 --port 8000`。跨机器流量经过 SSH 隧道，不需要打开公网推理端口。
 
 ## 5. Canonical LeRobot 数据流
 
@@ -170,24 +170,23 @@ bash tools/research/wait_policy.sh act 300
 
 源数据不要改写为相对动作；相对轨迹由各策略适配器在训练时构造。DP zarr 与 OpenPI v2.1 是可重新生成的派生格式，不能取代 canonical 源。每次采集后用容器中的 `scripts/data/validate_lerobotdataset.py` 验证，再通过部署目录的同步步骤上传远端。数据、checkpoint、缓存和视频都保持 Git 未跟踪。
 
-完成 `usage.md` 第 4 节中 `datasets/press_button_smoke` 的录制示例后，在本地宿主机运行：
+完成 `usage.md` 第 5 节开头的 EE 和 BaseJoint 两条固定 seed 示范采集后，在本地宿主机运行。下面的目录和远端名称与后续训练、推理命令一致：
 
 ```bash
-SESSION_INFO=$(find datasets/press_button_smoke -type f -path '*/lerobot/meta/info.json' | sort | tail -n 1)
+SESSION_INFO=$(find outputs/research/rebuild-20261007/scripted_press_ee -type f -path '*/lerobot/meta/info.json' | sort | tail -n 1)
 SESSION_ROOT=${SESSION_INFO%/lerobot/meta/info.json}
 test -f "$SESSION_ROOT/lerobot/meta/info.json"
-bash tools/research/sync_dataset.sh "$SESSION_ROOT" press_button_ee
-ssh tencent-86 'ls -la /diff/dzp_is_sb/ambench-research/datasets/press_button_ee/lerobot/meta/info.json'
+bash tools/research/sync_dataset.sh "$SESSION_ROOT" press_button_ee_rebuild_20261007
+SESSION_INFO=$(find outputs/research/rebuild-20261007/scripted_press_base_joint -type f -path '*/lerobot/meta/info.json' | sort | tail -n 1)
+SESSION_ROOT=${SESSION_INFO%/lerobot/meta/info.json}
+test -f "$SESSION_ROOT/lerobot/meta/info.json"
+bash tools/research/sync_dataset.sh "$SESSION_ROOT" press_button_base_joint_rebuild_20261007
+ssh tencent-86 'ls -l /diff/dzp_is_sb/ambench-research/datasets/press_button_{ee,base_joint}_rebuild_20261007/lerobot/meta/info.json'
 ```
 
-DP zarr 转换在远端的 DP 环境执行；ACT 直接读取上传的 canonical `lerobot/`；OpenPI 的 v2.1 派生数据在远端 ACT 环境从同一 canonical session 导出到 `HF_LEROBOT_HOME=/data/datasets/openpi` 下的对应 repo ID，完整命令见 `usage.md` 第 4.1 节。若已经在本地仿真容器导出，可使用同步脚本上传：
+DP zarr 转换在远端的 DP 环境执行；ACT 直接读取上传的 canonical `lerobot/`；OpenPI 的 v2.1 派生数据在远端 ACT 环境从同一 canonical session 导出到 `/data/datasets/openpi-rebuild-20261007` 下的对应 repo ID。完整命令见 `usage.md` 第 5.1–5.3 节；OpenPI 的 norm stats、训练和推理都使用这个独立 dataset home。
 
-```bash
-bash tools/research/sync_openpi_export.sh \
-  datasets/openpi_export am_bench/multitask_openpi_original_20hz_ee_local_relative
-```
-
-这两个同步脚本都拒绝覆盖远端同名目录。所有训练输出与 checkpoint 放在远端 `/data/checkpoints` 或 `/data/outputs`。
+同步脚本拒绝覆盖远端同名目录。重新采集时使用新的本地输出目录与远端名称，并一致替换后续命令中的路径。所有训练输出与 checkpoint 放在远端 `/data/checkpoints` 或 `/data/outputs`。
 
 ## 6. 完整验证与故障定位
 

@@ -2,6 +2,8 @@
 
 这份手册在 `research` 分支使用 Isaac Lab 2.3.2 / Isaac Sim 5.1.0，把仿真、机器人控制与脚本专家放在本地仿真容器，把 ACT、Diffusion Policy 和 OpenPI 的模型推理放在独立策略容器。默认部署策略容器到 `tencent-86`，本地和远端均只通过 Docker 安装项目依赖。`usage.md` 给出功能清单、逐项命令和验证记录。
 
+命令中的 `rebuild-20261007` 是本次验收的运行名。当前机器已有对应示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
+
 > 本分支的容器流程是研究验证路径。主分支 README 所述的原生安装仍是项目目前的维护路径。
 
 ## 1. 机器与目录
@@ -39,6 +41,15 @@ flowchart LR
 ssh -o BatchMode=yes -p 22 tencent-86 'id -un; nvidia-smi --query-gpu=index,memory.used --format=csv,noheader'
 docker compose version
 docker run --rm --gpus all ubuntu:22.04 nvidia-smi -L
+```
+
+本次连续启动服务时遇到过短 SSH 连接偶发中断，已为本机现有 `tencent-86` 配置连接复用，并通过禁用密码的 BatchMode 检查。其他机器可在已有的 `Host tencent-86` 配置下加入以下三项；保留原来的 HostName、User、IdentityFile 等设置：
+
+```sshconfig
+Host tencent-86
+  ControlMaster auto
+  ControlPersist 30m
+  ControlPath ~/.ssh/ambench-%C
 ```
 
 远端 GPU 编号会随他人的任务变化。每次启动容器前重新执行 `nvidia-smi`；部署脚本默认选取没有计算进程的最小编号，可给脚本传入明确的 GPU ID。不要在已有任务的卡上叠加模型进程。
@@ -100,7 +111,7 @@ docker exec -it ambench-sim-research python scripts/environments/teleop_se3_agen
   --task PressButton-Am-EE-Abs-PID-Direct-v0
 ```
 
-`teleop_se3_agent.py` 持续运行，结束时按 Ctrl+C。2026-09-30 的有界实测在 X11 桌面打开了 1440×900 的 Isaac Sim 5.1.0 窗口，PressButton 场景完成构造并显示 `Se3Keyboard` 键位及 `Teleoperation started`；180 秒上限触发的 exit 124 是连续运行器的预期结束方式，日志为 `outputs/gui_teleop_x11.log`。该次检查确认 GUI 与键盘设备初始化，未把无人按键的运行算作人工示范。完成后恢复无头服务：
+`teleop_se3_agent.py` 持续运行，结束时按 Ctrl+C。在可见窗口按 R 应触发环境重置。2026-10-07 最终镜像的有界 X11 检查完成 PressButton 场景和 `Se3Keyboard` 初始化；软件事件只发送给本次容器的窗口，日志出现 `Reset triggered` 和 `Environment reset complete`。180 秒上限触发的 exit 124 是连续运行器的预期结束方式，日志为 `outputs/research/rebuild-20261007/gui/teleop.log`，结束后没有残留 Isaac 子进程。公共连续入口没有 seed 参数，此项为 `seed: null`。这项检查验证 GUI 与键盘回调，真人示范、SpaceMouse 和 gamepad 硬件仍未执行。完成后恢复无头服务：
 
 ```bash
 docker compose -f docker/compose.sim.yml up -d --no-deps --force-recreate sim
@@ -139,13 +150,13 @@ bash tools/research/start_policy.sh act \
 bash tools/research/start_policy.sh dp \
   /data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt
 
-# OpenPI：分别给出固定配置名和含 model.safetensors 的 step 目录
+# OpenPI π₀.₅：第 5.3 节的一步训练 checkpoint
 bash tools/research/start_policy.sh pi \
   pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative \
-  '/data/checkpoints/openpi/<config>/<experiment>/<step>'
+  /data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1
 ```
 
-ACT/DP 两个示例要求先按 `usage.md` 第 5 节生成训练 checkpoint；再次复现时统一改用新的运行名和空输出目录。OpenPI 的 `<config>/<experiment>/<step>` 必须替换为真实训练 step 目录，并保证对应的 norm stats 已生成。
+三个示例都要求先按 `usage.md` 第 5 节生成训练 checkpoint 和对应数据统计；再次复现时统一改用新的运行名和空输出目录。运行 π₀ 时将 OpenPI 命令中的两处 `pi05` 替换为 `pi0`。
 
 启动后在本地宿主机等待服务加载完 checkpoint；把 `act` 替换为实际选择的 `dp` 或 `pi`：
 
@@ -203,8 +214,9 @@ docker exec ambench-sim-research python scripts/research/verify_matrix.py \
 
 | 工作目录相关实测 | 结果与证据 |
 | --- | --- |
-| 普通 MPC 入口 | `zero_agent.py --task PressButton-Am-FAHexa-Abs-MPC-Direct-v0 --num_envs 1 --headless` 在可写工作卷完成构造、reset 和 2,386 次步进，日志 `outputs/mpc_zero_agent_normal_cwd.log`；acados 生成文件留在工作卷，源码挂载下没有生成物。 |
-| X11 GUI 遥操作 | `compose.gui.yml` 启动了 Isaac Sim 5.1.0 窗口并完成 PressButton EE PID 场景及键盘设备初始化；有界日志 `outputs/gui_teleop_x11.log`，结束后已重建为无头 Compose。 |
+| MPC 验证器的相对输出路径 | 最终镜像上 `verify_environment.py` 完成 seed 42 的 8 步，结果写入预期的 `outputs/research/rebuild-20261007/direct_mpc_relative/records/probe.json`；同级 `videos/` 含 9 帧可解码 MP4，新求解器编译完成。 |
+| 普通 MPC 入口 | 最终镜像上 `zero_agent.py --task PressButton-Am-FAHexa-Abs-MPC-Direct-v0 --num_envs 1 --headless` 在可写工作卷完成构造、reset 和 3,151 条步进输出，记录为 `outputs/research/rebuild-20261007/mpc_normal_cwd.json`；75 秒有界运行的 exit 124 为预期，结束后没有残留子进程。公共连续运行器没有 seed 参数，此项为 `seed: null`。 |
+| X11 GUI 遥操作 | 最终镜像完成 PressButton EE PID 场景、键盘初始化及定向 R 键重置回调；日志 `outputs/research/rebuild-20261007/gui/teleop.log`，180 秒有界退出后恢复无头 Compose，未将软件事件计为真人示范。 |
 
 常用定位命令：
 
@@ -235,7 +247,9 @@ bash tools/research/deploy_policy.sh
 
 2026-10-07 的实际官方检查得到 `60bf5b73041df4eab571f7d9f0a297aeecbf2e0d`，与本次研究分支的原始基线相同。存在新提交时先审查差异和解决合并冲突，再运行后续构建；子模块使用合并后仓库记录的版本。
 
-构建脚本把源码 revision、是否有未提交改动和递归子模块版本写入镜像标签，并将 image inspect 与构建模式保存到忽略目录 `outputs/docker-builds/<image-id>/`。两种镜像内的 `/opt/ambench-build/` 保留各 Python 环境的依赖版本清单；应用安装和导入检查在构建中执行。重建后重新运行第 6 节全量矩阵、第 4 节示范采集及 `usage.md` 的各策略数据、训练、推理和闭环检查，使用新的空输出目录。
+构建脚本把源码 revision、是否有未提交改动和递归子模块版本写入镜像标签，并将 image inspect 与构建模式保存到忽略目录 `outputs/docker-builds/<image-id>/`。两种镜像内的 `/opt/ambench-build/` 保留各 Python 环境的依赖版本清单；应用安装和导入检查在构建中执行。重建后重新运行本手册第 6 节全量矩阵、`usage.md` 第 4 节示范采集及其策略数据、训练、推理和闭环检查，使用新的空输出目录。
+
+[本次重建快照](usage_assets/rebuild_snapshot.json)记录删除旧镜像、无缓存构建、后续源码修复重建、最终两端镜像和传输包哈希，以及 35 个原始证据的 SHA-256。最终运行镜像嵌入源码 `02d1499`；后续分支提交只更新验证记录和文档。
 
 如果宿主机 `nvidia-smi` 正常，但旧容器内提示 `Failed to initialize NVML: Unknown Error`，先结束该容器内的任务，再重新创建容器，随后检查驱动访问：
 

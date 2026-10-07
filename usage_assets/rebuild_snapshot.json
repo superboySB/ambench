@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-07",
+  "timezone": "Asia/Shanghai",
+  "generated_at_utc": "2026-10-07T06:22:32.611755+00:00",
+  "official_repository": "https://github.com/ambench/ambench.git",
+  "official_main": "60bf5b73041df4eab571f7d9f0a297aeecbf2e0d",
+  "cleanup": {
+    "old_research_images_and_containers_absent_verified": true,
+    "unrelated_images_and_containers_preserved_verified": true,
+    "canonical_metadata_hashes_and_data_checkpoint_cache_sizes_preserved_verified": true,
+    "volumes_and_build_download_caches_preserved": true,
+    "obsolete_intermediate_policy_image_removed": "sha256:55a54cb5c70b1d7c963b0187054053548f49200f3d1e6b819e663adc6ff8f6fc",
+    "obsolete_intermediate_sim_image": "sha256:062050353ceb8a4daecda23094f0de36e3223c647d21b5ca215a9d6f532881a0",
+    "obsolete_intermediate_sim_image_removed_verified": true,
+    "remove_intermediates_completed": true,
+    "removed_intermediate_and_obsolete_image_ids": {
+      "local": [
+        "sha256:55a54cb5c70b1d7c963b0187054053548f49200f3d1e6b819e663adc6ff8f6fc",
+        "sha256:062050353ceb8a4daecda23094f0de36e3223c647d21b5ca215a9d6f532881a0",
+        "sha256:574e1fa3a874613b8042687ed9a01673f42241eaa34802b8860477db6775b4df",
+        "sha256:5d3de95b1ce2033ebb3e78b6cbbea416256946cdcb3c7a8443bdec28190c48ac"
+      ],
+      "remote": [
+        "sha256:9285b31624bc31b29897f0e08dcc8e79e6626d6763ed2f550c8953934380aeea"
+      ]
+    }
+  },
+  "initial_clean_build": {
+    "mode": "clean: --no-cache --pull",
+    "images": {
+      "ambench:research-sim": {
+        "image_id": "sha256:062050353ceb8a4daecda23094f0de36e3223c647d21b5ca215a9d6f532881a0",
+        "bytes": 18872419407,
+        "standalone_workdir": "/opt/ambench",
+        "source_revision": "45eb69c347551139982a5c5bf863154c4f8c42e9",
+        "source_dirty": false
+      },
+      "ambench:research-policy": {
+        "image_id": "sha256:55a54cb5c70b1d7c963b0187054053548f49200f3d1e6b819e663adc6ff8f6fc",
+        "bytes": 32750657358,
+        "standalone_workdir": "/opt/ambench",
+        "source_revision": "45eb69c347551139982a5c5bf863154c4f8c42e9",
+        "source_dirty": false
+      }
+    }
+  },
+  "final_source_refresh": {
+    "mode": "cached: same exact constraints and OpenPI uv.lock",
+    "reason": "save evaluation environment configs and served checkpoint metadata; preserve direct MPC relative artifact paths",
+    "images": {
+      "ambench:research-sim": {
+        "image_id": "sha256:09bb607e2263f3dbbbecb1949e30aee13db85fbdcc0402d68abefdd861ff42d8",
+        "bytes": 18872420167,
+        "standalone_workdir": "/opt/ambench",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "source_dirty": false
+      },
+      "ambench:research-policy": {
+        "image_id": "sha256:3c5858e7ea74ed6b9e3fecbb80d692775ea6ecc3b699044dbc9858b552b33088",
+        "bytes": 32412139213,
+        "standalone_workdir": "/opt/ambench",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "source_dirty": false
+      }
+    }
+  },
+  "prior_source_refresh": {
+    "mode": "cached: same exact constraints and OpenPI uv.lock",
+    "images": {
+      "ambench:research-sim": {
+        "image_id": "sha256:574e1fa3a874613b8042687ed9a01673f42241eaa34802b8860477db6775b4df",
+        "bytes": 18872419979,
+        "standalone_workdir": "/opt/ambench",
+        "source_revision": "8ba737d82eef22bc321e1a7ba3f4fedd79d27884",
+        "source_dirty": false
+      },
+      "ambench:research-policy": {
+        "image_id": "sha256:5d3de95b1ce2033ebb3e78b6cbbea416256946cdcb3c7a8443bdec28190c48ac",
+        "bytes": 32412139027,
+        "standalone_workdir": "/opt/ambench",
+        "source_revision": "8ba737d82eef22bc321e1a7ba3f4fedd79d27884",
+        "source_dirty": false
+      }
+    },
+    "remote_actual_image_id": "sha256:9285b31624bc31b29897f0e08dcc8e79e6626d6763ed2f550c8953934380aeea"
+  },
+  "immutable_image_checks": {
+    "standalone_without_mounts_or_gpu": true,
+    "sim_act_dp_import_source": "/opt/ambench",
+    "openpi_import_source": "/opt/openpi",
+    "all_four_openpi_configs_load": true,
+    "protocol_tests_passed": 3,
+    "embedded_runtime_source_hashes_match_committed_workspace": {
+      "ambench:research-sim": {
+        "source/ambench_learn/ambench_learn/policies/act/eval.py": "f6b6cf8f3ba1bec780a3164b0c4369c9e04356f1e8a09d03eda1d89be99ee840",
+        "source/ambench_learn/ambench_learn/policies/dp/eval.py": "6faf763261b9ed5b1631c8d3f965bb2a54a8457dc9212afb519039db2a57cfbf",
+        "source/ambench_learn/ambench_learn/policies/pi/eval.py": "fd2c29cdadeeb94bcea2fce62c57d31ba3b6f4ea520c12c804abcd462fa908b4",
+        "source/ambench_learn/ambench_learn/policies/remote/server.py": "981b0053adc213eaee4177bfc40b23ee8659edbcf526a35928c17b76d95ed50b",
+        "scripts/research/verify_environment.py": "b8ab132ea160200cfac1a8e1f9b36c8c15338c2a51cca2c1c9549a7362f7afc6",
+        "scripts/data/record_demos_scripted.py": "d754d22cca92391f4a8abfedf27f2ebb80352c6807e94912f0c708d92a298bab"
+      },
+      "ambench:research-policy": {
+        "source/ambench_learn/ambench_learn/policies/act/eval.py": "f6b6cf8f3ba1bec780a3164b0c4369c9e04356f1e8a09d03eda1d89be99ee840",
+        "source/ambench_learn/ambench_learn/policies/dp/eval.py": "6faf763261b9ed5b1631c8d3f965bb2a54a8457dc9212afb519039db2a57cfbf",
+        "source/ambench_learn/ambench_learn/policies/pi/eval.py": "fd2c29cdadeeb94bcea2fce62c57d31ba3b6f4ea520c12c804abcd462fa908b4",
+        "source/ambench_learn/ambench_learn/policies/remote/server.py": "981b0053adc213eaee4177bfc40b23ee8659edbcf526a35928c17b76d95ed50b",
+        "scripts/research/verify_environment.py": "b8ab132ea160200cfac1a8e1f9b36c8c15338c2a51cca2c1c9549a7362f7afc6",
+        "scripts/data/record_demos_scripted.py": "d754d22cca92391f4a8abfedf27f2ebb80352c6807e94912f0c708d92a298bab"
+      }
+    },
+    "version_changes": {
+      "sim": {
+        "old_count": 279,
+        "new_count": 279,
+        "changes": {}
+      },
+      "act": {
+        "old_count": 149,
+        "new_count": 149,
+        "changes": {}
+      },
+      "dp": {
+        "old_count": 127,
+        "new_count": 127,
+        "changes": {}
+      },
+      "openpi": {
+        "old_count": 208,
+        "new_count": 208,
+        "changes": {}
+      }
+    },
+    "jaxls_git_sha": "50a58be88c5ef74532f09e3f55268b4f02c490e3"
+  },
+  "deployment": {
+    "ssh_host": "tencent-86",
+    "remote_root": "/diff/dzp_is_sb/ambench-research",
+    "container": "ambench-policy-research",
+    "local_image_content_fingerprint": "0d6582499e0f76a35d7b8bc7def9d962236fe0826261d831361e1ab00ed11728",
+    "remote_actual_image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8",
+    "remote_image_content_fingerprint": "0d6582499e0f76a35d7b8bc7def9d962236fe0826261d831361e1ab00ed11728",
+    "content_fingerprints_match": true,
+    "smallest_idle_gpu_host_id": 0,
+    "gpu_rechecked_idle_before_container_start": true,
+    "device_request_ids": [
+      "0"
+    ],
+    "loopback_port_bindings": {
+      "8000/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "8000"
+        }
+      ],
+      "8001/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "8001"
+        }
+      ]
+    },
+    "archive_bytes": 15093310538,
+    "local_remote_archive_sha256_match": "bcf3020ef6543785558fa6b357dfa62e5d5c8090492e340fad247e1871293170",
+    "policy_service_seed": 42,
+    "policy_start_script": {
+      "path": "tools/research/start_policy.sh",
+      "sha256": "01588fe38ec651ffa73e0d7453a209de9c3d1c29084524d4975564811f448a24"
+    },
+    "local_sim_actual_image_id": "sha256:09bb607e2263f3dbbbecb1949e30aee13db85fbdcc0402d68abefdd861ff42d8",
+    "local_sim_uses_final_image_verified": true
+  },
+  "evidence": [
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/delete-images.log",
+      "sha256": "5d32c0e367ba7f5e350e04551f7ad47362a715804b595cfa6837180cec7dd9e3"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/before-delete.json",
+      "sha256": "790278958d4b57283daf7b2f291d56e6627d28400698c053b6f1b696224826d8"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/after-delete.json",
+      "sha256": "4d7098a9396f57d76180f0b91ee3cbde6b9867a6d7ae79434ee5ae1dd617c920"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/official-fetch.log",
+      "sha256": "e5d6c99aec87ec07a2d1b5c1222d8b690d0a61c3548a55c795fff56db9450d0d"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/clean-build.log",
+      "sha256": "cf4da36945e7d78a3a65c46af14709bd4ae0fb39939521c416fe601b6edac5e4"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/initial-clean-images.txt",
+      "sha256": "b828933a5686eda73e16f6afc8c35c8816cdb441a30c70f5035e631595cf8258"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/standalone-sim.log",
+      "sha256": "5d4f8ff5f1eca64887d0c7843bbc1fb069adff6a9123f5ae3d1ca873544ed118"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/standalone-policy.log",
+      "sha256": "8936201cc4c7b00e5674084a878d928709fe3dd0dadf28fca38985cc15f368ba"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-refresh-build.log",
+      "sha256": "e21cb860d3ba9c501e88b69421fc180a7c1e1e05f035726a334a8f6da9e748ca"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-images.txt",
+      "sha256": "3819ef9ca080d33a8c7dd8bdfbfbf295bb50bf505086f67dec84a92d3eaa8999"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-standalone-sim.log",
+      "sha256": "982d004989e4a0e14312a5bc92696d77a93953230156e69ee0a01378f6b63f06"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-standalone-policy.log",
+      "sha256": "288a8cefcafe07ec66356ba5a156fce6dbef220527ea247b0ffa4c091068b9a2"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-immutable-source-hashes.json",
+      "sha256": "4685327f8668dfb3b8c36db635e4e8efdba60c9840d78ab90c308fb4439580ff"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-version-diff.json",
+      "sha256": "d15505f0a5fbbc70b055fb2bf7da4a64a08cad0c623de48536220003bd0cde14"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-policy-deploy.log",
+      "sha256": "eb0214837068b221164f906d5fe5bd4517b7735ed2d4178d30141325e8c9ab2e"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/remote-image-inspect.json",
+      "sha256": "2b99dd7f54799d31e2b018ba9047faf75f9f35a5f28cd4be78e6518568b96631"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/remote-container-inspect.json",
+      "sha256": "6ca6a57823ff37da3a9054c6c4ac2f6b9bc2b5b16bd1df0091840423f2a4d9c9"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/remove-intermediate-policy.log",
+      "sha256": "499510e4a67b2f5040aeaa0dabd1f71fbe56f87340ac53ec86d6abba8e37459f"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-refresh-build.log",
+      "sha256": "0a700184ad7bf53848c48000e638e97adda915d45ac7aa74127be3953e876d69"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-images.json",
+      "sha256": "f1f2fcadb4f35b4630afa032c5cb6632ea26e9a979d7236a2183e45dc4ce19eb"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-standalone-sim.log",
+      "sha256": "594bb85ea20f0950549add877e823aa4eac293eaf08e8b11d1edf35db6f4bacc"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-standalone-policy.log",
+      "sha256": "5c7214bfe1ec7fa12ec2599e631865a7275daaa2ffd2cf2915a6efe24d52d23e"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-immutable-source-hashes.json",
+      "sha256": "d7a4781b9e6f87197e32f1f10b356527b6f3715f8d6c66efeee3f69ebfe12a1f"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-version-diff.json",
+      "sha256": "d15505f0a5fbbc70b055fb2bf7da4a64a08cad0c623de48536220003bd0cde14"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-policy-stage.log",
+      "sha256": "055c665690ed331f9b374b5e455e1d2ca42e5c861bd5e7e9ec3d417cb25d28e7"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/staged-policy-active-before.txt",
+      "sha256": "8fe61d98276e312c61294d4914ff9d48b12cb7c03b7c1dc620ab75dddf4811ef"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/staged-policy-active-after.txt",
+      "sha256": "8fe61d98276e312c61294d4914ff9d48b12cb7c03b7c1dc620ab75dddf4811ef"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-safe-recreate-sim.log",
+      "sha256": "0ba0b5ee7df9c5789a4923398e02ebfb9956f21c79c935cc6774a3815cdc589f"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/path-policy-deploy.log",
+      "sha256": "558c45497c8eb8f8d593c3aa6f01663199db20430c1234393242c66465fb8ef1"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/remove-intermediate-sim.log",
+      "sha256": "435cdd5fd4456fff53ac7a11abdb2d20fd299bb29f043476fd56d17edf13ea0d"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/remove-obsolete-refresh-images.log",
+      "sha256": "d881f96708fcda5f8317c05abc5516f8f226c6dca0fa3891e9c1f58102d9a7c0"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/remove-obsolete-refresh-images.json",
+      "sha256": "029870dff180e862bf89851af8cfd3e887dd7cbb7357497be62c1aaea003d712"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/prior-remote-image-inspect.json",
+      "sha256": "b9cf5e7debd3a7bbaba7f94ef12eaa39cf4cd804a9372381b9a42cd0186b21e5"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/prior-remote-container-inspect.json",
+      "sha256": "c5a04251657667da527eeb1bc272450dce4f3933a08b661cef79516255bc918c"
+    },
+    {
+      "path": "outputs/docker-builds/rebuild-20261007/final-policy-gpu-before.csv",
+      "sha256": "aeae3d6a7e201cc62ee7388c7bcf353d51a9157483d020e8e9395dc8b702992e"
+    }
+  ]
+}

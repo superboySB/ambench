@@ -1,648 +1,754 @@
 {
-  "generated_at_utc": "2026-10-07T04:55:28.917812+00:00",
+  "generated_at_utc": "2026-10-07T06:37:24.906060+00:00",
   "matrix": {
     "families": 12,
     "passed": 106,
     "registry_count": 106,
     "source": {
-      "path": "outputs/research/combined-final/verified_106_after_wipe_fix.json",
-      "sha256": "5b2799552a482c7f21f4287cb9931715585d8fc28b89f4d05ff0d6b2c90eb025"
+      "path": "outputs/research/rebuild-20261007/matrix_verified.json",
+      "sha256": "43bda458a0ff2365898016c26cd98be1aaf9abcddcdb9a56c8e5cd24b211d463"
     },
     "tasks": [
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "CabinetPickPlace",
         "id": "CabinetPickPlace-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "FrameAssembly",
         "id": "FrameAssembly-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-EE-Abs-PID-Direct-Fast-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "LemonHarvesting",
         "id": "LemonHarvesting-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "NDT",
         "id": "NDT-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "NDT",
         "id": "NDT-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "OpenDoor",
         "id": "OpenDoor-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PegInHole",
         "id": "PegInHole-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-EE-Abs-PID-Direct-Fast-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-FAHexa-BaseJoint-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PressButton",
         "id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PullLever",
         "id": "PullLever-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-EE-Abs-PID-Direct-Fast-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-FAHexa-BaseJoint-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "PushSlider",
         "id": "PushSlider-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-EE-Abs-PID-Direct-Fast-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-FAHexa-BaseJoint-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "RotateValve",
         "id": "RotateValve-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 60
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "TossBall",
         "id": "TossBall-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-EE-Abs-L1-Direct-v0",
         "robot": "EE",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-EE-Abs-PID-Direct-v0",
         "robot": "EE",
-        "steps": 8
+        "seed": 42,
+        "steps": 60
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-FAHexa-Abs-L1-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-FAHexa-Abs-MPC-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-FAHexa-Abs-PID-Direct-v0",
         "robot": "FAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
         "robot": "OmniHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-UAHexa-Abs-PID-Direct-v0",
         "robot": "UAHexa",
+        "seed": 42,
         "steps": 8
       },
       {
         "family": "WipeWindow",
         "id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
         "robot": "UAQuad",
+        "seed": 42,
         "steps": 8
       }
     ]
@@ -652,49 +758,49 @@
       "episode_length_s": 0.5,
       "policy": "act",
       "rollouts": 1,
-      "seed": null,
+      "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/act_base_joint_isaac_step1/eval_summary.json",
-        "sha256": "2df988d031411653d4a8987e6d69e2c072c552f8c7a51f71bd02468c92f88944"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "6e3428936da70f7949e842eba0fafff7877a5c7275dec9781966bf6f2422b7b9"
       },
       "status": "completed",
       "steps": 59,
       "successes": 0,
       "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
       "termination_reason": "timeout",
-      "wall_time_s": 4.273
+      "wall_time_s": 3.562
     },
     {
       "episode_length_s": 0.5,
       "policy": "dp",
       "rollouts": 1,
-      "seed": null,
+      "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/dp_base_joint_isaac_step1/eval_summary.json",
-        "sha256": "f393c75230671a96fa42f7212ee2b1d1d9fe840c5ff4345ea4a1d0bf6ebb4a87"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "5566676abaa418bad9cd4337d7d79c13d8ecaa132dc2f0e8629e7a3dbab18956"
       },
       "status": "completed",
       "steps": 59,
       "successes": 0,
       "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
       "termination_reason": "timeout",
-      "wall_time_s": 3.104
+      "wall_time_s": 3.336
     },
     {
       "episode_length_s": 0.5,
       "policy": "pi0",
       "rollouts": 1,
-      "seed": null,
+      "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/pi0_base_joint_isaac_step1/eval_summary.json",
-        "sha256": "39b4a020d436ded6d40909581eef0a03d76cd70e92e5831ad0adb0921eb038ca"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "32e8132ad0daf4a3aa3e95b6849809ba643657cd36ac107545abc711729cb775"
       },
       "status": "completed",
       "steps": 59,
       "successes": 0,
       "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
       "termination_reason": "timeout",
-      "wall_time_s": 2.251
+      "wall_time_s": 2.757
     },
     {
       "episode_length_s": 0.5,
@@ -702,15 +808,15 @@
       "rollouts": 1,
       "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/pi05_base_joint_isaac_step1/eval_summary.json",
-        "sha256": "1b27bb580e3e76bfd501f5850c8295a6ff3cf4ace7ae57347d97194e77536539"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "ef8ee9313989970662154f264b48e682b495c1c79e7cbbaad9917fcbcc9fb842"
       },
       "status": "completed",
       "steps": 59,
       "successes": 0,
       "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
       "termination_reason": "timeout",
-      "wall_time_s": 3.217
+      "wall_time_s": 2.702
     }
   ],
   "policy_full_20s": [
@@ -719,153 +825,177 @@
       "rollouts": 1,
       "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/act_isaac_full20s/eval_summary.json",
-        "sha256": "9c91a54981181d240c353f92f45f315ede8b9ad754a60b6953ed34c6787c587a"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/eval_summary.json",
+        "sha256": "80d32b72243c6da1ddbad644494a59f94e1e3966b85dfa17823121dcf2ad81c8"
       },
       "status": "completed",
       "steps": 2399,
       "successes": 0,
       "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
       "termination_reason": "timeout",
-      "wall_time_s": 103.499
+      "wall_time_s": 83.135
     },
     {
       "policy": "dp",
       "rollouts": 1,
       "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/dp_isaac_full20s/eval_summary.json",
-        "sha256": "e39c4e63a3db0ec25a42f4910e6bea12a3fe17bd3e9066f15378b79b2deac3e4"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/eval_summary.json",
+        "sha256": "92e7de2c92ee348617ff24eeb8846c5b47187c0121988dc8b3cc0c6f91566866"
       },
       "status": "completed",
       "steps": 2399,
       "successes": 0,
       "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
       "termination_reason": "timeout",
-      "wall_time_s": 63.0
+      "wall_time_s": 65.298
     },
     {
       "policy": "pi0",
       "rollouts": 1,
       "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/pi0_isaac_full20s/eval_summary.json",
-        "sha256": "1a0668668415f5fc30fdb0318758116fa156c7b1075320239ea00fcbb5b69a34"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/eval_summary.json",
+        "sha256": "7f91a45ead1682873e9daf9f48fc6d4fa627529b38418384eb1f160fb5c0ed45"
       },
       "status": "completed",
-      "steps": 2399,
-      "successes": 0,
+      "steps": 443,
+      "successes": 1,
       "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
-      "termination_reason": "timeout",
-      "wall_time_s": 31.125
+      "termination_reason": "success",
+      "wall_time_s": 7.825
     },
     {
       "policy": "pi05",
       "rollouts": 1,
       "seed": 42,
       "source": {
-        "path": "outputs/policy_rpc/pi05_isaac_full20s/eval_summary.json",
-        "sha256": "0dfa2ef7bb5cbbd0d305e45f80fb7d6b414f04b86200a00da2ac83d4a1a60512"
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/eval_summary.json",
+        "sha256": "78f844a88df1af3e54eaa88a34250a02c9113c3cac424c795dfb998cf87ece3e"
       },
       "status": "completed",
-      "steps": 2399,
-      "successes": 0,
+      "steps": 298,
+      "successes": 1,
       "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
-      "termination_reason": "timeout",
-      "wall_time_s": 32.55
+      "termination_reason": "success",
+      "wall_time_s": 5.868
     }
   ],
   "scripted": {
     "families": [
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 60,
         "episodes": 1,
         "family": "CabinetPickPlace",
         "frames": 2755,
+        "seed": 42,
         "task_id": "CabinetPickPlace-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 30,
         "episodes": 1,
         "family": "FrameAssembly",
-        "frames": 2991,
+        "frames": 2995,
+        "seed": 42,
         "task_id": "FrameAssembly-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 30,
         "episodes": 1,
         "family": "LemonHarvesting",
         "frames": 1739,
+        "seed": 42,
         "task_id": "LemonHarvesting-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 20,
         "episodes": 1,
         "family": "NDT",
-        "frames": 1206,
+        "frames": 1213,
+        "seed": 42,
         "task_id": "NDT-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 15,
         "episodes": 1,
         "family": "OpenDoor",
-        "frames": 387,
+        "frames": 390,
+        "seed": 42,
         "task_id": "OpenDoor-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 20,
         "episodes": 1,
         "family": "PegInHole",
-        "frames": 1061,
+        "frames": 1043,
+        "seed": 42,
         "task_id": "PegInHole-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 20,
         "episodes": 1,
         "family": "PressButton",
-        "frames": 1001,
+        "frames": 994,
+        "seed": 42,
         "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 20,
         "episodes": 1,
         "family": "PullLever",
-        "frames": 919,
+        "frames": 916,
+        "seed": 42,
         "task_id": "PullLever-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 26,
         "episodes": 1,
         "family": "PushSlider",
         "frames": 1353,
+        "seed": 42,
         "task_id": "PushSlider-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 20,
         "episodes": 1,
         "family": "RotateValve",
         "frames": 1039,
+        "seed": 42,
         "task_id": "RotateValve-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 10,
         "episodes": 1,
         "family": "TossBall",
-        "frames": 594,
+        "frames": 615,
+        "seed": 42,
         "task_id": "TossBall-Am-EE-Abs-PID-Direct-v0"
       },
       {
         "action_semantics": "ee_absolute",
+        "episode_length_s": 20,
         "episodes": 1,
         "family": "WipeWindow",
-        "frames": 1747,
+        "frames": 2239,
+        "seed": 42,
         "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0"
       }
     ],
     "passed_families": 12,
     "source": {
-      "path": "outputs/research/combined-final/scripted_12_default20.json",
-      "sha256": "a7c0f5b282c6dddc4fe7d214f2db1e51f83a35138fec039fc5b5e91b12e04ad5"
+      "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+      "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
     }
   }
 }

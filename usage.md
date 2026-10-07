@@ -73,24 +73,26 @@ python scripts/research/verify_matrix.py --task-id PressButton-Am-FAHexa-BaseJoi
 
 ## 2. 十二个任务与全部 106 种场景配置
 
-| 任务前缀 | 时限 | 成功信号 | 额外配置 |
-| --- | ---: | --- | --- |
-| `CabinetPickPlace` | 60 s | 罐体进抽屉指定高度且速度低于阈值 | 无 |
-| `FrameAssembly` | 30 s | 框架中心落在 peg 容差内 | 无 |
-| `LemonHarvesting` | 30 s | 柠檬进入容器且夹爪打开 | EE Fast |
-| `NDT` | 20 s | 末端在检测点保持指定步数 | 无 |
-| `OpenDoor` | 15 s | 门关节超过开启角 | 无 |
-| `PegInHole` | 20 s | peg 尖端穿过孔坐标系的深度与横向边界 | 无 |
-| `PressButton` | 20 s | 按钮关节达到阈值 | BaseJoint PID/L1、EE Fast |
-| `PullLever` | 20 s | 杠杆关节超过最小角度 | 无 |
-| `PushSlider` | 26 s | 滑块关节达到目标 | BaseJoint PID/L1、EE Fast |
-| `RotateValve` | 20 s | 阀门关节达到目标角 | BaseJoint PID/L1、EE Fast |
-| `TossBall` | 10 s | 球在容器内释放、机体保持在要求区域 | 无 |
-| `WipeWindow` | 20 s | 每个污渍满足接触清除条件 | 无 |
+| 任务前缀 | 时限 | 成功信号 | 额外配置 | 新成功示范帧数（120 Hz） |
+| --- | ---: | --- | --- | ---: |
+| `CabinetPickPlace` | 60 s | 罐体进抽屉指定高度且速度低于阈值 | 无 | 2755 |
+| `FrameAssembly` | 30 s | 框架中心落在 peg 容差内 | 无 | 2995 |
+| `LemonHarvesting` | 30 s | 柠檬进入容器且夹爪打开 | EE Fast | 1739 |
+| `NDT` | 20 s | 末端在检测点保持指定步数 | 无 | 1213 |
+| `OpenDoor` | 15 s | 门关节超过开启角 | 无 | 390 |
+| `PegInHole` | 20 s | peg 尖端穿过孔坐标系的深度与横向边界 | 无 | 1043 |
+| `PressButton` | 20 s | 按钮关节达到阈值 | BaseJoint PID/L1、EE Fast | 994 |
+| `PullLever` | 20 s | 杠杆关节超过最小角度 | 无 | 916 |
+| `PushSlider` | 26 s | 滑块关节达到目标 | BaseJoint PID/L1、EE Fast | 1353 |
+| `RotateValve` | 20 s | 阀门关节达到目标角 | BaseJoint PID/L1、EE Fast | 1039 |
+| `TossBall` | 10 s | 球在容器内释放、机体保持在要求区域 | 无 | 615 |
+| `WipeWindow` | 20 s | 每个污渍满足接触清除条件 | 无 | 2239 |
 
-WipeWindow 的公开评估时限是 20 秒。修正夹持并缩短后续局部擦拭轨迹后，EE PID 脚本专家已在该默认时限内完成四处污点清除：成功示范为 1747 帧、120 Hz（约 14.6 秒），canonical LeRobot validator 通过。研究分支在 WipeWindow 场景中用固定关节保持海绵工具的夹持，因为原实现接触窗面时会脱手；这会改变工具动力学，跨分支比较成功率时应使用相同实现。此前 40 秒测试保留在合并报告的尝试历史中。
+表中示范均来自本次 seed 42 的 EE PID 采集，每族一个成功 episode，全部通过 canonical validator；来源为 `outputs/research/rebuild-20261007/scripted12_verified.json`。
 
-固定工具关节还通过双环境克隆检查：`outputs/research/wipe-fixed-two-envs-20260930T2044/results.json` 完成 8 步、动作形状 `(2, 8)`，两个环境均含接触传感器与 EE 相机。
+WipeWindow 的公开评估时限是 20 秒。修正夹持并缩短后续局部擦拭轨迹后，EE PID 脚本专家已在该默认时限内完成四处污点清除：2026-10-07 重建后 seed 42 的成功示范为 2239 帧、120 Hz（约 18.7 秒），canonical LeRobot validator 通过。研究分支在 WipeWindow 场景中用固定关节保持海绵工具的夹持，因为原实现接触窗面时会脱手；这会改变工具动力学，跨分支比较成功率时应使用相同实现。此前 seed 未固定的 1747 帧示范和 40 秒测试保留在历史报告中，本次汇总只使用重建后的新结果。
+
+固定工具关节还在本次重建后以 seed 42 通过双环境克隆检查：`outputs/research/rebuild-20261007/wipe_two_envs/results.json` 完成 8 步、动作形状 `(2, 8)`，两个环境均含接触传感器与 EE 相机。
 
 先按每族 EE PID 做独立 smoke；随后运行注册表驱动的全量矩阵，含物理机型、L1、MPC、BaseJoint 与 Fast。脚本为每个 ID 保存退出状态和日志，中途一个失败不会掩盖其他条目。当前矩阵入口默认 `--seed 42`，每个 child 和汇总报告都保存 seed；此前 2026-09-30 的无固定 seed 报告作为历史记录保留。
 
@@ -103,7 +105,7 @@ python scripts/research/verify_matrix.py \
 
 已有矩阵输出时，按 `results.json` 中的失败 ID 用 `--task-id` 重跑；修复后重新执行全量命令并换一个空的 `--output-dir` 生成新记录。工具会拒绝非空输出目录，防止旧结果混入。`--family PressButton` 与 `--robot FAHexa` 可用于缩小范围。NDT 首次加载远端仓库资产时，本次单项超过 240 秒，因此冷启动的全量命令使用 600 秒上限。机器上只有一张仿真 GPU，不要同时跑多个矩阵任务。
 
-2026-10-07 删除旧镜像、重新构建后，固定 seed 42 的整份矩阵一次通过 106/106；12 个 EE PID 代表各录制 60 步，其他 ID 各推进 8 步。下面的合并器读取这份新报告和每个 child JSON，逐项核对步数、退出状态、日志、seed 与来源 SHA-256；在仿真容器内运行。以下输出目录是本次验收路径，重复运行应换成新的空目录。2026-09-30 的首轮失败及修复记录作为历史保留在 `outputs/research/combined-final/`，不混入本次复测：
+2026-10-07 删除旧镜像、重新构建后，固定 seed 42 的整份矩阵一次通过 106/106；12 个 EE PID 代表各录制 60 步，其他 ID 各推进 8 步。下面的合并器读取这份新报告和每个 child JSON，逐项核对步数、退出状态、日志与来源 SHA-256，并记录 seed；在仿真容器内运行。以下输出目录是本次验收路径，重复运行应换成新的空目录。2026-09-30 的首轮失败及修复记录作为历史保留在 `outputs/research/combined-final/`，不混入本次复测：
 
 ```bash
 python scripts/research/merge_matrix_results.py \
@@ -171,48 +173,69 @@ python scripts/research/verify_matrix.py \
   --task-id PressButton-Am-UAQuad-Abs-PID-Direct-v0 \
   --video-task-id PressButton-Am-UAQuad-Abs-PID-Direct-v0 \
   --video-camera-name base_camera --video-steps 30 \
-  --timeout-s 240 --output-dir outputs/research/uaquad_base_camera
+  --seed 42 --timeout-s 600 \
+  --output-dir outputs/research/rebuild-20261007/uaquad_base_camera
 ```
 
 ![PressButton UAQuad PID 的 base_camera 实测帧](usage_assets/press_button_uaquad_base_camera.png)
 
-FAHexa PID 的扰动组合也已执行 8 步，包括转子饱和、气动、1 N 的 X 向风、动作噪声和观察噪声；这些设置与实际测试一致：
+2026-10-07 重建后，UAQuad 相机检查再次以 seed 42 完成 30 步并保存 MP4，见 `outputs/research/rebuild-20261007/uaquad_base_camera/results.json`。
+
+FAHexa PID 的扰动组合也已在本次重建后以 seed 42 执行 8 步，包括转子饱和、气动、1 N 的 X 向风、动作噪声和观察噪声；这些设置与实际测试一致：
 
 ```bash
 python scripts/research/verify_matrix.py \
   --task-id PressButton-Am-FAHexa-Abs-PID-Direct-v0 \
   --disturbance --wind-force 1 0 0 --action-noise --observation-noise \
-  --steps 8 --timeout-s 240 --output-dir outputs/research/fahexa_disturbance
+  --steps 8 --seed 42 --timeout-s 600 \
+  --output-dir outputs/research/rebuild-20261007/fahexa_disturbance
 ```
 
-MPC 的 acados 会在当前目录生成 C 代码和模型 JSON。仿真容器默认位于可写 `/workspace/ambench-run`，因此普通 `zero_agent.py` 和 ACT/DP 评估入口可直接使用 MPC 任务 ID，源码仍只读。GUI 遥操作的 X11 启动命令和无头恢复命令见 [note.md](note.md)。本分支的两项额外实测如下：
+MPC 的 acados 会在当前目录生成 C 代码和模型 JSON。仿真容器默认位于可写 `/workspace/ambench-run`，因此普通 `zero_agent.py` 和 ACT/DP 评估入口可直接使用 MPC 任务 ID，源码仍只读。GUI 遥操作的 X11 启动命令和无头恢复命令见 [note.md](note.md)。本分支的额外实测如下：
 
 | 功能 | 有界实测结果 |
 | --- | --- |
-| FAHexa MPC 普通入口 | `python scripts/environments/zero_agent.py --task PressButton-Am-FAHexa-Abs-MPC-Direct-v0 --num_envs 1 --headless` 完成 reset 和 2,386 次步进；`outputs/mpc_zero_agent_normal_cwd.log` 无权限错误或 traceback，生成文件仅在 Docker 工作卷。 |
-| 本地 X11 GUI 与键盘设备 | `PressButton-Am-EE-Abs-PID-Direct-v0` 出现 1440×900 Isaac Sim 5.1.0 窗口，场景构造及 `Se3Keyboard` 初始化完成；`outputs/gui_teleop_x11.log` 出现 `Teleoperation started`。连续运行器在 180 秒上限结束，exit 124 为预期；没有手动键盘动作示范。 |
+| MPC 相对结果与录像路径 | 最终镜像中 `verify_environment.py` 的相对 `--result-json` 与 `--video-dir` 均写入指定目录；seed 42、8/8 步，9 帧 384×384 MP4 可解码，acados 在新目录编译。来源 `outputs/research/rebuild-20261007/direct_mpc_relative/records/probe.json`。 |
+| FAHexa MPC 普通入口 | 2026-10-07 最终镜像下的 `zero_agent.py --task PressButton-Am-FAHexa-Abs-MPC-Direct-v0 --num_envs 1 --headless --device cuda:0` 完成 reset 和 3,151 次步进，新 acados C 代码编译成功；75 秒上限 exit 124，生成物仅在 Docker 工作卷。来源 `outputs/research/rebuild-20261007/mpc_normal_cwd.log`；公共连续入口未固定 seed。 |
+| 本地 X11 GUI 与键盘设备 | 最终镜像启动 Isaac Sim 5.1.0 窗口和 `Se3Keyboard`；向唯一匹配当前容器 teleop PID 的 X11 client 发送软件 `R` press/release，日志先后出现 `Reset triggered` 与 `Environment reset complete`。180 秒上限 exit 124 后子进程已回收并恢复无头 compose。来源 `outputs/research/rebuild-20261007/gui/teleop.log`；这是定向软件回调检查，未执行人工成功示范。 |
+
+直接复现 MPC 相对产物路径检查，容器内运行：
+
+```bash
+timeout --signal=INT --kill-after=10s 600s python scripts/research/verify_environment.py \
+  --task PressButton-Am-FAHexa-Abs-MPC-Direct-v0 --steps 8 --seed 42 \
+  --result-json outputs/research/rebuild-20261007/direct_mpc_relative/records/probe.json \
+  --video-dir outputs/research/rebuild-20261007/direct_mpc_relative/videos \
+  --headless --device cuda:0
+```
+
+GUI 检查先通过只读 X11 查询匹配窗口标题、`_NET_WM_PID` 与当前容器的 teleop 进程，再仅向该 client 发送 `R`。第一次仅按标题查找发现两个同名窗口，因此拒绝发送；补充进程匹配后 public reset 回调通过。全过程没有向其他桌面窗口发送事件。SpaceMouse/gamepad 未连接，真实设备输入和人工任务成功示范仍未验证。
 
 ## 4. 十二个脚本专家与 canonical 数据
 
 每个注册 ID 都携带 `scripted_policy_entry_point`。脚本专家使用任务状态机，经当前机器人控制流水线执行；BaseJoint 录制器通过当前 profile 的 IK 配置把专家 EE 目标转换为基座与关节绝对命令。先在 EE PID 下为每族取一条成功示范，随后检查各机型上的适用性。
 
-全部 12 族的有界采集和 canonical 验证可逐项运行，失败后继续并保存 JSON/CSV 与日志：
+全部 12 族的有界采集和 canonical 验证已在重建镜像中逐项通过。可一次运行下面的整组命令；它与本次分批采集使用相同的 seed 42、默认时限和校验条件，输出目录应为空：
 
 ```bash
 python scripts/research/verify_scripted.py \
-  --timeout-s 600 --output-dir outputs/research/scripted_all
+  --seed 42 --timeout-s 600 --output-dir outputs/research/rebuild-20261007/scripted_all
+python scripts/research/merge_scripted_results.py \
+  outputs/research/rebuild-20261007/scripted_all/results.json \
+  --output outputs/research/rebuild-20261007/scripted12_verified.json \
+  --expect-families 12
 ```
 
 先单独查一个任务可加 `--family PressButton` 并改用空的输出目录；给该单族测试加 `--video` 会保存额外 MP4，已在 PressButton 上实测。该脚本以每族 EE PID 作为任务逻辑基线；FAHexa BaseJoint PressButton 另有一条成功示范。四种物理飞行器的 PressButton PID 专家也均完成一条成功示范和 canonical validator，记录如下；这些单次结果不能推断其他任务的飞行专家成功率。
 
 | PressButton 物理机型 | 成功示范数 | canonical 帧数（120 Hz） | recorder + validator |
 | --- | ---: | ---: | --- |
-| UAQuad PID | 1 | 1016 | 通过 |
-| UAHexa PID | 1 | 986 | 通过 |
-| FAHexa PID | 1 | 1002 | 通过 |
-| OmniHexa PID | 1 | 997 | 通过 |
+| UAQuad PID | 1 | 1031 | 通过 |
+| UAHexa PID | 1 | 1005 | 通过 |
+| FAHexa PID | 1 | 999 | 通过 |
+| OmniHexa PID | 1 | 992 | 通过 |
 
-结果来自 `outputs/research/scripted-press-physical-20261007T1300/results.json`。2026-10-07 这轮补测沿用旧采集器的随机 seed（各 session 的 `env_cfg.yaml` 如实保存 `seed: null`）；从当前版本开始，验证脚本默认显式使用 `--seed 42`，报告记录 seed 与 episode 上限。使用公共采集器时也可加 `--seed 42` 固定任务随机化与专家轨迹：
+结果来自重建镜像的 `outputs/research/rebuild-20261007/scripted_press_physical/results.json`：四条新示范均在默认 20 秒 episode 内成功，seed 42，canonical validator 通过。验证脚本记录 seed 与 episode 上限；使用公共采集器时也需加 `--seed 42` 固定任务随机化与专家轨迹。此前无固定 seed 的补测保留为历史：
 
 ```bash
 python scripts/research/verify_scripted.py \
@@ -220,7 +243,7 @@ python scripts/research/verify_scripted.py \
   --task-id PressButton-Am-UAHexa-Abs-PID-Direct-v0 \
   --task-id PressButton-Am-FAHexa-Abs-PID-Direct-v0 \
   --task-id PressButton-Am-OmniHexa-Abs-PID-Direct-v0 \
-  --seed 42 --timeout-s 180 --output-dir outputs/research/scripted_press_physical
+  --seed 42 --timeout-s 600 --output-dir outputs/research/rebuild-20261007/scripted_press_physical
 ```
 
 容器内运行单任务示例：
@@ -265,21 +288,9 @@ python scripts/data/record_demos_scripted.py \
   --headless --device cuda:0
 ```
 
-这个 BaseJoint 配置还通过 `verify_scripted.py --task-id PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0 --output-dir outputs/research/scripted-press-basejoint-20260930T2005` 做了完整采集和校验：1 条成功 episode、1019 帧、12 维 `observation.state` 与 `action`，`base_joint_absolute` 动作语义。独立结果不会计入上面的 12 族 EE PID 汇总。
+这个 BaseJoint 配置已在 2026-10-07 重建镜像内用 seed 42 完整采集和校验，结果为 `outputs/research/rebuild-20261007/scripted_press_base_joint/results.json`：1 条成功 episode、999 帧、12 维 `observation.state` 与 `action`，`base_joint_absolute` 动作语义，默认时限 20 秒。独立结果不会计入 12 族 EE PID 汇总。第 5.0 节给出了这次 EE/BaseJoint fixture 的完整复现与上传命令。
 
-保留首次失败及各次复测，核对每条成功示范的 recorder、validator、LeRobot metadata 和视频，在仿真容器内合并本次分批采集：
-
-```bash
-python scripts/research/merge_scripted_results.py \
-  outputs/research/scripted-pressbutton-20260930T1850/results.json \
-  outputs/research/scripted-other-families-20260930T1852/results.json \
-  outputs/research/scripted-wipewindow-40s-20260930T1903/results.json \
-  outputs/research/scripted-pressbutton-video-20260930T1930/results.json \
-  outputs/research/scripted-wipe-fixed-success-20260930T1950/results.json \
-  outputs/research/scripted-wipe-default20-20260930T2045/results.json \
-  --output outputs/research/combined-final/scripted_12_default20.json \
-  --expect-families 12
-```
+合并器核对每条新示范的 recorder、validator、LeRobot metadata 和任务时限，并记录 seed。上面的整组采集命令可直接生成第 7 节需要的 `scripted12_verified.json`。本次实际运行先采集了第 5.0 节的 PressButton EE fixture，再采集其余 11 族；验收报告由 `scripted_press_ee/results.json` 与 `scripted_other11/results.json` 两份新报告合并，未混入历史结果。
 
 人工遥操作使用 `python scripts/data/record_demos_teleop.py --task PressButton-Am-EE-Abs-PID-Direct-v0 --help` 查看设备选项；它需要可见的 Isaac Sim 窗口和受支持输入设备。与脚本录制相同，遥操作输出也是 canonical LeRobot 数据。
 
@@ -297,34 +308,15 @@ python scripts/research/merge_scripted_results.py \
 
 源数据 LeRobot 0.4.4 的帧含 `observation.state`、`action`、`task` 与 `observation.images.<camera>`。`meta/info.json` 中 `ambench.action_semantics` 必须为 `ee_absolute` 或 `base_joint_absolute`，`state_keys` 记录 state 拼接顺序。模型训练使用相对目标时，由策略适配器或导出脚本从绝对动作源计算，源数据仍保留绝对语义。
 
-把 canonical session 按 [note.md](note.md) 同步到远端 `/data/datasets/press_button_ee` 后，在**远端策略容器的 DP 环境**转换与验证。以下命令在远端容器内执行：
-
-```bash
-/opt/venvs/dp/bin/python scripts/data/dp/lerobot_to_zarr.py \
-  --input_path /data/datasets/press_button_ee \
-  --output_path /data/datasets/press_button_ee.zarr.zip --omit_base_image
-/opt/venvs/dp/bin/python scripts/data/dp/validate_zarr.py \
-  /data/datasets/press_button_ee.zarr.zip --image_size 224
-```
-
-OpenPI 固定 reader 的 v2.1 派生导出在远端策略容器的 ACT 环境执行，直接读取同一份已同步的 canonical session；实际验证生成了 169 个 20 Hz 逻辑帧：
-
-```bash
-/opt/venvs/act/bin/python scripts/data/export_lerobot_to_openpi.py \
-  --dataset_roots /data/datasets/press_button_ee \
-  --repo_id am_bench/multitask_openpi_original_20hz_ee_local_relative \
-  --output_root /data/datasets/openpi/am_bench/multitask_openpi_original_20hz_ee_local_relative \
-  --target_hz 20 \
-  --omit_base_image --task_prompt "press the button"
-```
+本次模型数据链使用第 5.0 节新采集的 seed 42 EE/BaseJoint canonical session，分别同步到远端 `/data/datasets/press_button_ee_rebuild_20261007/lerobot` 与 `/data/datasets/press_button_base_joint_rebuild_20261007/lerobot`。ACT 直接读取 canonical 数据；DP 的 zarr 转换与 validator 命令见第 5.2 节；OpenPI reader 所需的 v2.1 导出与 norm stats 命令见第 5.3 节。派生目录、repo ID、训练 checkpoint 和闭环评估都使用同一个 `rebuild-20261007` 运行名，重复时统一换为新的空目录。
 
 多任务导出使用 `--task_prompt_map scripts/data/am_bench_language_instructions.json --require_task_prompt_map`，把各任务的 canonical session 一起传入。若已在本地仿真容器导出，也可用 `tools/research/sync_openpi_export.sh` 将 v2.1 repo 上传到远端相同布局；同步脚本拒绝覆盖已有目录。数据、配置和评估命令见下一节。
 
 ## 5. ACT、Diffusion Policy 与 OpenPI 的双容器闭环
 
-远端策略 Docker 持有 checkpoint 和高层模型；本地 Isaac Docker 采集相机与状态、运行低层控制并保存评估。先按 [note.md](note.md) 部署两个镜像并建立 SSH 隧道。2026-10-07 重建使用新采集的 seed 42 PressButton canonical 数据；本节的训练各为 **1 步接口验证**，EE 评估 20 秒、BaseJoint 评估 0.5 秒。此前 2026-09-30 的 OpenPI 两步训练和旧目录属于历史记录。
+远端策略 Docker 持有 checkpoint 和高层模型；本地 Isaac Docker 采集相机与状态、运行低层控制并保存评估。先按 [note.md](note.md) 部署两个镜像并建立 SSH 隧道。2026-10-07 重建使用新采集的 seed 42 PressButton canonical 数据；本节的训练各为 **1 步接口验证**，EE 使用 20 秒时限并允许成功提前结束，BaseJoint 评估 0.5 秒。此前 2026-09-30 的 OpenPI 两步训练和旧目录属于历史记录。
 
-以下路径使用空的新目录。再次复现时统一更换 `rebuild-20261007` 这个运行名，保留已有结果。当前的新模型结果待重建后门禁完成，更新到第 5.5 节。
+以下路径记录此次使用的独立新目录。再次复现时统一更换 `rebuild-20261007` 这个运行名，保留已有结果；实际训练与闭环结果见第 5.5 节。
 
 ### 5.0 同步本次 canonical 数据
 
@@ -353,7 +345,7 @@ bash tools/research/sync_dataset.sh "$EE_SESSION" press_button_ee_rebuild_202610
 bash tools/research/sync_dataset.sh "$BJ_SESSION" press_button_base_joint_rebuild_20261007
 ```
 
-上传脚本拒绝覆盖已有远端目录。后续训练与导出命令均在**远端策略容器**执行：
+上传脚本拒绝覆盖已有远端目录。已有本次数据和 checkpoint 时可直接从 5.4 加载服务；重新采集、导出和训练时，为整套命令统一换一个未占用的 run/session 前缀，包括两个同步名称、派生数据 home、stats、训练输出和 checkpoint 路径。下面路径记录此次实际验收配置。后续训练与导出命令均在**远端策略容器**执行：
 
 ```bash
 ssh -t tencent-86 'docker exec -it -w /workspace/ambench ambench-policy-research bash'
@@ -388,6 +380,8 @@ BaseJoint 的命令替换四项：
 保持其余参数不变并用独立 job name。`benchmark_dataset_report.json` 记录实际逻辑帧数：EE 为 `994 // 6 = 165`，BaseJoint 为 `999 // 6 = 166`；不足一个完整采样间隔的尾部帧不进入训练。ACT 相对动作不能跨观测锚点做 temporal ensembling。
 
 ### 5.2 Diffusion Policy
+
+本版本的 DP 训练使用仓库固定 UMI 源码内的 `train.py`；公共评估入口为 `python -m ambench_learn.policies.dp.eval`。
 
 在远端容器从相同 canonical session 导出 UMI zarr 并验证：
 
@@ -425,7 +419,7 @@ BaseJoint 使用 `task=umi_drone_base_joint`、对应 BaseJoint zarr、独立的
 
 ### 5.3 OpenPI π₀ / π₀.₅
 
-OpenPI 使用 `ext/openpi` 的固定版本和独立 Python 环境。两个模型共享 canonical 源；训练前分别准备配置、norm stats 和官方 base 权重。以下两个配置对应 EE：
+OpenPI 使用 `ext/openpi` 的固定版本和独立 Python 环境；训练入口是该上游版本的 `scripts.train_pytorch`，公共评估入口为 `python -m ambench_learn.policies.pi.eval`。两个模型共享 canonical 源；训练前分别准备配置、norm stats 和官方 base 权重。以下两个配置对应 EE：
 
 | 模型 | 配置名 |
 | --- | --- |
@@ -546,15 +540,14 @@ OpenPI 的 BaseJoint 服务配置也替换成表内 checkpoint 的配置名。�
 
 ### 5.5 本次重建的策略结果
 
-待新镜像的数据、训练和八项闭环门禁完成后填写。成功完成一个 rollout 证明跨容器模型接口可用；一步训练与单条示范不能作为论文性能复现。
-
-生产镜像没有开发测试工具。以下命令在远端策略 Docker 内安装固定版本 pytest，再核对动作变换、数据导出、评估记录与协议；测试依赖只写入容器：
+新策略镜像内的动作契约、导出、评估工具和协议测试已通过：ACT/shared 37 项、DP 10 项、OpenPI adapter 17 项。生产镜像没有开发测试依赖；重建后在**远端策略 Docker 内**安装以下固定测试包，再运行对应套件。首次 OpenPI 测试缺少 `pynvml`，下面的安装命令已包含修正；宿主机无需安装这些包。
 
 ```bash
+cd /workspace/ambench
 uv pip install --python /opt/venvs/act/bin/python pytest==8.4.2
 uv pip install --python /opt/venvs/dp/bin/python pytest==8.4.2
-uv pip install --python /opt/openpi/.venv/bin/python pytest==8.4.2 pynvml==13.0.1 nvidia-ml-py==13.590.48
-cd /workspace/ambench
+uv pip install --python /opt/openpi/.venv/bin/python \
+  pytest==8.4.2 pynvml==13.0.1 nvidia-ml-py==13.590.48
 /opt/venvs/act/bin/python -m pytest -q \
   source/ambench_learn/tests/data/test_action_contract.py \
   source/ambench_learn/tests/data/test_openpi_export.py \
@@ -572,9 +565,41 @@ cd /opt/openpi
 JAX_PLATFORMS=cpu /opt/openpi/.venv/bin/python -m pytest -q src/openpi/policies/am_bench_policy_test.py
 ```
 
+EE 与 BaseJoint 的 ACT、DP、π₀、π₀.₅ 共八个训练任务均完成一步优化和 checkpoint 保存。保存的 ACT train config、OpenPI metadata 和 DP Hydra config 均核对 seed 42；四套 OpenPI stats 与两个导出报告匹配新的 canonical 源。[训练验收快照](usage_assets/policy_training_snapshot.json)保留配置、原始日志和退出码的 SHA-256。完整报告为 `outputs/research/rebuild-20261007/policy_training/training_validation.json`，原始日志在其 `raw_gates/` 子目录，远端来源为 `/data/outputs/rebuild-20261007/policy-gates/`。
+
+| 模型 | EE 训练 loss | BaseJoint 训练 loss | 训练步数 |
+| --- | --- | --- | --- |
+| ACT | 默认日志间隔未输出 | 默认日志间隔未输出 | 各 1 |
+| DP | 1.060095 | 1.140075 | 各 1 |
+| π₀ | 0.0930 | 0.1633 | 各 1 |
+| π₀.₅ | 0.0547 | 0.0256 | 各 1 |
+
+ACT 默认 `log_freq=200`，因此一步运行没有 loss 日志。八项 transport gate 已通过真实 checkpoint reload 与有限动作前向：ACT 返回 `(1, 8)` / `(1, 12)`，DP 返回插值后的 `(96, 8)` / `(96, 12)`，π₀ 和 π₀.₅ 返回 `(50, 8)` / `(50, 12)`。每项服务日志均记录 `REMOTE_INFERENCE_SEED=42`；闭环前再次重启服务以恢复随机推理起点。
+
+八项 Isaac 闭环均 `completed`，完整产物与录像已逐项验收。EE 使用默认 20 秒任务时限，π₀ 和 π₀.₅ 在任务成功后提前结束；BaseJoint 为 0.5 秒接口烟测。两侧随机种子均为 42：
+
+| 模型 | 模式 / 时限 | 仿真步数 | 任务成功 | MP4 解码帧 | 评估耗时（秒） |
+| --- | --- | --- | --- | --- | --- |
+| ACT | EE / 20 s | 2399 | 0/1 | 600 | 83.135 |
+| DP | EE / 20 s | 2399 | 0/1 | 600 | 65.298 |
+| π₀ | EE / 20 s | 443 | 1/1 | 110 | 7.825 |
+| π₀.₅ | EE / 20 s | 298 | 1/1 | 75 | 5.868 |
+| ACT | BaseJoint / 0.5 s | 59 | 0/1 | 14 | 3.562 |
+| DP | BaseJoint / 0.5 s | 59 | 0/1 | 14 | 3.336 |
+| π₀ | BaseJoint / 0.5 s | 59 | 0/1 | 14 | 2.757 |
+| π₀.₅ | BaseJoint / 0.5 s | 59 | 0/1 | 14 | 2.702 |
+
+[闭环产物验收快照](usage_assets/policy_artifact_snapshot.json)记录所有 summary、完整 env config、results、tracking/analysis、checkpoint、服务日志、调用顺序与视频的来源和 SHA-256；原始报告为 `outputs/research/rebuild-20261007/policy_rpc/artifact_validation.json`。下图从两个真实成功录像中提取末尾附近的原始帧，未经缩放或叠字，出处与帧索引见[帧提取记录](usage_assets/policy_success_frames_manifest.json)。任务成功以环境终止条件判定。
+
+| π₀：443 步成功 | π₀.₅：298 步成功 |
+| --- | --- |
+| ![π₀ EE 成功录像原始帧](usage_assets/policy_pi0_ee_success.png) | ![π₀.₅ EE 成功录像原始帧](usage_assets/policy_pi05_ee_success.png) |
+
+本次训练和 rollout 使用同一个 seed 的单条 PressButton 示范；π₀/π₀.₅ 的各一次成功不能推断多任务成绩或泛化成功率。一步训练与短 BaseJoint 烟测不能作为论文性能复现。
+
 ## 6. 评估记录与可视化
 
-三个公共 evaluator 均保存解析后的完整 `env_cfg.yaml`、`results.txt`、`eval_summary.json`、tracking JSONL 和 `tracking/analysis.json`。ACT/DP 的远端 checkpoint 路径记录在 summary 的 `metadata.Server metadata`；OpenPI 的来源按服务配置、实际启动参数和 checkpoint 哈希核对。所有本次公开命令显式指定 seed 42。
+三个公共 evaluator 均保存解析后的完整 `env_cfg.yaml`、`results.txt`、`eval_summary.json`、tracking JSONL 和 `tracking/analysis.json`。ACT/DP 的远端 checkpoint 路径记录在 summary 的 `metadata.Server metadata`；OpenPI 的来源按服务配置、实际启动参数和 checkpoint 哈希核对。本次模型评估命令均显式指定 seed 42。
 
 验收一个评估目录时，同时检查 `status: "completed"`、rollout 数、步骤、环境 ID、seed、动作语义、服务来源和 checkpoint。保存录像时用 `--save-video --video-camera-names ee_camera`，还要实际解码 MP4 并确认帧数大于零。进程 exit 0 而缺少 summary 不算通过；本次曾遇到长期运行的旧容器失去 GPU 访问，恢复方法见 [note.md](note.md)。
 
@@ -582,35 +607,37 @@ EE 20 秒评估与 BaseJoint 0.5 秒评估分别记录。任务成功以环境�
 
 ## 7. 本分支验证记录
 
-下表在每次复现后按实际输出填写。`未执行` 是明确状态，不代表失败或通过。在**本地主机的仓库根目录**用下面的纯标准库脚本从忽略目录中的原始报告重新生成[验证快照](usage_assets/validation_snapshot.json)；它要求 106 个环境、12 族专家和四个真实 20 秒策略 episode 均齐全：
+本节以 2026-10-07 删除旧研究镜像、重新构建后的结果为主要证据。矩阵、脚本采集和模型训练统一 seed 42；公共 `zero_agent.py` / teleop 连续 smoke 保留默认 seed 未设置，单独注明。此前 2026-09-30 及未固定 seed 的报告保留为历史，不参与本次合并。在**本地主机的仓库根目录**从原始报告生成[验证快照](usage_assets/validation_snapshot.json)：
 
 ```bash
 python3 scripts/research/snapshot_validation.py \
-  --matrix outputs/research/combined-final/verified_106_after_wipe_fix.json \
-  --scripted outputs/research/combined-final/scripted_12_default20.json \
-  --policy-root outputs/policy_rpc \
+  --matrix outputs/research/rebuild-20261007/matrix_verified.json \
+  --scripted outputs/research/rebuild-20261007/scripted12_verified.json \
+  --policy-root outputs/research/rebuild-20261007/policy_rpc \
   --require-base-joint \
   --output usage_assets/validation_snapshot.json
 ```
 
 | 项目 | 状态 | 证据或原因 |
 | --- | --- | --- |
-| 仿真镜像构建与依赖导入 | 通过 | 最终镜像 `sha256:f6b7d491…` 已运行；Python 3.11.13、NumPy 1.26.0、Torch 2.7.0+cu128、CUDA 可用、LeRobot 0.4.4 与 accelerate 1.12 可导入，acados `t_renderer` 可执行 |
-| 策略镜像构建与远端 GPU | 通过 | 远端容器 `ambench-policy-research` 仅看见 GPU 0 RTX PRO 5000 72 GB；8000/8001 仅绑定服务器 `127.0.0.1` |
-| Gym registry | 通过 | 2026-09-30，`outputs/research/registry-smoke-20260930T1740/registry.json`：106 ID、12 族 |
-| PressButton EE PID 场景与相机 | 通过 | `outputs/research/press-ee-video-20260930T1744/results.json`：8/8 步，384×384 MP4 与上图 |
-| UAQuad base_camera 与 FAHexa 扰动 | 通过 | UAQuad `outputs/research/press-uaquad-base-camera-20260930T1933/results.json`：30/30 步、base_camera MP4；FAHexa `press-disturbance-20260930T1932/results.json`：1 N 风、饱和、气动、动作/观察噪声下 8/8 步 |
-| ACT/DP 随机权重跨机模型推理 | 通过（接口烟测） | `outputs/policy_rpc/`：远端 GPU 加载两种真实模型；本地仿真 Docker 经 SSH tunnel 取得有限 8D 动作及 `(8, 8)` 计划；随机权重无任务能力 |
-| OpenPI 配置与 WebSocket | 通过（π₀、π₀.₅ 真实模型接口） | 远端 adapter 17/17；两个官方 base 分别为 33 文件/12,014,440,489 B 与 29 文件/12,441,749,581 B，经本地及远端 GCS 校验、转换与各自两步训练；本地仿真 Docker 经隧道分别收到真实 checkpoint 的 `(50, 8)` 动作序列，见 `outputs/policy_rpc/pi0_trained_remote_ws.log`、`pi05_trained_remote_ws.log` |
-| 106/106 注册与 reset/step | 通过（首轮及针对性复测） | `outputs/research/combined-final/verified_106_after_wipe_fix.json`：逐 ID 核对 child JSON、步数及来源，106/106、12 族；首轮 103/106，MPC/NDT 三项复测 3/3，WipeWindow 修复后 8/8 重新通过；12 类 EE 相机录像及上方图集已生成 |
-| 12/12 脚本专家成功示范 | 通过（每族 EE PID 一条） | PressButton `outputs/research/scripted-pressbutton-20260930T1850/results.json`：1 episode/1018 帧；`scripted-other-families-20260930T1852` 的另外 10 类通过；WipeWindow 默认 20 s 修正后见 `scripted-wipe-default20-20260930T2045/results.json`：1 episode/1747 帧。全部 12 个 session 均通过 LeRobot validator；合并报告为 `scripted_12_default20.json` |
-| 四种物理机型 PressButton 专家 | 通过（每机型一条） | `outputs/research/scripted-press-physical-20261007T1300/results.json`：UAQuad1016、UAHexa986、FAHexa1002、OmniHexa997 帧；四条成功 episode 均通过 canonical validator。旧采集器 seed未固定，不能推断多任务成功率 |
-| FAHexa BaseJoint 专家示范 | 通过（单任务） | `outputs/research/scripted-press-basejoint-20260930T2005/results.json`：PressButton 1 条成功 episode/1019 帧，12 维 state/action，`base_joint_absolute`，LeRobot validator exit0 |
-| canonical LeRobot + DP/OpenPI 派生格式 | 通过（单任务数据链） | PressButton canonical LeRobot 0.4.4 已通过 validator 并同步远端，`info.json` 两端 SHA-256 一致；DP zarr 导出、validator 1 episode/1018 steps 通过；OpenPI v2.1 导出 169 个 20 Hz 逻辑帧，π₀/π₀.₅ 两个 config 的 norm stats 均生成。见 `outputs/policy_rpc/dp_convert.log`、`dp_validate.log`、`openpi_export.log`、`openpi_norm_pi0.log`、`openpi_norm_pi05.log` |
-| ACT 一步训练与跨机调用 | 通过（模型接口） | 远端从 PressButton canonical 的 169 个 20 Hz 帧训练 1 步，checkpoint `/data/checkpoints/act_press_button_smoke/checkpoints/last/pretrained_model`；训练及本地 Docker → 远端真实 checkpoint HTTP 见 `outputs/policy_rpc/act_train.log`、`act_trained_remote_http.log` |
-| DP 一步训练与跨机调用 | 通过（模型接口） | 远端从 PressButton zarr 训练 1 步，checkpoint `/data/outputs/press_button_dp_smoke/checkpoints/latest.ckpt`；训练及本地 Docker → 远端真实 checkpoint HTTP 见 `outputs/policy_rpc/dp_train.log`、`dp_trained_remote_http.log` |
-| ACT / DP Isaac 闭环 | 通过（任务成功均 0/1） | 0.5 秒录像闭环见 `outputs/policy_rpc/act_isaac_step1/eval_summary.json`、`dp_isaac_step1/eval_summary.json`：均 `completed`、59 步、0/1。默认 20 秒 episode 见 `outputs/policy_rpc/act_isaac_full20s/eval_summary.json`、`dp_isaac_full20s/eval_summary.json`：均 `completed`、2399 步、0/1；远端服务日志各有 400 次 `/infer` 请求，ACT 耗时 103.5 s、DP 63 s。一步训练 checkpoint 验证完整跨机链路，不代表有效任务成绩 |
-| OpenPI π₀ / π₀.₅ 远端闭环 | 通过（20 秒闭环，任务成功均 0/1） | 两个官方 base 均经本地及远端 GCS 校验、转成 PyTorch、从同一 canonical 派生数据各训练 2 步；本地 Docker 经 WebSocket 分别收到真实 checkpoint 的 `(50, 8)` 动作块。两个 0.5 秒 Isaac 闭环均 `completed`、59 步、0/1 且有 MP4；`outputs/policy_rpc/pi0_isaac_full20s/eval_summary.json` 与 `pi05_isaac_full20s/eval_summary.json` 均 `completed`、2399 步、0/1 |
-| FAHexa BaseJoint 四种高层模型 | 通过（0.5 秒闭环，任务成功均 0/1） | ACT、DP、π₀、π₀.₅ 从同一 12 维成功示范各训练 1 步，HTTP/WebSocket 返回有限 12 维动作；`outputs/policy_rpc/{act,dp,pi0,pi05}_base_joint_isaac_step1/eval_summary.json` 均 `completed`、59 步、0/1 且有 MP4。π₀.₅ 闭环于 2026-10-07 补齐 |
+| 仿真镜像与无源码挂载导入 | 通过 | 最终镜像 `sha256:09bb607e…`、源码 `02d1499`；Isaac Sim 5.1.0、Python 3.11、Torch 2.7.0+cu128，独立容器不挂载仓库也可导入包及查看 CLI；实际运行容器 CUDA/NVML 正常 |
+| 策略镜像、部署与单元测试 | 通过 | 最终本地镜像 `sha256:3c5858e7…`、远端实际 ID `ba710cfc…`，内容指纹一致、源码 `02d1499`；仅映射最小空闲 GPU 0，8000/8001 仅绑定 loopback。ACT/shared 37 项、DP 10 项、OpenPI adapter 17 项通过，详见第 5.5 节与[重建快照](usage_assets/rebuild_snapshot.json) |
+| 106/106 注册与 reset/step | 通过（全新单轮） | `outputs/research/rebuild-20261007/matrix_verified.json`：106/106、12 族、5 个机器人标签，逐 ID child JSON/退出码/步数核对；12 类 EE PID 各 60 步及 MP4，其余各 8 步；全部 seed 42 |
+| MPC 新 solver 生成 | 通过 | 全量矩阵的 12 个 MPC ID 在各自新 `matrix/mpc_build/<task>` 下重新编译 acados C 代码并完成步进，源码目录只读 |
+| 12/12 EE PID 脚本专家 | 通过（每族一条成功示范） | `outputs/research/rebuild-20261007/scripted12_verified.json`；全部默认任务时限、seed 42、成功 episode 与 canonical validator；帧数见第 2 节，WipeWindow 为 2239 帧/约 18.7 秒，20 秒时限内成功 |
+| 四种物理机型 PressButton 专家 | 通过（每机型一条） | `outputs/research/rebuild-20261007/scripted_press_physical/results.json`：UAQuad 1031、UAHexa 1005、FAHexa 999、OmniHexa 992 帧，seed 42、20 秒默认时限、四条成功示范和 validator 均通过 |
+| FAHexa BaseJoint 专家 | 通过（单任务） | `outputs/research/rebuild-20261007/scripted_press_base_joint/results.json`：999 帧、20 秒默认时限、seed 42、成功 episode、12 维 state/action、`base_joint_absolute`、validator exit 0 |
+| UAQuad base_camera | 通过 | `outputs/research/rebuild-20261007/uaquad_base_camera/results.json`：seed 42、30/30 步与可解码 MP4 |
+| FAHexa 扰动组合 | 通过 | `outputs/research/rebuild-20261007/fahexa_disturbance/results.json`：seed 42、8/8 步；饱和、气动、X 向 1 N 风、动作和观察噪声共同启用 |
+| WipeWindow 双环境克隆 | 通过 | `outputs/research/rebuild-20261007/wipe_two_envs/results.json`：seed 42、两个环境、8/8 步、动作形状 `(2, 8)`、接触传感器与 EE 相机 |
+| canonical → DP/OpenPI 派生数据 | 通过（EE 与 BaseJoint） | 新 994/999 帧 canonical 源分别转换、校验和生成 OpenPI stats；两种动作语义共用 canonical 格式，见第 4.1、5.0–5.3 节及训练快照 |
+| 八个模型一步训练 | 通过（模型训练接口） | EE 与 BaseJoint 的 ACT、DP、π₀、π₀.₅ 均完成一步优化与 checkpoint 保存，seed 42；[训练快照](usage_assets/policy_training_snapshot.json)记录源报告及 SHA-256 |
+| 八个真实模型跨机前向与闭环 | 通过 | 最终镜像上八项真实权重前向与八个 seed 42 rollout 均通过。EE 20 秒时限：ACT/DP 各 2399 步、0/1；π₀ 443 步、π₀.₅ 298 步成功提前终止，各 1/1。四项 BaseJoint 0.5 秒均 59 步、0/1。配置、服务来源、tracking 和全部 MP4 已核验；[产物快照](usage_assets/policy_artifact_snapshot.json)记录哈希。同 seed 单次成功不代表泛化性能 |
+| MPC 普通入口与相对输出路径 | 通过 | 最终镜像：普通入口 3,151 个步进输出、75 秒 exit 124、fresh acados 编译；相对结果与 video 路径均正确、8/8 步与可解码 MP4；详见第 3 节 |
+| GUI 键盘初始化与软件 reset | 通过（软件事件） | 最终镜像出现 Isaac 窗口，`Se3Keyboard` 初始化、teleop 启动；仅向当前容器唯一 client 发送 `R`，两个 public reset 日志标记均出现，180 秒上限退出后无 Isaac 子进程并恢复无头容器，详见第 3 节 |
+| SpaceMouse / gamepad 真实输入 | 未执行（无硬件） | 本机 USB 与 `/dev/input/by-id` 检查未发现 SpaceMouse 或 gamepad；缺少设备，不能验证真实输入 |
+| 人工遥操作成功示范 | 未执行 | 本次只验证 GUI、键盘接口和定向软件事件，不将其计为人工任务成功示范 |
 
-公开文档提供的是代码与运行方法，仓库没有打包训练数据和任务 checkpoint。任何未完成的阶段都会保留真实状态及直接日志，不推断模型精度或任务成功率。
+[附加验证快照](usage_assets/additional_validation_snapshot.json)保存四种物理专家、BaseJoint、相机/扰动/双环境、MPC 路径与 GUI 软件 reset 的 11 项摘要及原始文件 SHA-256，来源为 `outputs/research/rebuild-20261007/additional_gates.json`。
+
+场景 smoke、单条专家示范与单步训练分别验证对应软件链路。论文性能、物理机器人在全部任务上的成功率，以及真实遥操作硬件输入仍需匹配数据、训练和设备后单独评估。

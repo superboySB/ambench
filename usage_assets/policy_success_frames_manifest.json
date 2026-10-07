@@ -1,0 +1,48 @@
+{
+  "frames": [
+    {
+      "policy": "pi0",
+      "mode": "ee",
+      "seed": 42,
+      "inference_seed": 42,
+      "task_successes": 1,
+      "rollouts": 1,
+      "executed_steps": 443,
+      "source_video": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/videos/pi-eval-ee_camera-env0-eps0.mp4",
+      "source_video_sha256": "d034c9c6fdb3c25a5b31a755a0b0dc574ae132456f04467c622392cffc7261db",
+      "decoded_video_frames": 110,
+      "frame_index_zero_based": 107,
+      "output_png": "outputs/research/rebuild-20261007/policy_rpc/success_frames/pi0_ee_success.png",
+      "output_png_sha256": "85cf9dd7f1560c8cc5e4c3f49abe1f658b094a8513fca3b121d5c617538b767a",
+      "image_shape_hwc": [
+        384,
+        384,
+        3
+      ],
+      "transform": "CPU OpenCV extraction only; original dimensions and pixels, no overlays or resizing.",
+      "published_png": "usage_assets/policy_pi0_ee_success.png"
+    },
+    {
+      "policy": "pi05",
+      "mode": "ee",
+      "seed": 42,
+      "inference_seed": 42,
+      "task_successes": 1,
+      "rollouts": 1,
+      "executed_steps": 298,
+      "source_video": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/videos/pi-eval-ee_camera-env0-eps0.mp4",
+      "source_video_sha256": "80a83031fdc8e61a2c477e907fbe7b49f1739937384952102dec804fd58880bf",
+      "decoded_video_frames": 75,
+      "frame_index_zero_based": 72,
+      "output_png": "outputs/research/rebuild-20261007/policy_rpc/success_frames/pi05_ee_success.png",
+      "output_png_sha256": "e0266e6f6f2973f1373420f5f324db396a3bc2393f0a57174d616a72b5cc803f",
+      "image_shape_hwc": [
+        384,
+        384,
+        3
+      ],
+      "transform": "CPU OpenCV extraction only; original dimensions and pixels, no overlays or resizing.",
+      "published_png": "usage_assets/policy_pi05_ee_success.png"
+    }
+  ]
+}

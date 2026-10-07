@@ -1,0 +1,514 @@
+{
+  "bulk_sim_image_prefix": "062050353ceb8a4d",
+  "bulk_sim_source_commit": "45eb69c",
+  "final_sim_image": "sha256:09bb607e2263f3dbbbecb1949e30aee13db85fbdcc0402d68abefdd861ff42d8",
+  "final_sim_source_commit": "02d1499",
+  "gates": [
+    {
+      "action_dim": 8,
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20,
+      "fps": 120,
+      "frames": 1031,
+      "gate": "scripted_UAQuad",
+      "seed": 42,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+          "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonUAQuadAbsPID/demo-20261007_060306/lerobot/meta/info.json",
+          "sha256": "5e067a4a948823bfe014f5cb376f47882dd431b32e39668dd1b3984dfb9156c8"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-UAQuad-Abs-PID-Direct-v0.log",
+          "sha256": "f89127a2e5dec35a3f8b103cc09b38917c5e001aaac4f99e59e62d4cb2aa8227"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-UAQuad-Abs-PID-Direct-v0-validation.log",
+          "sha256": "77fc4907bb1e0405ad4dd423b3331d9ff50131e2386cbe0a6211b8e9db57fadc"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonUAQuadAbsPID/demo-20261007_060306/lerobot/env_cfg.yaml",
+          "sha256": "ad7f359672346ba3138035c9848ad4e69c0a15415ee17215af1d34e7b0398a76"
+        }
+      ],
+      "status": "passed",
+      "successful_episodes": 1,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0"
+    },
+    {
+      "action_dim": 8,
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20,
+      "fps": 120,
+      "frames": 1005,
+      "gate": "scripted_UAHexa",
+      "seed": 42,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+          "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonUAHexaAbsPID/demo-20261007_060409/lerobot/meta/info.json",
+          "sha256": "8c8817328dfe151bdced88ce240a028801cc8cf52de01b12e42bed9e1305b7d0"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-UAHexa-Abs-PID-Direct-v0.log",
+          "sha256": "9837779eef4285b353ff0e29d62715bc7febc53daaa4080017fda7336cb293e5"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-UAHexa-Abs-PID-Direct-v0-validation.log",
+          "sha256": "f440ed58b3b960f568992b3a93a5339131867fc9bb228ef1536872b9728d2083"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonUAHexaAbsPID/demo-20261007_060409/lerobot/env_cfg.yaml",
+          "sha256": "63b130dff872ba975123f90856d5c6ee0d47718273e1252dd9c104dac09e1067"
+        }
+      ],
+      "status": "passed",
+      "successful_episodes": 1,
+      "task_id": "PressButton-Am-UAHexa-Abs-PID-Direct-v0"
+    },
+    {
+      "action_dim": 8,
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20,
+      "fps": 120,
+      "frames": 999,
+      "gate": "scripted_FAHexa",
+      "seed": 42,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+          "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonFAHexaAbsPID/demo-20261007_060515/lerobot/meta/info.json",
+          "sha256": "549951f480e8a3646e9c26c590a83ec462003b5ba5f35b5fad867c9ade3d9469"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-FAHexa-Abs-PID-Direct-v0.log",
+          "sha256": "e5fc4ab7562a7acce8e68f4c0cae02b6b86f3a06fa7a850a4125642449dabb69"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-FAHexa-Abs-PID-Direct-v0-validation.log",
+          "sha256": "058957d10204df064b3d8f83f6780d9829c0b56c06abd99ff75347a54d853beb"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonFAHexaAbsPID/demo-20261007_060515/lerobot/env_cfg.yaml",
+          "sha256": "aa6cd30cecd6ccfcda3f662fd49e9b6647316c6bad76618ca497f96df9dc6340"
+        }
+      ],
+      "status": "passed",
+      "successful_episodes": 1,
+      "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0"
+    },
+    {
+      "action_dim": 8,
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20,
+      "fps": 120,
+      "frames": 992,
+      "gate": "scripted_OmniHexa",
+      "seed": 42,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+          "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonOmniHexaAbsPID/demo-20261007_060617/lerobot/meta/info.json",
+          "sha256": "83985081ff717feeb0147e512f39e7db0fe45d5a5fe4ef33b1ce2cb50ff7e7e4"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-OmniHexa-Abs-PID-Direct-v0.log",
+          "sha256": "d0489e3508ba2b930da17148e3437123111e3162506c3efcd9ca8bc825e7342c"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/logs/PressButton-Am-OmniHexa-Abs-PID-Direct-v0-validation.log",
+          "sha256": "077966b45e340d7087e304a20ecd7e695f110d4eba7c8748c14b94f144f6cc6e"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_physical/datasets/PressButton/PressButtonOmniHexaAbsPID/demo-20261007_060617/lerobot/env_cfg.yaml",
+          "sha256": "015d4113a3ff187aff4ea276eebe0cd0c2cafdfe1579f8a4c7e0590db6f0a176"
+        }
+      ],
+      "status": "passed",
+      "successful_episodes": 1,
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0"
+    },
+    {
+      "action_dim": 12,
+      "action_semantics": "base_joint_absolute",
+      "episode_length_s": 20,
+      "fps": 120,
+      "frames": 999,
+      "gate": "scripted_FAHexa-BaseJoint",
+      "seed": 42,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_base_joint/results.json",
+          "sha256": "20ab1a47bd2d3dcb3ce7bd9185ae4591e3df3384d3030a5f8bf9666844c69bf1"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_base_joint/datasets/PressButton/PressButtonFAHexaBaseJointAbsPID/demo-20261007_050716/lerobot/meta/info.json",
+          "sha256": "1523dd65d94fd50d883bbbda7c9411717583eabc23397087428f816f922bb975"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_base_joint/logs/PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0.log",
+          "sha256": "f687dda1ed863641d5fbd51154ccf449d90db3a304b1040216e801fd847927c2"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_base_joint/logs/PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0-validation.log",
+          "sha256": "5d9e9f4a50d20487ae32335bd13385281745fa9d944779ecb531944b00dbc383"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/scripted_press_base_joint/datasets/PressButton/PressButtonFAHexaBaseJointAbsPID/demo-20261007_050716/lerobot/env_cfg.yaml",
+          "sha256": "445cfa870b8b03150140cee60c808600667c07b4bfe45c7cb49a3751e5388181"
+        }
+      ],
+      "status": "passed",
+      "successful_episodes": 1,
+      "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0"
+    },
+    {
+      "action_shape": [
+        1,
+        8
+      ],
+      "gate": "uaquad_base_camera",
+      "num_envs": 1,
+      "probe_config": {
+        "action_noise": false,
+        "device": "cuda:0",
+        "disable_fabric": false,
+        "disturbance": false,
+        "num_envs": 1,
+        "observation_noise": false,
+        "seed": 42,
+        "steps": 8,
+        "timeout_s": 600.0,
+        "video_camera_name": "base_camera",
+        "video_family_representatives": false,
+        "video_steps": 30,
+        "video_task_ids": [
+          "PressButton-Am-UAQuad-Abs-PID-Direct-v0"
+        ],
+        "wind_force": null
+      },
+      "seed": 42,
+      "sensor_names": [
+        "base_camera",
+        "ee_camera"
+      ],
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/uaquad_base_camera/results.json",
+          "sha256": "92a50ca8d78e3e72eb2610986eda3a5b38e46ae9d05a28d725ed12a1e247f110"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/uaquad_base_camera/records/PressButton-Am-UAQuad-Abs-PID-Direct-v0.json",
+          "sha256": "ac311c06c19e38b0f32198254a7be4b494e5751b8f825fa4c9a8774f878e9f66"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/uaquad_base_camera/logs/PressButton-Am-UAQuad-Abs-PID-Direct-v0.log",
+          "sha256": "fe1751f08ce58e295d4e43ad6147ffe6aabdefe3566cca5d900472e3807e5f09"
+        }
+      ],
+      "status": "passed",
+      "steps_completed": 30,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "video": {
+        "decoded_first_frame": true,
+        "fps": 30.0,
+        "frame_count": 30,
+        "gate": "uaquad_base_camera",
+        "height": 384,
+        "path": "outputs/research/rebuild-20261007/uaquad_base_camera/videos/PressButton-Am-UAQuad-Abs-PID-Direct-v0/research-base_camera-env0-eps0.mp4",
+        "sha256": "57f255454288a7e57c79ce5bcad074504d90c7bcd32d4195b2572c719f121071",
+        "width": 384
+      }
+    },
+    {
+      "action_shape": [
+        1,
+        8
+      ],
+      "gate": "fahexa_disturbance",
+      "num_envs": 1,
+      "probe_config": {
+        "action_noise": true,
+        "device": "cuda:0",
+        "disable_fabric": false,
+        "disturbance": true,
+        "num_envs": 1,
+        "observation_noise": true,
+        "seed": 42,
+        "steps": 8,
+        "timeout_s": 600.0,
+        "video_camera_name": "ee_camera",
+        "video_family_representatives": false,
+        "video_steps": 60,
+        "video_task_ids": [],
+        "wind_force": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      "seed": 42,
+      "sensor_names": [
+        "base_camera",
+        "ee_camera"
+      ],
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/fahexa_disturbance/results.json",
+          "sha256": "c46f748fa36dbe9480dfe41bffe79739f111c589d65ece1c39be919b20a1204f"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/fahexa_disturbance/records/PressButton-Am-FAHexa-Abs-PID-Direct-v0.json",
+          "sha256": "f8b24f7ce9087a6e63834a7c42bc465e7cbab21e0738859aa850bdb804121fc7"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/fahexa_disturbance/logs/PressButton-Am-FAHexa-Abs-PID-Direct-v0.log",
+          "sha256": "f4a70ae507f46df3496b934f29e6c5accebf3dae15bc9231881a4f487bcb9dcf"
+        }
+      ],
+      "status": "passed",
+      "steps_completed": 8,
+      "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0"
+    },
+    {
+      "action_shape": [
+        2,
+        8
+      ],
+      "gate": "wipe_two_envs",
+      "num_envs": 2,
+      "probe_config": {
+        "action_noise": false,
+        "device": "cuda:0",
+        "disable_fabric": false,
+        "disturbance": false,
+        "num_envs": 2,
+        "observation_noise": false,
+        "seed": 42,
+        "steps": 8,
+        "timeout_s": 600.0,
+        "video_camera_name": "ee_camera",
+        "video_family_representatives": false,
+        "video_steps": 60,
+        "video_task_ids": [],
+        "wind_force": null
+      },
+      "seed": 42,
+      "sensor_names": [
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/wipe_two_envs/results.json",
+          "sha256": "621f24e233c6e2087aae05ab01e6eb815688fb90d6960408d4eab3578d8f6fe2"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/wipe_two_envs/records/WipeWindow-Am-EE-Abs-PID-Direct-v0.json",
+          "sha256": "d4d011d7e2b12020a9f15ea21dd6340798942016bc8a257a10483879e5294e11"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/wipe_two_envs/logs/WipeWindow-Am-EE-Abs-PID-Direct-v0.log",
+          "sha256": "3a4ed43eeb371dae145667614e93dfea240cd1c0a0e3f9eecb06eb562f96475b"
+        }
+      ],
+      "status": "passed",
+      "steps_completed": 8,
+      "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0"
+    },
+    {
+      "gate": "direct_mpc_relative",
+      "num_envs": 1,
+      "relative_result_and_video_paths": true,
+      "seed": 42,
+      "solver_compiled": true,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/direct_mpc_relative/records/probe.json",
+          "sha256": "6aabd5bf82057174010ba7664eb86ea3766d6a40c8c2d505d2ece3bf310f80a8"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/direct_mpc_relative/probe.log",
+          "sha256": "5184f9402109e64c8e999a601e3c1c193e2358305b05ec6ed92f6cf4bf18200a"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/video_decode.json",
+          "sha256": "ad6efe443d00ea9060de279f249a0e960b083a98a415e65b2865efcb2fe9c875"
+        }
+      ],
+      "status": "passed",
+      "steps_completed": 8,
+      "task_id": "PressButton-Am-FAHexa-Abs-MPC-Direct-v0",
+      "video": {
+        "decoded_first_frame": true,
+        "fps": 30.0,
+        "frame_count": 9,
+        "gate": "direct_mpc_relative",
+        "height": 384,
+        "path": "outputs/research/rebuild-20261007/direct_mpc_relative/videos/research-ee_camera-env0-eps0.mp4",
+        "sha256": "5ac52043a3029a742d2d24be524d57dd30ca6b149a0a0dc5b0f5c1bdad97f863",
+        "width": 384
+      },
+      "work_dir": "outputs/research/rebuild-20261007/direct_mpc_relative/mpc_build/PressButton-Am-FAHexa-Abs-MPC-Direct-v0"
+    },
+    {
+      "child_processes_remaining": 0,
+      "continuous_runner": true,
+      "exit_code": 124,
+      "gate": "mpc_normal_cwd",
+      "num_envs": 1,
+      "seed": null,
+      "solver_compiled": true,
+      "source_writable": false,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/mpc_normal_cwd.json",
+          "sha256": "ee0e2ebbf20a194737ba0816d5227f9d0940e2c7dc169f846fb2b1f7cc417a73"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/mpc_normal_cwd.log",
+          "sha256": "85c0ea6c910471e2b9af0209f6f7f145921571390bdf145d7a5e257aeae3160c"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/mpc_workdir_check.log",
+          "sha256": "d451ad14900ea3e9f45d7d898653269cbf519ea2fa701d0662835702ba97653d"
+        }
+      ],
+      "status": "passed",
+      "steps_completed": 3151,
+      "task_id": "PressButton-Am-FAHexa-Abs-MPC-Direct-v0",
+      "timeout_s": 75,
+      "working_directory": "/workspace/ambench-run"
+    },
+    {
+      "child_processes_remaining": 0,
+      "continuous_runner": true,
+      "episode_length_s": 100000,
+      "event_target": {
+        "candidate_windows": [
+          [
+            6291883,
+            "Isaac Sim 5.1.0",
+            2237
+          ],
+          [
+            127926277,
+            "Isaac Sim 5.1.0",
+            47
+          ]
+        ],
+        "client_pid": 47,
+        "display": ":0",
+        "generated_at_utc": "2026-10-07T06:17:05.150896+00:00",
+        "hardware_input": false,
+        "key": "R",
+        "method": "libX11 XSendEvent targeted to one unique Isaac window",
+        "send_returns": [
+          1,
+          1
+        ],
+        "window_id": 127926277,
+        "window_title": "Isaac Sim 5.1.0"
+      },
+      "exit_code": 124,
+      "first_attempt": {
+        "reason": "Two same-title windows; no event sent until live container teleop PID matched",
+        "status": "safely_rejected"
+      },
+      "frames": null,
+      "gate": "gui_keyboard_software_reset",
+      "hardware_input": false,
+      "human_successful_demo_recorded": false,
+      "keyboard_initialized": true,
+      "num_envs": 1,
+      "recorder_help_with_required_task_passed": true,
+      "reset_completed_marker": "Environment reset complete",
+      "reset_requested_marker": "Reset triggered - Environment will reset on next step",
+      "seed": null,
+      "software_key": "R",
+      "software_reset_passed": true,
+      "sources": [
+        {
+          "path": "outputs/research/rebuild-20261007/gui/teleop.log",
+          "sha256": "f60a1c27f0b458d2ba4b5769d6b4b1bf07d001f7462eef473e8a2d90dc92f71b"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/send_reset.py",
+          "sha256": "b9431ca5d17a032976063b14f7a50e03286a1a68fa4d58ca4a47c8c17cc321fb"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/send_reset_result.json",
+          "sha256": "c901f5728d745f98bfc13f54a17ff1108753689488e6a78ed5594bde4aedb82e"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/send_reset_result.log",
+          "sha256": "3686410fcdcbebc70a77eb7164e168a19408b48c9b5bece9aa07bbf23d001bc3"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/send_reset_error.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/attempt1_send_reset_error.log",
+          "sha256": "faff54534abff4a59a930f3d4bb50b9b65c25f2eb54514b69f05b28a8b891d8f"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/window_inspection.log",
+          "sha256": "325474fc3d3704483907d068517f1c731dac50740490aad588d4bd5214f64166"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/after_timeout_processes.txt",
+          "sha256": "1a5ab79464fc90e97f13929bc5d35bceaec42d623e000629f8013c40ec6bdd18"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/compose_gui.log",
+          "sha256": "e89c44fd861d2a86b018a391a6f71ff55b4e9afe557198e4562d56420f522912"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/compose_headless.log",
+          "sha256": "5e336591e11eaf4187b8e30e332cc8a9d8eac3f0d308b751efe4d9cee50049fe"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/recorder_help.log",
+          "sha256": "ba26946227c720530ed6a133e25367b7eadcb9d8b5bb8dd85ac6294ffd5b3d5a"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/lsusb.txt",
+          "sha256": "92305c94958c366e50ae1d616e1d020b73f49bc57b35211b548ef4801345083a"
+        },
+        {
+          "path": "outputs/research/rebuild-20261007/gui/input_devices.txt",
+          "sha256": "10ef3d95e1e5f68a09349b6efb989829e4dfb79c2d0afe1d431d87a52517e6d6"
+        }
+      ],
+      "status": "passed",
+      "steps_completed": null,
+      "successful_episodes": null,
+      "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
+      "teleoperation_started": true,
+      "timeout_s": 180,
+      "window_initialized": true
+    }
+  ],
+  "generated_at_utc": "2026-10-07T06:19:32.313287+00:00",
+  "hardware_limitations": {
+    "gamepad": "not_connected; physical input unverified",
+    "human_successful_teleoperation_demo": "not_performed",
+    "spacemouse": "not_connected; physical input unverified"
+  },
+  "rebuild_date": "2026-10-07",
+  "schema_version": 1,
+  "software_gates_passed": 11
+}

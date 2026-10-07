@@ -1,0 +1,988 @@
+{
+  "validated_gates": 8,
+  "rows": [
+    {
+      "policy": "act",
+      "mode": "ee",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 0,
+      "steps": 2399,
+      "wall_time_s": 83.135,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/eval_summary.json",
+        "sha256": "80d32b72243c6da1ddbad644494a59f94e1e3966b85dfa17823121dcf2ad81c8"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/env_cfg.yaml",
+        "sha256": "6f18194c2dd9f91dbf5ef76b9b24d4d241a54e7d6deaf8b82387d5f300e5bc58"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/results.txt",
+        "sha256": "29994d81f7a43af0cf1c7f37a9f284ae2f5730c932c1b69d3dafdf1bb470ea4f"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/tracking/tracking.jsonl",
+        "sha256": "a38bebf7886b15345523800b31498699f984961d50cf474a92b8eb0e54d55a75",
+        "json_lines": 2402
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/tracking/analysis.json",
+        "sha256": "33e51ff8f4d0a17f4c4bd4be87cccdf245f653f5f908fe5dcbdcdad5882d166a"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/service_calls.txt",
+        "sha256": "daa9a1575f0f9a414807dc120b3b7eae237c2e5a95d6d456bca5079eb9629034"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/transport_smoke.log",
+        "sha256": "801b8e22ef1622c39c579e20d39079b53c3b08edc70f2b6dc7af30da5df337df",
+        "result": {
+          "policy": "act",
+          "reset": {
+            "version": 1,
+            "action_representation": "ee_local_relative",
+            "state_keys": [
+              "ee_pos",
+              "ee_quat",
+              "gripper_width"
+            ]
+          },
+          "action_shapes": [
+            [
+              1,
+              8
+            ],
+            [
+              1,
+              8
+            ]
+          ],
+          "action_semantics": "ee_absolute",
+          "remote_url": "http://127.0.0.1:8001",
+          "model_forward": "passed"
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/policy_server.log",
+        "sha256": "18ce45c49e2f58d8d1d1ef5332783ae6eed86f56858c45d66375572489ac773b"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/policy_server_smoke.log",
+        "sha256": "26e7a59c8346196d525d7eba0419e173e30f7f354921c4daf9496a77899679c6"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/server_checkpoint.json",
+        "sha256": "33d570973546eba7e838ed343b43a153ce54a57ce678ef22005e37d33f3927b2",
+        "policy": "act",
+        "requested_checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/last/pretrained_model",
+        "resolved_checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+        "checkpoint_sha256": "dbc78877e633241795f0599a57d571ecc88c279b67f379b74bb8d84e87af5a2d",
+        "checkpoint_files": [
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/config.json",
+            "bytes": 1494,
+            "sha256": "91d32789f090d6cb6e3b1a5b65f3a5564cfa88d4eaeae763f07dcfd4a51bc693"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/model.safetensors",
+            "bytes": 206372056,
+            "sha256": "dbc78877e633241795f0599a57d571ecc88c279b67f379b74bb8d84e87af5a2d"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/policy_postprocessor.json",
+            "bytes": 935,
+            "sha256": "0ffb194ded3dd6f079af379a0cb2909e18d118846dbea91ab8cbf29bffa7a6ac"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+            "bytes": 6752,
+            "sha256": "e5ec1b415226c4a0b48694f43128abe269845635baa581e23d76fca8fd6a3c75"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/policy_preprocessor.json",
+            "bytes": 1433,
+            "sha256": "1a6bdf985fe2fd92cc3f472b21d0bec0645d49ebd3bad745338d980d64e9db0e"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/policy_preprocessor_step_5_normalizer_processor.safetensors",
+            "bytes": 6752,
+            "sha256": "e5ec1b415226c4a0b48694f43128abe269845635baa581e23d76fca8fd6a3c75"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/train_config.json",
+            "bytes": 5404,
+            "sha256": "c65ab8d36ee2b76b90131305ae7d421f6d94f635eb368a8bab6a634fcc811607"
+          }
+        ],
+        "config": null,
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 3301,
+        "process_argv": [
+          "/opt/venvs/act/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "--policy",
+          "act",
+          "--checkpoint",
+          "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/last/pretrained_model",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cuda:0"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-act.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/videos/act-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "ff7e093b43d4499ed1a8cc8fd7f2e64774f890e87031ffe6c02ee7f17f02c95e",
+          "decoded_frames": 600
+        }
+      ]
+    },
+    {
+      "policy": "dp",
+      "mode": "ee",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 0,
+      "steps": 2399,
+      "wall_time_s": 65.298,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/eval_summary.json",
+        "sha256": "92e7de2c92ee348617ff24eeb8846c5b47187c0121988dc8b3cc0c6f91566866"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/env_cfg.yaml",
+        "sha256": "a7e97ea6fb21b6d67ec4b52644e06365604a7dd7e75070f05324a09df777386a"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/results.txt",
+        "sha256": "835467e97c78bbb1fd683b277aa200be28c5ffef056536a0ed952e92c91dc08e"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/tracking/tracking.jsonl",
+        "sha256": "3078f6209f845fc065952cbac58029bcd408d2941aebcbfa9d1c7f0c185806bc",
+        "json_lines": 2402
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/tracking/analysis.json",
+        "sha256": "9222b737ce40ae07494ff426491df79e2085f7d2689c4837f1c0ffe0b0516e2f"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/service_calls.txt",
+        "sha256": "0c44f293b04b4a1805c68caa4fc36a7ac1ec9b4f1c21434ff473c0cc7cefb7cd"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/transport_smoke.log",
+        "sha256": "81539c4a35f0a3fcc62577772ace204a9afadbae71ec83b6de64204321599441",
+        "result": {
+          "policy": "dp",
+          "reset": {
+            "version": 1,
+            "status": "reset"
+          },
+          "action_shape": [
+            96,
+            8
+          ],
+          "action_semantics": "ee_absolute",
+          "remote_url": "http://127.0.0.1:8001",
+          "model_forward": "passed"
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/policy_server.log",
+        "sha256": "f85370d207e9ea7e872c3879248c94bfaf43a720b4b8b61a4afaa4a87cd2e2dd"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/policy_server_smoke.log",
+        "sha256": "5158ddaac0c55c7e3adb460865f02ff570a5ab9ad4bcb884ddf304dfe22df003"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/server_checkpoint.json",
+        "sha256": "7f1aad631f2daafff38f97f68d0d0c7a12f3e6b4a68ac6aa271a4129efec44f8",
+        "policy": "dp",
+        "requested_checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+        "resolved_checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+        "checkpoint_sha256": "356fd02dc6b1dfc6e0c09cd4183deb63cf6a601be7bee71ee637ea021de4ede5",
+        "checkpoint_files": [
+          {
+            "path": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+            "bytes": 110881759,
+            "sha256": "356fd02dc6b1dfc6e0c09cd4183deb63cf6a601be7bee71ee637ea021de4ede5"
+          }
+        ],
+        "config": null,
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 3586,
+        "process_argv": [
+          "/opt/venvs/dp/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "--policy",
+          "dp",
+          "--checkpoint",
+          "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cuda:0"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-dp.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/videos/dp-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "6f4e64aef103a0ccdd4b758f5e7657dbf8bdb3a535ea70be6cd7540cd75cd31a",
+          "decoded_frames": 600
+        }
+      ]
+    },
+    {
+      "policy": "pi0",
+      "mode": "ee",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 1,
+      "steps": 443,
+      "wall_time_s": 7.825,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/eval_summary.json",
+        "sha256": "7f91a45ead1682873e9daf9f48fc6d4fa627529b38418384eb1f160fb5c0ed45"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/env_cfg.yaml",
+        "sha256": "f7f6deae99e6ae0d8c3ee47e741addf01d696ab6a60f12f05eaa5835e264756e"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/results.txt",
+        "sha256": "459b6b0fe3814d6ba7eb7983d94c6b19bf3503fbcb460ac51a988bc2f09bdcc1"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/tracking/tracking.jsonl",
+        "sha256": "1fa76bb60ab2e055f60a07832a0d6ac17781261ef857e25fdcb21f3d97f6c1ef",
+        "json_lines": 446
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/tracking/analysis.json",
+        "sha256": "e6e8f027c82dcee0265a5cc1b32b1d25cf2f689d3f28e1d070efc9594e48d15a"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/service_calls.txt",
+        "sha256": "12a7994ad64777c0e45c0d498e9f106121690cf03293c52a652d3dd94ae7b38d"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/transport_smoke.log",
+        "sha256": "b467b9dfe5480a72aa02b1f5bb7974978bcd42daa80d9498846c1f945b26a3c7",
+        "result": {
+          "metadata": {
+            "action_representation": "ee_local_relative"
+          },
+          "action_semantics": "ee_absolute",
+          "action_shapes": [
+            [
+              50,
+              8
+            ],
+            [
+              50,
+              8
+            ]
+          ]
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/policy_server.log",
+        "sha256": "b04099a386f5801a26e3592f32737e307b80079fd3d79d4280994ca2fa6525d3"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/policy_server_smoke.log",
+        "sha256": "0c602109c20b394508bc28920adadd1d539c28a6c4af6399b22866691b263035"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/server_checkpoint.json",
+        "sha256": "c2e4cffb6ba18823bb25b81bbdbcc94c476cfbfa874402a990b87236d914164f",
+        "policy": "pi0",
+        "requested_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "resolved_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "checkpoint_sha256": "62926a961ed7b700ac4d7923fa842cdacbcf89b78ab5affeaccb3227d9aa7428",
+        "checkpoint_files": [
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+            "bytes": 1400,
+            "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/metadata.pt",
+            "bytes": 3187,
+            "sha256": "8f15dd262515596a55b1393898d15adbe5e30bd760c5cc05510578fc5b68e96d"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/model.safetensors",
+            "bytes": 7011543960,
+            "sha256": "62926a961ed7b700ac4d7923fa842cdacbcf89b78ab5affeaccb3227d9aa7428"
+          }
+        ],
+        "config": "pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 3998,
+        "process_argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-pi.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/videos/pi-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "d034c9c6fdb3c25a5b31a755a0b0dc574ae132456f04467c622392cffc7261db",
+          "decoded_frames": 110
+        }
+      ]
+    },
+    {
+      "policy": "pi05",
+      "mode": "ee",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 1,
+      "steps": 298,
+      "wall_time_s": 5.868,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/eval_summary.json",
+        "sha256": "78f844a88df1af3e54eaa88a34250a02c9113c3cac424c795dfb998cf87ece3e"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/env_cfg.yaml",
+        "sha256": "1d079e2d4708e9ff82cefc3f11a11a2062f718b0f53db09f54b6cc9a0abb55b3"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/results.txt",
+        "sha256": "bfda0c2befefcc08d597274548021309280fa7218d1be305e341f1941e02661c"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/tracking/tracking.jsonl",
+        "sha256": "3a710d19eea7f709c45049d0b26ede1b1a5e0753530133cf4a902b8369cf1944",
+        "json_lines": 301
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/tracking/analysis.json",
+        "sha256": "aaf4186d2a568033371b4555312473361b95f8b3f9cf46fc89e1c899112b7325"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/service_calls.txt",
+        "sha256": "713eabb3fc14808519072c0f020024d824af1dd16cd1aae8e954fe8ef806b7da"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/transport_smoke.log",
+        "sha256": "b467b9dfe5480a72aa02b1f5bb7974978bcd42daa80d9498846c1f945b26a3c7",
+        "result": {
+          "metadata": {
+            "action_representation": "ee_local_relative"
+          },
+          "action_semantics": "ee_absolute",
+          "action_shapes": [
+            [
+              50,
+              8
+            ],
+            [
+              50,
+              8
+            ]
+          ]
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/policy_server.log",
+        "sha256": "31cdd1b7e20c9dde6b0a62ea993da1943b8ff4eb66c31d8f622a706c77435cb0"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/policy_server_smoke.log",
+        "sha256": "273e81051d43eb9d048228038ba1add315bca35cf0de5f9b7fdf704a891fd8ea"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/server_checkpoint.json",
+        "sha256": "11bac65ee522bd49aea6d6c2bc0cfd7e7c18426b5ed637421442315df0d52699",
+        "policy": "pi05",
+        "requested_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "resolved_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "checkpoint_sha256": "3c76224d288223071b89d7de6b8061b3ca40244a4ffc4d1de800b4af9d374983",
+        "checkpoint_files": [
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+            "bytes": 1400,
+            "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/metadata.pt",
+            "bytes": 3251,
+            "sha256": "2302664c8d4eb412fdfba913643278611da020c5c735ddb6a6243b6d07d0e3a9"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/model.safetensors",
+            "bytes": 7473091464,
+            "sha256": "3c76224d288223071b89d7de6b8061b3ca40244a4ffc4d1de800b4af9d374983"
+          }
+        ],
+        "config": "pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 4286,
+        "process_argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-pi.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/videos/pi-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "80a83031fdc8e61a2c477e907fbe7b49f1739937384952102dec804fd58880bf",
+          "decoded_frames": 75
+        }
+      ]
+    },
+    {
+      "policy": "act",
+      "mode": "base_joint",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 0,
+      "steps": 59,
+      "wall_time_s": 3.562,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "6e3428936da70f7949e842eba0fafff7877a5c7275dec9781966bf6f2422b7b9"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/env_cfg.yaml",
+        "sha256": "741beec95bc1dba18306a71d95730b08e8b85e49beb5df00b1af2173fcfd7fce"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/results.txt",
+        "sha256": "cf0a1fea24fa19b803b87e218e63a2ee1e5b7c95d6d48bb8c88c91e0e01623f5"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/tracking/tracking.jsonl",
+        "sha256": "4cd03f3bcea12c9a028e6942f38e02def58ff8be04f1463b4990bc3fd0eea5c0",
+        "json_lines": 62
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/tracking/analysis.json",
+        "sha256": "dcf57e2161cd7dcaf228987d082e7d5195adceb9db1934900c34f6f815013647"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/service_calls.txt",
+        "sha256": "e5e57f0f29145e11c5eff2b0c7d16390116eb417db8ae01281c7c5a306a53adb"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/transport_smoke.log",
+        "sha256": "581d1ca8489ef0e24abbba7da7c2236545e397dd37131422d746d36c35ae2ed9",
+        "result": {
+          "policy": "act",
+          "reset": {
+            "version": 1,
+            "action_representation": "base_joint_relative",
+            "state_keys": [
+              "base_pos",
+              "base_quat",
+              "arm_joint_pos",
+              "gripper_width"
+            ]
+          },
+          "action_shapes": [
+            [
+              1,
+              12
+            ],
+            [
+              1,
+              12
+            ]
+          ],
+          "action_semantics": "base_joint_absolute",
+          "remote_url": "http://127.0.0.1:8001",
+          "model_forward": "passed"
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/policy_server.log",
+        "sha256": "f79e7cdcf259a853f2c429fd98cae6f3d97c74a542f813be8c7ef6eadf146af9"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/policy_server_smoke.log",
+        "sha256": "9e2c4871226f87247040a55e785ebeb3fb0957a75b4b62f99d730bb72152ac75"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/server_checkpoint.json",
+        "sha256": "36d98d5c8305235616767fd1efd5b67ed955506a848b6d41ba6e8c2c2bdaccce",
+        "policy": "act",
+        "requested_checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/last/pretrained_model",
+        "resolved_checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model",
+        "checkpoint_sha256": "025b0ec3901722513fcad2410e9503eaa3c5594483ebc9f626faddc7fb53d2b0",
+        "checkpoint_files": [
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/config.json",
+            "bytes": 1496,
+            "sha256": "460fe43c18a116e3901794d5ee4b23cd85e56b61172b6576c2b423317a7ee600"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/model.safetensors",
+            "bytes": 206404848,
+            "sha256": "025b0ec3901722513fcad2410e9503eaa3c5594483ebc9f626faddc7fb53d2b0"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/policy_postprocessor.json",
+            "bytes": 936,
+            "sha256": "a85dd18ffd9907e760455f8b496519026f6bbeac29cb6b49ab5070b739cf8ec0"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+            "bytes": 7104,
+            "sha256": "dc6447f599d57f19b6d60e41fc015817fe209403450b69d26c450633f3c7e1e6"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/policy_preprocessor.json",
+            "bytes": 1435,
+            "sha256": "6a3ee064b10e1597500acf72e080a36df89627e3e1ff1e01d90fe00608c7e978"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/policy_preprocessor_step_5_normalizer_processor.safetensors",
+            "bytes": 7104,
+            "sha256": "dc6447f599d57f19b6d60e41fc015817fe209403450b69d26c450633f3c7e1e6"
+          },
+          {
+            "path": "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/000001/pretrained_model/train_config.json",
+            "bytes": 5442,
+            "sha256": "eea81b335cacd1ba8a8a88d68a79dfd46a0a226122d1cac1f9ef996ba14269b4"
+          }
+        ],
+        "config": null,
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 4573,
+        "process_argv": [
+          "/opt/venvs/act/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "--policy",
+          "act",
+          "--checkpoint",
+          "/data/checkpoints/rebuild-20261007/act_press_button_base_joint_smoke/checkpoints/last/pretrained_model",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cuda:0"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-act.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/act_base_joint_isaac_step1/videos/act-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "56154ed6e11ffe18d6d1af813095ffc31f2f28d73f37f3813951beb0073cc7e2",
+          "decoded_frames": 14
+        }
+      ]
+    },
+    {
+      "policy": "dp",
+      "mode": "base_joint",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 0,
+      "steps": 59,
+      "wall_time_s": 3.336,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "5566676abaa418bad9cd4337d7d79c13d8ecaa132dc2f0e8629e7a3dbab18956"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/env_cfg.yaml",
+        "sha256": "d69dcb02fb9f2e2b14cf8874854f4fde1817bcc75feed8f5ee70dbc04e66604d"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/results.txt",
+        "sha256": "cbe6bb8f7adadcbd2719bf24d2875dcd77ff7e5530358a204a7ec33a77364be9"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/tracking/tracking.jsonl",
+        "sha256": "22874a08afbcfc4788b4e9fedc805eeba6f5a1204f2621dc77b1864d30b56b19",
+        "json_lines": 62
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/tracking/analysis.json",
+        "sha256": "b52eda4bfbf64536093d45c7fa946f6d9e50e3c7c3dc77b5fee7174112174338"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/service_calls.txt",
+        "sha256": "5f70e43f6ecf7874d60db2d0162e09dd414c81cdd079f56ab011741196ba4363"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/transport_smoke.log",
+        "sha256": "bae7176db09abfa355a7f8b3536d4d2642da98a65f6c725c8c09d5d140ae88e6",
+        "result": {
+          "policy": "dp",
+          "reset": {
+            "version": 1,
+            "status": "reset"
+          },
+          "action_shape": [
+            96,
+            12
+          ],
+          "action_semantics": "base_joint_absolute",
+          "remote_url": "http://127.0.0.1:8001",
+          "model_forward": "passed"
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/policy_server.log",
+        "sha256": "23425f62f11723e93ee6d26e4a36f71edabfdcce7b020f312b47b1a351cc9ad2"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/policy_server_smoke.log",
+        "sha256": "a1c79a4abfd3ee3aa2c29f5094c65951f1840b8707207d000582d12ca355d641"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/server_checkpoint.json",
+        "sha256": "7690e0a9d03752b40cb530d39821c375f5c75c3b6373a50acaaff4d2a47d6771",
+        "policy": "dp",
+        "requested_checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_base_joint_smoke/checkpoints/latest.ckpt",
+        "resolved_checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_base_joint_smoke/checkpoints/latest.ckpt",
+        "checkpoint_sha256": "dbad06e0b1cf6492b113df90f75176117ee31385fa0305102c4a99550217e7ef",
+        "checkpoint_files": [
+          {
+            "path": "/data/outputs/rebuild-20261007/press_button_dp_base_joint_smoke/checkpoints/latest.ckpt",
+            "bytes": 110818215,
+            "sha256": "dbad06e0b1cf6492b113df90f75176117ee31385fa0305102c4a99550217e7ef"
+          }
+        ],
+        "config": null,
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 4858,
+        "process_argv": [
+          "/opt/venvs/dp/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "--policy",
+          "dp",
+          "--checkpoint",
+          "/data/outputs/rebuild-20261007/press_button_dp_base_joint_smoke/checkpoints/latest.ckpt",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cuda:0"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-dp.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/dp_base_joint_isaac_step1/videos/dp-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "c157a25503a7463f604e54c3d53b41f40e1b3b8934a89b4ae5d48ba1b81a9234",
+          "decoded_frames": 14
+        }
+      ]
+    },
+    {
+      "policy": "pi0",
+      "mode": "base_joint",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 0,
+      "steps": 59,
+      "wall_time_s": 2.757,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "32e8132ad0daf4a3aa3e95b6849809ba643657cd36ac107545abc711729cb775"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/env_cfg.yaml",
+        "sha256": "cc7179b7bd2f9fff5c3b20909a6ba2534bd04f49f3170d823397f29c79c904f7"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/results.txt",
+        "sha256": "25ef9e4e3ec2cb493826bc575d0989b8e1f3e6607ed0d67a7035d03cc7b8fa54"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/tracking/tracking.jsonl",
+        "sha256": "135dc096173b824978814da204c6c65d8307350b9356319ed8350b5df4af543b",
+        "json_lines": 62
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/tracking/analysis.json",
+        "sha256": "5f4c400ecac418b273b91c2591a0ca5c6b47d1786e967e4943b61b3872b72222"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/service_calls.txt",
+        "sha256": "7de97abacb5b409179b07c1f96dcaf0b40355fa264d335fed7a449b8f29390f2"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/transport_smoke.log",
+        "sha256": "eb67c58475b525f32ba497a37092702037aed3ef3e16e53c5d638507a6f4d105",
+        "result": {
+          "metadata": {
+            "action_representation": "base_joint_relative"
+          },
+          "action_semantics": "base_joint_absolute",
+          "action_shapes": [
+            [
+              50,
+              12
+            ],
+            [
+              50,
+              12
+            ]
+          ]
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/policy_server.log",
+        "sha256": "9596733ca637fe5d8beb28014e86e2bfa22594b31d056f2856a98aff29ca251a"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/policy_server_smoke.log",
+        "sha256": "1985096c6ba051a2d9ed5ea431306e21a699218b3db7b730d562a5793a6c77da"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/server_checkpoint.json",
+        "sha256": "3aabca660985fdfa52da3d5abda3352bf6a0f0dd789175ac175e2a4c673b6075",
+        "policy": "pi0",
+        "requested_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1",
+        "resolved_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1",
+        "checkpoint_sha256": "2cb9011d005776deef611c52903dc1b11091b7a3aef165d4812e7f6f871e0561",
+        "checkpoint_files": [
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1/assets/am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative/norm_stats.json",
+            "bytes": 3023,
+            "sha256": "153f6b201ad16c770e13266c2e7751a3bcbab64868cff44af4745f5644f7af5a"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1/metadata.pt",
+            "bytes": 3251,
+            "sha256": "46aeef0ecb98a6fbcc6738b76844adf27c5afb2915a3b33f6af61979804d9fbf"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1/model.safetensors",
+            "bytes": 7011543960,
+            "sha256": "2cb9011d005776deef611c52903dc1b11091b7a3aef165d4812e7f6f871e0561"
+          }
+        ],
+        "config": "pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative",
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 5270,
+        "process_argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-pi.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_base_joint_isaac_step1/videos/pi-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "59ed0bf5d3fe6c4eef13bb17b466e00de5166502aac580e5f659b778bad94846",
+          "decoded_frames": 14
+        }
+      ]
+    },
+    {
+      "policy": "pi05",
+      "mode": "base_joint",
+      "seed": 42,
+      "inference_seed": 42,
+      "status": "completed",
+      "rollouts": 1,
+      "successes": 0,
+      "steps": 59,
+      "wall_time_s": 2.702,
+      "report": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/eval_summary.json",
+        "sha256": "ef8ee9313989970662154f264b48e682b495c1c79e7cbbaad9917fcbcc9fb842"
+      },
+      "env_cfg": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/env_cfg.yaml",
+        "sha256": "2b6bda6258a3073fd64b683d2649ca4071712d75b9a382b385052c4d9c32b8a6"
+      },
+      "results": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/results.txt",
+        "sha256": "537a98ddcca44907f3c005d30e8e1e3c603cae6e890c8cdf256663130084ef63"
+      },
+      "tracking": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/tracking/tracking.jsonl",
+        "sha256": "9cc093af0dfc38086dce8d5ee4687814f5fbb65e6eacc2d872f28a8b49c959a7",
+        "json_lines": 62
+      },
+      "analysis": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/tracking/analysis.json",
+        "sha256": "81268e91c919710f7e504dd7628b9d986d6039dd073e33300c4d175e921047bc"
+      },
+      "calls": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/service_calls.txt",
+        "sha256": "6b155f3270b41fa02c79d3530f02ce902961a7f956b06729b345974d3b5b7059"
+      },
+      "transport": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/transport_smoke.log",
+        "sha256": "eb67c58475b525f32ba497a37092702037aed3ef3e16e53c5d638507a6f4d105",
+        "result": {
+          "metadata": {
+            "action_representation": "base_joint_relative"
+          },
+          "action_semantics": "base_joint_absolute",
+          "action_shapes": [
+            [
+              50,
+              12
+            ],
+            [
+              50,
+              12
+            ]
+          ]
+        }
+      },
+      "server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/policy_server.log",
+        "sha256": "ad19cd47935e012916a08e108c83f2e865e3a2eebc7c5800f399b1595afca14a"
+      },
+      "smoke_server_log": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/policy_server_smoke.log",
+        "sha256": "075c354eedc0b1193b4a73c29135064c00adb4c2b03836c601a79ea145a5232e"
+      },
+      "server_checkpoint": {
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/server_checkpoint.json",
+        "sha256": "5a1c687d800feba49bd300e3af57cd20f3376725816b455487967605bc84df26",
+        "policy": "pi05",
+        "requested_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1",
+        "resolved_checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1",
+        "checkpoint_sha256": "822885e568782bd89a655bbc0ad66f938ce0e2dca0fb5ea04eb19d340304a72a",
+        "checkpoint_files": [
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1/assets/am_bench/multitask_base_joint_openpi_original_20hz_base_joint_relative/norm_stats.json",
+            "bytes": 3023,
+            "sha256": "153f6b201ad16c770e13266c2e7751a3bcbab64868cff44af4745f5644f7af5a"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1/metadata.pt",
+            "bytes": 3251,
+            "sha256": "36eb65e3bb3a1cb8d742d08d661bed2c5afe1caf13d9d42b646738cb66bef36b"
+          },
+          {
+            "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1/model.safetensors",
+            "bytes": 7473091464,
+            "sha256": "822885e568782bd89a655bbc0ad66f938ce0e2dca0fb5ea04eb19d340304a72a"
+          }
+        ],
+        "config": "pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative",
+        "inference_seed": 42,
+        "calls_before_rollout": [],
+        "process_pid": 5558,
+        "process_argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed = sys.argv[1:3]\ndel sys.argv[1:3]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_base_joint_openpi_original_20hz_h50_base_joint_relative/rebuild-20261007/1"
+        ],
+        "gpu": "0, GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c, NVIDIA RTX PRO 5000 72GB Blackwell, 73415 MiB",
+        "server_log": "/data/outputs/policy-server-pi.log",
+        "source_revision": "02d14993b717509d0dad940d4695689aad70f9a3",
+        "image_id": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+      },
+      "videos": [
+        {
+          "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_base_joint_isaac_step1/videos/pi-eval-ee_camera-env0-eps0.mp4",
+          "sha256": "d637daabdebd3ca3a1e975926cd50e580858c3d36ca778f7a10bb23849490027",
+          "decoded_frames": 14
+        }
+      ]
+    }
+  ]
+}

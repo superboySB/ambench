@@ -1,0 +1,57 @@
+name: ambench-research
+
+services:
+  sim:
+    container_name: ambench-sim-research
+    image: ambench:research-sim
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.sim
+    entrypoint: ["/bin/bash", "/workspace/ambench/tools/research/sim_workspace.sh"]
+    command: ["sleep", "infinity"]
+    working_dir: /workspace/ambench-run
+    network_mode: host
+    ipc: host
+    shm_size: 8gb
+    init: true
+    stdin_open: true
+    tty: true
+    environment:
+      ACCEPT_EULA: "Y"
+      PRIVACY_CONSENT: "Y"
+      OMNI_KIT_ACCEPT_EULA: "YES"
+      OMNI_KIT_ALLOW_ROOT: "1"
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility,graphics
+      JAX_PLATFORMS: cpu
+    volumes:
+      - ..:/workspace/ambench:ro
+      - ../datasets:/workspace/ambench/datasets
+      - ../outputs:/workspace/ambench/outputs
+      - ../videos:/workspace/ambench/videos
+      - sim-workdir:/workspace/ambench-run
+      - isaac-cache-kit:/isaac-sim/kit/cache
+      - isaac-cache-ov:/root/.cache/ov
+      - isaac-cache-pip:/root/.cache/pip
+      - isaac-cache-gl:/root/.cache/nvidia/GLCache
+      - isaac-cache-compute:/root/.nv/ComputeCache
+      - isaac-logs:/root/.nvidia-omniverse/logs
+      - isaac-data:/root/.local/share/ov/data
+      - isaac-documents:/root/Documents
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+
+volumes:
+  sim-workdir:
+  isaac-cache-kit:
+  isaac-cache-ov:
+  isaac-cache-pip:
+  isaac-cache-gl:
+  isaac-cache-compute:
+  isaac-logs:
+  isaac-data:
+  isaac-documents:

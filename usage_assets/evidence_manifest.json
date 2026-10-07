@@ -1,0 +1,24 @@
+[
+  {
+    "label": "PressButton scripted expert near final contact",
+    "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
+    "image": "usage_assets/press_button_scripted_success_near_final.png",
+    "source_video": "outputs/research/scripted-pressbutton-video-20260930T1930/datasets/PressButton/PressButtonEEAbsPID/demo-20260930_112756/videos/scripted-ee_camera-env0-eps0.mp4",
+    "source_report": "outputs/research/scripted-pressbutton-video-20260930T1930/results.json",
+    "frame_number": 237,
+    "frame_count": 250,
+    "image_sha256": "96f2af15d8372b85de6a1da6ae29bad2fb181638ee834db0e019325772feb1e7",
+    "source_video_sha256": "1a98fe1fe3e0ea63de7915db098c13195b93f5f016fbd615e80fbf430a5fc03f"
+  },
+  {
+    "label": "PressButton UAQuad base_camera neutral-action scene",
+    "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+    "image": "usage_assets/press_button_uaquad_base_camera.png",
+    "source_video": "outputs/research/press-uaquad-base-camera-20260930T1933/videos/PressButton-Am-UAQuad-Abs-PID-Direct-v0/research-base_camera-env0-eps0.mp4",
+    "source_report": "outputs/research/press-uaquad-base-camera-20260930T1933/results.json",
+    "frame_number": 14,
+    "frame_count": 30,
+    "image_sha256": "46af3c1b889cfb946ad90df989d2024135b33e70ab062463081344d47284463f",
+    "source_video_sha256": "77f1bd54232998f9cc001b55c8fc618d755682528dd74968d86004dcbcde51f7"
+  }
+]

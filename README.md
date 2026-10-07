@@ -42,6 +42,9 @@ embodiment, control, disturbances, and policy choice interact in that regime.
 A native Linux host (Ubuntu 22.04 or 24.04), a discrete NVIDIA GPU, and Isaac Sim 5.1 with
 Python 3.11 are required. WSL and Docker are not maintained paths.
 
+The `research` branch also documents a tested two-container workflow in [note.md](note.md)
+and its task-by-task results in [usage.md](usage.md).
+
 Once Isaac Sim and Isaac Lab are installed:
 
 ```bash

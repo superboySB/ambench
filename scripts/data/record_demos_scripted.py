@@ -35,6 +35,7 @@ from isaaclab.app import AppLauncher
 # Add argparse arguments before extending them with AppLauncher options.
 parser = argparse.ArgumentParser(description="Record demonstrations for Isaac Lab environments.")
 parser.add_argument("--num_envs", type=int, default=None, help="Number of environments to simulate.")
+parser.add_argument("--seed", type=int, default=None, help="Seed for task randomization and scripted trajectories.")
 parser.add_argument("--task", type=str, required=True, help="Name of the task.")
 parser.add_argument(
     "--dataset_root",
@@ -409,6 +410,8 @@ def main() -> None:
         logger.error(f"Failed to parse environment configuration: {e}")
         raise SystemExit(1) from e
     env_cfg.episode_length_s = args_cli.env_length_s
+    if args_cli.seed is not None:
+        env_cfg.seed = args_cli.seed
 
     # Ensure rendering happens during internal resets to prevent stale observations.
     if hasattr(env_cfg, "num_rerenders_on_reset"):

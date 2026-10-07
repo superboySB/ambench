@@ -26,6 +26,7 @@ from ambench_learn.eval.common import (
     wrap_video,
 )
 from ambench_learn.eval.run import EvalRun
+from ambench_learn.policies.remote.protocol import RemotePolicyClient
 
 # Argument parsing
 parser = argparse.ArgumentParser(description="Evaluate Diffusion Policy on Isaac Lab environments.")
@@ -35,6 +36,12 @@ parser.add_argument(
     type=Path,
     default=None,
     help="Path to the trained Diffusion Policy checkpoint file.",
+)
+parser.add_argument(
+    "--remote-url", type=str, default=None, help="DP inference server URL, for example http://host:8001."
+)
+parser.add_argument(
+    "--policy-id", type=str, default=None, help="Label for the served checkpoint in evaluation reports."
 )
 
 # append AppLauncher cli args
@@ -47,11 +54,19 @@ except ValueError as error:
     parser.error(str(error))
 if args_cli.num_envs != 1:
     parser.error("DP evaluation requires --num-envs 1 because its UMI observation history is not vectorized.")
-if args_cli.checkpoint is None:
-    parser.error("--checkpoint is required.")
-args_cli.checkpoint = args_cli.checkpoint.expanduser().resolve()
-if not args_cli.checkpoint.is_file():
-    parser.error(f"Checkpoint file not found: {args_cli.checkpoint}")
+if args_cli.remote_url is None:
+    if args_cli.checkpoint is None:
+        parser.error("--checkpoint is required unless --remote-url is set.")
+    args_cli.checkpoint = args_cli.checkpoint.expanduser().resolve()
+    if not args_cli.checkpoint.is_file():
+        parser.error(f"Checkpoint file not found: {args_cli.checkpoint}")
+else:
+    try:
+        remote_info = RemotePolicyClient(args_cli.remote_url, timeout_s=10.0).info()
+        if remote_info.get("policy") != "dp":
+            parser.error(f"Expected a DP inference server, got {remote_info.get('policy')!r}.")
+    except (OSError, RuntimeError, ValueError) as error:
+        parser.error(f"Could not connect to DP inference server: {error}")
 
 # Launch simulator.
 args_cli.enable_cameras = True
@@ -60,39 +75,21 @@ simulation_app = app_launcher.app
 
 """Rest everything follows."""
 
-import dill
 import gymnasium as gym
-import hydra
 import isaaclab_tasks  # noqa: F401
 import numpy as np
 import torch
-from diffusion_policy.common.pytorch_util import dict_apply
-from diffusion_policy.workspace.base_workspace import BaseWorkspace
 from isaaclab_tasks.utils import parse_env_cfg
-from omegaconf import OmegaConf
-from umi.real_world.real_inference_util import (
-    get_real_umi_action,
-    get_real_umi_obs_dict,
-)
 
 import ambench.tasks  # noqa: F401
 from ambench.evaluation import SuccessCriteriaTracker
 from ambench.recording import RecordVideo
 from ambench.utils.camera_utils import get_camera_rgb
-from ambench_learn.policies.dp.eval_utils import (
-    ObservationBufferManager,
-    extract_robot_state,
-    get_real_base_joint_action,
-    get_real_base_joint_obs_dict,
-    interpolate_action_sequence,
-    interpolate_base_joint_action_sequence,
-    prepare_umi_image_observation,
-    quat_wxyz_to_axis_angle,
-    resolve_dp_eval_action_semantics,
-    resolve_dp_execution_schedule,
+from ambench_learn.data.action_semantics import (
+    BASE_JOINT_ABSOLUTE,
+    EE_ABSOLUTE,
+    resolve_eval_action_semantics,
 )
-
-OmegaConf.register_new_resolver("eval", eval, replace=True)
 
 
 def eval_policy(
@@ -104,6 +101,24 @@ def eval_policy(
     progress_every: int,
     rollout_seed: int | None = None,
 ) -> tuple[dict, bool]:
+    from diffusion_policy.common.pytorch_util import dict_apply
+    from umi.real_world.real_inference_util import (
+        get_real_umi_action,
+        get_real_umi_obs_dict,
+    )
+
+    from ambench_learn.policies.dp.eval_utils import (
+        ObservationBufferManager,
+        extract_robot_state,
+        get_real_base_joint_action,
+        get_real_base_joint_obs_dict,
+        interpolate_action_sequence,
+        interpolate_base_joint_action_sequence,
+        prepare_umi_image_observation,
+        quat_wxyz_to_axis_angle,
+        resolve_dp_execution_schedule,
+    )
+
     shape_meta = config["shape_meta"]
     img_obs_horizon = shape_meta.obs.camera0_rgb.horizon
     low_dim_obs_horizon = next(
@@ -321,26 +336,153 @@ def eval_policy(
     return record, stop_evaluation
 
 
+def eval_remote_policy(
+    env,
+    client: RemotePolicyClient,
+    server_info: dict,
+    eval_run: EvalRun,
+    batch: EvalBatch,
+    progress_every: int,
+    rollout_seed: int | None = None,
+) -> tuple[dict, bool]:
+    """Run one rollout while the remote server owns UMI history and decoding."""
+
+    raw_obs, _ = env.reset(seed=rollout_seed) if rollout_seed is not None else env.reset()
+    client.reset(observation=raw_obs["policy"][0])
+    camera_names = list(server_info["camera_shapes"])
+    missing_cameras = []
+    for camera_name in camera_names:
+        try:
+            get_camera_rgb(env.unwrapped, camera_name, 0)
+        except KeyError as error:
+            missing_cameras.append(f"{camera_name}: {error.args[0]}")
+    if missing_cameras:
+        raise ValueError("DP checkpoint requires unavailable cameras: " + "; ".join(missing_cameras))
+
+    obs_stride = int(server_info["obs_down_sample_steps"])
+    query_frequency = int(server_info["query_frequency"])
+    action_buffer: list[np.ndarray] = []
+    max_timesteps = env.unwrapped.max_episode_length
+    success = False
+    executed_steps = 0
+    success_criteria = SuccessCriteriaTracker(env_index=0)
+    latest_tracking = None
+    termination_reason = "timeout"
+    stop_evaluation = False
+    eval_run.start_rollout(rollout_idx=batch.start, batch_env_index=0)
+
+    for t in range(max_timesteps):
+        if not simulation_app.is_running() or simulation_app.is_exiting():
+            stop_evaluation = True
+            termination_reason = "app_stopped"
+            break
+        if t % obs_stride == 0:
+            images = {name: get_camera_rgb(env.unwrapped, name, 0) for name in camera_names}
+            response = client.infer(
+                timestep=t,
+                observation=raw_obs["policy"][0],
+                images=images,
+            )
+            if response["actions"] is not None:
+                action_buffer = list(np.asarray(response["actions"], dtype=np.float32))
+        if t % query_frequency == 0 and not action_buffer:
+            raise RuntimeError(f"Remote DP server returned no action plan at timestep {t}.")
+
+        if server_info["action_mode"] != "base_joint" and hasattr(env.unwrapped.controller, "reference_from_dp"):
+            env.unwrapped.controller.reference_from_dp = True
+            mpc_steps = env.unwrapped.controller.N
+            env.unwrapped.controller.reference_traj = np.array(action_buffer[:mpc_steps])
+
+        raw_action = action_buffer.pop(0)
+        actions = torch.from_numpy(raw_action).float().to(env.unwrapped.device).unsqueeze(0)
+        raw_obs, reward, terminated, truncated, info = env.step(actions)
+        executed_steps = t + 1
+        action_is_nan = bool(torch.isnan(actions).any().item())
+        success_criteria.update(info)
+        episode_done = bool(terminated[0] or truncated[0]) or action_is_nan
+        if not episode_done:
+            latest_tracking = eval_run.record_timestep(
+                env=env,
+                raw_obs=raw_obs,
+                rollout_idx=batch.start,
+                timestep=executed_steps,
+                env_index=0,
+                batch_env_index=0,
+            )
+        eval_run.print_progress(
+            rollout_batch=batch.label(),
+            step=executed_steps,
+            active=(0 if episode_done else 1, 1),
+            reward=reward[0].item(),
+            tracking_record=latest_tracking,
+            tracking_env_index=0,
+            progress_every=progress_every,
+        )
+        if terminated[0]:
+            success = True
+            termination_reason = "success"
+            break
+        if action_is_nan:
+            termination_reason = "nan_action"
+            break
+        if truncated[0]:
+            termination_reason = "timeout"
+            break
+
+    record = eval_run.finish_rollout(
+        batch.start,
+        batch_env_index=0,
+        success=success,
+        executed_steps=executed_steps,
+        subtask_completion=success_criteria.completion_fraction,
+        termination_reason=termination_reason,
+        extra=success_criteria.to_record(),
+    )
+    return record, stop_evaluation
+
+
 def main():
     """Main evaluation loop."""
 
     device = args_cli.device
     num_rollouts = args_cli.num_rollouts
-    ckpt_path = args_cli.checkpoint
+    remote_client = None
+    if args_cli.remote_url is None:
+        import dill
+        import hydra
+        from diffusion_policy.workspace.base_workspace import BaseWorkspace
+        from omegaconf import OmegaConf
 
-    # Load payload
-    with open(ckpt_path, "rb") as f:
-        payload = torch.load(f, map_location="cpu", pickle_module=dill)
-    cfg = payload["cfg"]
+        from ambench_learn.policies.dp.eval_utils import (
+            resolve_dp_eval_action_semantics,
+        )
 
-    # Restore the trained policy from its Hydra workspace payload.
-    workspace_cls = hydra.utils.get_class(cfg._target_)
-    workspace: BaseWorkspace = workspace_cls(cfg)
-    workspace.load_payload(payload, exclude_keys=None, include_keys=None)
-    policy = workspace.ema_model if cfg.training.use_ema else workspace.model
-    policy.action_pose_repr = cfg.task.pose_repr.action_pose_repr
-    policy.to(device)
-    policy.eval()
+        OmegaConf.register_new_resolver("eval", eval, replace=True)
+        ckpt_path = args_cli.checkpoint
+        with open(ckpt_path, "rb") as file:
+            payload = torch.load(file, map_location="cpu", pickle_module=dill)
+        cfg = payload["cfg"]
+        workspace_cls = hydra.utils.get_class(cfg._target_)
+        workspace: BaseWorkspace = workspace_cls(cfg)
+        workspace.load_payload(payload, exclude_keys=None, include_keys=None)
+        policy = workspace.ema_model if cfg.training.use_ema else workspace.model
+        policy.action_pose_repr = cfg.task.pose_repr.action_pose_repr
+        policy.to(device)
+        policy.eval()
+        action_mode = cfg.task.shape_meta.action.get("mode", "ee_pose")
+        action_pose_repr = cfg.task.pose_repr.action_pose_repr
+        hydra_workspace = cfg._target_
+        server_info = None
+    else:
+        remote_client = RemotePolicyClient(args_cli.remote_url)
+        server_info = remote_client.info()
+        if server_info.get("policy") != "dp":
+            raise ValueError(f"Expected a DP inference server, got {server_info.get('policy')!r}.")
+        ckpt_path = args_cli.remote_url
+        cfg = policy = None
+        action_mode = server_info["action_mode"]
+        action_pose_repr = server_info["action_pose_repr"]
+        hydra_workspace = server_info["hydra_workspace"]
 
     # Create environment
     env_name = args_cli.task
@@ -359,39 +501,48 @@ def main():
         disturbance=args_cli.disturbance,
         scene_camera_cfg=scene_camera_cfg,
     )
-    action_mode = cfg.task.shape_meta.action.get("mode", "ee_pose")
-    action_semantics = resolve_dp_eval_action_semantics(action_mode, env_cfg)
+    if remote_client is None:
+        action_semantics = resolve_dp_eval_action_semantics(action_mode, env_cfg)
+    else:
+        action_semantics = resolve_eval_action_semantics(env_cfg)
+        expected_semantics = BASE_JOINT_ABSOLUTE if action_mode == "base_joint" else EE_ABSOLUTE
+        if action_mode not in ("base_joint", "ee_pose") or action_semantics != expected_semantics:
+            raise ValueError(
+                f"Remote DP action mode {action_mode!r} requires {expected_semantics!r}; "
+                f"environment uses {action_semantics!r}."
+            )
 
-    # Extract config
-    shape_meta = cfg.task.shape_meta
+    if remote_client is None:
+        shape_meta = cfg.task.shape_meta
 
-    # Determine camera names and mapping keys
-    camera_names = []
-    camera_key_mapping = {}
+        # Determine camera names and mapping keys.
+        camera_names = []
+        camera_key_mapping = {}
 
-    if "camera0_rgb" in shape_meta.obs:
-        camera_names.append("ee_camera")
-        camera_key_mapping["ee_camera"] = "camera0_rgb"
+        if "camera0_rgb" in shape_meta.obs:
+            camera_names.append("ee_camera")
+            camera_key_mapping["ee_camera"] = "camera0_rgb"
 
-    if "camera1_rgb" in shape_meta.obs:
-        # Assuming camera1 is base_camera if not specified otherwise
-        camera_names.append("base_camera")
-        camera_key_mapping["base_camera"] = "camera1_rgb"
+        if "camera1_rgb" in shape_meta.obs:
+            camera_names.append("base_camera")
+            camera_key_mapping["base_camera"] = "camera1_rgb"
 
-    if not camera_names:
-        raise ValueError(
-            "DP checkpoint shape_meta.obs must declare at least one supported RGB observation key: "
-            "camera0_rgb or camera1_rgb."
-        )
+        if not camera_names:
+            raise ValueError(
+                "DP checkpoint shape_meta.obs must declare at least one supported RGB observation key: "
+                "camera0_rgb or camera1_rgb."
+            )
 
-    eval_config = {
-        "shape_meta": shape_meta,
-        "obs_pose_repr": cfg.task.pose_repr.obs_pose_repr,
-        "action_pose_repr": cfg.task.pose_repr.action_pose_repr,
-        "obs_down_sample_steps": cfg.task.obs_down_sample_steps,
-        "camera_names": camera_names,
-        "camera_key_mapping": camera_key_mapping,
-    }
+        eval_config = {
+            "shape_meta": shape_meta,
+            "obs_pose_repr": cfg.task.pose_repr.obs_pose_repr,
+            "action_pose_repr": cfg.task.pose_repr.action_pose_repr,
+            "obs_down_sample_steps": cfg.task.obs_down_sample_steps,
+            "camera_names": camera_names,
+            "camera_key_mapping": camera_key_mapping,
+        }
+    else:
+        eval_config = None
 
     # Create environment
     env = gym.make(env_name, cfg=env_cfg).unwrapped
@@ -406,11 +557,12 @@ def main():
         requested_rollouts=num_rollouts,
         num_envs=num_envs,
         action_semantics=action_semantics,
-        action_representation=cfg.task.pose_repr.action_pose_repr,
+        action_representation=action_pose_repr,
         metadata={
             **build_common_eval_metadata(args_cli, output_dir=eval_save_dir),
             "DP action mode": action_mode,
-            "Hydra workspace": cfg._target_,
+            "Hydra workspace": hydra_workspace,
+            "Policy ID": args_cli.policy_id,
         },
     )
     eval_run.print_startup()
@@ -426,15 +578,26 @@ def main():
     )
 
     def run_batch(batch: EvalBatch) -> bool:
-        rollout_record, stop_evaluation = eval_policy(
-            env,
-            policy,
-            eval_config,
-            eval_run,
-            batch=batch,
-            progress_every=args_cli.progress_every,
-            rollout_seed=batch.seed,
-        )
+        if remote_client is None:
+            rollout_record, stop_evaluation = eval_policy(
+                env,
+                policy,
+                eval_config,
+                eval_run,
+                batch=batch,
+                progress_every=args_cli.progress_every,
+                rollout_seed=batch.seed,
+            )
+        else:
+            rollout_record, stop_evaluation = eval_remote_policy(
+                env,
+                remote_client,
+                server_info,
+                eval_run,
+                batch=batch,
+                progress_every=args_cli.progress_every,
+                rollout_seed=batch.seed,
+            )
         eval_run.print_rollout_finished(rollout_record, total=num_rollouts)
         return stop_evaluation
 

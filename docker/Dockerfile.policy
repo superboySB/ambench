@@ -1,0 +1,83 @@
+# syntax=docker/dockerfile:1.7
+FROM nvidia/cuda:12.8.1-cudnn-runtime-ubuntu22.04@sha256:17e2934e1fa96152b14f78078bfbafd0f00f391df995dc6c641a720fce1202bb
+
+COPY --from=ghcr.io/astral-sh/uv:0.7.13@sha256:6c1e19020ec221986a210027040044a5df8de762eb36d5240e382bc41d7a9043 /uv /uvx /usr/local/bin/
+
+USER root
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    UV_PYTHON_INSTALL_DIR=/opt/uv-python \
+    UV_CACHE_DIR=/root/.cache/uv \
+    UV_LINK_MODE=copy \
+    HF_HOME=/data/cache/huggingface \
+    HF_LEROBOT_HOME=/data/datasets/openpi \
+    TORCH_HOME=/data/cache/torch \
+    OPENPI_DATA_HOME=/data/cache/openpi \
+    WANDB_MODE=offline \
+    PYTHONPATH=/workspace/ambench/source/ambench:/workspace/ambench/source/ambench_learn \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      build-essential ca-certificates cmake git git-lfs libgl1 libglib2.0-0 \
+      libsm6 libxext6 libxrender1 ninja-build pkg-config python3 zstd \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN uv python install 3.11.9 \
+    && uv venv --python 3.11.9 /opt/venvs/act \
+    && uv venv --python 3.11.9 /opt/venvs/dp \
+    && uv venv --python 3.11.9 /opt/openpi/.venv
+
+WORKDIR /opt/ambench
+COPY docker/constraints.act.txt docker/constraints.dp.txt /opt/ambench-build/
+COPY source source
+COPY scripts scripts
+COPY ext/openpi /opt/openpi
+
+# ACT and Diffusion Policy need incompatible diffusers versions. OpenPI has its
+# own locked Torch/JAX stack, so the three policy families share one image but
+# never share a Python environment.
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install --python /opt/venvs/act/bin/python --torch-backend cu128 \
+      --constraint /opt/ambench-build/constraints.act.txt \
+      'torch==2.7.1' 'torchvision==0.22.1' \
+      -e source/ambench -e 'source/ambench_learn[act]' 'lerobot==0.4.4'
+
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install --python /opt/venvs/dp/bin/python --torch-backend cu128 \
+      --constraint /opt/ambench-build/constraints.dp.txt \
+      'torch==2.7.1' 'torchvision==0.22.1' \
+      'pyarrow>=20,<24' \
+      -e source/ambench -e 'source/ambench_learn[dp]' \
+    && uv pip install --python /opt/venvs/dp/bin/python --no-deps \
+      -e source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface
+
+WORKDIR /opt/openpi
+ENV UV_PROJECT_ENVIRONMENT=/opt/openpi/.venv
+RUN --mount=type=cache,target=/root/.cache/uv \
+    GIT_LFS_SKIP_SMUDGE=1 uv sync --frozen --no-dev \
+    && transformers_dir="$(/opt/openpi/.venv/bin/python -c 'import os, transformers; print(os.path.dirname(transformers.__file__))')" \
+    && cp -a src/openpi/models_pytorch/transformers_replace/. "$transformers_dir/" \
+    && /opt/openpi/.venv/bin/python -c \
+      'import openpi, openpi_client; from openpi.training.config import get_config; assert openpi.__file__.startswith("/opt/openpi/"), openpi.__file__; configs = [f"{model}_am_bench_multitask{suffix}_openpi_original_20hz_h50_{representation}" for model in ("pi0", "pi05") for suffix, representation in (("", "ee_local_relative"), ("_base_joint", "base_joint_relative"))]; [get_config(name) for name in configs]; print("OPENPI_IMPORT_OK", configs)'
+
+RUN /opt/venvs/act/bin/python -c \
+      'import torch, lerobot, ambench_learn; from lerobot.policies.act.modeling_act import ACTPolicy; from ambench_learn.policies.remote.server import ACTBackend; assert ambench_learn.__file__.startswith("/opt/ambench/"), ambench_learn.__file__; print("ACT_IMPORT_OK", torch.__version__)' \
+    && /opt/venvs/dp/bin/python -c \
+      'import torch, diffusion_policy, umi, ambench_learn; from ambench_learn.policies.remote.server import DPBackend; assert ambench_learn.__file__.startswith("/opt/ambench/"), ambench_learn.__file__; print("DP_IMPORT_OK", torch.__version__)' \
+    && mkdir -p /opt/ambench-build \
+    && uv pip freeze --python /opt/venvs/act/bin/python > /opt/ambench-build/act.requirements.txt \
+    && uv pip freeze --python /opt/venvs/dp/bin/python > /opt/ambench-build/dp.requirements.txt \
+    && uv pip freeze --python /opt/openpi/.venv/bin/python > /opt/ambench-build/openpi.requirements.txt
+
+ARG AMBENCH_REVISION=unknown
+ARG AMBENCH_SUBMODULES=unknown
+ARG AMBENCH_SOURCE_DIRTY=unknown
+LABEL org.opencontainers.image.source="https://github.com/ambench/ambench" \
+      org.opencontainers.image.revision="$AMBENCH_REVISION" \
+      org.ambench.submodules="$AMBENCH_SUBMODULES" \
+      org.ambench.source-dirty="$AMBENCH_SOURCE_DIRTY"
+
+WORKDIR /opt/ambench
+EXPOSE 8000 8001
+CMD ["sleep", "infinity"]

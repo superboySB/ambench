@@ -1,0 +1,16 @@
+# Runtime requirements from pinned ext/pyroki/pyproject.toml.
+# JAXLS is installed separately without resolving its newer JAX requirement.
+# AM-Bench's validated simulation stack keeps JAX 0.4.28 with NumPy 1.26.0.
+tyro
+jax>=0.4.0
+jaxlib
+jaxlie>=1.0.0
+jax_dataclasses>=1.0.0
+jaxtyping
+loguru
+robot_descriptions
+yourdfpy
+trimesh
+viser
+pyliblzfse
+termcolor

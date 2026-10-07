@@ -4,12 +4,10 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import torch
-from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
-from ambench.recording.paths import load_env_cfg
 from ambench_learn.data.action_semantics import (
     ACTION_SEMANTICS_CHOICES,
     BASE_JOINT_ABSOLUTE,
@@ -22,6 +20,11 @@ from ambench_learn.utils.rotation_math import (
     normalize_quat,
     slerp_quat,
 )
+
+if TYPE_CHECKING:
+    from lerobot.datasets.lerobot_dataset import LeRobotDataset
+else:
+    LeRobotDataset = Any
 
 
 def resolve_dataset_action_semantics(raw_dataset: LeRobotDataset) -> str:
@@ -40,6 +43,8 @@ def resolve_dataset_action_semantics(raw_dataset: LeRobotDataset) -> str:
         return BASE_JOINT_ABSOLUTE
 
     try:
+        from ambench.recording.paths import load_env_cfg
+
         env_cfg = load_env_cfg(raw_dataset.root)
     except Exception:
         env_cfg = None

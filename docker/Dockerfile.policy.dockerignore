@@ -1,0 +1,15 @@
+.git
+**/.git
+ext/acados
+ext/pyroki
+source/ambench/ambench/assets
+**/__pycache__
+**/*.pyc
+datasets
+outputs
+logs
+checkpoints
+videos
+wandb
+*.tar
+*.tar.zst

@@ -1,0 +1,11 @@
+# Add this file after compose.sim.yml when an X11 desktop is available.
+services:
+  sim:
+    environment:
+      DISPLAY: ${DISPLAY:?Set DISPLAY before enabling the GUI}
+      XAUTHORITY: /tmp/.Xauthority
+      NVIDIA_DRIVER_CAPABILITIES: all
+      QT_X11_NO_MITSHM: "1"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - ${XAUTHORITY:?Set XAUTHORITY to an existing X11 cookie file}:/tmp/.Xauthority:ro

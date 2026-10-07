@@ -10,6 +10,8 @@ import isaaclab.sim as sim_utils
 import torch
 from isaaclab.assets import RigidObject
 from isaaclab.sensors import ContactSensor
+from omni.usd import get_context
+from pxr import Gf, Usd, UsdPhysics
 
 from ambench.tasks.base.base_env import BaseEnv
 
@@ -40,6 +42,42 @@ class WipeWindow(BaseEnv):
 
         self.sponge_object = RigidObject(self.cfg.sponge_object_cfg)
         self.scene.rigid_objects["sponge_object"] = self.sponge_object
+
+        # The sponge is a held tool. A free rigid body slips out of the gripper
+        # when it touches the window and makes later stains unreachable.
+        spec = self.cfg.robot_profile.robot
+        if spec.ee_body_name is None:
+            raise ValueError("WipeWindow requires an end-effector body to hold the sponge.")
+        frame = spec.end_effector
+        tip_offset = (0.0, 0.0, 0.0) if frame is None else frame.tool_tip_offset_local
+        command_to_link = None if frame is None else frame.command_to_link_quat_wxyz
+        link_to_command = (
+            (1.0, 0.0, 0.0, 0.0)
+            if command_to_link is None
+            else (command_to_link[0], -command_to_link[1], -command_to_link[2], -command_to_link[3])
+        )
+        stage = get_context().get_stage()
+        for env_path in self.scene.env_prim_paths:
+            robot_prim = stage.GetPrimAtPath(f"{env_path}/Robot")
+            if not robot_prim.IsValid():
+                raise RuntimeError(f"Missing robot prim in {env_path}.")
+            ee_prims = [
+                prim
+                for prim in Usd.PrimRange(robot_prim)
+                if prim.GetName() == spec.ee_body_name and prim.HasAPI(UsdPhysics.RigidBodyAPI)
+            ]
+            sponge_prim = stage.GetPrimAtPath(f"{env_path}/Sponge")
+            if len(ee_prims) != 1 or not sponge_prim.IsValid():
+                raise RuntimeError(f"Cannot attach sponge to {spec.ee_body_name} in {env_path}.")
+            joint = UsdPhysics.FixedJoint.Define(stage, f"{env_path}/SpongeToolJoint")
+            joint.CreateBody0Rel().SetTargets([ee_prims[0].GetPath()])
+            joint.CreateBody1Rel().SetTargets([sponge_prim.GetPath()])
+            joint.CreateLocalPos0Attr().Set(Gf.Vec3f(*tip_offset))
+            joint.CreateLocalPos1Attr().Set(Gf.Vec3f(0.0, 0.0, 0.0))
+            joint.CreateLocalRot0Attr().Set(Gf.Quatf(link_to_command[0], Gf.Vec3f(*link_to_command[1:])))
+            joint.CreateLocalRot1Attr().Set(Gf.Quatf(1.0, Gf.Vec3f(0.0, 0.0, 0.0)))
+            joint.CreateCollisionEnabledAttr().Set(False)
+            joint.CreateExcludeFromArticulationAttr().Set(True)
 
         # Add single contact sensor for detecting sponge-window contact
         self.contact_sensor = ContactSensor(cfg=self.cfg.contact_sensor_cfg)

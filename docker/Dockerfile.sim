@@ -1,0 +1,100 @@
+# syntax=docker/dockerfile:1.7
+FROM nvcr.io/nvidia/isaac-lab:2.3.2@sha256:388dbc806f48359a964cb9f807feb226da95d0a107f470fdcad9780ea10fe6f2
+
+USER root
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+ENV ACCEPT_EULA=Y \
+    PRIVACY_CONSENT=Y \
+    OMNI_KIT_ACCEPT_EULA=YES \
+    OMNI_KIT_ALLOW_ROOT=1 \
+    JAX_PLATFORMS=cpu \
+    ACADOS_SOURCE_DIR=/opt/ambench/ext/acados \
+    LD_LIBRARY_PATH=/opt/ambench/ext/acados/lib:/opt/ambench/ext/acados/build:/usr/local/cuda/lib64 \
+    PIP_DEFAULT_TIMEOUT=120 \
+    PIP_RETRIES=8 \
+    PIP_CONSTRAINT=/opt/ambench-build/constraints.sim.txt \
+    PYTHONPATH=/workspace/ambench/source/ambench:/workspace/ambench/source/ambench_learn \
+    PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      build-essential cmake git ninja-build pkg-config \
+    && rm -rf /var/lib/apt/lists/* \
+    && printf '%s\n' '#!/usr/bin/env bash' \
+      'exec /workspace/isaaclab/isaaclab.sh -p "$@"' > /usr/local/bin/python \
+    && chmod 0755 /usr/local/bin/python
+
+WORKDIR /opt/ambench
+COPY docker/constraints.sim.txt docker/pyroki-runtime.txt /opt/ambench-build/
+COPY ext/pyroki ext/pyroki
+COPY ext/acados ext/acados
+COPY ext/openpi/packages/openpi-client ext/openpi/packages/openpi-client
+COPY source source
+COPY scripts scripts
+
+# Isaac Lab supplies its own CUDA, Torch and Warp stack. Keep the exact Torch
+# version from the 2.3.2 image while installing AM-Bench controller dependencies.
+RUN --mount=type=cache,target=/root/.cache/pip \
+    /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 \
+      -r /opt/ambench-build/pyroki-runtime.txt \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --no-deps \
+      'jaxls @ git+https://github.com/brentyi/jaxls.git@50a58be88c5ef74532f09e3f55268b4f02c490e3' \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --no-deps -e ext/pyroki \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 \
+      'numpy==1.26.0' 'jax==0.4.28' 'jaxlib==0.4.28'
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 -e source/ambench \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --no-deps -e source/ambench_learn
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 \
+      'av>=15,<16' 'datasets>=4,<5' 'draccus==0.10.0' \
+      'huggingface-hub>=0.34.2,<0.36' 'jsonlines>=4,<5' \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --no-deps 'lerobot==0.4.4' \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 \
+      -e ext/openpi/packages/openpi-client \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 \
+      'numpy==1.26.0' 'jax==0.4.28' 'jaxlib==0.4.28'
+
+# LeRobot imports Accelerate while setting up its dataset module. Installing it
+# without dependency resolution preserves the Isaac image's pip/packaging stack.
+RUN --mount=type=cache,target=/root/.cache/pip \
+    /workspace/isaaclab/isaaclab.sh -p -m pip install --no-deps --timeout 120 --retries 8 \
+      'accelerate==1.12.0'
+
+RUN cmake -S ext/acados -B ext/acados/build \
+      -DCMAKE_INSTALL_PREFIX=/opt/ambench/ext/acados \
+      -DACADOS_WITH_QPOASES=ON \
+    && cmake --build ext/acados/build --target install --parallel 4 \
+    && /workspace/isaaclab/isaaclab.sh -p -m pip install --timeout 120 --retries 8 \
+      -e ext/acados/interfaces/acados_template \
+    && /workspace/isaaclab/isaaclab.sh -p -c \
+      'import numpy, torch; assert torch.__version__ == "2.7.0+cu128", torch.__version__; assert numpy.__version__ == "1.26.0", numpy.__version__; import ambench, ambench_learn, lerobot, openpi_client; assert ambench.__file__.startswith("/opt/ambench/"), ambench.__file__; assert ambench_learn.__file__.startswith("/opt/ambench/"), ambench_learn.__file__; from ambench.recording import DatasetRecorder; from lerobot.datasets.lerobot_dataset import LeRobotDataset; print("AMBENCH_SIM_IMPORT_OK", torch.__version__, numpy.__version__)'
+
+# Whole-body MPC renders acados solver templates at runtime. Fetch the pinned
+# acados renderer during image construction so headless runs never prompt.
+RUN for attempt in 1 2 3; do \
+      if python -c 'from acados_template.utils import get_tera; get_tera(force_download=True)'; then \
+        break; \
+      fi; \
+      [[ "$attempt" -lt 3 ]] || exit 1; \
+      sleep 5; \
+    done \
+    && test -x /opt/ambench/ext/acados/bin/t_renderer \
+    && /opt/ambench/ext/acados/bin/t_renderer --help >/dev/null
+
+RUN mkdir -p /opt/ambench-build \
+    && python -c \
+      'import subprocess, sys; from pathlib import Path; result = subprocess.run([sys.executable, "-m", "pip", "freeze"], check=True, capture_output=True, text=True); Path("/opt/ambench-build/sim.requirements.txt").write_text(result.stdout)'
+
+ARG AMBENCH_REVISION=unknown
+ARG AMBENCH_SUBMODULES=unknown
+ARG AMBENCH_SOURCE_DIRTY=unknown
+LABEL org.opencontainers.image.source="https://github.com/ambench/ambench" \
+      org.opencontainers.image.revision="$AMBENCH_REVISION" \
+      org.ambench.submodules="$AMBENCH_SUBMODULES" \
+      org.ambench.source-dirty="$AMBENCH_SOURCE_DIRTY"
+
+WORKDIR /opt/ambench
+CMD ["sleep", "infinity"]

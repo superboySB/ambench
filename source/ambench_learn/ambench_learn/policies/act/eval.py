@@ -9,8 +9,8 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
+from types import SimpleNamespace
 
-import lerobot.policies.act.processor_act as lerobot_act_processor
 from isaaclab.app import AppLauncher
 
 from ambench_learn.data.action_resampling import (
@@ -39,17 +39,7 @@ from ambench_learn.eval.common import (
     wrap_video,
 )
 from ambench_learn.eval.run import EvalRun
-from ambench_learn.policies.act.eval_utils import resolve_act_action_representation
-from ambench_learn.policies.act.se_relative_processor import (
-    BaseJointRelativeTrajectoryProcessorStep,
-    EELocalRelativeTrajectoryProcessorStep,
-)
-from ambench_learn.policies.act.se_relative_processor import (
-    make_act_pre_post_processors as make_am_act_pre_post_processors,
-)
-from ambench_learn.policies.act.se_relative_processor import (
-    reconnect_se_relative_absolute_steps,
-)
+from ambench_learn.policies.remote.protocol import RemotePolicyClient
 
 # Argument parsing
 parser = argparse.ArgumentParser(
@@ -61,6 +51,12 @@ parser.add_argument(
     type=Path,
     default=None,
     help="Path to a LeRobot ACT checkpoint directory or its pretrained_model subdirectory.",
+)
+parser.add_argument(
+    "--remote-url", type=str, default=None, help="ACT inference server URL, for example http://host:8001."
+)
+parser.add_argument(
+    "--policy-id", type=str, default=None, help="Label for the served checkpoint in evaluation reports."
 )
 parser.add_argument(
     "--n-action-steps",
@@ -90,13 +86,31 @@ if args_cli.n_action_steps is not None and args_cli.n_action_steps < 1:
     parser.error(f"--n-action-steps must be >= 1, got {args_cli.n_action_steps}.")
 if args_cli.policy_target_hz is not None and args_cli.policy_target_hz < 1:
     parser.error(f"--policy-target-hz must be >= 1, got {args_cli.policy_target_hz}.")
-if args_cli.checkpoint is None:
-    parser.error("--checkpoint is required.")
-checkpoint = args_cli.checkpoint.expanduser().resolve()
-checkpoint = checkpoint if checkpoint.name == "pretrained_model" else checkpoint / "pretrained_model"
-if not checkpoint.is_dir():
-    parser.error(f"Could not find a LeRobot pretrained_model directory at '{checkpoint}'.")
-args_cli.checkpoint = checkpoint
+if args_cli.remote_url is None:
+    if args_cli.checkpoint is None:
+        parser.error("--checkpoint is required unless --remote-url is set.")
+    checkpoint = args_cli.checkpoint.expanduser().resolve()
+    checkpoint = checkpoint if checkpoint.name == "pretrained_model" else checkpoint / "pretrained_model"
+    if not checkpoint.is_dir():
+        parser.error(f"Could not find a LeRobot pretrained_model directory at '{checkpoint}'.")
+    args_cli.checkpoint = checkpoint
+else:
+    try:
+        remote_info = RemotePolicyClient(args_cli.remote_url, timeout_s=10.0).info()
+        if remote_info.get("policy") != "act":
+            parser.error(f"Expected an ACT inference server, got {remote_info.get('policy')!r}.")
+        if args_cli.n_action_steps is not None and remote_info.get("n_action_steps") != args_cli.n_action_steps:
+            parser.error(
+                f"ACT server uses n_action_steps={remote_info.get('n_action_steps')}; "
+                f"requested {args_cli.n_action_steps}. Configure the server with this override."
+            )
+        if (
+            args_cli.temporal_ensemble_coeff is not None
+            and remote_info.get("temporal_ensemble_coeff") != args_cli.temporal_ensemble_coeff
+        ):
+            parser.error("ACT temporal ensemble override differs from the remote server configuration.")
+    except (OSError, RuntimeError, ValueError) as error:
+        parser.error(f"Could not connect to ACT inference server: {error}")
 
 args_cli.enable_cameras = True
 app_launcher = AppLauncher(args_cli)
@@ -107,9 +121,6 @@ import isaaclab_tasks  # noqa: F401
 import torch
 from isaaclab.utils.seed import configure_seed
 from isaaclab_tasks.utils import parse_env_cfg
-from lerobot.configs.policies import PreTrainedConfig
-from lerobot.policies.factory import get_policy_class, make_pre_post_processors
-from lerobot.processor.device_processor import DeviceProcessorStep
 
 import ambench.tasks  # noqa: F401
 from ambench.evaluation import SuccessCriteriaTracker
@@ -129,7 +140,7 @@ def build_policy_observation_batch(
     raw_policy_obs: list[dict[str, torch.Tensor]],
     env,
     state_keys: list[str],
-    policy_cfg: PreTrainedConfig,
+    policy_cfg,
     env_indices: list[int],
 ) -> dict[str, torch.Tensor]:
     """Build a batched policy observation for the selected env indices."""
@@ -164,6 +175,18 @@ def build_policy_observation_batch(
 def load_lerobot_act(
     policy_path: str | Path, device: str, n_action_steps: int | None, temporal_ensemble_coeff: float | None
 ):
+    import lerobot.policies.act.processor_act as lerobot_act_processor
+    from lerobot.configs.policies import PreTrainedConfig
+    from lerobot.policies.factory import get_policy_class, make_pre_post_processors
+    from lerobot.processor.device_processor import DeviceProcessorStep
+
+    from ambench_learn.policies.act.se_relative_processor import (
+        make_act_pre_post_processors as make_am_act_pre_post_processors,
+    )
+    from ambench_learn.policies.act.se_relative_processor import (
+        reconnect_se_relative_absolute_steps,
+    )
+
     policy_path = Path(policy_path).expanduser().resolve()
     pretrained_dir = policy_path if policy_path.name == "pretrained_model" else policy_path / "pretrained_model"
     if not pretrained_dir.is_dir():
@@ -242,6 +265,11 @@ def refresh_se_relative_decode_anchor(
 ) -> None:
     """Cache the measured chunk-start policy state for queued relative ACT actions."""
 
+    from ambench_learn.policies.act.se_relative_processor import (
+        BaseJointRelativeTrajectoryProcessorStep,
+        EELocalRelativeTrajectoryProcessorStep,
+    )
+
     if not policy_action_representation.endswith("_relative"):
         return
     if not hasattr(policy, "_action_queue") or len(policy._action_queue) != 0:
@@ -276,6 +304,7 @@ def eval_policy(
     batch: EvalBatch,
     progress_every: int,
     rollout_seed: int | None = None,
+    remote_client: RemotePolicyClient | None = None,
 ) -> bool:
     device = env.unwrapped.device
     if rollout_seed is None:
@@ -297,23 +326,27 @@ def eval_policy(
             batch_env_index=env_index,
         )
 
-    policy.reset()
+    if remote_client is None:
+        policy.reset()
+    else:
+        reset_info = remote_client.reset(action_semantics=action_semantics)
+        if reset_info["action_representation"] != policy_action_representation:
+            raise ValueError("Remote ACT action representation differs from the environment contract.")
+        if reset_info["state_keys"] != state_keys:
+            raise ValueError("Remote ACT state layout differs from the environment contract.")
     env_fps = round(1.0 / float(env.unwrapped.dt))
     execution_stride = 1 if policy_target_hz is None else compute_stride(env_fps, policy_target_hz)
     pending_actions: list[torch.Tensor] = []
     env_indices = list(range(num_envs))
-    ee_local_relative_step = next(
-        (step for step in preprocessor.steps if isinstance(step, EELocalRelativeTrajectoryProcessorStep)),
-        None,
-    )
-    if ee_local_relative_step is not None:
-        ee_local_relative_step.clear_decode_anchor()
-    base_joint_relative_step = next(
-        (step for step in preprocessor.steps if isinstance(step, BaseJointRelativeTrajectoryProcessorStep)),
-        None,
-    )
-    if base_joint_relative_step is not None:
-        base_joint_relative_step.clear_decode_anchor()
+    if remote_client is None:
+        from ambench_learn.policies.act.se_relative_processor import (
+            BaseJointRelativeTrajectoryProcessorStep,
+            EELocalRelativeTrajectoryProcessorStep,
+        )
+
+        for step in preprocessor.steps:
+            if isinstance(step, (EELocalRelativeTrajectoryProcessorStep, BaseJointRelativeTrajectoryProcessorStep)):
+                step.clear_decode_anchor()
 
     stop_evaluation = False
     with torch.no_grad():
@@ -335,14 +368,17 @@ def eval_policy(
                     policy_cfg,
                     env_indices,
                 )
-                processed_obs = preprocessor(policy_obs)
-                refresh_se_relative_decode_anchor(
-                    policy,
-                    preprocessor,
-                    policy_action_representation,
-                )
-                raw_action = policy.select_action(processed_obs)
-                action = postprocessor(raw_action)
+                if remote_client is None:
+                    processed_obs = preprocessor(policy_obs)
+                    refresh_se_relative_decode_anchor(
+                        policy,
+                        preprocessor,
+                        policy_action_representation,
+                    )
+                    raw_action = policy.select_action(processed_obs)
+                    action = postprocessor(raw_action)
+                else:
+                    action = torch.from_numpy(remote_client.infer(observation=policy_obs)["action"])
                 if action.ndim == 1:
                     action = action.unsqueeze(0)
                 if action.shape[0] != num_envs:
@@ -437,12 +473,30 @@ def main() -> None:
     if args_cli.seed is not None:
         configure_seed(args_cli.seed)
 
-    pretrained_dir, policy_cfg, policy, preprocessor, postprocessor = load_lerobot_act(
-        args_cli.checkpoint,
-        args_cli.device,
-        args_cli.n_action_steps,
-        args_cli.temporal_ensemble_coeff,
-    )
+    remote_client = None
+    if args_cli.remote_url is None:
+        from ambench_learn.policies.act.eval_utils import (
+            resolve_act_action_representation,
+        )
+
+        pretrained_dir, policy_cfg, policy, preprocessor, postprocessor = load_lerobot_act(
+            args_cli.checkpoint,
+            args_cli.device,
+            args_cli.n_action_steps,
+            args_cli.temporal_ensemble_coeff,
+        )
+    else:
+        remote_client = RemotePolicyClient(args_cli.remote_url)
+        server_info = remote_client.info()
+        if server_info.get("policy") != "act":
+            raise ValueError(f"Expected an ACT inference server, got {server_info.get('policy')!r}.")
+        policy_cfg = SimpleNamespace(
+            image_features={key: SimpleNamespace(shape=shape) for key, shape in server_info["image_features"].items()},
+            action_representation=server_info.get("action_representation"),
+            temporal_ensemble_coeff=server_info.get("temporal_ensemble_coeff"),
+        )
+        pretrained_dir = args_cli.remote_url
+        policy = preprocessor = postprocessor = None
 
     env_name = args_cli.task
     # Enable cameras required by the checkpoint and optional rollout videos.
@@ -462,11 +516,20 @@ def main() -> None:
     )
 
     resolved_action_semantics = resolve_eval_action_semantics(env_cfg)
-    resolved_policy_action_representation = resolve_act_action_representation(
-        resolved_action_semantics,
-        policy_cfg,
-        postprocessor,
-    )
+    if remote_client is None:
+        resolved_policy_action_representation = resolve_act_action_representation(
+            resolved_action_semantics, policy_cfg, postprocessor
+        )
+    else:
+        from ambench_learn.data.action_semantics import (
+            resolve_policy_action_representation_for_dataset,
+        )
+
+        resolved_policy_action_representation = resolve_policy_action_representation_for_dataset(
+            resolved_action_semantics,
+            policy_cfg.action_representation,
+            policy_name="ACT",
+        )
     effective_temporal_ensemble_coeff = getattr(policy_cfg, "temporal_ensemble_coeff", None)
     if effective_temporal_ensemble_coeff is not None and resolved_policy_action_representation.endswith("_relative"):
         raise ValueError(
@@ -513,6 +576,7 @@ def main() -> None:
         action_representation=resolved_policy_action_representation,
         metadata={
             **build_common_eval_metadata(args_cli, output_dir=eval_save_dir),
+            "Policy ID": args_cli.policy_id,
             "Eval overrides": eval_overrides or None,
         },
     )
@@ -533,6 +597,7 @@ def main() -> None:
             batch=batch,
             progress_every=args_cli.progress_every,
             rollout_seed=batch.seed,
+            remote_client=remote_client,
         )
 
     run_evaluation_batches(

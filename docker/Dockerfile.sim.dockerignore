@@ -1,0 +1,15 @@
+.git
+**/.git
+ext/openpi
+!ext/openpi/packages
+!ext/openpi/packages/openpi-client
+**/__pycache__
+**/*.pyc
+datasets
+outputs
+logs
+checkpoints
+videos
+wandb
+*.tar
+*.tar.zst

@@ -80,12 +80,15 @@ class WipeWindowPolicy(BasePolicy):
         # Visit each visible stain with a short local wipe stroke. Sorting the dots
         # keeps the path stable instead of hopping around the window randomly.
         visible_dots = sorted(visible_dots, key=lambda dot: (dot[1][2].item(), dot[1][1].item()))
-        aim_time = 100
-        forward_time = 300
+        # Use shorter local strokes for the registered 20 s task. The first
+        # approach remains slow because it crosses most of the room.
+        short_episode = self.env.cfg.episode_length_s <= 20
+        aim_time = 50 if short_episode else 100
+        forward_time = 140 if short_episode else 300
         making_contact_time = 100
-        pause_time = 40
-        sweep_time = 180
-        retreat_time = 100
+        pause_time = 20 if short_episode else 40
+        sweep_time = 100 if short_episode else 180
+        retreat_time = 60 if short_episode else 100
 
         dot_positions = [dot_pos for _, dot_pos in visible_dots]
         first_pos = dot_positions[0]
@@ -101,25 +104,28 @@ class WipeWindowPolicy(BasePolicy):
         # absolute x put the approach in the wrong place whenever it moved.
         hover_offset_x = 0.40
 
-        for dot_pos in dot_positions:
+        for dot_index, dot_pos in enumerate(dot_positions):
             far = dot_pos.clone()
             far[0] = dot_pos[0] - hover_offset_x
             far[2] -= 0.1
 
             close = far.clone()
-            close[0] = dot_pos[0] - 0.25
+            close[0] = dot_pos[0] - 0.28
             close[1] += 0.01
             close[2] += 0.1
 
             contact = close.clone()
-            contact[0] = dot_pos[0] - 0.215
+            # Keep the contact pose shallow to avoid excessive window force.
+            contact[0] = dot_pos[0] - 0.235
 
             sweep = contact.clone()
             sweep[1] -= 0.04
 
-            current_time += aim_time
+            # The first approach crosses most of the room; give the EE time
+            # to settle before touching the window.
+            current_time += 300 if dot_index == 0 else aim_time
             waypoints.append(Waypoint(t=current_time, xyz=far, quat=identity_quat, gripper=-1.0))
-            current_time += forward_time
+            current_time += 300 if dot_index == 0 else forward_time
             waypoints.append(Waypoint(t=current_time, xyz=close, quat=identity_quat, gripper=-1.0))
             current_time += making_contact_time
             waypoints.append(Waypoint(t=current_time, xyz=contact, quat=identity_quat, gripper=-1.0))

@@ -2,7 +2,7 @@
   "artifact_bytes": 34312592,
   "artifact_file_count": 113,
   "experiment_count": 23,
-  "generated_at_utc": "2026-10-08T09:31:15.802124+00:00",
+  "generated_at_utc": "2026-10-08T09:38:17.497457+00:00",
   "gif_count": 54,
   "maximum_file_bytes": 556653,
   "mp4_count": 54,
@@ -571,7 +571,7 @@
   ],
   "payload_sha256": "085416f7e458e6d9a32964902c8fb67dbb4e0b3396f73aee28219431726b887a",
   "preview_count": 54,
-  "research_commit": "a81d4a0b230463b01e272261824b4e2902da7201",
+  "research_commit": "1a8c3e263e429d9ac97fcd80240925201c7d4358",
   "source_file_count": 54,
   "source_manifest_sha256": "99eb454c1bfeb39e8b92e6ab6aeb7f99c444042bc138c461745dbb2a5f7f017e",
   "source_worktree_clean": true

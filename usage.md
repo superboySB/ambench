@@ -795,7 +795,7 @@ python3 tools/research/publish_video_pages.py --publish
 
 ## 7. 本分支验证记录
 
-本节以 2026-10-07 删除旧研究镜像、重新构建后的结果为主要证据。下面的矩阵、脚本采集和模型训练统一 seed 42；公共 `zero_agent.py` / teleop 连续 smoke 保留默认 seed 未设置，单独注明。2026-10-08 新 seed / 新视角 / CPU 推理记录按第 6.2 节和在线清单独立解释；表内基线成绩对应原始验收报告。此前 2026-09-30 及未固定 seed 的报告保留为历史，不参与本次合并。在**本地主机的仓库根目录**从原始报告生成[验证快照](usage_assets/validation_snapshot.json)：
+本节以 2026-10-07 删除旧研究镜像、重新构建后的结果为主要证据。下面的矩阵、脚本采集和模型训练统一 seed 42；公共 `zero_agent.py` / teleop 连续 smoke 保留默认 seed 未设置，单独注明。2026-10-08 本地双镜像再次构建到干净源码 `85d5957`，无仓库挂载、无 GPU、无网络的 12 项检查通过，包含默认录制配置；此轮未重新部署远端镜像，详情见[多视角验收快照](usage_assets/multiview_validation_snapshot.json)的 `local_docker_refresh`。2026-10-08 新 seed / 新视角 / CPU 推理记录按第 6.2 节和在线清单独立解释；表内基线成绩对应原始验收报告。此前 2026-09-30 及未固定 seed 的报告保留为历史，不参与本次合并。在**本地主机的仓库根目录**从原始报告生成[验证快照](usage_assets/validation_snapshot.json)：
 
 ```bash
 python3 scripts/research/snapshot_validation.py \

@@ -23,7 +23,7 @@ flowchart LR
     Expert --> Low
   end
   Data[Canonical LeRobot 数据]
-  subgraph Remote[远端策略 Docker：一张空闲 GPU]
+  subgraph Remote[远端策略 Docker：空闲 GPU 或 CPU]
     Model[ACT / DP / π₀ / π₀.₅]
     Train[数据转换与训练]
     Train --> Model
@@ -56,7 +56,14 @@ Host tencent-86
 
 ## 2. 获取源码和构建镜像
 
-从仓库根目录执行。构建上下文包含固定 Git 子模块版本；`ext/` 的生成物仍留在容器层和忽略目录中。
+首次获取本研究分支时执行：
+
+```bash
+git clone --branch research --recurse-submodules https://github.com/superboySB/ambench.git ambench-research
+cd ambench-research
+```
+
+已有 checkout 时跳过克隆，从仓库根目录执行下面的命令。构建上下文包含固定 Git 子模块版本；`ext/` 的生成物仍留在容器层和忽略目录中。
 
 ```bash
 git switch research
@@ -68,6 +75,8 @@ bash tools/research/build_images.sh policy
 镜像分别是 `ambench:research-sim` 和 `ambench:research-policy`。仿真镜像基于 NVIDIA 官方 `nvcr.io/nvidia/isaac-lab:2.3.2`，其配套 Isaac Sim 为 5.1.0，Python 为 3.11，Torch 为 2.7.0+cu128。第一次拉取镜像较大，应留出磁盘空间。构建只在容器内安装 Pyroki、acados、AM-Bench 和策略依赖；宿主机不需要安装 Conda、Isaac Lab Python 包或模型包。
 
 2026-10-07 重建的最终两张镜像约为 18.9 GB 和 32.4 GB；策略镜像传输包约 15.1 GB。构建机还需要 Docker 层、下载缓存和该传输包的临时空间；远端需要镜像与传输包的空间。传输包放在本机 `~/.cache/ambench-research/` 和远端研究目录的 `images/`，均不属于 Git 仓库。
+
+2026-10-08 为多视角录制与 CPU 推理改动再次构建本地两张镜像，源码为 `85d5957`、构建时工作区干净，大小约 18.9 GB 和 32.9 GB。脱离仓库挂载、禁用 GPU 与网络的 12 项导入/CLI/内置源码检查全部通过，仿真镜像也包含默认的 21 条录制配置。详见[多视角验收快照](usage_assets/multiview_validation_snapshot.json)的 `local_docker_refresh`。这一轮未重新上传远端镜像；远端 CPU 实测使用既有策略容器及更新后的源码挂载。该检查不代替前述完整 GPU 仿真与闭环实验记录。
 
 OpenPI 的 π₀ 和 π₀.₅ 官方 base checkpoint 各约 11–12 GiB。`fetch_openpi_base.sh` 只在本地无 GPU Docker 中下载到忽略目录 `outputs/openpi-cache/`，校验后用 rsync 传到远端持久缓存并再次校验；同时使用两个模型时，本地和远端分别预留至少 25 GiB 权重空间。
 

@@ -365,6 +365,113 @@
     "Model environment seed and CPU/GPU inference device both differ across trials; one-step checkpoints and one rollout per condition are not benchmark performance or generalization rates.",
     "NDT geometry is fixed; alternate seed is not an alternate layout."
   ],
+  "local_docker_refresh": {
+    "checks": [
+      {
+        "name": "sim_four_embedded_source_hashes_match",
+        "status": "passed"
+      },
+      {
+        "name": "policy_four_embedded_source_hashes_match",
+        "status": "passed"
+      },
+      {
+        "name": "sim_immutable_cpu_imports",
+        "status": "passed"
+      },
+      {
+        "flags": [
+          "--max_episodes",
+          "--scene_camera_position",
+          "--scene_camera_look_at",
+          "--scene_camera_width",
+          "--scene_camera_height"
+        ],
+        "name": "public_recorder_new_cli_flags",
+        "status": "passed"
+      },
+      {
+        "name": "new_recording_driver_help",
+        "status": "passed"
+      },
+      {
+        "default_path": "/opt/ambench/usage_assets/variant_recording_specs.json",
+        "name": "packaged_default_recording_specs",
+        "sha256": "8641072287207a8f75f81bc13c51f14cd542e3479f8408c953cdf66172196ebf",
+        "spec_count": 21,
+        "status": "passed"
+      },
+      {
+        "name": "act_immutable_cpu_imports",
+        "status": "passed"
+      },
+      {
+        "name": "dp_immutable_cpu_imports",
+        "status": "passed"
+      },
+      {
+        "name": "openpi_immutable_cpu_imports_and_four_configs",
+        "status": "passed"
+      },
+      {
+        "name": "policy_server_device_help",
+        "status": "passed"
+      },
+      {
+        "name": "baked_act_factory_device_preprocessor_override",
+        "status": "passed"
+      },
+      {
+        "name": "act_cli_cpu_device_dispatch",
+        "scope": "CLI dispatch with mocked backend and server; model inference not rerun",
+        "status": "passed"
+      }
+    ],
+    "embedded_source_sha256": {
+      "ambench:research-policy": {
+        "scripts/data/_record_cli.py": "e41a99d341dc4c03a71ff96feb2ad747a66268b692ae08e02e274bbd0747ec56",
+        "scripts/data/record_demos_scripted.py": "658355c040598ff71de581475622a4a6703f4a3847190bb4b0e98fde8ce35b7e",
+        "scripts/research/record_usage_variants.py": "3b693d7125661e78ebdd546641fe30c1b2f55b57532381547ccd4c483ee4bb31",
+        "source/ambench_learn/ambench_learn/policies/remote/server.py": "eab9e6a25c13db4806a2672df96e8305883b22e79c579e457fca6fa0670b883e"
+      },
+      "ambench:research-sim": {
+        "scripts/data/_record_cli.py": "e41a99d341dc4c03a71ff96feb2ad747a66268b692ae08e02e274bbd0747ec56",
+        "scripts/data/record_demos_scripted.py": "658355c040598ff71de581475622a4a6703f4a3847190bb4b0e98fde8ce35b7e",
+        "scripts/research/record_usage_variants.py": "3b693d7125661e78ebdd546641fe30c1b2f55b57532381547ccd4c483ee4bb31",
+        "source/ambench_learn/ambench_learn/policies/remote/server.py": "eab9e6a25c13db4806a2672df96e8305883b22e79c579e457fca6fa0670b883e",
+        "usage_assets/variant_recording_specs.json": "8641072287207a8f75f81bc13c51f14cd542e3479f8408c953cdf66172196ebf"
+      }
+    },
+    "gpu_devices_visible": false,
+    "host_packages_installed": false,
+    "images": {
+      "ambench:research-policy": {
+        "bytes": 32940909649,
+        "image_id": "sha256:72def8e6eea8aa79d54dfc9d8b5612241614723c103e26692b081561fabb5854",
+        "source_dirty": "false",
+        "source_revision": "85d59571f453c0ef69773b16326b184ac87b8fe6"
+      },
+      "ambench:research-sim": {
+        "bytes": 18872480927,
+        "image_id": "sha256:6df940ba58f846ae3fe5ad4e0dc94fa4d9785611a4deb093f90b9f7cc9d7f31f",
+        "source_dirty": "false",
+        "source_revision": "85d59571f453c0ef69773b16326b184ac87b8fe6"
+      }
+    },
+    "mode": "cached",
+    "network_enabled": false,
+    "remote_state_modified": false,
+    "report": {
+      "bytes": 9306,
+      "path": "outputs/docker-builds/rebuild-20261008/final-85d5957/validation.json",
+      "sha256": "d998abf3dacc2970029647069dc2edcf1e43ed69b04e5c1c77127abb7562c0a3"
+    },
+    "repository_source_bind": false,
+    "scope": "Standalone CPU gates only; full GPU environment and policy rollout records remain separate.",
+    "source_clean_at_build": true,
+    "source_revision": "85d59571f453c0ef69773b16326b184ac87b8fe6",
+    "validation_level": "standalone CPU imports, CLI and embedded source checks"
+  },
   "maximum_media_bytes": 460604,
   "media_limit_bytes": 460800,
   "minimum_previews_per_experiment": 2,

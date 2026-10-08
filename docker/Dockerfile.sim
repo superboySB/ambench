@@ -31,6 +31,7 @@ COPY ext/acados ext/acados
 COPY ext/openpi/packages/openpi-client ext/openpi/packages/openpi-client
 COPY source source
 COPY scripts scripts
+COPY usage_assets/variant_recording_specs.json usage_assets/variant_recording_specs.json
 
 # Isaac Lab supplies its own CUDA, Torch and Warp stack. Keep the exact Torch
 # version from the 2.3.2 image while installing AM-Bench controller dependencies.

@@ -1,6 +1,6 @@
 # AM-Bench 双容器研究环境
 
-这份手册在 `research` 分支使用 Isaac Lab 2.3.2 / Isaac Sim 5.1.0，把仿真、机器人控制与脚本专家放在本地仿真容器，把 ACT、Diffusion Policy 和 OpenPI 的模型推理放在独立策略容器。默认部署策略容器到 `tencent-86`，本地和远端均只通过 Docker 安装项目依赖。`usage.md` 给出功能清单、逐项命令和验证记录。
+这份手册在 `research` 分支使用 Isaac Lab 2.3.2 / Isaac Sim 5.1.0，把仿真、机器人控制与脚本专家放在本地仿真容器，把 ACT、Diffusion Policy 和 OpenPI 的模型推理放在独立策略容器。默认部署策略容器到 `tencent-86`，本地和远端均只通过 Docker 安装项目依赖。[usage.md](usage.md) 给出功能清单、逐项命令和验证记录，并加入 23 段真实实验 GIF；克隆后用浏览器打开[视频播放总览](usage_assets/playback.html)可播放、暂停、拖动和调速。成功、超时和场景烟测分别标明，重新导出步骤见 usage.md 第 6.1 节。
 
 命令中的 `rebuild-20261007` 是本次验收的运行名。当前机器已有对应示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
 

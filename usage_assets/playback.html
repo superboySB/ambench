@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AM-Bench 实验视频</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; color: #172437; background: #f4f6f8; }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      main { max-width: 1240px; margin: auto; padding: 32px 20px 48px; }
+      h1 { margin: 0 0 12px; font-size: clamp(1.7rem, 4vw, 2.3rem); }
+      h2 { margin: 0; font-size: 1.1rem; }
+      p { line-height: 1.65; }
+      a { color: #1558a8; }
+      .intro { max-width: 960px; margin: 8px 0; }
+      .notice { background: white; border: 1px solid #d4dde6; border-left: 4px solid #1558a8; padding: 12px 16px; margin: 20px 0; }
+      .notice p { margin: 4px 0; }
+      .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 14px 0; }
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; }
+      button, input, select { font: inherit; border: 1px solid #aebdcb; border-radius: 6px; padding: 8px 10px; background: white; color: inherit; }
+      button { cursor: pointer; }
+      button[aria-pressed="true"] { background: #1558a8; color: white; border-color: #1558a8; }
+      button:hover { border-color: #1558a8; }
+      input { width: 210px; }
+      label { display: flex; align-items: center; gap: 7px; }
+      :focus-visible { outline: 3px solid #dd9600; outline-offset: 3px; }
+      #count { color: #465769; margin: 8px 0 18px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+      .card { overflow: hidden; background: white; border: 1px solid #d4dde6; border-radius: 10px; }
+      .card[hidden] { display: none; }
+      .heading { padding: 14px 14px 10px; }
+      .category { font-size: .8rem; color: #526477; margin: 0 0 5px; }
+      .badge { display: inline-block; font-size: .8rem; font-weight: 650; padding: 4px 8px; border-radius: 4px; margin-top: 10px; }
+      .success { color: #16512e; background: #e0f1e5; }
+      .timeout { color: #783812; background: #fff0dd; }
+      .smoke { color: #304864; background: #e7edf5; }
+      video { display: block; width: 100%; aspect-ratio: 1 / 1.125; background: #182330; }
+      .caption { padding: 0 14px 14px; }
+      .caption p { font-size: .86rem; margin: 8px 0; }
+      .time { font-variant-numeric: tabular-nums; color: #465769; }
+      .source { color: #465769; }
+      footer { margin-top: 28px; color: #465769; font-size: .88rem; }
+      @media (max-width: 360px) { main { padding: 24px 12px; } .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>AM-Bench 实验视频</h1>
+      <p class="intro">23 段真实仿真记录：十二类任务的脚本专家、四种飞机、BaseJoint、四种上层模型，以及相机和 MPC 检查。点击视频的播放按钮，可暂停、拖动进度、全屏或调整倍速。播放一段时会暂停其他视频。</p>
+      <p class="intro">记录来自 2026-10-07 的双 Docker 复现，seed = 42。<a href="../usage.md">实验说明与复现命令</a> · <a href="animations/manifest.json">来源、结果与文件校验记录</a></p>
+      <div class="notice">
+        <p><strong>看结果：</strong>SUCCESS 表示所展示 episode 达成任务；TIMEOUT（0/1）表示一次 rollout 在 20 仿真秒内未成功；SMOKE 仅验证启动、控制或相机，不能据此判断任务成功。</p>
+        <p><strong>看时间：</strong>预览经过缩放、压缩和等间隔采样，播放时间尺度与源记录不同，结尾额外停留便于观察。画面中的 t 是源记录时间（canonical 数据为仿真时间，MP4 按视频帧率计时）；下方给出源记录的时间覆盖，播放后会显示预览时长。</p>
+        <p>相机与 MPC 两段烟测在 120 Hz 仿真中每步录一帧，源 MP4 编码为 30 FPS；UAQuad 的 30 步实际约 0.25 仿真秒，MPC 的 8 步约 0.067 仿真秒，源录像时间比仿真时间长。</p>
+        <p>专家视频展示保存的成功 episode；TossBall 此前有一次超时。四种飞机仅展示 PressButton。模型各用一个 canonical episode 训练一步，再跑一个同条件 episode：π₀ / π₀.₅ 成功，ACT / Diffusion Policy 超时；这些结果不代表论文性能或泛化能力。</p>
+      </div>
+      <nav class="filters" aria-label="实验类别">
+        <button type="button" data-category="all" aria-pressed="true">全部 23</button>
+        <button type="button" data-category="models" aria-pressed="false">模型成败 4</button>
+        <button type="button" data-category="tasks" aria-pressed="false">十二类任务 12</button>
+        <button type="button" data-category="aircraft" aria-pressed="false">飞机与 BaseJoint 5</button>
+        <button type="button" data-category="checks" aria-pressed="false">相机与 MPC 2</button>
+      </nav>
+      <div class="toolbar">
+        <label>搜索 <input id="search" type="search" placeholder="任务、飞机或模型" /></label>
+        <label>结果
+          <select id="outcome">
+            <option value="all">全部</option>
+            <option value="success">SUCCESS</option>
+            <option value="timeout">TIMEOUT（0/1）</option>
+            <option value="smoke">SMOKE</option>
+          </select>
+        </label>
+        <label>播放倍速
+          <select id="speed">
+            <option value="0.25">0.25×</option>
+            <option value="0.5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+            <option value="4">4×</option>
+          </select>
+        </label>
+        <button id="pause" type="button">暂停全部</button>
+      </div>
+      <p id="count" role="status" aria-live="polite"></p>
+      <div id="gallery" class="grid"></div>
+      <noscript><p>请启用浏览器 JavaScript，或从 <a href="../usage.md">usage.md</a> 查看 GIF 与各段 MP4 链接。</p></noscript>
+      <footer>本页直接用浏览器打开即可离线播放，无需启动服务。完整录像和数据保留在实验输出目录；这里的短片用于观察动作与已记录的结果。</footer>
+    </main>
+    <script>
+      // Metadata comes from the export manifest; video files remain local.
+      const experiments = [
+        {"name": "policy_pi05_ee","title": "π₀.₅ · PressButton","category": "models","result": "success","seconds": 2.466667,"description": "1 个演示训练一步；同条件 1 次 rollout，任务成功 1/1。","source": "完整模型 rollout 录像"},
+        {"name": "policy_pi0_ee","title": "π₀ · PressButton","category": "models","result": "success","seconds": 3.633333,"description": "1 个演示训练一步；同条件 1 次 rollout，任务成功 1/1。","source": "完整模型 rollout 录像"},
+        {"name": "policy_act_ee","title": "ACT · PressButton","category": "models","result": "timeout","seconds": 19.966667,"description": "1 个演示训练一步；同条件 1 次 rollout，20 秒超时，任务成功 0/1。","source": "完整模型 rollout 录像"},
+        {"name": "policy_dp_ee","title": "Diffusion Policy · PressButton","category": "models","result": "timeout","seconds": 19.966667,"description": "1 个演示训练一步；同条件 1 次 rollout，20 秒超时，任务成功 0/1。","source": "完整模型 rollout 录像"},
+        {"name": "expert_cabinetpickplace","title": "CabinetPickPlace","category": "tasks","result": "success","seconds": 22.950001,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_frameassembly","title": "FrameAssembly","category": "tasks","result": "success","seconds": 24.950001,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_lemonharvesting","title": "LemonHarvesting","category": "tasks","result": "success","seconds": 14.483334,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_ndt","title": "NDT","category": "tasks","result": "success","seconds": 10.1,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_opendoor","title": "OpenDoor","category": "tasks","result": "success","seconds": 3.241667,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_peginhole","title": "PegInHole","category": "tasks","result": "success","seconds": 8.683333,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_pressbutton","title": "PressButton","category": "tasks","result": "success","seconds": 8.275,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_pulllever","title": "PullLever","category": "tasks","result": "success","seconds": 7.625,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_pushslider","title": "PushSlider","category": "tasks","result": "success","seconds": 11.266666,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_rotatevalve","title": "RotateValve","category": "tasks","result": "success","seconds": 8.65,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_tossball","title": "TossBall","category": "tasks","result": "success","seconds": 5.116667,"description": "先有一次超时；这里展示随后保存的成功 episode。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_wipewindow","title": "WipeWindow","category": "tasks","result": "success","seconds": 18.65,"description": "保存的成功 episode，录制与数据校验通过。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "physical_uaquad","title": "PressButton · UAQuad PID","category": "aircraft","result": "success","seconds": 8.583333,"description": "保存的 PressButton 成功 episode；此段仅证明该任务。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "physical_uahexa","title": "PressButton · UAHexa PID","category": "aircraft","result": "success","seconds": 8.366667,"description": "保存的 PressButton 成功 episode；此段仅证明该任务。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "physical_fahexa","title": "PressButton · FAHexa PID","category": "aircraft","result": "success","seconds": 8.316667,"description": "保存的 PressButton 成功 episode；此段仅证明该任务。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "physical_omnihexa","title": "PressButton · OmniHexa PID","category": "aircraft","result": "success","seconds": 8.258333,"description": "保存的 PressButton 成功 episode；此段仅证明该任务。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "expert_base_joint","title": "FAHexa BaseJoint · PressButton","category": "aircraft","result": "success","seconds": 8.316667,"description": "12D 绝对 base pose / arm joints 的脚本专家成功 episode。","source": "canonical LeRobot 成功 episode 的相机图像"},
+        {"name": "uaquad_base_camera","title": "UAQuad · base_camera","category": "checks","result": "smoke","seconds": 0.966667,"description": "30 步相机与场景检查，实际约 0.25 仿真秒；没有验证任务成功。","source": "有限步数检查录像"},
+        {"name": "mpc_smoke","title": "FAHexa · whole-body MPC","category": "checks","result": "smoke","seconds": 0.266667,"description": "8 步 reset、step、录像与求解器构建检查，实际约 0.067 仿真秒；没有验证任务成功。","source": "有限步数检查录像"}
+      ];
+      const categories = {
+        models: "远端上层模型 · PressButton · EE",
+        tasks: "脚本专家 · EE · PID",
+        aircraft: "脚本专家 · PressButton",
+        checks: "有限步数检查"
+      };
+      const gallery = document.querySelector("#gallery");
+      const cards = [];
+      let selectedCategory = "all";
+
+      for (const experiment of experiments) {
+        const card = document.createElement("article");
+        card.className = "card";
+        const heading = document.createElement("header");
+        heading.className = "heading";
+        const category = document.createElement("p");
+        category.className = "category";
+        category.textContent = categories[experiment.category];
+        const title = document.createElement("h2");
+        title.textContent = experiment.title;
+        const badge = document.createElement("span");
+        badge.className = `badge ${experiment.result}`;
+        badge.textContent = experiment.result === "success" ? "SUCCESS" : experiment.result === "timeout" ? "TIMEOUT（0/1）" : "SMOKE";
+        heading.append(category, title, badge);
+
+        const video = document.createElement("video");
+        video.controls = true;
+        video.preload = "none";
+        video.playsInline = true;
+        video.src = `animations/${experiment.name}.mp4`;
+        video.setAttribute("aria-label", `${experiment.title} 实验视频`);
+        video.poster = `animations/${experiment.name}.gif`;
+        const fallback = document.createElement("a");
+        fallback.href = video.src;
+        fallback.textContent = "打开 MP4";
+        video.append(fallback);
+
+        const caption = document.createElement("div");
+        caption.className = "caption";
+        const time = document.createElement("p");
+        time.className = "time";
+        const sourceTime = `源记录时间：0–${experiment.seconds.toFixed(2)} 秒。`;
+        time.textContent = sourceTime;
+        const description = document.createElement("p");
+        description.textContent = experiment.description;
+        const source = document.createElement("p");
+        source.className = "source";
+        source.textContent = `来源：${experiment.source} · seed 42`;
+        const download = document.createElement("a");
+        download.href = `animations/${experiment.name}.mp4`;
+        download.textContent = "打开单段 MP4";
+        caption.append(time, description, source, download);
+        card.append(heading, video, caption);
+        gallery.append(card);
+        cards.push({ card, video, experiment });
+
+        video.addEventListener("play", () => {
+          for (const item of cards) {
+            if (item.video !== video) item.video.pause();
+          }
+        });
+        video.addEventListener("loadedmetadata", () => {
+          video.playbackRate = Number(document.querySelector("#speed").value);
+          if (Number.isFinite(video.duration)) {
+            time.textContent = `${sourceTime} 预览 ${video.duration.toFixed(2)} 秒（含末帧停留）。`;
+          }
+        });
+        video.addEventListener("error", () => {
+          time.textContent = `${sourceTime} 视频未能加载，请确认 animations 目录中的 MP4 文件完整。`;
+        });
+      }
+
+      function filterCards() {
+        const search = document.querySelector("#search").value.trim().toLowerCase();
+        const result = document.querySelector("#outcome").value;
+        let visible = 0;
+        for (const { card, video, experiment } of cards) {
+          const matchesCategory = selectedCategory === "all" || experiment.category === selectedCategory;
+          const matchesResult = result === "all" || experiment.result === result;
+          const matchesSearch = `${experiment.title} ${experiment.description}`.toLowerCase().includes(search);
+          card.hidden = !(matchesCategory && matchesResult && matchesSearch);
+          if (card.hidden) video.pause();
+          else visible += 1;
+        }
+        document.querySelector("#count").textContent = `显示 ${visible} / ${cards.length} 段实验。`;
+      }
+
+      for (const button of document.querySelectorAll("[data-category]")) {
+        button.addEventListener("click", () => {
+          selectedCategory = button.dataset.category;
+          for (const filter of document.querySelectorAll("[data-category]")) {
+            filter.setAttribute("aria-pressed", String(filter === button));
+          }
+          filterCards();
+        });
+      }
+      document.querySelector("#search").addEventListener("input", filterCards);
+      document.querySelector("#outcome").addEventListener("change", filterCards);
+      document.querySelector("#speed").addEventListener("change", (event) => {
+        for (const { video } of cards) video.playbackRate = Number(event.target.value);
+      });
+      document.querySelector("#pause").addEventListener("click", () => {
+        for (const { video } of cards) video.pause();
+      });
+      filterCards();
+    </script>
+  </body>
+</html>

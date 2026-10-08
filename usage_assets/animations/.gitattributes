@@ -1,0 +1,3 @@
+# Small documentation previews are regular Git blobs.
+*.gif -filter -diff -merge -text
+*.mp4 -filter -diff -merge -text

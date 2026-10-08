@@ -6,6 +6,18 @@
 
 图片是仓库自带的项目总览。下文的验证表只记录实际运行结果；静态注册检查、仿真 reset/step、脚本任务成功和模型评估分别记录，不能互相代替。
 
+## 先看动作与结果
+
+下面是同一 PressButton 场景的真实闭环：π₀.₅ 完成按压，ACT 到达 20 秒时限仍未完成。画面来自已验收的 2026-10-07 Docker 录像，结果读取对应评估报告；不是根据画面猜测成败。
+
+| π₀.₅：成功，1/1 | ACT：超时未完成，0/1 |
+| --- | --- |
+| ![π₀.₅ 按钮任务成功的完整过程采样](usage_assets/animations/policy_pi05_ee.gif) | ![ACT 按钮任务超时未完成的完整过程采样](usage_assets/animations/policy_act_ee.gif) |
+
+**[打开 23 段视频播放总览](usage_assets/playback.html)**：下载或克隆仓库后，用浏览器打开该 HTML，可播放、暂停、拖动和调速；GitHub 文件页只显示 HTML 源码。Markdown 中的 GIF 自动循环。全彩视频、十二类专家动作、四种飞机与 BaseJoint 在下文按实验分组展示。
+
+这些预览保留原记录首尾，均匀采样、缩放并压缩，末帧停留约 1 秒，播放速度不等于实时速度。画面上的 `t` 是源记录时间：canonical 数据用仿真时间戳，MP4 用视频帧率计时，两者不一定相等。`SUCCESS` / `TIMEOUT` 是整段实验的最终结果，不表示第一帧已成功；`SMOKE` 只表示构造/reset/step 检查通过。完整原始录像、数据和 checkpoint 留在忽略目录；[动画来源清单](usage_assets/animations/manifest.json)记录源报告、源文件、预览文件的 SHA-256 与采样位置。导出步骤见第 6.1 节。
+
 ## 阅读路线
 
 | 目标 | 章节 | 可得到的结果 |
@@ -122,23 +134,25 @@ python scripts/research/extract_scene_frames.py \
   --output-dir outputs/research/rebuild-20261007/scene_frames
 ```
 
-### 2.1 十二类场景的实测相机帧
+### 2.1 十二类任务的成功动作过程
 
-下图均来自 2026-10-07 删除旧镜像并重新构建后，固定 seed 42 的 Isaac Sim 5.1 Docker EE PID 场景录像。来源是 `outputs/research/rebuild-20261007/matrix/results.json`：每类运行 60 步，从 MP4 提取中间帧；[帧清单](usage_assets/scenes/manifest.json)记录源录像路径、帧位置和文件 SHA-256。它们证明场景和相机可运行，不表示任务成功。
+下列动画来自 2026-10-07 重建后、seed 42 的 EE PID 脚本专家 **保存的成功 episode**，从 canonical LeRobot 的 120 Hz EE 相机序列提取，覆盖开始到结束。成功依据 recorder、validator 和 `scripted12_verified.json`，不是场景 smoke。TossBall 在保存这一成功 episode 前有一次超时尝试；这组展示不能解释为十二个任务都首次尝试成功。
+
+点击[视频播放总览](usage_assets/playback.html)可看全彩版本并暂停查看末尾；每个任务的原始帧数见上表。此前 60 步场景烟测的静态帧及[帧清单](usage_assets/scenes/manifest.json)继续保留，动画来源与采样位置见[动画清单](usage_assets/animations/manifest.json)。
 
 | CabinetPickPlace | FrameAssembly |
 | --- | --- |
-| ![CabinetPickPlace 相机帧](usage_assets/scenes/cabinetpickplace_ee_pid.png) | ![FrameAssembly 相机帧](usage_assets/scenes/frameassembly_ee_pid.png) |
+| ![CabinetPickPlace 专家成功过程](usage_assets/animations/expert_cabinetpickplace.gif) | ![FrameAssembly 专家成功过程](usage_assets/animations/expert_frameassembly.gif) |
 | LemonHarvesting | NDT |
-| ![LemonHarvesting 相机帧](usage_assets/scenes/lemonharvesting_ee_pid.png) | ![NDT 相机帧](usage_assets/scenes/ndt_ee_pid.png) |
+| ![LemonHarvesting 专家成功过程](usage_assets/animations/expert_lemonharvesting.gif) | ![NDT 专家成功过程](usage_assets/animations/expert_ndt.gif) |
 | OpenDoor | PegInHole |
-| ![OpenDoor 相机帧](usage_assets/scenes/opendoor_ee_pid.png) | ![PegInHole 相机帧](usage_assets/scenes/peginhole_ee_pid.png) |
+| ![OpenDoor 专家成功过程](usage_assets/animations/expert_opendoor.gif) | ![PegInHole 专家成功过程](usage_assets/animations/expert_peginhole.gif) |
 | PressButton | PullLever |
-| ![PressButton 相机帧](usage_assets/scenes/pressbutton_ee_pid.png) | ![PullLever 相机帧](usage_assets/scenes/pulllever_ee_pid.png) |
+| ![PressButton 专家成功过程](usage_assets/animations/expert_pressbutton.gif) | ![PullLever 专家成功过程](usage_assets/animations/expert_pulllever.gif) |
 | PushSlider | RotateValve |
-| ![PushSlider 相机帧](usage_assets/scenes/pushslider_ee_pid.png) | ![RotateValve 相机帧](usage_assets/scenes/rotatevalve_ee_pid.png) |
+| ![PushSlider 专家成功过程](usage_assets/animations/expert_pushslider.gif) | ![RotateValve 专家成功过程](usage_assets/animations/expert_rotatevalve.gif) |
 | TossBall | WipeWindow |
-| ![TossBall 相机帧](usage_assets/scenes/tossball_ee_pid.png) | ![WipeWindow 相机帧](usage_assets/scenes/wipewindow_ee_pid.png) |
+| ![TossBall 保存的成功 episode](usage_assets/animations/expert_tossball.gif) | ![WipeWindow 专家成功过程](usage_assets/animations/expert_wipewindow.gif) |
 
 ### 2.2 观察、动作、奖励与成功率
 
@@ -177,9 +191,11 @@ python scripts/research/verify_matrix.py \
   --output-dir outputs/research/rebuild-20261007/uaquad_base_camera
 ```
 
-![PressButton UAQuad PID 的 base_camera 实测帧](usage_assets/press_button_uaquad_base_camera.png)
+![UAQuad base_camera 30 步场景检查，SMOKE，不代表任务成功](usage_assets/animations/uaquad_base_camera.gif)
 
 2026-10-07 重建后，UAQuad 相机检查再次以 seed 42 完成 30 步并保存 MP4，见 `outputs/research/rebuild-20261007/uaquad_base_camera/results.json`。
+
+上面的动画使用这次新录像；源片段按 30 FPS 编码约 1 秒，为便于查看放慢播放。实际 30 个仿真步约 0.25 秒；此检查每步录一帧，录像时间不能直接作为仿真时间。[全彩相机视频](usage_assets/animations/uaquad_base_camera.mp4)和历史[静态帧](usage_assets/press_button_uaquad_base_camera.png)分别保留。
 
 FAHexa PID 的扰动组合也已在本次重建后以 seed 42 执行 8 步，包括转子饱和、气动、1 N 的 X 向风、动作噪声和观察噪声；这些设置与实际测试一致：
 
@@ -211,6 +227,10 @@ timeout --signal=INT --kill-after=10s 600s python scripts/research/verify_enviro
 
 GUI 检查先通过只读 X11 查询匹配窗口标题、`_NET_WM_PID` 与当前容器的 teleop 进程，再仅向该 client 发送 `R`。第一次仅按标题查找发现两个同名窗口，因此拒绝发送；补充进程匹配后 public reset 回调通过。全过程没有向其他桌面窗口发送事件。SpaceMouse/gamepad 未连接，真实设备输入和人工任务成功示范仍未验证。
 
+![FAHexa MPC 8 步 smoke 的真实相机过程](usage_assets/animations/mpc_smoke.gif)
+
+MPC 片段仅覆盖 8 步（实际约 0.067 仿真秒；源录像按 30 FPS 编码约 0.3 秒，预览放慢），标记为 `SMOKE`；它显示相机输出，不构成 MPC 专家成功证据。[全彩 MPC 预览](usage_assets/animations/mpc_smoke.mp4)。
+
 ## 4. 十二个脚本专家与 canonical 数据
 
 每个注册 ID 都携带 `scripted_policy_entry_point`。脚本专家使用任务状态机，经当前机器人控制流水线执行；BaseJoint 录制器通过当前 profile 的 IK 配置把专家 EE 目标转换为基座与关节绝对命令。先在 EE PID 下为每族取一条成功示范，随后检查各机型上的适用性。
@@ -235,7 +255,15 @@ python scripts/research/merge_scripted_results.py \
 | FAHexa PID | 1 | 999 | 通过 |
 | OmniHexa PID | 1 | 992 | 通过 |
 
-结果来自重建镜像的 `outputs/research/rebuild-20261007/scripted_press_physical/results.json`：四条新示范均在默认 20 秒 episode 内成功，seed 42，canonical validator 通过。验证脚本记录 seed 与 episode 上限；使用公共采集器时也需加 `--seed 42` 固定任务随机化与专家轨迹。此前无固定 seed 的补测保留为历史：
+结果来自重建镜像的 `outputs/research/rebuild-20261007/scripted_press_physical/results.json`：四条新示范均在默认 20 秒 episode 内成功，seed 42，canonical validator 通过。验证脚本记录 seed 与 episode 上限；使用公共采集器时也需加 `--seed 42` 固定任务随机化与专家轨迹。此前无固定 seed 的补测保留为历史。
+
+| UAQuad：PressButton 成功 | UAHexa：PressButton 成功 |
+| --- | --- |
+| ![UAQuad 按钮专家成功过程](usage_assets/animations/physical_uaquad.gif) | ![UAHexa 按钮专家成功过程](usage_assets/animations/physical_uahexa.gif) |
+| FAHexa：PressButton 成功 | OmniHexa：PressButton 成功 |
+| ![FAHexa 按钮专家成功过程](usage_assets/animations/physical_fahexa.gif) | ![OmniHexa 按钮专家成功过程](usage_assets/animations/physical_omnihexa.gif) |
+
+这些动画是四种物理机型经各自控制流水线完成按钮任务的 EE 相机记录；只支持本任务、各一条成功示范的结论。机器人外观和飞行轨迹未必都在末端相机视野内；[视频总览](usage_assets/playback.html)可播放和暂停全彩版本。复现命令：
 
 ```bash
 python scripts/research/verify_scripted.py \
@@ -270,9 +298,7 @@ python scripts/data/validate_lerobotdataset.py \
   --repo_id am_bench/pressbutton_ee_absolute --target_hz 20
 ```
 
-下面保留 2026-09-30 的历史成功 PressButton 脚本示范画面，来自 EE 相机 MP4 第 237 帧，画面显示夹爪已靠近按钮。该 session 的一条 episode 和 validator 都通过；成功由环境终止条件判定，不靠图片推断。[附加图像清单](usage_assets/evidence_manifest.json)记录这个视频和上方 UAQuad 视频的 SHA-256、帧号及源报告。
-
-![PressButton 脚本专家成功示范接近结束时的 EE 相机帧](usage_assets/press_button_scripted_success_near_final.png)
+PressButton EE 的完整成功过程见第 2.1 节；[全彩专家视频](usage_assets/animations/expert_pressbutton.mp4)来自本次重建后的 994 帧 canonical 序列。2026-09-30 的[历史成功帧](usage_assets/press_button_scripted_success_near_final.png)及[附加图像清单](usage_assets/evidence_manifest.json)保留作历史证据。
 
 BaseJoint 数据应使用匹配 ID 和有序 state keys：
 
@@ -289,6 +315,10 @@ python scripts/data/record_demos_scripted.py \
 ```
 
 这个 BaseJoint 配置已在 2026-10-07 重建镜像内用 seed 42 完整采集和校验，结果为 `outputs/research/rebuild-20261007/scripted_press_base_joint/results.json`：1 条成功 episode、999 帧、12 维 `observation.state` 与 `action`，`base_joint_absolute` 动作语义，默认时限 20 秒。独立结果不会计入 12 族 EE PID 汇总。第 5.0 节给出了这次 EE/BaseJoint fixture 的完整复现与上传命令。
+
+![FAHexa BaseJoint 12 维动作专家的 PressButton 成功过程](usage_assets/animations/expert_base_joint.gif)
+
+[全彩 BaseJoint 专家视频](usage_assets/animations/expert_base_joint.mp4)展示这条保存的成功 episode；这里展示的是脚本专家，四个学习模型的短 BaseJoint 接口烟测结果另见第 5.5 节。
 
 合并器核对每条新示范的 recorder、validator、LeRobot metadata 和任务时限，并记录 seed。上面的整组采集命令可直接生成第 7 节需要的 `scripted12_verified.json`。本次实际运行先采集了第 5.0 节的 PressButton EE fixture，再采集其余 11 族；验收报告由 `scripted_press_ee/results.json` 与 `scripted_other11/results.json` 两份新报告合并，未混入历史结果。
 
@@ -589,11 +619,15 @@ ACT 默认 `log_freq=200`，因此一步运行没有 loss 日志。八项 transp
 | π₀ | BaseJoint / 0.5 s | 59 | 0/1 | 14 | 2.757 |
 | π₀.₅ | BaseJoint / 0.5 s | 59 | 0/1 | 14 | 2.702 |
 
-[闭环产物验收快照](usage_assets/policy_artifact_snapshot.json)记录所有 summary、完整 env config、results、tracking/analysis、checkpoint、服务日志、调用顺序与视频的来源和 SHA-256；原始报告为 `outputs/research/rebuild-20261007/policy_rpc/artifact_validation.json`。下图从两个真实成功录像中提取末尾附近的原始帧，未经缩放或叠字，出处与帧索引见[帧提取记录](usage_assets/policy_success_frames_manifest.json)。任务成功以环境终止条件判定。
+[闭环产物验收快照](usage_assets/policy_artifact_snapshot.json)记录所有 summary、完整 env config、results、tracking/analysis、checkpoint、服务日志、调用顺序与视频的来源和 SHA-256；原始报告为 `outputs/research/rebuild-20261007/policy_rpc/artifact_validation.json`。下列动画覆盖四个 EE rollout 的录像首尾，成功以环境终止条件判定。ACT 和 DP 的 `completed` 表示闭环执行完毕，两者实际均超时，任务成功为 0/1。
 
 | π₀：443 步成功 | π₀.₅：298 步成功 |
 | --- | --- |
-| ![π₀ EE 成功录像原始帧](usage_assets/policy_pi0_ee_success.png) | ![π₀.₅ EE 成功录像原始帧](usage_assets/policy_pi05_ee_success.png) |
+| ![π₀ EE 闭环成功过程](usage_assets/animations/policy_pi0_ee.gif) | ![π₀.₅ EE 闭环成功过程](usage_assets/animations/policy_pi05_ee.gif) |
+| ACT：20 秒超时，0/1 | DP：20 秒超时，0/1 |
+| ![ACT EE 闭环超时未完成](usage_assets/animations/policy_act_ee.gif) | ![DP EE 闭环超时未完成](usage_assets/animations/policy_dp_ee.gif) |
+
+全彩预览：[ACT](usage_assets/animations/policy_act_ee.mp4)、[DP](usage_assets/animations/policy_dp_ee.mp4)、[π₀](usage_assets/animations/policy_pi0_ee.mp4)、[π₀.₅](usage_assets/animations/policy_pi05_ee.mp4)；也可在[视频总览](usage_assets/playback.html)暂停、拖动或调速比较。两条成功录像的原始静态帧仍见[帧提取记录](usage_assets/policy_success_frames_manifest.json)。
 
 本次训练和 rollout 使用同一个 seed 的单条 PressButton 示范；π₀/π₀.₅ 的各一次成功不能推断多任务成绩或泛化成功率。一步训练与短 BaseJoint 烟测不能作为论文性能复现。
 
@@ -603,7 +637,33 @@ ACT 默认 `log_freq=200`，因此一步运行没有 loss 日志。八项 transp
 
 验收一个评估目录时，同时检查 `status: "completed"`、rollout 数、步骤、环境 ID、seed、动作语义、服务来源和 checkpoint。保存录像时用 `--save-video --video-camera-names ee_camera`，还要实际解码 MP4 并确认帧数大于零。进程 exit 0 而缺少 summary 不算通过；本次曾遇到长期运行的旧容器失去 GPU 访问，恢复方法见 [note.md](note.md)。
 
-EE 20 秒评估与 BaseJoint 0.5 秒评估分别记录。任务成功以环境的终止条件判定，视频仅提供画面证据；`completed` 本身不能推断任务成功。原始录像、checkpoint、示范和日志保持在忽略目录；经核验的代表帧及小型结果摘要放到 `usage_assets/`，并记录出处与哈希。
+EE 20 秒评估与 BaseJoint 0.5 秒评估分别记录。任务成功以环境的终止条件判定，视频仅提供画面证据；`completed` 本身不能推断任务成功。原始录像、checkpoint、示范和日志保持在忽略目录；经核验的代表帧、短预览及小型结果摘要放到 `usage_assets/`，并记录出处与哈希。
+
+### 6.1 从真实实验重新导出 GIF 与视频
+
+本页的 23 段 GIF 和 23 段全彩 MP4 在 2026-10-08 从已验收的 2026-10-07 实验记录导出，没有重新执行仿真或训练。导出器只使用现有仿真 Docker 中的 Pillow、OpenCV、PyArrow 与 PyAV，CPU 运行，不启动 Isaac Sim。源为 MP4 或 canonical Parquet 内嵌的 EE 相机图像；[导出配置](usage_assets/animation_specs.json)逐项指定源报告、episode 和结果字段。它不补造中间帧。
+
+从仓库根目录在**宿主机**执行；输出目录必须为空，重复导出请更改目录名：
+
+```bash
+docker exec ambench-sim-research python scripts/research/export_usage_animations.py \
+  --specs-json usage_assets/animation_specs.json \
+  --source-root /workspace/ambench \
+  --output-dir outputs/research/usage-animations-repeat-01 \
+  --write-mp4
+```
+
+脚本逐项读取真实报告中的最终结果，保留源图像序列首尾，并完整解码验证导出的 GIF/MP4。每段文件最多 450 KiB；GIF 根据内容减少颜色或尺寸，全彩 MP4 保留采样序列。`manifest.json` 写入结果字段、源报告与源文件 SHA-256、采样帧/时间、播放参数和每个预览的 SHA-256。模型超时会标记 `TIMEOUT (0/1)`，不会因 evaluator 正常退出而改标成功。
+
+核验输出后，可在**宿主机**更新本页预览：
+
+```bash
+cp outputs/research/usage-animations-repeat-01/*.gif usage_assets/animations/
+cp outputs/research/usage-animations-repeat-01/*.mp4 usage_assets/animations/
+cp outputs/research/usage-animations-repeat-01/manifest.json usage_assets/animations/
+```
+
+换一次新的实验运行时，先完成前面的采集和闭环，再把配置里的 `rebuild-20261007` 报告与视频路径统一改成新运行名。专家 session 路径从报告读取，无须手填时间戳目录；若重排合并报告，须同步修改 `session_root_path` / `outcome_path` 的索引。视频总览中的结果和源时长也应与新清单核对。原始大录像和数据仍不提交；`usage_assets/animations/.gitattributes` 仅将本页小预览作为普通 Git 文件保存，克隆后无需下载 LFS 内容。
 
 ## 7. 本分支验证记录
 

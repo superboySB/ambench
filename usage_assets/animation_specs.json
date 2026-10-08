@@ -1,0 +1,458 @@
+[
+  {
+    "name": "expert_cabinetpickplace",
+    "title": "CabinetPickPlace | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      0,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      0,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_frameassembly",
+    "title": "FrameAssembly | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      1,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      1,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_lemonharvesting",
+    "title": "LemonHarvesting | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      2,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      2,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_ndt",
+    "title": "NDT | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      3,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      3,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_opendoor",
+    "title": "OpenDoor | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      4,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      4,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_peginhole",
+    "title": "PegInHole | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      5,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      5,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_pressbutton",
+    "title": "PressButton | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      6,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      6,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_pulllever",
+    "title": "PullLever | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      7,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      7,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_pushslider",
+    "title": "PushSlider | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      8,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      8,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_rotatevalve",
+    "title": "RotateValve | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      9,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      9,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "expert_tossball",
+    "title": "TossBall | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      10,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      10,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed. TossBall had an earlier timeout attempt; only its saved success is shown."
+  },
+  {
+    "name": "expert_wipewindow",
+    "title": "WipeWindow | expert",
+    "source_report": "outputs/research/rebuild-20261007/scripted12_verified.json",
+    "session_root_path": [
+      "results",
+      11,
+      "selected",
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      11,
+      "selected",
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+  },
+  {
+    "name": "physical_uaquad",
+    "title": "PressButton | UAQuad PID",
+    "source_report": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+    "session_root_path": [
+      "results",
+      0,
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      0,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+  },
+  {
+    "name": "physical_uahexa",
+    "title": "PressButton | UAHexa PID",
+    "source_report": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+    "session_root_path": [
+      "results",
+      1,
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      1,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+  },
+  {
+    "name": "physical_fahexa",
+    "title": "PressButton | FAHexa PID",
+    "source_report": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+    "session_root_path": [
+      "results",
+      2,
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      2,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+  },
+  {
+    "name": "physical_omnihexa",
+    "title": "PressButton | OmniHexa PID",
+    "source_report": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+    "session_root_path": [
+      "results",
+      3,
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      3,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+  },
+  {
+    "name": "expert_base_joint",
+    "title": "PressButton | BaseJoint",
+    "source_report": "outputs/research/rebuild-20261007/scripted_press_base_joint/results.json",
+    "session_root_path": [
+      "results",
+      0,
+      "session_root"
+    ],
+    "source_fps": 120,
+    "outcome_path": [
+      "results",
+      0,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SUCCESS"
+    },
+    "notes": "Saved FAHexa BaseJoint successful expert episode, 12D absolute state/actions, seed 42."
+  },
+  {
+    "name": "policy_act_ee",
+    "title": "PressButton | ACT EE",
+    "source_report": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/eval_summary.json",
+    "source_video": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/videos/act-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+  },
+  {
+    "name": "policy_dp_ee",
+    "title": "PressButton | DP EE",
+    "source_report": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/eval_summary.json",
+    "source_video": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/videos/dp-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+  },
+  {
+    "name": "policy_pi0_ee",
+    "title": "PressButton | PI0 EE",
+    "source_report": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/eval_summary.json",
+    "source_video": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/videos/pi-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+  },
+  {
+    "name": "policy_pi05_ee",
+    "title": "PressButton | PI05 EE",
+    "source_report": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/eval_summary.json",
+    "source_video": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/videos/pi-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+  },
+  {
+    "name": "uaquad_base_camera",
+    "title": "UAQuad | base camera 30 steps",
+    "source_report": "outputs/research/rebuild-20261007/uaquad_base_camera/results.json",
+    "source_video": "outputs/research/rebuild-20261007/uaquad_base_camera/videos/PressButton-Am-UAQuad-Abs-PID-Direct-v0/research-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "results",
+      0,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SMOKE"
+    },
+    "notes": "30-step camera/scene check only; does not assert task success."
+  },
+  {
+    "name": "mpc_smoke",
+    "title": "FAHexa MPC | 8 steps",
+    "source_report": "outputs/research/rebuild-20261007/direct_mpc_relative/records/probe.json",
+    "source_video": "outputs/research/rebuild-20261007/direct_mpc_relative/videos/research-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SMOKE"
+    },
+    "notes": "8-step final-image MPC reset/step/video/solver-build check only; does not assert task success."
+  }
+]

@@ -599,6 +599,95 @@
     },
     "status": "passed"
   },
+  "online_asset_delivery": {
+    "all_files_passed_including_release": 113,
+    "base_url": "https://zipengdai.com/ambench/",
+    "checked_at_utc": "2026-10-08T09:34:04.441691+00:00",
+    "downloaded_artifact_bytes": 34312592,
+    "expected_artifact_bytes": 34312592,
+    "gif_content_type_passed": 54,
+    "index_html_sha256": "85378d62cef432527ec162ce88976c224be2c1b368db23d1a910cef6ad4cccfa",
+    "mp4_content_type_passed": 54,
+    "payload_count": 112,
+    "payload_passed": 112,
+    "payload_requests": 112,
+    "payload_retries": 0,
+    "range_passed": true,
+    "release_stale_reads_before_current_publication": 2,
+    "report": {
+      "bytes": 222127,
+      "path": "outputs/research/online-delivery-20261008/assets.json",
+      "sha256": "bd293572b30966926c4f8dae537e1e51779837a7d3f40aee3c25d97d3bbfe18f"
+    },
+    "research_commit": "a81d4a0b230463b01e272261824b4e2902da7201",
+    "scope": "All published payload files verified by HTTP bytes/SHA; native browser playback is recorded separately.",
+    "source_manifest_sha256": "99eb454c1bfeb39e8b92e6ab6aeb7f99c444042bc138c461745dbb2a5f7f017e",
+    "status": "passed"
+  },
+  "online_browser_validation": {
+    "browser": "Chrome/143.0.7499.169",
+    "category_counts": {
+      "aircraft": 5,
+      "all": 23,
+      "checks": 2,
+      "models": 4,
+      "tasks": 12
+    },
+    "checks": [
+      "first/end frames and dimensions/duration",
+      "native playback and timeline dragging",
+      "speed/exclusive playback/pause all",
+      "category/outcome/seed/camera filters",
+      "deep anchors open comparisons and clear filters",
+      "desktop and mobile layout"
+    ],
+    "decoded_preview_count": 54,
+    "experiment_count": 23,
+    "gallery_sha256": "85378d62cef432527ec162ce88976c224be2c1b368db23d1a910cef6ad4cccfa",
+    "javascript_errors": 0,
+    "loading_errors": 0,
+    "manifest_sha256": "99eb454c1bfeb39e8b92e6ab6aeb7f99c444042bc138c461745dbb2a5f7f017e",
+    "native_timeline_drag": {
+      "after": 4.585147,
+      "before": 0.5,
+      "native_timeline": true
+    },
+    "outcome_preview_counts": {
+      "failure": 0,
+      "smoke": 4,
+      "success": 40,
+      "timeout": 10
+    },
+    "prior_failed_run": {
+      "issues": [
+        "Missing favicon returned HTTP 404; resolved with embedded SVG icon.",
+        "One MP4 load reported ERR_NETWORK_CHANGED; independent hash/decode retry and full v2 run passed."
+      ],
+      "report": {
+        "bytes": 22624,
+        "path": "outputs/research-browser-check-20261008/final-online/result.json",
+        "sha256": "364405f4079380f947f28f7536ca89d5ee6320f2e7d81b498d332d2e5b73ba69"
+      },
+      "root_cause_of_network_change": "not established",
+      "tested_previews_before_failure": 42
+    },
+    "report": {
+      "bytes": 28051,
+      "path": "outputs/research-browser-check-20261008/final-online-v2/result.json",
+      "sha256": "3906b9ff2e16cd7fd300f84c2959777d0ad1b362b8cbe290acdb3d02ddfcc034"
+    },
+    "scope": "Full HTTPS browser playback/UI verification of these exact gallery, manifest and media bytes; subsequent documentation-only publication retains this payload.",
+    "status": "passed",
+    "tested_research_commit": "a81d4a0b230463b01e272261824b4e2902da7201",
+    "url": "https://zipengdai.com/ambench/"
+  },
+  "online_media_ci": {
+    "conclusion": "success",
+    "history_blob_limit_bytes_exclusive": 100000000,
+    "media_limit_bytes_inclusive": 460800,
+    "run_url": "https://github.com/superboySB/ambench/actions/runs/37757218875",
+    "tested_research_commit": "a81d4a0b230463b01e272261824b4e2902da7201"
+  },
   "preview_count": 54,
   "previews": [
     {

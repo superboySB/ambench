@@ -272,7 +272,7 @@ bash tools/research/deploy_policy.sh
 
 构建脚本把源码 revision、是否有未提交改动和递归子模块版本写入镜像标签，并将 image inspect 与构建模式保存到忽略目录 `outputs/docker-builds/<image-id>/`。两种镜像内的 `/opt/ambench-build/` 保留各 Python 环境的依赖版本清单；应用安装和导入检查在构建中执行。重建后重新运行本手册第 6 节全量矩阵、`usage.md` 第 4 节示范采集及其策略数据、训练、推理和闭环检查，使用新的空输出目录。
 
-[本次重建快照](usage_assets/rebuild_snapshot.json)记录删除旧镜像、无缓存构建、后续源码修复重建、最终两端镜像和传输包哈希，以及 35 个原始证据的 SHA-256。最终运行镜像嵌入源码 `02d1499`；后续分支提交只更新验证记录和文档。
+[2026-10-07 重建快照](usage_assets/rebuild_snapshot.json)记录删除旧镜像、无缓存构建、后续源码修复重建、当时两端镜像和传输包哈希，以及 35 个原始证据的 SHA-256。该次运行镜像嵌入源码 `02d1499`。2026-10-08 的多视角录制、CPU 服务改动及本地镜像刷新另见第 2 节与[多视角验收快照](usage_assets/multiview_validation_snapshot.json)，两次记录分别保留源码和检查范围。
 
 如果宿主机 `nvidia-smi` 正常，但旧容器内提示 `Failed to initialize NVML: Unknown Error`，先结束该容器内的任务，再重新创建容器，随后检查驱动访问：
 

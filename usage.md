@@ -793,6 +793,8 @@ python3 tools/research/publish_video_pages.py --publish
 
 发布器创建并推送 `gh-pages` 的正常提交，无需切换当前 research 工作区。在仓库 Settings → Pages 中选择 `gh-pages`、根目录 `/` 作为来源；本站沿用账号的自定义域名 `zipengdai.com`，项目路径为 `/ambench/`。等待 Pages 构建结束后，在在线站点实测至少一段视频能播放、暂停、拖动和调速，验证实验锚点、比较展开、过滤、技术条件与本地清单一致；HTTP 200 或看到封面还不足以证明视频可播放。网络暂不可用时仍可用仓库中的[离线页](usage_assets/playback.html)。
 
+2026-10-08 已在上述 HTTPS 地址完成全量验收：**54/54 段首末帧可解码**，原生播放/暂停/真实时间轴拖动/倍速/互斥播放、23 个实验组的分类和结果筛选、seed/相机搜索、深链接自动展开、1280 像素桌面和 390 像素手机布局均通过，页面及媒体加载错误为 0。另逐一下载全部 **113 个发布文件**核对大小与 SHA-256，54 MP4/54 GIF 的 MIME 正确，MP4 Range 返回 206 且内容匹配；整站 **34,312,592 字节**。验收绑定播放器、清单和媒体的精确哈希，见[多视角验收快照](usage_assets/multiview_validation_snapshot.json)的 `online_browser_validation` 与 `online_asset_delivery`。首轮缺 favicon 的 404 和一段视频网络中断的失败报告均保留；补齐 favicon、核验文件并重新执行全量验收后通过。GitHub 的媒体 CI 也已通过，持续检查 100 MB 文件上限及普通 Git 预览。
+
 ## 7. 本分支验证记录
 
 本节以 2026-10-07 删除旧研究镜像、重新构建后的结果为主要证据。下面的矩阵、脚本采集和模型训练统一 seed 42；公共 `zero_agent.py` / teleop 连续 smoke 保留默认 seed 未设置，单独注明。2026-10-08 本地双镜像再次构建到干净源码 `85d5957`，无仓库挂载、无 GPU、无网络的 12 项检查通过，包含默认录制配置；此轮未重新部署远端镜像，详情见[多视角验收快照](usage_assets/multiview_validation_snapshot.json)的 `local_docker_refresh`。2026-10-08 新 seed / 新视角 / CPU 推理记录按第 6.2 节和在线清单独立解释；表内基线成绩对应原始验收报告。此前 2026-09-30 及未固定 seed 的报告保留为历史，不参与本次合并。在**本地主机的仓库根目录**从原始报告生成[验证快照](usage_assets/validation_snapshot.json)：

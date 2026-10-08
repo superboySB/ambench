@@ -1,0 +1,464 @@
+[
+  {
+    "name": "expert_cabinetpickplace_seed43_scene",
+    "experiment_id": "expert_cabinetpickplace",
+    "task_id": "CabinetPickPlace-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 60,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_frameassembly_seed43_scene",
+    "experiment_id": "expert_frameassembly",
+    "task_id": "FrameAssembly-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 30,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_lemonharvesting_seed43_scene",
+    "experiment_id": "expert_lemonharvesting",
+    "task_id": "LemonHarvesting-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 30,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_ndt_seed43_scene",
+    "experiment_id": "expert_ndt",
+    "task_id": "NDT-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 384,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -4,
+      -5,
+      4.5
+    ],
+    "scene_camera_look_at": [
+      1.77,
+      0,
+      4
+    ]
+  },
+  {
+    "name": "expert_opendoor_seed43_scene",
+    "experiment_id": "expert_opendoor",
+    "task_id": "OpenDoor-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 15,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_peginhole_seed43_scene",
+    "experiment_id": "expert_peginhole",
+    "task_id": "PegInHole-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_pressbutton_seed43_scene",
+    "experiment_id": "expert_pressbutton",
+    "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_pulllever_seed43_scene",
+    "experiment_id": "expert_pulllever",
+    "task_id": "PullLever-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_pushslider_seed43_scene",
+    "experiment_id": "expert_pushslider",
+    "task_id": "PushSlider-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 26,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_rotatevalve_seed43_scene",
+    "experiment_id": "expert_rotatevalve",
+    "task_id": "RotateValve-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_tossball_seed43_scene",
+    "experiment_id": "expert_tossball",
+    "task_id": "TossBall-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 10,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_wipewindow_seed43_scene",
+    "experiment_id": "expert_wipewindow",
+    "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_uaquad_seed43_base",
+    "experiment_id": "physical_uaquad",
+    "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "base_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_uahexa_seed43_base",
+    "experiment_id": "physical_uahexa",
+    "task_id": "PressButton-Am-UAHexa-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "base_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_fahexa_seed43_base",
+    "experiment_id": "physical_fahexa",
+    "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "base_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_omnihexa_seed43_base",
+    "experiment_id": "physical_omnihexa",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "base_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "expert_base_joint_seed43_base",
+    "experiment_id": "expert_base_joint",
+    "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "base_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_uaquad_seed43_scene",
+    "experiment_id": "physical_uaquad",
+    "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_uahexa_seed43_scene",
+    "experiment_id": "physical_uahexa",
+    "task_id": "PressButton-Am-UAHexa-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_fahexa_seed43_scene",
+    "experiment_id": "physical_fahexa",
+    "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  },
+  {
+    "name": "physical_omnihexa_seed43_scene",
+    "experiment_id": "physical_omnihexa",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 43,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera"
+    ],
+    "scene_camera_width": 640,
+    "scene_camera_height": 384,
+    "scene_camera_position": [
+      -2,
+      -2.5,
+      1.6
+    ],
+    "scene_camera_look_at": [
+      2,
+      0,
+      1
+    ]
+  }
+]

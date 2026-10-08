@@ -1,0 +1,29 @@
+name: research media release
+
+on:
+  push:
+    branches: [research, main, release/public]
+  pull_request:
+    paths:
+      - "scripts/research/**"
+      - "usage_assets/**"
+      - "docs/**"
+      - "usage.md"
+      - "note.md"
+      - ".gitattributes"
+      - ".github/workflows/research-media.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  media-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: false
+      - name: Check Git history and ordinary GIF/MP4 previews
+        run: python3 scripts/research/check_media_release.py --history-ref all

@@ -27,10 +27,17 @@ optional arguments:
 import argparse
 import contextlib
 import importlib
+import json
+import os
+import traceback
 from pathlib import Path
+from typing import Any
 
 from _record_cli import add_dataset_export_args, resolve_dataset_output_dir
 from isaaclab.app import AppLauncher
+
+SCENE_CAMERA_POS = (-2.0, -2.5, 1.6)
+SCENE_CAMERA_LOOKAT = (2.0, 0.0, 1.0)
 
 # Add argparse arguments before extending them with AppLauncher options.
 parser = argparse.ArgumentParser(description="Record demonstrations for Isaac Lab environments.")
@@ -49,6 +56,12 @@ parser.add_argument(
     type=int,
     default=0,
     help="Number of demonstrations to record. Set to 0 for infinite.",
+)
+parser.add_argument(
+    "--max_episodes",
+    type=int,
+    default=0,
+    help="Maximum completed episodes, including failures. Set to 0 for unlimited; bounded runs require one env.",
 )
 parser.add_argument(
     "--inject_noise",
@@ -79,6 +92,24 @@ parser.add_argument(
         "Add other cameras (e.g. 'base_camera') explicitly if they exist for the selected task."
     ),
 )
+parser.add_argument(
+    "--scene_camera_position",
+    type=float,
+    nargs=3,
+    default=SCENE_CAMERA_POS,
+    metavar=("X", "Y", "Z"),
+    help="External scene camera position in the environment frame.",
+)
+parser.add_argument(
+    "--scene_camera_look_at",
+    type=float,
+    nargs=3,
+    default=SCENE_CAMERA_LOOKAT,
+    metavar=("X", "Y", "Z"),
+    help="External scene camera look-at target in the environment frame.",
+)
+parser.add_argument("--scene_camera_width", type=int, default=1280, help="External scene camera image width.")
+parser.add_argument("--scene_camera_height", type=int, default=720, help="External scene camera image height.")
 add_dataset_export_args(parser)
 
 # Append AppLauncher CLI args before parsing.
@@ -86,6 +117,12 @@ AppLauncher.add_app_launcher_args(parser)
 
 # Parse CLI arguments and enable cameras for dataset recording.
 args_cli = parser.parse_args()
+if args_cli.max_episodes < 0:
+    parser.error("--max_episodes must be nonnegative.")
+if args_cli.max_episodes and args_cli.num_envs not in (None, 1):
+    parser.error("--max_episodes requires --num_envs 1.")
+if args_cli.scene_camera_width < 1 or args_cli.scene_camera_height < 1:
+    parser.error("Scene camera width and height must be positive.")
 
 args_cli.enable_cameras = True
 
@@ -104,6 +141,7 @@ import time
 import gymnasium as gym
 import isaaclab.sim as sim_utils
 import isaaclab_tasks  # noqa: F401
+import numpy as np
 import torch
 from isaaclab.sensors import CameraCfg
 from isaaclab_tasks.utils.parse_cfg import parse_env_cfg
@@ -118,17 +156,17 @@ from ambench.utils.camera_utils import compute_camera_quat_from_lookat
 logger = logging.getLogger(__name__)
 
 BASE_JOINT_ABSOLUTE = "base_joint_absolute"
-SCENE_CAMERA_POS = (-2.0, -2.5, 1.6)
-SCENE_CAMERA_LOOKAT = (2.0, 0.0, 1.0)
 
 
 def make_scene_camera_cfg() -> CameraCfg:
     """Create the optional external scene camera used for side-view recording."""
+    camera_position = tuple(args_cli.scene_camera_position)
+    look_at = tuple(args_cli.scene_camera_look_at)
     return CameraCfg(
         prim_path="/World/envs/env_.*/scene_camera",
         update_period=0.0,
-        height=720,
-        width=1280,
+        height=args_cli.scene_camera_height,
+        width=args_cli.scene_camera_width,
         data_types=["rgb"],
         spawn=sim_utils.PinholeCameraCfg(
             focal_length=24.0,
@@ -137,11 +175,37 @@ def make_scene_camera_cfg() -> CameraCfg:
             clipping_range=(0.01, 100.0),
         ),
         offset=CameraCfg.OffsetCfg(
-            pos=SCENE_CAMERA_POS,
-            rot=compute_camera_quat_from_lookat(SCENE_CAMERA_POS, SCENE_CAMERA_LOOKAT),
+            pos=camera_position,
+            rot=compute_camera_quat_from_lookat(camera_position, look_at),
             convention="ros",
         ),
     )
+
+
+def serialize_observation(value: Any) -> Any:
+    """Copy numeric policy observations into JSON-compatible CPU values."""
+    if torch.is_tensor(value):
+        return value.detach().cpu().tolist()
+    if isinstance(value, (np.ndarray, np.generic)):
+        return value.tolist()
+    if isinstance(value, dict):
+        return {key: serialize_observation(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [serialize_observation(item) for item in value]
+    if value is None or isinstance(value, (bool, int, float, str)):
+        return value
+    raise TypeError(f"Unsupported initial policy observation value: {type(value).__name__}")
+
+
+def write_episode_outcomes(output_dir: Path, report: dict[str, Any]) -> None:
+    """Persist episode outcomes atomically without changing the canonical dataset."""
+    report_path = output_dir / "episode_outcomes.json"
+    temporary_path = report_path.with_suffix(".json.tmp")
+    with temporary_path.open("w") as report_file:
+        report_file.write(json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n")
+        report_file.flush()
+        os.fsync(report_file.fileno())
+    temporary_path.replace(report_path)
 
 
 class RateLimiter:
@@ -325,6 +389,23 @@ def run_simulation_loop(
 
     env_unwrapped = env.unwrapped
     action_adapter = BaseJointActionAdapter(env_unwrapped)
+    initial_observations = [serialize_observation(obs["policy"][env_id]) for env_id in range(num_envs)]
+    episode_steps = [0] * num_envs
+    episode_report: dict[str, Any] = {
+        "task": args_cli.task,
+        "seed": args_cli.seed,
+        "episode_length_s": args_cli.env_length_s,
+        "max_episodes": args_cli.max_episodes,
+        "requested_successes": args_cli.num_demos,
+        "camera_names": list(recorder.camera_names),
+        "requested_camera_names": list(args_cli.camera_names),
+        "save_failed_episodes": args_cli.save_failed_episodes,
+        "step_dt_s": float(env_unwrapped.step_dt),
+        "status": "recording",
+        "episodes": [],
+        "successful_episodes": 0,
+    }
+    write_episode_outcomes(recorder.output_dir, episode_report)
     with contextlib.suppress(KeyboardInterrupt) and torch.inference_mode():
         loop_step_count = 0
         while simulation_app.is_running():
@@ -347,8 +428,25 @@ def run_simulation_loop(
             # Handle termination and truncation for each environment.
             envs_to_reset = []
             for env_id in range(num_envs):
+                episode_steps[env_id] += 1
+                exported_before = len(recorder.episode_steps)
                 reset_needed = process_success_condition(recorder, obv, env_id)
                 if reset_needed:
+                    exported = len(recorder.episode_steps) > exported_before
+                    episode_report["episodes"].append({
+                        "episode_index": len(episode_report["episodes"]),
+                        "env_id": env_id,
+                        "initial_observation": initial_observations[env_id],
+                        "step_count": episode_steps[env_id],
+                        "simulation_elapsed_s": episode_steps[env_id] * float(env_unwrapped.step_dt),
+                        "termination_reason": "success" if bool(terminated[env_id]) else "timeout",
+                        "exported": exported,
+                        "exported_episode_index": exported_before if exported else None,
+                    })
+                    episode_report["successful_episodes"] = recorder.successful_episode_count
+                    write_episode_outcomes(recorder.output_dir, episode_report)
+                    episode_steps[env_id] = 0
+                    initial_observations[env_id] = serialize_observation(obs["policy"][env_id])
                     envs_to_reset.append(env_id)
 
             # Reset recorder and policy state for environments that finished.
@@ -368,6 +466,10 @@ def run_simulation_loop(
                 print(f"All {total_recorded_demo_count} demonstrations recorded.\nExiting the app.")
                 break
 
+            if args_cli.max_episodes and len(episode_report["episodes"]) >= args_cli.max_episodes:
+                print(f"Completed episode limit {args_cli.max_episodes} reached.\nExiting the app.")
+                break
+
             # Stop if the simulator has been stopped externally.
             if env.unwrapped.sim.is_stopped():
                 break
@@ -376,6 +478,16 @@ def run_simulation_loop(
             if rate_limiter:
                 rate_limiter.sleep(env.unwrapped)
 
+    episode_report["status"] = (
+        "completed"
+        if args_cli.num_demos > 0 and total_recorded_demo_count >= args_cli.num_demos
+        else (
+            "episode_limit"
+            if args_cli.max_episodes and len(episode_report["episodes"]) >= args_cli.max_episodes
+            else "stopped"
+        )
+    )
+    write_episode_outcomes(recorder.output_dir, episode_report)
     return total_recorded_demo_count
 
 
@@ -410,6 +522,8 @@ def main() -> None:
         logger.error(f"Failed to parse environment configuration: {e}")
         raise SystemExit(1) from e
     env_cfg.episode_length_s = args_cli.env_length_s
+    if args_cli.max_episodes and env_cfg.scene.num_envs != 1:
+        raise ValueError("--max_episodes requires a single environment.")
     if args_cli.seed is not None:
         env_cfg.seed = args_cli.seed
 
@@ -418,7 +532,11 @@ def main() -> None:
         env_cfg.num_rerenders_on_reset = 1
     if "scene_camera" in args_cli.camera_names:
         env_cfg.scene_camera_cfg = make_scene_camera_cfg()
-        print(f"[INFO]: Added scene_camera at {SCENE_CAMERA_POS} looking at {SCENE_CAMERA_LOOKAT}")
+        print(
+            f"[INFO]: Added scene_camera at {tuple(args_cli.scene_camera_position)} "
+            f"looking at {tuple(args_cli.scene_camera_look_at)} "
+            f"with resolution {args_cli.scene_camera_width}x{args_cli.scene_camera_height}"
+        )
 
     try:
         env = gym.make(args_cli.task, cfg=env_cfg).unwrapped
@@ -493,12 +611,17 @@ def main() -> None:
     if recorder.canonical_output_dir != output_dir_path:
         print(f"Canonical LeRobot dataset: {recorder.canonical_output_dir}")
     print(f"{'='*80}\n")
+    if args_cli.max_episodes and args_cli.num_demos > 0 and total_recorded_demo_count < args_cli.num_demos:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
     try:
         # Run the main function.
         main()
+    except Exception:
+        traceback.print_exc()
+        raise
     finally:
         print("Closing simulation app...")
         simulation_app.close()

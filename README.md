@@ -44,6 +44,9 @@ Python 3.11 are required. WSL and Docker are not maintained paths.
 
 The `research` branch also documents a tested two-container workflow in [note.md](note.md)
 and its task-by-task results in [usage.md](usage.md).
+The [online experiment video gallery](https://zipengdai.com/ambench/) groups real runs
+by task, aircraft and policy, with recorded seeds, camera views and success or timeout
+outcomes. An [offline copy](usage_assets/playback.html) is included with the same previews.
 
 Once Isaac Sim and Isaac Lab are installed:
 

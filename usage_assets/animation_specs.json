@@ -19,7 +19,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_cabinetpickplace",
+      "category": "tasks",
+      "trial_id": "expert_cabinetpickplace_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        0,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        0,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        0,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_frameassembly",
@@ -41,7 +73,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_frameassembly",
+      "category": "tasks",
+      "trial_id": "expert_frameassembly_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        1,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        1,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        1,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_lemonharvesting",
@@ -63,7 +127,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_lemonharvesting",
+      "category": "tasks",
+      "trial_id": "expert_lemonharvesting_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        2,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        2,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        2,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_ndt",
@@ -85,7 +181,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_ndt",
+      "category": "tasks",
+      "trial_id": "expert_ndt_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": false,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included; fixed task geometry, alternate seed does not imply another layout"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        3,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        3,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        3,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_opendoor",
@@ -107,7 +235,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_opendoor",
+      "category": "tasks",
+      "trial_id": "expert_opendoor_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        4,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        4,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        4,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_peginhole",
@@ -129,7 +289,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_peginhole",
+      "category": "tasks",
+      "trial_id": "expert_peginhole_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        5,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        5,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        5,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_pressbutton",
@@ -151,7 +343,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_pressbutton",
+      "category": "tasks",
+      "trial_id": "expert_pressbutton_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        6,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        6,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        6,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_pulllever",
@@ -173,7 +397,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_pulllever",
+      "category": "tasks",
+      "trial_id": "expert_pulllever_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        7,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        7,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        7,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_pushslider",
@@ -195,7 +451,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_pushslider",
+      "category": "tasks",
+      "trial_id": "expert_pushslider_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        8,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        8,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        8,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_rotatevalve",
@@ -217,7 +505,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_rotatevalve",
+      "category": "tasks",
+      "trial_id": "expert_rotatevalve_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        9,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        9,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        9,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_tossball",
@@ -239,7 +559,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed. TossBall had an earlier timeout attempt; only its saved success is shown."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed. TossBall had an earlier timeout attempt; only its saved success is shown.",
+    "metadata": {
+      "experiment_id": "expert_tossball",
+      "category": "tasks",
+      "trial_id": "expert_tossball_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        10,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        10,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        10,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_wipewindow",
@@ -261,7 +613,39 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed."
+    "notes": "Saved successful canonical episode, EE PID, seed 42; recorder and validator passed.",
+    "metadata": {
+      "experiment_id": "expert_wipewindow",
+      "category": "tasks",
+      "trial_id": "expert_wipewindow_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        11,
+        "selected",
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        11,
+        "selected",
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        11,
+        "selected",
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "physical_uaquad",
@@ -281,7 +665,36 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks.",
+    "metadata": {
+      "experiment_id": "physical_uaquad",
+      "category": "aircraft",
+      "trial_id": "physical_uaquad_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        0,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        0,
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        0,
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "physical_uahexa",
@@ -301,7 +714,36 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks.",
+    "metadata": {
+      "experiment_id": "physical_uahexa",
+      "category": "aircraft",
+      "trial_id": "physical_uahexa_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        1,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        1,
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        1,
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "physical_fahexa",
@@ -321,7 +763,36 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks.",
+    "metadata": {
+      "experiment_id": "physical_fahexa",
+      "category": "aircraft",
+      "trial_id": "physical_fahexa_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        2,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        2,
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        2,
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "physical_omnihexa",
@@ -341,7 +812,36 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks."
+    "notes": "One saved successful physical-flight PressButton expert episode, default 20 s limit, seed 42. Does not establish success on other tasks.",
+    "metadata": {
+      "experiment_id": "physical_omnihexa",
+      "category": "aircraft",
+      "trial_id": "physical_omnihexa_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        3,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        3,
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        3,
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "expert_base_joint",
@@ -361,7 +861,36 @@
     "outcome_labels": {
       "passed": "SUCCESS"
     },
-    "notes": "Saved FAHexa BaseJoint successful expert episode, 12D absolute state/actions, seed 42."
+    "notes": "Saved FAHexa BaseJoint successful expert episode, 12D absolute state/actions, seed 42.",
+    "metadata": {
+      "experiment_id": "expert_base_joint",
+      "category": "aircraft",
+      "trial_id": "expert_base_joint_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "parquet simulation timestamp",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "base_joint_absolute",
+      "attempt_selection": "saved successful episode; earlier attempts not included"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        0,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        0,
+        "task_id"
+      ],
+      "episode_length_s": [
+        "results",
+        0,
+        "episode_length_s"
+      ]
+    }
   },
   {
     "name": "policy_act_ee",
@@ -377,7 +906,52 @@
       "success": "SUCCESS",
       "timeout": "TIMEOUT (0/1)"
     },
-    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure.",
+    "metadata": {
+      "experiment_id": "policy_act_ee",
+      "category": "models",
+      "trial_id": "policy_act_ee_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "inference_seed": 42,
+      "inference_device": "cuda:0",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "attempt_selection": "one rollout, one-step checkpoint trained on seed42 demonstration"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
   },
   {
     "name": "policy_dp_ee",
@@ -393,7 +967,52 @@
       "success": "SUCCESS",
       "timeout": "TIMEOUT (0/1)"
     },
-    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure.",
+    "metadata": {
+      "experiment_id": "policy_dp_ee",
+      "category": "models",
+      "trial_id": "policy_dp_ee_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "inference_seed": 42,
+      "inference_device": "cuda:0",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "attempt_selection": "one rollout, one-step checkpoint trained on seed42 demonstration"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
   },
   {
     "name": "policy_pi0_ee",
@@ -409,7 +1028,52 @@
       "success": "SUCCESS",
       "timeout": "TIMEOUT (0/1)"
     },
-    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure.",
+    "metadata": {
+      "experiment_id": "policy_pi0_ee",
+      "category": "models",
+      "trial_id": "policy_pi0_ee_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "inference_seed": 42,
+      "inference_device": "cuda:0",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "attempt_selection": "one rollout, one-step checkpoint trained on seed42 demonstration"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
   },
   {
     "name": "policy_pi05_ee",
@@ -425,7 +1089,52 @@
       "success": "SUCCESS",
       "timeout": "TIMEOUT (0/1)"
     },
-    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure."
+    "notes": "Real remote model, one training step, one canonical episode, simulation and inference seed 42. Complete recorded rollout; timeout means task not achieved within 20 s, not a transport failure.",
+    "metadata": {
+      "experiment_id": "policy_pi05_ee",
+      "category": "models",
+      "trial_id": "policy_pi05_ee_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "inference_seed": 42,
+      "inference_device": "cuda:0",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "attempt_selection": "one rollout, one-step checkpoint trained on seed42 demonstration"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
   },
   {
     "name": "uaquad_base_camera",
@@ -440,7 +1149,37 @@
     "outcome_labels": {
       "passed": "SMOKE"
     },
-    "notes": "30-step camera/scene check only; does not assert task success."
+    "notes": "30-step camera/scene check only; does not assert task success.",
+    "metadata": {
+      "experiment_id": "uaquad_base_camera",
+      "category": "checks",
+      "trial_id": "uaquad_base_camera_seed42",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "simulation_duration_s": 0.25,
+      "attempt_selection": "bounded smoke; no task success claim"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        0,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        0,
+        "task_id"
+      ],
+      "steps": [
+        "results",
+        0,
+        "steps_completed"
+      ]
+    }
   },
   {
     "name": "mpc_smoke",
@@ -453,6 +1192,1822 @@
     "outcome_labels": {
       "passed": "SMOKE"
     },
-    "notes": "8-step final-image MPC reset/step/video/solver-build check only; does not assert task success."
+    "notes": "8-step final-image MPC reset/step/video/solver-build check only; does not assert task success.",
+    "metadata": {
+      "experiment_id": "mpc_smoke",
+      "category": "checks",
+      "trial_id": "mpc_smoke_seed42",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-07",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "episode_index": 0,
+      "action_semantics": "ee_absolute",
+      "simulation_duration_s": 0.06666666666666667,
+      "attempt_selection": "bounded smoke; no task success claim"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task_id"
+      ],
+      "steps": [
+        "steps_completed"
+      ]
+    }
+  },
+  {
+    "name": "expert_cabinetpickplace_seed43_scene",
+    "title": "CabinetPickPlace | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_cabinetpickplace_seed43_scene/CabinetPickPlaceEEAbsPID/demo-20261008_081628/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_cabinetpickplace_seed43_scene/CabinetPickPlaceEEAbsPID/demo-20261008_081628/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted CabinetPickPlace scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_cabinetpickplace",
+      "category": "tasks",
+      "trial_id": "expert_cabinetpickplace_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_lemonharvesting_seed43_scene",
+    "title": "LemonHarvesting | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_lemonharvesting_seed43_scene/LemonHarvestingEEAbsPID/demo-20261008_082511/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_lemonharvesting_seed43_scene/LemonHarvestingEEAbsPID/demo-20261008_082511/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted LemonHarvesting scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_lemonharvesting",
+      "category": "tasks",
+      "trial_id": "expert_lemonharvesting_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_ndt_seed43_scene",
+    "title": "NDT | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_ndt_seed43_scene/NDTEEAbsPID/demo-20261008_082633/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_ndt_seed43_scene/NDTEEAbsPID/demo-20261008_082633/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted NDT scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Fixed task geometry: changed seed is not a second randomized layout; the external camera shows the low-to-high inspection trajectory. Scene camera position [-4, -5, 4.5], look-at [1.77, 0, 4], size 384x384.",
+    "metadata": {
+      "experiment_id": "expert_ndt",
+      "category": "tasks",
+      "trial_id": "expert_ndt_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": false,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_opendoor_seed43_scene",
+    "title": "OpenDoor | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_opendoor_seed43_scene/OpenDoorEEAbsPID/demo-20261008_082745/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_opendoor_seed43_scene/OpenDoorEEAbsPID/demo-20261008_082745/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted OpenDoor scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_opendoor",
+      "category": "tasks",
+      "trial_id": "expert_opendoor_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_peginhole_seed43_scene",
+    "title": "PegInHole | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_peginhole_seed43_scene/PegInHoleEEAbsPID/demo-20261008_082816/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_peginhole_seed43_scene/PegInHoleEEAbsPID/demo-20261008_082816/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted PegInHole scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_peginhole",
+      "category": "tasks",
+      "trial_id": "expert_peginhole_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_pressbutton_seed43_scene",
+    "title": "PressButton | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_pressbutton_seed43_scene/PressButtonEEAbsPID/demo-20261008_082912/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_pressbutton_seed43_scene/PressButtonEEAbsPID/demo-20261008_082912/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted PressButton scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_pressbutton",
+      "category": "tasks",
+      "trial_id": "expert_pressbutton_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_pulllever_seed43_scene",
+    "title": "PullLever | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_pulllever_seed43_scene/PullLeverEEAbsPID/demo-20261008_083002/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_pulllever_seed43_scene/PullLeverEEAbsPID/demo-20261008_083002/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted PullLever scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_pulllever",
+      "category": "tasks",
+      "trial_id": "expert_pulllever_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_pushslider_seed43_scene",
+    "title": "PushSlider | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_pushslider_seed43_scene/PushSliderEEAbsPID/demo-20261008_083101/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_pushslider_seed43_scene/PushSliderEEAbsPID/demo-20261008_083101/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted PushSlider scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_pushslider",
+      "category": "tasks",
+      "trial_id": "expert_pushslider_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_rotatevalve_seed43_scene",
+    "title": "RotateValve | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_rotatevalve_seed43_scene/RotateValveEEAbsPID/demo-20261008_083204/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_rotatevalve_seed43_scene/RotateValveEEAbsPID/demo-20261008_083204/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted RotateValve scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_rotatevalve",
+      "category": "tasks",
+      "trial_id": "expert_rotatevalve_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_tossball_seed43_scene",
+    "title": "TossBall | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_tossball_seed43_scene/TossBallEEAbsPID/demo-20261008_083257/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_tossball_seed43_scene/TossBallEEAbsPID/demo-20261008_083257/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted TossBall scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_tossball",
+      "category": "tasks",
+      "trial_id": "expert_tossball_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_wipewindow_seed43_scene",
+    "title": "WipeWindow | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_wipewindow_seed43_scene/WipeWindowEEAbsPID/demo-20261008_083335/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_wipewindow_seed43_scene/WipeWindowEEAbsPID/demo-20261008_083335/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted WipeWindow scripted expert episode, EE PID, seed 43, scene_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_wipewindow",
+      "category": "tasks",
+      "trial_id": "expert_wipewindow_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_uaquad_seed43_base",
+    "title": "PressButton | UAQuad | seed 43 | base_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/physical_uaquad_seed43_base/PressButtonUAQuadAbsPID/demo-20261008_083448/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/physical_uaquad_seed43_base/PressButtonUAQuadAbsPID/demo-20261008_083448/videos/scripted-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted PressButton scripted expert episode, UAQuad PID, seed 43, base_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed.",
+    "metadata": {
+      "experiment_id": "physical_uaquad",
+      "category": "aircraft",
+      "trial_id": "physical_uaquad_seed43_base",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_uahexa_seed43_base",
+    "title": "PressButton | UAHexa | seed 43 | base_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/physical_uahexa_seed43_base/PressButtonUAHexaAbsPID/demo-20261008_083557/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/physical_uahexa_seed43_base/PressButtonUAHexaAbsPID/demo-20261008_083557/videos/scripted-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "First attempted PressButton scripted expert episode, UAHexa PID, seed 43, base_camera; completion and export confirmed by episode_outcomes.json, canonical validation passed.",
+    "metadata": {
+      "experiment_id": "physical_uahexa",
+      "category": "aircraft",
+      "trial_id": "physical_uahexa_seed43_base",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_fahexa_seed43_base",
+    "title": "PressButton | FAHexa | seed 43 | base_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/physical_fahexa_seed43_base/PressButtonFAHexaAbsPID/demo-20261008_083705/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/physical_fahexa_seed43_base/PressButtonFAHexaAbsPID/demo-20261008_083705/videos/scripted-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, FAHexa PID, seed 43, base_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4.",
+    "metadata": {
+      "experiment_id": "physical_fahexa",
+      "category": "aircraft",
+      "trial_id": "physical_fahexa_seed43_base",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_omnihexa_seed43_base",
+    "title": "PressButton | OmniHexa | seed 43 | base_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/physical_omnihexa_seed43_base/PressButtonOmniHexaAbsPID/demo-20261008_083813/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/physical_omnihexa_seed43_base/PressButtonOmniHexaAbsPID/demo-20261008_083813/videos/scripted-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, OmniHexa PID, seed 43, base_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4.",
+    "metadata": {
+      "experiment_id": "physical_omnihexa",
+      "category": "aircraft",
+      "trial_id": "physical_omnihexa_seed43_base",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_base_joint_seed43_base",
+    "title": "PressButton | FAHexa | seed 43 | base_camera",
+    "source_report": "outputs/research/multiview-20261008/experts/datasets/expert_base_joint_seed43_base/PressButtonFAHexaBaseJointAbsPID/demo-20261008_083919/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/experts/datasets/expert_base_joint_seed43_base/PressButtonFAHexaBaseJointAbsPID/demo-20261008_083919/videos/scripted-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, FAHexa PID, seed 43, base_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4.",
+    "metadata": {
+      "experiment_id": "expert_base_joint",
+      "category": "aircraft",
+      "trial_id": "expert_base_joint_seed43_base",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "base_joint_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "expert_frameassembly_seed43_scene",
+    "title": "FrameAssembly | EE | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/expert_frameassembly_seed43_scene/FrameAssemblyEEAbsPID/demo-20261008_084042/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/expert_frameassembly_seed43_scene/FrameAssemblyEEAbsPID/demo-20261008_084042/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "FrameAssembly scripted expert, EE PID, seed 43, scene_camera; infrastructure retry with the same seed; first saved completed episode of retry session; earlier failed process is excluded. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "expert_frameassembly",
+      "category": "tasks",
+      "trial_id": "expert_frameassembly_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "infrastructure retry with the same seed; first saved completed episode of retry session; earlier failed process is excluded"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_uaquad_seed43_scene",
+    "title": "PressButton | UAQuad | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_uaquad_seed43_scene/PressButtonUAQuadAbsPID/demo-20261008_084243/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_uaquad_seed43_scene/PressButtonUAQuadAbsPID/demo-20261008_084243/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, UAQuad PID, seed 43, scene_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "physical_uaquad",
+      "category": "aircraft",
+      "trial_id": "physical_uaquad_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_uahexa_seed43_scene",
+    "title": "PressButton | UAHexa | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_uahexa_seed43_scene/PressButtonUAHexaAbsPID/demo-20261008_084356/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_uahexa_seed43_scene/PressButtonUAHexaAbsPID/demo-20261008_084356/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, UAHexa PID, seed 43, scene_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "physical_uahexa",
+      "category": "aircraft",
+      "trial_id": "physical_uahexa_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_fahexa_seed43_scene",
+    "title": "PressButton | FAHexa | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_fahexa_seed43_scene/PressButtonFAHexaAbsPID/demo-20261008_084508/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_fahexa_seed43_scene/PressButtonFAHexaAbsPID/demo-20261008_084508/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, FAHexa PID, seed 43, scene_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "physical_fahexa",
+      "category": "aircraft",
+      "trial_id": "physical_fahexa_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "physical_omnihexa_seed43_scene",
+    "title": "PressButton | OmniHexa | seed 43 | scene_camera",
+    "source_report": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_omnihexa_seed43_scene/PressButtonOmniHexaAbsPID/demo-20261008_084620/episode_outcomes.json",
+    "source_video": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_omnihexa_seed43_scene/PressButtonOmniHexaAbsPID/demo-20261008_084620/videos/scripted-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "episodes",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "PressButton scripted expert, OmniHexa PID, seed 43, scene_camera; first attempted episode of this recording session; max_episodes=1; failed episodes retained. Completion/export confirmed by episode_outcomes.json and canonical validation passed. Canonical initial state and image were cross-checked against the sidecar and source MP4. Scene camera position [-2, -2.5, 1.6], look-at [2, 0, 1], size 640x384.",
+    "metadata": {
+      "experiment_id": "physical_omnihexa",
+      "category": "aircraft",
+      "trial_id": "physical_omnihexa_seed43_scene",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "MP4 at 30 FPS, every fourth 120 Hz simulation step",
+      "geometry_randomized": true,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "first attempted episode of this recording session; max_episodes=1; failed episodes retained"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "seed"
+      ],
+      "task_id": [
+        "task"
+      ],
+      "episode_length_s": [
+        "episode_length_s"
+      ],
+      "episode_index": [
+        "episodes",
+        0,
+        "episode_index"
+      ],
+      "steps": [
+        "episodes",
+        0,
+        "step_count"
+      ],
+      "simulation_duration_s": [
+        "episodes",
+        0,
+        "simulation_elapsed_s"
+      ],
+      "initial_observation": [
+        "episodes",
+        0,
+        "initial_observation"
+      ]
+    }
+  },
+  {
+    "name": "policy_act_ee_seed43_cpu_ee",
+    "title": "ACT | seed 43 | CPU | ee",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/act_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/act_seed43/videos/act-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_act_ee",
+      "category": "models",
+      "trial_id": "policy_act_ee_seed43_cpu",
+      "camera": "ee_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "policy_act_ee_seed43_cpu_scene",
+    "title": "ACT | seed 43 | CPU | scene",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/act_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/act_seed43/videos/act-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_act_ee",
+      "category": "models",
+      "trial_id": "policy_act_ee_seed43_cpu",
+      "camera": "scene_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "policy_dp_ee_seed43_cpu_ee",
+    "title": "Diffusion Policy | seed 43 | CPU | ee",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/videos/dp-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_dp_ee",
+      "category": "models",
+      "trial_id": "policy_dp_ee_seed43_cpu",
+      "camera": "ee_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "policy_dp_ee_seed43_cpu_scene",
+    "title": "Diffusion Policy | seed 43 | CPU | scene",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/videos/dp-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_dp_ee",
+      "category": "models",
+      "trial_id": "policy_dp_ee_seed43_cpu",
+      "camera": "scene_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "policy_pi0_ee_seed43_cpu_ee",
+    "title": "pi0 | seed 43 | CPU | ee",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/videos/pi-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_pi0_ee",
+      "category": "models",
+      "trial_id": "policy_pi0_ee_seed43_cpu",
+      "camera": "ee_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "policy_pi0_ee_seed43_cpu_scene",
+    "title": "pi0 | seed 43 | CPU | scene",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/videos/pi-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_pi0_ee",
+      "category": "models",
+      "trial_id": "policy_pi0_ee_seed43_cpu",
+      "camera": "scene_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_base_camera_seed43_ee_camera",
+    "title": "UAQuad | 30 steps | seed 43 | EE",
+    "source_report": "outputs/research/multiview-20261008/smoke/uaquad_ee/results.json",
+    "source_video": "outputs/research/multiview-20261008/smoke/uaquad_ee/videos/PressButton-Am-UAQuad-Abs-PID-Direct-v0/research-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "results",
+      0,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SMOKE"
+    },
+    "notes": "Bounded reset/step and camera check only, not task success. Video records each simulation step at encoded 30 FPS; simulation time is steps / 120.",
+    "metadata": {
+      "experiment_id": "uaquad_base_camera",
+      "category": "checks",
+      "trial_id": "uaquad_base_camera_seed43",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "simulation_duration_s": 0.25,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "one bounded reset/step probe"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        0,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        0,
+        "task_id"
+      ],
+      "steps": [
+        "results",
+        0,
+        "steps_completed"
+      ]
+    }
+  },
+  {
+    "name": "mpc_smoke_seed43_base_camera",
+    "title": "FAHexa MPC | 8 steps | seed 43 | base",
+    "source_report": "outputs/research/multiview-20261008/smoke/mpc_base/results.json",
+    "source_video": "outputs/research/multiview-20261008/smoke/mpc_base/videos/PressButton-Am-FAHexa-Abs-MPC-Direct-v0/research-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "results",
+      0,
+      "status"
+    ],
+    "outcome_labels": {
+      "passed": "SMOKE"
+    },
+    "notes": "Bounded reset/step and camera check only, not task success. Video records each simulation step at encoded 30 FPS; simulation time is steps / 120.",
+    "metadata": {
+      "experiment_id": "mpc_smoke",
+      "category": "checks",
+      "trial_id": "mpc_smoke_seed43",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "simulation_duration_s": 0.06666666666666667,
+      "action_semantics": "ee_absolute",
+      "attempt_selection": "one bounded reset/step probe"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "results",
+        0,
+        "seed"
+      ],
+      "task_id": [
+        "results",
+        0,
+        "task_id"
+      ],
+      "steps": [
+        "results",
+        0,
+        "steps_completed"
+      ]
+    }
+  },
+  {
+    "name": "policy_pi05_ee_seed43_cpu_ee",
+    "title": "pi05 | seed 43 | CPU | ee",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/videos/pi-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_pi05_ee",
+      "category": "models",
+      "trial_id": "policy_pi05_ee_seed43_cpu",
+      "camera": "ee_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
+  },
+  {
+    "name": "policy_pi05_ee_seed43_cpu_scene",
+    "title": "pi05 | seed 43 | CPU | scene",
+    "source_report": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/eval_summary.json",
+    "source_video": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/videos/pi-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "outcome_labels": {
+      "success": "SUCCESS",
+      "timeout": "TIMEOUT (0/1)"
+    },
+    "notes": "Same one-step seed 42 checkpoint as the original GPU baseline. Environment seed 43, remote CPU inference seed 42. EE and scene videos share one rollout; scene camera is recording only. Device and environment seed both differ from baseline; no performance attribution.",
+    "metadata": {
+      "experiment_id": "policy_pi05_ee",
+      "category": "models",
+      "trial_id": "policy_pi05_ee_seed43_cpu",
+      "camera": "scene_camera",
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 1,
+      "training_reference": "usage_assets/policy_training_snapshot.json",
+      "episode_index": 0,
+      "source_run_date": "2026-10-08",
+      "source_time_basis": "video frame index / encoded FPS",
+      "geometry_randomized": true,
+      "attempt_selection": "one rollout, no additional attempts"
+    },
+    "metadata_paths": {
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "simulation_duration_s": [
+        "rollouts",
+        0,
+        "tracking",
+        "execution_time"
+      ]
+    }
   }
 ]

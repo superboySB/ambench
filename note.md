@@ -1,6 +1,6 @@
 # AM-Bench 双容器研究环境
 
-这份手册在 `research` 分支使用 Isaac Lab 2.3.2 / Isaac Sim 5.1.0，把仿真、机器人控制与脚本专家放在本地仿真容器，把 ACT、Diffusion Policy 和 OpenPI 的模型推理放在独立策略容器。默认部署策略容器到 `tencent-86`，本地和远端均只通过 Docker 安装项目依赖。[usage.md](usage.md) 给出功能清单、逐项命令和验证记录，并加入 23 段真实实验 GIF；克隆后用浏览器打开[视频播放总览](usage_assets/playback.html)可播放、暂停、拖动和调速。成功、超时和场景烟测分别标明，重新导出步骤见 usage.md 第 6.1 节。
+这份手册在 `research` 分支使用 Isaac Lab 2.3.2 / Isaac Sim 5.1.0，把仿真、机器人控制与脚本专家放在本地仿真容器，把 ACT、Diffusion Policy 和 OpenPI 的模型推理放在独立策略容器。默认部署策略容器到 `tencent-86`，本地和远端均只通过 Docker 安装项目依赖。[usage.md](usage.md) 给出功能清单、逐项命令和验证记录；[在线实验视频总览](https://zipengdai.com/ambench/)支持直接播放、暂停、拖动、调速，并按任务、飞机和模型查看 seed 与视角对照。成功、超时和场景烟测逐段标明。网络不可用时，下载或克隆仓库后用浏览器打开[离线播放页](usage_assets/playback.html)，同时保留其 `animations/` 目录。重新录制、导出和发布步骤见 usage.md 第 6.1–6.3 节。
 
 命令中的 `rebuild-20261007` 是本次验收的运行名。当前机器已有对应示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
 
@@ -11,7 +11,7 @@
 | 角色 | 设备 | 容器 | 持久目录 |
 | --- | --- | --- | --- |
 | 仿真、低层控制、数据采集 | 本地 RTX 4070 Ti SUPER 16 GiB | `ambench-sim-research` | 仓库的 `datasets/`、`outputs/`、`videos/`（均不提交） |
-| 高层策略训练与推理 | `tencent-86` 上空闲编号最小的 GPU；部署时重新检查 | `ambench-policy-research` | `/diff/dzp_is_sb/ambench-research` |
+| 高层策略训练与推理 | `tencent-86` 上空闲编号最小的 GPU；无空闲 GPU 时可在策略 Docker 内用 CPU 推理 | `ambench-policy-research` | `/diff/dzp_is_sb/ambench-research` |
 
 ```mermaid
 flowchart LR
@@ -164,7 +164,21 @@ bash tools/research/start_policy.sh pi \
 bash tools/research/wait_policy.sh act 300
 ```
 
-这三个命令是互斥服务选择，先停止旧服务再启动另一种策略。脚本顶部 `INFERENCE_SEED=42` 固定远端 Python、NumPy 与 Torch 的随机种子，日志包含 `REMOTE_INFERENCE_SEED=42`；本地评估也使用 `--seed 42`。前向 smoke 会消耗模型随机状态，开始可复现的评估前重新启动对应服务。ACT/DP 的仿真侧评估命令使用 `--remote-url http://127.0.0.1:8001`；OpenPI 使用 `--host 127.0.0.1 --port 8000`。跨机器流量经过 SSH 隧道，不需要打开公网推理端口。
+这三个命令是互斥服务选择，先停止旧服务再启动另一种策略。脚本顶部 `INFERENCE_SEED=42` 固定远端 Python、NumPy 与 Torch 的随机种子，日志包含 `REMOTE_INFERENCE_SEED=42`；以上基线评估也使用 `--seed 42`。前向 smoke 会消耗模型随机状态，开始可复现的评估前重新启动对应服务。ACT/DP 的仿真侧评估命令使用 `--remote-url http://127.0.0.1:8001`；OpenPI 使用 `--host 127.0.0.1 --port 8000`。跨机器流量经过 SSH 隧道，不需要打开公网推理端口。
+
+### 4.2 无空闲 GPU 时的远端 CPU 推理与多视角记录
+
+2026-10-08 补录时远端 GPU 均被其他任务占用，新增模型评估使用同一策略 Docker 内的 CPU 推理，本地 Isaac 仿真继续使用本地 GPU。服务入口加 `--cpu` 后会隐藏 CUDA 设备并记录 `REMOTE_INFERENCE_DEVICE=cpu`；推理 seed 仍为 42。以下命令从本地宿主机执行，只启动服务，不重新训练：
+
+```bash
+bash tools/research/start_policy.sh --cpu act \
+  /data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/last/pretrained_model
+bash tools/research/wait_policy.sh act 600
+```
+
+DP 和 OpenPI 使用各自原有 checkpoint，按 usage.md 第 6.2 节的 CPU 服务与双视角评估命令依次运行。CPU 推理可能明显慢于 GPU，应等待服务就绪后再启动单个 rollout；不要为了补录覆盖正在运行的他人 GPU 任务。
+
+在线总览将 seed 42 基线和 seed 43 补录分组显示。新模型录像的环境 seed 为 43、推理 seed 为 42、训练 seed 为 42 且仅训练一步；与旧 GPU 记录同时改变了环境 seed 和推理设备，无法把结果差异单独归因于布局。新模型同一次 rollout 的 EE 和场景录像共享 `trial_id`，只计一次试验。十二任务的新视角按每次调用一条 episode 记录，基础设施异常的重跑独立标明；NDT 固定几何，仅补充观察视角。物理飞机的基座与外部场景视角分别运行，使用不同 `trial_id`。精确动作语义、相机、初始观测、步数、结果和来源哈希见每段的技术详情。
 
 ## 5. Canonical LeRobot 数据流
 
@@ -179,7 +193,7 @@ bash tools/research/wait_policy.sh act 300
 本地 Isaac 容器：观察经 SSH RPC → 动作 → 低层控制 → 评估记录
 ```
 
-源数据不要改写为相对动作；相对轨迹由各策略适配器在训练时构造。DP zarr 与 OpenPI v2.1 是可重新生成的派生格式，不能取代 canonical 源。每次采集后用容器中的 `scripts/data/validate_lerobotdataset.py` 验证，再通过部署目录的同步步骤上传远端。数据、checkpoint、缓存和视频都保持 Git 未跟踪。
+源数据不要改写为相对动作；相对轨迹由各策略适配器在训练时构造。DP zarr 与 OpenPI v2.1 是可重新生成的派生格式，不能取代 canonical 源。每次采集后用容器中的 `scripts/data/validate_lerobotdataset.py` 验证，再通过部署目录的同步步骤上传远端。原始数据、checkpoint、缓存和完整录像保持 Git 未跟踪；文档使用的短 GIF/MP4 与来源清单保存在 `usage_assets/animations/`。
 
 完成 `usage.md` 第 5 节开头的 EE 和 BaseJoint 两条固定 seed 示范采集后，在本地宿主机运行。下面的目录和远端名称与后续训练、推理命令一致：
 
@@ -245,7 +259,7 @@ docker compose -f docker/compose.sim.yml up -d
 bash tools/research/deploy_policy.sh
 ```
 
-2026-10-07 的实际官方检查得到 `60bf5b73041df4eab571f7d9f0a297aeecbf2e0d`，与本次研究分支的原始基线相同。存在新提交时先审查差异和解决合并冲突，再运行后续构建；子模块使用合并后仓库记录的版本。
+2026-10-07 与 2026-10-08 的官方 main 检查均得到 `60bf5b73041df4eab571f7d9f0a297aeecbf2e0d`，该提交已包含在 research 历史中。存在新提交时先审查差异和解决合并冲突，再运行后续构建；子模块使用合并后仓库记录的版本。
 
 构建脚本把源码 revision、是否有未提交改动和递归子模块版本写入镜像标签，并将 image inspect 与构建模式保存到忽略目录 `outputs/docker-builds/<image-id>/`。两种镜像内的 `/opt/ambench-build/` 保留各 Python 环境的依赖版本清单；应用安装和导入检查在构建中执行。重建后重新运行本手册第 6 节全量矩阵、`usage.md` 第 4 节示范采集及其策略数据、训练、推理和闭环检查，使用新的空输出目录。
 

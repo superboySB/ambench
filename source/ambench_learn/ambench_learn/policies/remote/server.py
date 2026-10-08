@@ -57,7 +57,11 @@ class ACTBackend:
         self.config = PreTrainedConfig.from_pretrained(pretrained_dir, cli_overrides=cli_overrides)
         policy_cls = get_policy_class(self.config.type)
         self.policy = policy_cls.from_pretrained(pretrained_dir, config=self.config)
-        self.preprocessor, self.postprocessor = make_pre_post_processors(self.config, pretrained_path=pretrained_dir)
+        self.preprocessor, self.postprocessor = make_pre_post_processors(
+            self.config,
+            pretrained_path=pretrained_dir,
+            preprocessor_overrides={"device_processor": {"device": device}},
+        )
         for step in self.preprocessor.steps:
             if isinstance(step, DeviceProcessorStep):
                 step.device = device

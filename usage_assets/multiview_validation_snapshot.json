@@ -1,0 +1,1268 @@
+{
+  "excluded_infrastructure_runs": [
+    {
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "error": "Recorder did not finish; inspect the log",
+      "name": "expert_frameassembly_seed43_scene",
+      "status": "failed",
+      "task_outcome": "not scored; incomplete recording"
+    }
+  ],
+  "experiment_count": 23,
+  "expert_completed_trials": [
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_cabinetpickplace_seed43_scene",
+      "seed": 43,
+      "steps": 2755,
+      "task_id": "CabinetPickPlace-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_lemonharvesting_seed43_scene",
+      "seed": 43,
+      "steps": 1739,
+      "task_id": "LemonHarvesting-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_ndt_seed43_scene",
+      "seed": 43,
+      "steps": 1204,
+      "task_id": "NDT-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_opendoor_seed43_scene",
+      "seed": 43,
+      "steps": 387,
+      "task_id": "OpenDoor-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_peginhole_seed43_scene",
+      "seed": 43,
+      "steps": 1067,
+      "task_id": "PegInHole-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_pressbutton_seed43_scene",
+      "seed": 43,
+      "steps": 1008,
+      "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_pulllever_seed43_scene",
+      "seed": 43,
+      "steps": 920,
+      "task_id": "PullLever-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_pushslider_seed43_scene",
+      "seed": 43,
+      "steps": 1353,
+      "task_id": "PushSlider-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_rotatevalve_seed43_scene",
+      "seed": 43,
+      "steps": 1039,
+      "task_id": "RotateValve-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_tossball_seed43_scene",
+      "seed": 43,
+      "steps": 634,
+      "task_id": "TossBall-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_wipewindow_seed43_scene",
+      "seed": 43,
+      "steps": 1750,
+      "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "base_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "physical_uaquad_seed43_base",
+      "seed": 43,
+      "steps": 1015,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "base_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "physical_uahexa_seed43_base",
+      "seed": 43,
+      "steps": 1017,
+      "task_id": "PressButton-Am-UAHexa-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "base_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "physical_fahexa_seed43_base",
+      "seed": 43,
+      "steps": 1012,
+      "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "base_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "physical_omnihexa_seed43_base",
+      "seed": 43,
+      "steps": 1006,
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "base_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 23482,
+        "path": "outputs/research/multiview-20261008/experts/results.json",
+        "sha256": "6b9d0ea3a2b758046b8ad8e15fa3fb5e79774f63d7860f4ca1d2e44f9407f1ef"
+      },
+      "name": "expert_base_joint_seed43_base",
+      "seed": 43,
+      "steps": 1012,
+      "task_id": "PressButton-Am-FAHexa-BaseJoint-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 7641,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/results.json",
+        "sha256": "ba75caaaf5ecfd1eac3b46acfa16da6479c817cc4fb7726d023c51af68448bf2"
+      },
+      "name": "expert_frameassembly_seed43_scene",
+      "seed": 43,
+      "steps": 2982,
+      "task_id": "FrameAssembly-Am-EE-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 7641,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/results.json",
+        "sha256": "ba75caaaf5ecfd1eac3b46acfa16da6479c817cc4fb7726d023c51af68448bf2"
+      },
+      "name": "physical_uaquad_seed43_scene",
+      "seed": 43,
+      "steps": 1015,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 7641,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/results.json",
+        "sha256": "ba75caaaf5ecfd1eac3b46acfa16da6479c817cc4fb7726d023c51af68448bf2"
+      },
+      "name": "physical_uahexa_seed43_scene",
+      "seed": 43,
+      "steps": 1017,
+      "task_id": "PressButton-Am-UAHexa-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 7641,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/results.json",
+        "sha256": "ba75caaaf5ecfd1eac3b46acfa16da6479c817cc4fb7726d023c51af68448bf2"
+      },
+      "name": "physical_fahexa_seed43_scene",
+      "seed": 43,
+      "steps": 1012,
+      "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    },
+    {
+      "cameras": [
+        "scene_camera"
+      ],
+      "canonical_validation": "passed",
+      "driver_report": {
+        "bytes": 7641,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/results.json",
+        "sha256": "ba75caaaf5ecfd1eac3b46acfa16da6479c817cc4fb7726d023c51af68448bf2"
+      },
+      "name": "physical_omnihexa_seed43_scene",
+      "seed": 43,
+      "steps": 1006,
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "task_outcome": "success"
+    }
+  ],
+  "expert_initial_state_audit": {
+    "bytes": 9483,
+    "path": "outputs/research/multiview-20261008/expert-source-initial-check.json",
+    "sha256": "e0502661956cd8f1653a504e70ec5f11b16a0af970cc7ec6c3370522b137d1e6"
+  },
+  "expert_initial_state_max_abs_error": 0.0,
+  "full_preview_decode": "54 MP4 full decode gates passed; GIF decode checked by exporter",
+  "gif_count": 54,
+  "limitations": [
+    "Seed 42 expert baseline selects saved successful episodes; seed 43 retained one attempt per recording invocation, with FrameAssembly infrastructure retry disclosed.",
+    "Physical base and scene camera clips are separate trials; two model camera clips share each single rollout.",
+    "Model environment seed and CPU/GPU inference device both differ across trials; one-step checkpoints and one rollout per condition are not benchmark performance or generalization rates.",
+    "NDT geometry is fixed; alternate seed is not an alternate layout."
+  ],
+  "maximum_media_bytes": 460604,
+  "media_limit_bytes": 460800,
+  "minimum_previews_per_experiment": 2,
+  "models": [
+    {
+      "cameras": [
+        "ee_camera",
+        "scene_camera"
+      ],
+      "env_seed": 43,
+      "inference_device": "cpu",
+      "inference_seed": 42,
+      "model": "act",
+      "report": {
+        "bytes": 26319,
+        "path": "outputs/research/multiview-20261008/policy_rpc/act_seed43/eval_summary.json",
+        "sha256": "0da6097f58f3258fd65c4d26ce2144c6d6c466628037fe3c17a68a06e180914c"
+      },
+      "server_log": {
+        "bytes": 27358,
+        "path": "outputs/research/multiview-20261008/policy_logs/act_cpu.log",
+        "sha256": "a7217e6229efefa925855b274a67e35a0e730807af692dc1efdd79b6f567a548"
+      },
+      "status": "completed",
+      "steps": 2399,
+      "task_outcome": "timeout",
+      "training_seed": 42,
+      "training_steps": 1
+    },
+    {
+      "cameras": [
+        "ee_camera",
+        "scene_camera"
+      ],
+      "env_seed": 43,
+      "inference_device": "cpu",
+      "inference_seed": 42,
+      "model": "dp",
+      "report": {
+        "bytes": 26591,
+        "path": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/eval_summary.json",
+        "sha256": "2b62e1687cfaff7df12f9bec13a90407ea3e7ae0243181d04176d018f8b48a2c"
+      },
+      "server_log": {
+        "bytes": 27340,
+        "path": "outputs/research/multiview-20261008/policy_logs/dp_cpu.log",
+        "sha256": "1e68c11fc6d5cb85a4f9d846aba7497b1b0118cb8970e05da0bd33f6d7b40591"
+      },
+      "status": "completed",
+      "steps": 2399,
+      "task_outcome": "timeout",
+      "training_seed": 42,
+      "training_steps": 1
+    },
+    {
+      "cameras": [
+        "ee_camera",
+        "scene_camera"
+      ],
+      "env_seed": 43,
+      "inference_device": "cpu",
+      "inference_seed": 42,
+      "model": "pi0",
+      "report": {
+        "bytes": 25543,
+        "path": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/eval_summary.json",
+        "sha256": "69b628c703df37ffdd71c0ede83bf0e4c2705bc8c0507e1af37f50d9c7bd6b93"
+      },
+      "server_log": {
+        "bytes": 4911,
+        "path": "outputs/research/multiview-20261008/policy_logs/pi0_cpu.log",
+        "sha256": "a6a01947a94476ad3b8e8026f089a36ba6dc628f9755349c95009f3ffbf714b6"
+      },
+      "status": "completed",
+      "steps": 2399,
+      "task_outcome": "timeout",
+      "training_seed": 42,
+      "training_steps": 1
+    },
+    {
+      "cameras": [
+        "ee_camera",
+        "scene_camera"
+      ],
+      "env_seed": 43,
+      "inference_device": "cpu",
+      "inference_seed": 42,
+      "model": "pi05",
+      "report": {
+        "bytes": 25495,
+        "path": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/eval_summary.json",
+        "sha256": "89efd8ce9d86f934913378f82df9202cafefee93b69a931c6811f4d3619d2774"
+      },
+      "server_log": {
+        "bytes": 4914,
+        "path": "outputs/research/multiview-20261008/policy_logs/pi05_cpu.log",
+        "sha256": "729052cd12ff53e2c0659eb9d4b4a7ffc566c9cc7104892c6c8c4ca0c8af0aea"
+      },
+      "status": "completed",
+      "steps": 2399,
+      "task_outcome": "timeout",
+      "training_seed": 42,
+      "training_steps": 1
+    }
+  ],
+  "mp4_count": 54,
+  "offline_browser_validation": {
+    "checks": [
+      "first/end frames and dimensions/duration",
+      "native playback and timeline dragging",
+      "speed/exclusive playback/pause all",
+      "category/outcome/seed/camera filters",
+      "deep anchors open comparisons and clear filters",
+      "desktop and mobile layout"
+    ],
+    "decoded_preview_count": 54,
+    "gallery_sha256": "4252908750d2376ba303aff264d26f09d86d8977c3d68656ec4e998b6e123e98",
+    "javascript_errors": 0,
+    "loading_errors": 0,
+    "manifest_sha256": "99eb454c1bfeb39e8b92e6ab6aeb7f99c444042bc138c461745dbb2a5f7f017e",
+    "report": {
+      "bytes": 28463,
+      "path": "outputs/research-browser-check-20261008/final-offline/result.json",
+      "sha256": "7d56b6a0fff011daa433f7b258741e8d1604295205afc1f10ecb8c8c83c12e4f"
+    },
+    "status": "passed"
+  },
+  "preview_count": 54,
+  "previews": [
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_cabinetpickplace",
+      "name": "expert_cabinetpickplace",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "819c582c76c4227dede3305e85d5137e974749727df2e865a4ae13f3fb448373",
+      "trial_id": "expert_cabinetpickplace_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_frameassembly",
+      "name": "expert_frameassembly",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "8362d541a3ee235542ff59062b8bc775a6098c3a15aae91d627bd5ed74d235bf",
+      "trial_id": "expert_frameassembly_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_lemonharvesting",
+      "name": "expert_lemonharvesting",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "f05bb7a24e36cfdae05b9dbb9ce673b92569a9d391e22d34ec02f254b4e5400c",
+      "trial_id": "expert_lemonharvesting_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_ndt",
+      "name": "expert_ndt",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "2d6edbcd8c87c1a345143d730b0b5edf58844ebe90fcf6b6dfeae27f61bdd41f",
+      "trial_id": "expert_ndt_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_opendoor",
+      "name": "expert_opendoor",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "6f72183160dade523737e11d50402c87bb59e064fe96b24e8a989ff06483026c",
+      "trial_id": "expert_opendoor_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_peginhole",
+      "name": "expert_peginhole",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "257d9cc272aebe28805c30ff6ba17058ba804bb06210a4a5188327373511a21e",
+      "trial_id": "expert_peginhole_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_pressbutton",
+      "name": "expert_pressbutton",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "d747b9ab59ad413f8b1c09d2483b309a24787d9228db4013078a326a939666f7",
+      "trial_id": "expert_pressbutton_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_pulllever",
+      "name": "expert_pulllever",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "459e7c74e28be5de6cfda48e8c6a9a52b48b784188d26391c08daae310735e22",
+      "trial_id": "expert_pulllever_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_pushslider",
+      "name": "expert_pushslider",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "971ae3fc89b34245284849dccedf25ac4b180a4ddcb3a57c77f0d935ed143bb2",
+      "trial_id": "expert_pushslider_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_rotatevalve",
+      "name": "expert_rotatevalve",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "d20e88e02005a8f6fe8b6b1de86ef817a7dd281703dcf3cd7a705e32dc419655",
+      "trial_id": "expert_rotatevalve_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_tossball",
+      "name": "expert_tossball",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "1989b333eeaea1e4a4ec2aeb2decf0d21065fbf44c03e3b14f040143b7406080",
+      "trial_id": "expert_tossball_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_wipewindow",
+      "name": "expert_wipewindow",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 33309,
+        "path": "outputs/research/rebuild-20261007/scripted12_verified.json",
+        "sha256": "d91a320f0c2605e66eb778e747b03355bb34e36368cd2351557941640a2ca5d1"
+      },
+      "source_sha256": "a3e587e60d06b353ad15742baa5e7366a9a106c9c8ea05bef764dd4fc8b1867f",
+      "trial_id": "expert_wipewindow_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "physical_uaquad",
+      "name": "physical_uaquad",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 3886,
+        "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+        "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+      },
+      "source_sha256": "ba8174e134d8e1425cbe8a466acc25c89978213e8ddfb95b0186751d7da41eb2",
+      "trial_id": "physical_uaquad_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "physical_uahexa",
+      "name": "physical_uahexa",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 3886,
+        "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+        "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+      },
+      "source_sha256": "0645a724bc7e6820bc7f6fbb056dbc8cb60b34dd8e3265cd4470a594d1b5c76f",
+      "trial_id": "physical_uahexa_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "physical_fahexa",
+      "name": "physical_fahexa",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 3886,
+        "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+        "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+      },
+      "source_sha256": "285bdb05e53991f1c4738dcde5e2d3786fba0c36ebfa1f10c31cb01cfda9b6a9",
+      "trial_id": "physical_fahexa_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "physical_omnihexa",
+      "name": "physical_omnihexa",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 3886,
+        "path": "outputs/research/rebuild-20261007/scripted_press_physical/results.json",
+        "sha256": "ed917c7f1358db679b492ad10635a0eb487a264b51e47f27afcdc4fc85aa2a3b"
+      },
+      "source_sha256": "ca21bf4dd4556ddd3d768f21ddf008d58b3f441736ebd072dd457f5fe8421731",
+      "trial_id": "physical_omnihexa_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "expert_base_joint",
+      "name": "expert_base_joint",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1332,
+        "path": "outputs/research/rebuild-20261007/scripted_press_base_joint/results.json",
+        "sha256": "20ab1a47bd2d3dcb3ce7bd9185ae4591e3df3384d3030a5f8bf9666844c69bf1"
+      },
+      "source_sha256": "b04265c5152f6530083a94eacf6e36de387cc76d37c6ec648bf319864b363388",
+      "trial_id": "expert_base_joint_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "policy_act_ee",
+      "name": "policy_act_ee",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 26305,
+        "path": "outputs/research/rebuild-20261007/policy_rpc/act_isaac_full20s/eval_summary.json",
+        "sha256": "80d32b72243c6da1ddbad644494a59f94e1e3966b85dfa17823121dcf2ad81c8"
+      },
+      "source_sha256": "ff7e093b43d4499ed1a8cc8fd7f2e64774f890e87031ffe6c02ee7f17f02c95e",
+      "trial_id": "policy_act_ee_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "policy_dp_ee",
+      "name": "policy_dp_ee",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 26570,
+        "path": "outputs/research/rebuild-20261007/policy_rpc/dp_isaac_full20s/eval_summary.json",
+        "sha256": "92e7de2c92ee348617ff24eeb8846c5b47187c0121988dc8b3cc0c6f91566866"
+      },
+      "source_sha256": "6f4e64aef103a0ccdd4b758f5e7657dbf8bdb3a535ea70be6cd7540cd75cd31a",
+      "trial_id": "policy_dp_ee_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "policy_pi0_ee",
+      "name": "policy_pi0_ee",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 26728,
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi0_isaac_full20s/eval_summary.json",
+        "sha256": "7f91a45ead1682873e9daf9f48fc6d4fa627529b38418384eb1f160fb5c0ed45"
+      },
+      "source_sha256": "d034c9c6fdb3c25a5b31a755a0b0dc574ae132456f04467c622392cffc7261db",
+      "trial_id": "policy_pi0_ee_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "policy_pi05_ee",
+      "name": "policy_pi05_ee",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 26741,
+        "path": "outputs/research/rebuild-20261007/policy_rpc/pi05_isaac_full20s/eval_summary.json",
+        "sha256": "78f844a88df1af3e54eaa88a34250a02c9113c3cac424c795dfb998cf87ece3e"
+      },
+      "source_sha256": "80a83031fdc8e61a2c477e907fbe7b49f1739937384952102dec804fd58880bf",
+      "trial_id": "policy_pi05_ee_seed42"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 42,
+      "experiment_id": "uaquad_base_camera",
+      "name": "uaquad_base_camera",
+      "outcome": "SMOKE",
+      "source_report": {
+        "bytes": 1933,
+        "path": "outputs/research/rebuild-20261007/uaquad_base_camera/results.json",
+        "sha256": "92a50ca8d78e3e72eb2610986eda3a5b38e46ae9d05a28d725ed12a1e247f110"
+      },
+      "source_sha256": "57f255454288a7e57c79ce5bcad074504d90c7bcd32d4195b2572c719f121071",
+      "trial_id": "uaquad_base_camera_seed42"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 42,
+      "experiment_id": "mpc_smoke",
+      "name": "mpc_smoke",
+      "outcome": "SMOKE",
+      "source_report": {
+        "bytes": 559,
+        "path": "outputs/research/rebuild-20261007/direct_mpc_relative/records/probe.json",
+        "sha256": "6aabd5bf82057174010ba7664eb86ea3766d6a40c8c2d505d2ece3bf310f80a8"
+      },
+      "source_sha256": "5ac52043a3029a742d2d24be524d57dd30ca6b149a0a0dc5b0f5c1bdad97f863",
+      "trial_id": "mpc_smoke_seed42"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_cabinetpickplace",
+      "name": "expert_cabinetpickplace_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1639,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_cabinetpickplace_seed43_scene/CabinetPickPlaceEEAbsPID/demo-20261008_081628/episode_outcomes.json",
+        "sha256": "6b5f7d86a6c6a761ef3049437b55768adcb3074fba01a939be1117754b3aa2fa"
+      },
+      "source_sha256": "65c08a2f4f1a9d5fba77ecf6783f1fa60948b8d15053ae22409dd8e707962987",
+      "trial_id": "expert_cabinetpickplace_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_lemonharvesting",
+      "name": "expert_lemonharvesting_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1617,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_lemonharvesting_seed43_scene/LemonHarvestingEEAbsPID/demo-20261008_082511/episode_outcomes.json",
+        "sha256": "0ed5d5d5973aee8241fa6a9915f9a130dd653583b37a06d53c519970c9b794de"
+      },
+      "source_sha256": "f7c9fd0691f94d1e6f91581844740b75d429ded21c9b9a433b2bcf066edb82f3",
+      "trial_id": "expert_lemonharvesting_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_ndt",
+      "name": "expert_ndt_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1461,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_ndt_seed43_scene/NDTEEAbsPID/demo-20261008_082633/episode_outcomes.json",
+        "sha256": "6494b61272bf2a5e16ca5a23c1badf9833c8c9ca4a70bd516e848726f52de216"
+      },
+      "source_sha256": "a34f1341e313a17fb2af6ecb7d4615558d3d900b3492c32a43d8734a81f1fde8",
+      "trial_id": "expert_ndt_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_opendoor",
+      "name": "expert_opendoor_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1520,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_opendoor_seed43_scene/OpenDoorEEAbsPID/demo-20261008_082745/episode_outcomes.json",
+        "sha256": "7bae4f85206f67330ea28865af8ffe0e5b2cea24b8a000bcf5ae14ace7e9dadb"
+      },
+      "source_sha256": "f66fb02bcc66dfd07fa7e553795e73babbf9cc6b575c94d91ef1f9d117a7bb29",
+      "trial_id": "expert_opendoor_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_peginhole",
+      "name": "expert_peginhole_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1497,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_peginhole_seed43_scene/PegInHoleEEAbsPID/demo-20261008_082816/episode_outcomes.json",
+        "sha256": "764ab88c5ee7fba100df8a5f56d7b2df049521d1c359a1e87a6ae340b5becb0d"
+      },
+      "source_sha256": "79f2c614a81344a27c541ef1f145ec4023ef06ad912025bda149b90c2fb9f108",
+      "trial_id": "expert_peginhole_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_pressbutton",
+      "name": "expert_pressbutton_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1536,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_pressbutton_seed43_scene/PressButtonEEAbsPID/demo-20261008_082912/episode_outcomes.json",
+        "sha256": "2f7c0ff82a9bf35d328cdd5dbca38c994b7dd29549358e227950dfe9545b4941"
+      },
+      "source_sha256": "fa5d55517dbadcf3283f36a54a445f5e2cbd9a572cf7a467aa224ce37415382a",
+      "trial_id": "expert_pressbutton_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_pulllever",
+      "name": "expert_pulllever_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1553,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_pulllever_seed43_scene/PullLeverEEAbsPID/demo-20261008_083002/episode_outcomes.json",
+        "sha256": "9fe30aafe176c7dd0642d20f63dbcda2aaf42e5e2b34a4245c5fc8eb518e725f"
+      },
+      "source_sha256": "d3e7ab48d4453ee2b3bd360323e76da018adf1a51a98d64af45af5c8c74c528e",
+      "trial_id": "expert_pulllever_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_pushslider",
+      "name": "expert_pushslider_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1466,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_pushslider_seed43_scene/PushSliderEEAbsPID/demo-20261008_083101/episode_outcomes.json",
+        "sha256": "1be3cd7fa9bc815e72485f98f656802fb0f2ab3b7c2e8053852d64cc00ff78de"
+      },
+      "source_sha256": "771549e16ed9709592e6187b7a251fbca9bdec991695dfc9b0598ba448800281",
+      "trial_id": "expert_pushslider_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_rotatevalve",
+      "name": "expert_rotatevalve_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1500,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_rotatevalve_seed43_scene/RotateValveEEAbsPID/demo-20261008_083204/episode_outcomes.json",
+        "sha256": "41afc96ad57b37740afc23b886dc55a9bcfb39c9aee54618004aa8e0aaea5370"
+      },
+      "source_sha256": "8af982deed3b2e99fef4936c8fb0396b187fbb270aafcaa2c0afe457de269923",
+      "trial_id": "expert_rotatevalve_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_tossball",
+      "name": "expert_tossball_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1657,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_tossball_seed43_scene/TossBallEEAbsPID/demo-20261008_083257/episode_outcomes.json",
+        "sha256": "62881979496730b7b0a01132be037be21ea30fabafdf0c92cc886fff3ff32b4b"
+      },
+      "source_sha256": "fcd18a75f6a0e2fa43cfb2486410ce34f96476ed492789a8337c0c917940336d",
+      "trial_id": "expert_tossball_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_wipewindow",
+      "name": "expert_wipewindow_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1993,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_wipewindow_seed43_scene/WipeWindowEEAbsPID/demo-20261008_083335/episode_outcomes.json",
+        "sha256": "6cb0726a1a01ef892a37443a1b80807529e2c89ad5f688a941de1da43b19821e"
+      },
+      "source_sha256": "66d61edd52ddb19df8477a0c9c4ae0a78d3cf54b29103f672e7ac0f14d923cde",
+      "trial_id": "expert_wipewindow_seed43_scene"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_uaquad",
+      "name": "physical_uaquad_seed43_base",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1914,
+        "path": "outputs/research/multiview-20261008/experts/datasets/physical_uaquad_seed43_base/PressButtonUAQuadAbsPID/demo-20261008_083448/episode_outcomes.json",
+        "sha256": "4cb48e44a75782922b88262b9c3b4788d5c00e1a2ef2eddab8304817b5b82b1d"
+      },
+      "source_sha256": "f224193aa004a363e39b69b71fed5f7104857cee0f0e9d771bc9052d57103217",
+      "trial_id": "physical_uaquad_seed43_base"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_uahexa",
+      "name": "physical_uahexa_seed43_base",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1817,
+        "path": "outputs/research/multiview-20261008/experts/datasets/physical_uahexa_seed43_base/PressButtonUAHexaAbsPID/demo-20261008_083557/episode_outcomes.json",
+        "sha256": "d8d2633c94f879a8fbde6df37333a8103739adebf1cbd1c809a0fac263b0f526"
+      },
+      "source_sha256": "95b2be7dfc9ff35a6457b34296ad0ae9d2b0eb4fc27bc0d6b93030bfc1a050de",
+      "trial_id": "physical_uahexa_seed43_base"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_fahexa",
+      "name": "physical_fahexa_seed43_base",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1829,
+        "path": "outputs/research/multiview-20261008/experts/datasets/physical_fahexa_seed43_base/PressButtonFAHexaAbsPID/demo-20261008_083705/episode_outcomes.json",
+        "sha256": "93d4ab49fac4e6775abe0012a3363e501b9c802f57b71796ffffed470665c59f"
+      },
+      "source_sha256": "e92ceffc403e2e34e823dde5d9254a7ea26c1231f4dc60dc602d9f1d5091ee96",
+      "trial_id": "physical_fahexa_seed43_base"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_omnihexa",
+      "name": "physical_omnihexa_seed43_base",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1850,
+        "path": "outputs/research/multiview-20261008/experts/datasets/physical_omnihexa_seed43_base/PressButtonOmniHexaAbsPID/demo-20261008_083813/episode_outcomes.json",
+        "sha256": "8cc3bf686df868111206df541a1e04911431d6da8cdf7069923e15112d88b44c"
+      },
+      "source_sha256": "23f81cd7e6a0e72b91d671e30ad5e2cb41dcc27cb2d9352bcbb7bddc547315b3",
+      "trial_id": "physical_omnihexa_seed43_base"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_base_joint",
+      "name": "expert_base_joint_seed43_base",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1839,
+        "path": "outputs/research/multiview-20261008/experts/datasets/expert_base_joint_seed43_base/PressButtonFAHexaBaseJointAbsPID/demo-20261008_083919/episode_outcomes.json",
+        "sha256": "64e0e781f25e0e1781b74f60f84b77d81cf69d045f21d330b483caf9d9391be7"
+      },
+      "source_sha256": "44c44e88fad4fd911d9d429bf0a9e865852598ed1a14ca7554d250bab9cc5bd8",
+      "trial_id": "expert_base_joint_seed43_base"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "expert_frameassembly",
+      "name": "expert_frameassembly_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1592,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/expert_frameassembly_seed43_scene/FrameAssemblyEEAbsPID/demo-20261008_084042/episode_outcomes.json",
+        "sha256": "3aca7cba43ab4050f4d6a228c68f197d468fa3e686d43a225e74b3887766e80c"
+      },
+      "source_sha256": "bcedc3cd9ed2c34c8b05c0d23495283474232bbb8e2327f995848b7b9153c80d",
+      "trial_id": "expert_frameassembly_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_uaquad",
+      "name": "physical_uaquad_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1916,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_uaquad_seed43_scene/PressButtonUAQuadAbsPID/demo-20261008_084243/episode_outcomes.json",
+        "sha256": "8f186fb63a81e20887ab583226d3b51ad421acef9fbf788e7c809e550371e0d5"
+      },
+      "source_sha256": "3e6779519b30fe0d6d1d66becd59691555915f3dc968b7d33ce3d48c8fabae59",
+      "trial_id": "physical_uaquad_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_uahexa",
+      "name": "physical_uahexa_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1819,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_uahexa_seed43_scene/PressButtonUAHexaAbsPID/demo-20261008_084356/episode_outcomes.json",
+        "sha256": "e551b55d4cea576fea719b949677c6f8e8c663192b48c8bb3c805bbddccb38ed"
+      },
+      "source_sha256": "1694fb8376cdb62bd27eee218840ec54846f0c055a81670e3b195b7ca3fa2f3e",
+      "trial_id": "physical_uahexa_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_fahexa",
+      "name": "physical_fahexa_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1831,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_fahexa_seed43_scene/PressButtonFAHexaAbsPID/demo-20261008_084508/episode_outcomes.json",
+        "sha256": "d77b524a12a4992c2f70ce6e4dba2d12566e6f26984555cac7e485d2a533e441"
+      },
+      "source_sha256": "03865fab42ce39706b342d143a5bbc5e3afe893317356e30b2e392c235dd686c",
+      "trial_id": "physical_fahexa_seed43_scene"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "physical_omnihexa",
+      "name": "physical_omnihexa_seed43_scene",
+      "outcome": "SUCCESS",
+      "source_report": {
+        "bytes": 1852,
+        "path": "outputs/research/multiview-20261008/frame_retry_and_aircraft_scene/datasets/physical_omnihexa_seed43_scene/PressButtonOmniHexaAbsPID/demo-20261008_084620/episode_outcomes.json",
+        "sha256": "2dd36a1c0c2f1345b045d08a1161d3ebbcea7f94ee748ebe9dc4fd69f3a21621"
+      },
+      "source_sha256": "d5cee391734be2e7ee573351f9e35e36ed06f9d4de08bafa000fa77d21b60e1f",
+      "trial_id": "physical_omnihexa_seed43_scene"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_act_ee",
+      "name": "policy_act_ee_seed43_cpu_ee",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 26319,
+        "path": "outputs/research/multiview-20261008/policy_rpc/act_seed43/eval_summary.json",
+        "sha256": "0da6097f58f3258fd65c4d26ce2144c6d6c466628037fe3c17a68a06e180914c"
+      },
+      "source_sha256": "9b609559859edbc3f1acf7117184f6b1606cd53a4b1df1f8d8682252f481ea39",
+      "trial_id": "policy_act_ee_seed43_cpu"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_act_ee",
+      "name": "policy_act_ee_seed43_cpu_scene",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 26319,
+        "path": "outputs/research/multiview-20261008/policy_rpc/act_seed43/eval_summary.json",
+        "sha256": "0da6097f58f3258fd65c4d26ce2144c6d6c466628037fe3c17a68a06e180914c"
+      },
+      "source_sha256": "ff83d273d63628f1935d988a7585507098fdcb0a6e3e02edfa2d53415220f2cf",
+      "trial_id": "policy_act_ee_seed43_cpu"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_dp_ee",
+      "name": "policy_dp_ee_seed43_cpu_ee",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 26591,
+        "path": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/eval_summary.json",
+        "sha256": "2b62e1687cfaff7df12f9bec13a90407ea3e7ae0243181d04176d018f8b48a2c"
+      },
+      "source_sha256": "0ed033eaa7ebab6a4cad608976cc81a45a55f2089083016a858a9f01eabc83d6",
+      "trial_id": "policy_dp_ee_seed43_cpu"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_dp_ee",
+      "name": "policy_dp_ee_seed43_cpu_scene",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 26591,
+        "path": "outputs/research/multiview-20261008/policy_rpc/dp_seed43/eval_summary.json",
+        "sha256": "2b62e1687cfaff7df12f9bec13a90407ea3e7ae0243181d04176d018f8b48a2c"
+      },
+      "source_sha256": "b56492af8318b5e93b709eb2d12a592fa5d18b861ed668edc024d92fbc821bca",
+      "trial_id": "policy_dp_ee_seed43_cpu"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_pi0_ee",
+      "name": "policy_pi0_ee_seed43_cpu_ee",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 25543,
+        "path": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/eval_summary.json",
+        "sha256": "69b628c703df37ffdd71c0ede83bf0e4c2705bc8c0507e1af37f50d9c7bd6b93"
+      },
+      "source_sha256": "773c993d21a3ff2ec7912fbe3c7631a91e3e58c9668cf827d7f00355e3517065",
+      "trial_id": "policy_pi0_ee_seed43_cpu"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_pi0_ee",
+      "name": "policy_pi0_ee_seed43_cpu_scene",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 25543,
+        "path": "outputs/research/multiview-20261008/policy_rpc/pi0_seed43/eval_summary.json",
+        "sha256": "69b628c703df37ffdd71c0ede83bf0e4c2705bc8c0507e1af37f50d9c7bd6b93"
+      },
+      "source_sha256": "6a78be30e06b43cd2cd5f79a90788fc9ace4176ced2163a1ac49364e269c5b11",
+      "trial_id": "policy_pi0_ee_seed43_cpu"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 43,
+      "experiment_id": "uaquad_base_camera",
+      "name": "uaquad_base_camera_seed43_ee_camera",
+      "outcome": "SMOKE",
+      "source_report": {
+        "bytes": 1926,
+        "path": "outputs/research/multiview-20261008/smoke/uaquad_ee/results.json",
+        "sha256": "d0d4c6690f17e87ac421e943bf193aec2ea8208e647d4ef4d35d992db38eeea6"
+      },
+      "source_sha256": "a8780d876a0ff7742525c0208eb209d67c55611983ffc47e3d003bb4abe479cd",
+      "trial_id": "uaquad_base_camera_seed43"
+    },
+    {
+      "camera": "base_camera",
+      "env_seed": 43,
+      "experiment_id": "mpc_smoke",
+      "name": "mpc_smoke_seed43_base_camera",
+      "outcome": "SMOKE",
+      "source_report": {
+        "bytes": 1925,
+        "path": "outputs/research/multiview-20261008/smoke/mpc_base/results.json",
+        "sha256": "1207ae78ea77881d38f5d7b647d67a8c50febf6836d2ec268720dd6e9bedae9d"
+      },
+      "source_sha256": "c752ee5340d63f03d59558ff2d167ef99bde0b73c63aca97e5c0f6e61b811ecd",
+      "trial_id": "mpc_smoke_seed43"
+    },
+    {
+      "camera": "ee_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_pi05_ee",
+      "name": "policy_pi05_ee_seed43_cpu_ee",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 25495,
+        "path": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/eval_summary.json",
+        "sha256": "89efd8ce9d86f934913378f82df9202cafefee93b69a931c6811f4d3619d2774"
+      },
+      "source_sha256": "4fdf16cd5fc3da12d3b91eda74972d09ba5f9b15a1e979dbf432ee9b83508f10",
+      "trial_id": "policy_pi05_ee_seed43_cpu"
+    },
+    {
+      "camera": "scene_camera",
+      "env_seed": 43,
+      "experiment_id": "policy_pi05_ee",
+      "name": "policy_pi05_ee_seed43_cpu_scene",
+      "outcome": "TIMEOUT (0/1)",
+      "source_report": {
+        "bytes": 25495,
+        "path": "outputs/research/multiview-20261008/policy_rpc/pi05_seed43/eval_summary.json",
+        "sha256": "89efd8ce9d86f934913378f82df9202cafefee93b69a931c6811f4d3619d2774"
+      },
+      "source_sha256": "64b80e334ff6eab40493c8dd69f786cf019b6bbdd336020e7fce5ecb95fe9b18",
+      "trial_id": "policy_pi05_ee_seed43_cpu"
+    }
+  ],
+  "run_date": "2026-10-08",
+  "smoke": {
+    "mpc_base": {
+      "bytes": 1925,
+      "path": "outputs/research/multiview-20261008/smoke/mpc_base/results.json",
+      "sha256": "1207ae78ea77881d38f5d7b647d67a8c50febf6836d2ec268720dd6e9bedae9d"
+    },
+    "uaquad_ee": {
+      "bytes": 1926,
+      "path": "outputs/research/multiview-20261008/smoke/uaquad_ee/results.json",
+      "sha256": "d0d4c6690f17e87ac421e943bf193aec2ea8208e647d4ef4d35d992db38eeea6"
+    }
+  },
+  "source_audit": "all source/report hashes, outcome selectors, condition selectors and fixed metadata verified"
+}

@@ -10,7 +10,9 @@ of ``source_video``, ``source_parquet``, ``session_root_path``, ``image_dir`` or
 ``images_glob``. ``session_root_path`` selects a session directory from the report
 and reads its single LeRobot data shard. Non-video sources require ``source_fps``.
 Optional keys include ``title``, ``outcome_labels``, ``image_column``, ``font_path``
-and ``notes``. Relative paths use ``--source-root``.
+and ``notes``. ``metadata`` stores fixed experiment conditions;
+``metadata_paths`` reads conditions from the source report. Only declared
+condition fields are accepted. Relative paths use ``--source-root``.
 
 Example outcome selector: ["rollouts", 0, "termination_reason"]. Labels are taken
 from that report value; an unknown value fails instead of guessing an outcome.
@@ -38,6 +40,29 @@ import pyarrow.parquet as pq
 from PIL import Image, ImageDraw, ImageFont
 
 OUTCOME_LABELS = {"success": "SUCCESS", "timeout": "TIMEOUT", "passed": "SMOKE"}
+CONDITION_FIELDS = {
+    "experiment_id",
+    "category",
+    "trial_id",
+    "camera",
+    "task_id",
+    "env_seed",
+    "inference_seed",
+    "inference_device",
+    "training_seed",
+    "training_steps",
+    "training_reference",
+    "episode_index",
+    "steps",
+    "action_semantics",
+    "episode_length_s",
+    "simulation_duration_s",
+    "initial_observation",
+    "source_run_date",
+    "source_time_basis",
+    "geometry_randomized",
+    "attempt_selection",
+}
 
 
 def sha256(path: Path) -> str:
@@ -314,7 +339,8 @@ def main() -> int:
     manifest = []
     for spec in specs:
         report_path = source_root / spec["source_report"]
-        outcome_value = json.loads(report_path.read_text())
+        report = json.loads(report_path.read_text())
+        outcome_value = report
         for key in spec["outcome_path"]:
             outcome_value = outcome_value[key]
         labels = spec.get("outcome_labels", OUTCOME_LABELS)
@@ -322,6 +348,15 @@ def main() -> int:
         if label_key not in labels:
             raise ValueError(f"{spec['name']}: no outcome label for report value {outcome_value!r}")
         outcome = labels[label_key]
+        conditions = dict(spec.get("metadata", {}))
+        for name, selector in spec.get("metadata_paths", {}).items():
+            value = report
+            for key in selector:
+                value = value[key]
+            conditions[name] = value
+        unknown_fields = set(conditions) - CONDITION_FIELDS
+        if unknown_fields:
+            raise ValueError(f"{spec['name']}: unsupported condition metadata: {sorted(unknown_fields)}")
         frame_limit = max(2, round((args.duration_s - args.final_hold_s) * args.fps))
         frames, provenance = load_frames(spec, source_root, frame_limit)
         font_path = source_root / spec["font_path"] if spec.get("font_path") else None
@@ -426,6 +461,7 @@ def main() -> int:
         manifest.append({
             **provenance,
             **mp4_metadata,
+            **conditions,
             "name": spec["name"],
             "title": spec.get("title", spec["name"]),
             "outcome": outcome,

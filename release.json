@@ -1,12 +1,12 @@
 {
-  "artifact_bytes": 143225683,
+  "artifact_bytes": 143228333,
   "artifact_file_count": 635,
   "experiment_count": 65,
-  "generated_at_utc": "2026-10-09T09:37:13.467443+00:00",
+  "generated_at_utc": "2026-10-09T09:45:47.677289+00:00",
   "gif_count": 306,
   "maximum_file_bytes": 9411329,
   "mp4_count": 306,
-  "payload_bytes": 143105677,
+  "payload_bytes": 143108327,
   "payload_files": [
     {
       "bytes": 0,
@@ -3129,9 +3129,9 @@
       "sha256": "06909506a5e8456366ae2ebab215d690156f00ceb07f145c5e36efdcf4d83168"
     },
     {
-      "bytes": 109410,
+      "bytes": 112060,
       "path": "tilting/validation.json",
-      "sha256": "0d3e465bb17f55d054408956919a06b922160bc5156a98379eca8d5094c49aa1"
+      "sha256": "698c5ef25e331f334090a2db945e1d591f7e2f65a75b4090245e6fc244d6dc7a"
     },
     {
       "bytes": 1021430,
@@ -3179,9 +3179,9 @@
       "sha256": "23ed7f5df62b0d07adb45cd6910b5bb9f062e0cdcce87c29df30f3ba9140c649"
     }
   ],
-  "payload_sha256": "7a19476236a3b2a68f7750cd2b8156aa41a2254acb07747ca86689dc2972556e",
+  "payload_sha256": "c2bad675d5c0d70bfc38fff43f4d927f3b81baeb3f17d40234a6d73c5ea291e6",
   "preview_count": 306,
-  "research_commit": "aea900e4000cb85d3e8f774108552ea2bb1b6282",
+  "research_commit": "ee291c85610a1cca4545c784e5c60afcc8629527",
   "source_file_count": 306,
   "source_manifest_sha256": "ea0c34ce1b09006085db9662e9e0a7d1e4336b9ea1b95f94323af2f0d6cadce4",
   "source_worktree_clean": true

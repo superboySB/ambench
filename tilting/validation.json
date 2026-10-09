@@ -97,8 +97,27 @@
     "verified_at_utc": "2026-10-09T09:27:13.095780+00:00"
   },
   "browser_online": {
-    "reason": "Actual final browser evidence not supplied",
-    "status": "pending"
+    "browser_version": {
+      "jsVersion": "14.3.127.17",
+      "product": "Chrome/143.0.7499.169",
+      "protocolVersion": "1.3",
+      "revision": "@164b20aab62509dad21fd46383951aeec084ad1e",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/143.0.0.0 Safari/537.36"
+    },
+    "checks_passed": 314,
+    "evidence": {
+      "bytes": 69224,
+      "path": "outputs/tilting-ui-check/final-browser-online.json",
+      "sha256": "28245b687bae4fb5c0ada6335fbd06395e1c02cd696cc7f1e3acfbaf38a2152a"
+    },
+    "general_errors": [],
+    "general_manifest_sha256": "ea0c34ce1b09006085db9662e9e0a7d1e4336b9ea1b95f94323af2f0d6cadce4",
+    "loaded_document_sha256": "ebb951df7d1ce45b77abd9a27097b01679823aacb38586d9670d2d1959b47fa9",
+    "media_decoded_and_played": 126,
+    "status": "passed",
+    "topic_errors": [],
+    "url": "https://zipengdai.com/ambench/tilting/",
+    "verified_at_utc": "2026-10-09T09:41:47.678203+00:00"
   },
   "checks": [
     {
@@ -151,11 +170,11 @@
     },
     {
       "name": "browser_online",
-      "status": "pending"
+      "status": "passed"
     },
     {
       "name": "public_access",
-      "status": "pending"
+      "status": "passed"
     }
   ],
   "cpu_column_loading": {
@@ -968,8 +987,45 @@
     "status": "passed"
   },
   "public_access": {
-    "reason": "Final anonymous payload/SHA/MIME/Range evidence not supplied",
-    "status": "pending"
+    "artifact_files_derived": 635,
+    "downloaded_payload_bytes": 143105677,
+    "evidence": {
+      "bytes": 270253,
+      "path": "outputs/research/tilting-20261009/public-payload-first.json",
+      "sha256": "52022704fc0eb8535b74da2b2d0a91c9b84135e8e927fe4fc03fae8c09ddefa1"
+    },
+    "github_embedded_gifs_verified": 21,
+    "github_markdown_sha256": "b1e6016aa2c5846002e0868d61e6737561068ffc8899c4596310131ea01e6949",
+    "mp4_range_request": {
+      "accept_ranges": "bytes",
+      "bytes": 1024,
+      "content_range": "bytes 0-1023/107491",
+      "http_status": 206,
+      "mime": "video/mp4",
+      "path": "animations/tilting_policy_act_transfer_seed61_scene_camera.mp4",
+      "prefix_sha256": "73722fec71e56ec15051f8f2c0adf2c4f8399b5b79d55c30e6f8337fef3dd4e9",
+      "status": "passed"
+    },
+    "release": {
+      "artifact_bytes": 143225683,
+      "artifact_files": 635,
+      "payload_sha256": "7a19476236a3b2a68f7750cd2b8156aa41a2254acb07747ca86689dc2972556e",
+      "research_commit": "aea900e4000cb85d3e8f774108552ea2bb1b6282",
+      "sha256": "f0af27fde019815f147da786b680cca5146882f9b4435bac3d34d4dc53598bca",
+      "status": "passed",
+      "url": "https://zipengdai.com/ambench/release.json?release=aea900e4000cb85d3e8f774108552ea2bb1b6282&verification=1791538822852401065"
+    },
+    "snapshot_limit": "All listed published bytes were verified. This newly assembled validation.json is a subsequent snapshot and requires republishing to become public; no self SHA is claimed.",
+    "status": "passed",
+    "topic_html_sha256": "ebb951df7d1ce45b77abd9a27097b01679823aacb38586d9670d2d1959b47fa9",
+    "validation_self_snapshot": [
+      {
+        "path": "tilting/validation.json",
+        "published_bytes": 109410,
+        "published_sha256": "0d3e465bb17f55d054408956919a06b922160bc5156a98379eca8d5094c49aa1"
+      }
+    ],
+    "verified_payload_files": 634
   },
   "recording_recovery": {
     "budget_decision": {
@@ -1485,7 +1541,7 @@
       "sha256": "40f9d0b7bca019bca1e6329f3db9fb214caaa2f36e62cf0f3674830a1c472282"
     },
     "ordinary_git_files": {
-      "checked": 1064,
+      "checked": 1065,
       "largest": [
         {
           "bytes": 28728079,
@@ -1514,7 +1570,7 @@
       "strict_maximum_bytes": 100000000
     },
     "source_snapshot": {
-      "base_git_commit": "042e2f2ec079505ab9a386634c419d9ce564a482",
+      "base_git_commit": "aea900e4000cb85d3e8f774108552ea2bb1b6282",
       "claim": "Generated only when root invokes final assembly after code freeze; historical execution hashes remain distinct.",
       "file_count": 186,
       "files": [
@@ -2272,7 +2328,7 @@
       "sha256": "3d931bb525434ffbecc8d1542b43cfce593e9812dba53b50a075af3c4c768961"
     }
   },
-  "status": "local_verified_online_pending",
+  "status": "passed",
   "training": {
     "canonical_dataset": {
       "action_dim": 8,
@@ -2353,13 +2409,13 @@
     ],
     "status": "passed"
   },
-  "updated_at_utc": "2026-10-09T09:30:04.736490+00:00",
+  "updated_at_utc": "2026-10-09T09:43:02.286638+00:00",
   "upstream": {
     "branch": "main",
     "checked_at_utc": "2026-10-09T09:19:15.962541+00:00",
     "claim_limit": "This preserves the actual git ls-remote observation at the recorded time and independently verifies local ancestry at assembly. It does not claim the remote has remained unchanged after that observation.",
     "commit": "60bf5b73041df4eab571f7d9f0a297aeecbf2e0d",
-    "current_head": "042e2f2ec079505ab9a386634c419d9ce564a482",
+    "current_head": "aea900e4000cb85d3e8f774108552ea2bb1b6282",
     "current_head_contains_commit": true,
     "evidence": {
       "bytes": 232,

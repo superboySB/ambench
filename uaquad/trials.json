@@ -1,0 +1,4309 @@
+{
+  "coverage": {
+    "duplicate_names": [],
+    "expected_count": 30,
+    "extra_names": [],
+    "invalid_names": [],
+    "missing_names": [],
+    "verified_count": 30
+  },
+  "expected_specs": [
+    {
+      "path": "usage_assets/uaquad/recording_specs.json",
+      "sha256": "c606cefcea10a352231519fe33b5c9fc6cbc61660a5532c40cafd26e43eb43a9"
+    }
+  ],
+  "metric_basis": {
+    "attitude": "WXYZ base quaternion, standard intrinsic XYZ roll/pitch/yaw in degrees",
+    "ee_target_error": "observation_before_step.ee_pos minus same-step 8D absolute EE action xyz",
+    "motor_limits": "per-robot episode metadata, or AST-parsed checked-in robot specification for old sessions",
+    "position_frame": "environment_origin_relative_m"
+  },
+  "reports": [
+    {
+      "path": "outputs/research/uaquad-20261009/press-initial/results.json",
+      "sha256": "0581f4e3635c8c4b31509bcd5ec74f22b10ad131e35ba040f54a3068623d080d"
+    },
+    {
+      "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+      "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+    },
+    {
+      "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+      "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+    }
+  ],
+  "schema_version": 1,
+  "trials": [
+    {
+      "base": {
+        "end_pos_m": [
+          1.4768129587173462,
+          0.012811094522476196,
+          1.4289299249649048
+        ],
+        "path_length_m": 1.562331833817534,
+        "pitch_deg": {
+          "max": 9.02598558688475,
+          "max_abs": 9.02598558688475,
+          "min": -7.33796775088051
+        },
+        "position_bounds_m": [
+          [
+            -0.0003136284649372101,
+            1.4768129587173462
+          ],
+          [
+            -0.0028637018986046314,
+            0.012984368950128555
+          ],
+          [
+            0.998845636844635,
+            1.4289299249649048
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.0733249280984873,
+          "max_abs": 1.0733249280984873,
+          "min": -0.8584025267415215
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.08022815659842787,
+          "max_abs": 0.18444857037673457,
+          "min": -0.18444857037673457
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "field": "BaseEnvCfg.enable_saturation",
+          "kind": "base_env_source_ast_fallback",
+          "path": "source/ambench/ambench/tasks/base/base_env_cfg.py",
+          "sha256": "83e79a6cd9964dc7ea5cee9379cec8fc12e4407502a3cc82a8bbfdfca378fbad"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7231777906417847,
+          0.0019748564809560776,
+          1.113046407699585
+        ],
+        "path_length_m": 1.7687894658533099,
+        "position_bounds_m": [
+          [
+            0.24719233810901642,
+            1.7231777906417847
+          ],
+          [
+            -0.018525414168834686,
+            0.0020447056740522385
+          ],
+          [
+            0.6748663187026978,
+            1.12775456905365
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.07455608427898408,
+          "rms": 0.025051902860057946
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 4,
+        "below_min_step_count": 27,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 34.957366943359375,
+        "min_thrust_n": -12.730949401855469,
+        "negative_step_count": 27,
+        "negative_step_fraction": 0.0263671875,
+        "out_of_limits_step_count": 28,
+        "out_of_limits_step_fraction": 0.02734375,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pressbutton_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "task_id_token_fallback",
+        "robot_id": "ua_quad",
+        "robot_id_source": "task_id_token_fallback",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 8.533333333333333,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/press-initial/datasets/uaquad_pressbutton_seed51/PressButtonUAQuadAbsPID/demo-20261009_021614/episode_outcomes.json",
+          "sha256": "338459718c27e92f0824be60fcc41ac9e2841027ef3f9919cb14e3ce525d06e2"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/press-initial/results.json",
+          "sha256": "0581f4e3635c8c4b31509bcd5ec74f22b10ad131e35ba040f54a3068623d080d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/press-initial/datasets/uaquad_pressbutton_seed51/PressButtonUAQuadAbsPID/demo-20261009_021614/telemetry.jsonl",
+          "sha256": "15a985ee5999d061b6bc21af1d00c1db863a7764947ebf6e7d50e7e2c7c10bbe"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1024,
+      "success": true,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1024,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 77.837
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.618984580039978,
+          -0.1587211787700653,
+          1.5246018171310425
+        ],
+        "path_length_m": 1.7271811505806551,
+        "pitch_deg": {
+          "max": 6.623711607335059,
+          "max_abs": 6.623711607335059,
+          "min": -5.211203011646033
+        },
+        "position_bounds_m": [
+          [
+            -0.00032196566462516785,
+            1.618984580039978
+          ],
+          [
+            -0.1587439328432083,
+            1.0339757656912846e-25
+          ],
+          [
+            0.9987944960594177,
+            1.5246018171310425
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.100559233093931,
+          "max_abs": 1.100559233093931,
+          "min": -0.5089275155386732
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.07563298592276517,
+          "max_abs": 0.20878464591963922,
+          "min": -0.20878464591963922
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "field": "BaseEnvCfg.enable_saturation",
+          "kind": "base_env_source_ast_fallback",
+          "path": "source/ambench/ambench/tasks/base/base_env_cfg.py",
+          "sha256": "83e79a6cd9964dc7ea5cee9379cec8fc12e4407502a3cc82a8bbfdfca378fbad"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.8673133850097656,
+          -0.16958937048912048,
+          1.2103525400161743
+        ],
+        "path_length_m": 1.873369754986966,
+        "position_bounds_m": [
+          [
+            0.2550286054611206,
+            1.8673133850097656
+          ],
+          [
+            -0.17002680897712708,
+            -0.007095868233591318
+          ],
+          [
+            0.6830740571022034,
+            1.2274271249771118
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.05978639686901287,
+          "rms": 0.020209381366050223
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 4,
+        "below_min_step_count": 7,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 35.02308654785156,
+        "min_thrust_n": -14.225959777832031,
+        "negative_step_count": 7,
+        "negative_step_fraction": 0.006910167818361303,
+        "out_of_limits_step_count": 8,
+        "out_of_limits_step_fraction": 0.007897334649555774,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pressbutton_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "task_id_token_fallback",
+        "robot_id": "ua_quad",
+        "robot_id_source": "task_id_token_fallback",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 8.441666666666666,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_seed52/PressButtonUAQuadAbsPID/demo-20261009_021823/episode_outcomes.json",
+          "sha256": "da2f9904c64f5773c8d88d981f544d6635c9e9273eced7ea0a40bfa25bf2d352"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_seed52/PressButtonUAQuadAbsPID/demo-20261009_021823/telemetry.jsonl",
+          "sha256": "524c8a8612d6284adc34be62b47fcc4bbb7cf46f3ceaa799058a214d52e55373"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1013,
+      "success": true,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1013,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 80.637
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.537312388420105,
+          0.046835027635097504,
+          1.7672059535980225
+        ],
+        "path_length_m": 1.8553038486738367,
+        "pitch_deg": {
+          "max": 15.71745906178157,
+          "max_abs": 15.71745906178157,
+          "min": -4.315429927025633
+        },
+        "position_bounds_m": [
+          [
+            -0.0001538395881652832,
+            1.537312388420105
+          ],
+          [
+            -0.0001915705215651542,
+            0.05455625802278519
+          ],
+          [
+            1.0,
+            1.7672059535980225
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.8050606234555359,
+          "max_abs": 1.863404956679541,
+          "min": -1.863404956679541
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.11582325711847265,
+          "max_abs": 0.3229402631112827,
+          "min": -0.3229402631112827
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "field": "BaseEnvCfg.enable_saturation",
+          "kind": "base_env_source_ast_fallback",
+          "path": "source/ambench/ambench/tasks/base/base_env_cfg.py",
+          "sha256": "83e79a6cd9964dc7ea5cee9379cec8fc12e4407502a3cc82a8bbfdfca378fbad"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.5473506450653076,
+          0.030869092792272568,
+          1.3697718381881714
+        ],
+        "path_length_m": 2.259624773147668,
+        "position_bounds_m": [
+          [
+            0.019523905590176582,
+            1.5612109899520874
+          ],
+          [
+            -0.013507072813808918,
+            0.048523545265197754
+          ],
+          [
+            0.6282837986946106,
+            1.3697718381881714
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.2657338635235044,
+          "rms": 0.0608290436170637
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 34,
+        "below_min_step_count": 63,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 55.14971923828125,
+        "min_thrust_n": -30.260784149169922,
+        "negative_step_count": 63,
+        "negative_step_fraction": 0.06638566912539515,
+        "out_of_limits_step_count": 68,
+        "out_of_limits_step_fraction": 0.07165437302423604,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pulllever_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "task_id_token_fallback",
+        "robot_id": "ua_quad",
+        "robot_id_source": "task_id_token_fallback",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 7.908333333333333,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pulllever_seed51/PullLeverUAQuadAbsPID/demo-20261009_022001/episode_outcomes.json",
+          "sha256": "268b0dd78848038d84479aa08f5ece2d7218c0767c0d64b101bad96302ec94ae"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pulllever_seed51/PullLeverUAQuadAbsPID/demo-20261009_022001/telemetry.jsonl",
+          "sha256": "7ab168bb69ea96e41666809a662d289be5e116806ef27a3f465280b739aaa3fa"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 949,
+      "success": true,
+      "task_id": "PullLever-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 949,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 70.572
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.6916468143463135,
+          -0.11691021174192429,
+          1.8573358058929443
+        ],
+        "path_length_m": 2.0304471332441754,
+        "pitch_deg": {
+          "max": 15.724696968714632,
+          "max_abs": 15.724696968714632,
+          "min": -4.055108883978022
+        },
+        "position_bounds_m": [
+          [
+            -0.0001538395881652832,
+            1.6916468143463135
+          ],
+          [
+            -0.11890210956335068,
+            1.0339757656912846e-25
+          ],
+          [
+            1.0,
+            1.8573358058929443
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.7869495663365065,
+          "max_abs": 1.1403700791088522,
+          "min": -1.1403700791088522
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.15451942651277603,
+          "max_abs": 0.24524137957068748,
+          "min": -0.24524137957068748
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7383941411972046,
+          -0.12722162902355194,
+          1.4623664617538452
+        ],
+        "path_length_m": 2.4347692410537043,
+        "position_bounds_m": [
+          [
+            0.019500967115163803,
+            1.7383941411972046
+          ],
+          [
+            -0.1353697031736374,
+            -0.010271694511175156
+          ],
+          [
+            0.6282536387443542,
+            1.4623664617538452
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.2658085060884243,
+          "rms": 0.05792702372031242
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 27,
+        "below_min_step_count": 60,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 62.027793884277344,
+        "min_thrust_n": -49.479949951171875,
+        "negative_step_count": 60,
+        "negative_step_fraction": 0.06369426751592357,
+        "out_of_limits_step_count": 64,
+        "out_of_limits_step_fraction": 0.06794055201698514,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pulllever_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 7.85,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pulllever_seed52/PullLeverUAQuadAbsPID/demo-20261009_022124/episode_outcomes.json",
+          "sha256": "3f43d9f8248c9a8acd96b3e647917325aa48a1650ccb3fe8abc19c5bee0d8886"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pulllever_seed52/PullLeverUAQuadAbsPID/demo-20261009_022124/telemetry.jsonl",
+          "sha256": "c4e8cab816ed09a8a160ed94f6abb5ae762bd8df332ef695703065d3a9d8a0ba"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 942,
+      "success": true,
+      "task_id": "PullLever-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 942,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 67.918
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.4372485876083374,
+          -0.4874064326286316,
+          1.4628790616989136
+        ],
+        "path_length_m": 2.731813194174624,
+        "pitch_deg": {
+          "max": 4.767694494397734,
+          "max_abs": 4.767694494397734,
+          "min": -4.317367346189586
+        },
+        "position_bounds_m": [
+          [
+            -0.0003305971622467041,
+            1.4383183717727661
+          ],
+          [
+            -0.5289204716682434,
+            0.5131398439407349
+          ],
+          [
+            0.9986752867698669,
+            1.4672654867172241
+          ]
+        ],
+        "roll_deg": {
+          "max": 8.860732066280976,
+          "max_abs": 8.860732066280976,
+          "min": -3.2814050931588046
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 1.1961657677984343,
+          "max_abs": 2.609086177441626,
+          "min": -2.609086177441626
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7136733531951904,
+          -0.4988345503807068,
+          1.1730071306228638
+        ],
+        "path_length_m": 3.001813744903444,
+        "position_bounds_m": [
+          [
+            0.26422247290611267,
+            1.7232719659805298
+          ],
+          [
+            -0.5462903380393982,
+            0.5065801739692688
+          ],
+          [
+            0.6941530108451843,
+            1.1951903104782104
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.12951986544598804,
+          "rms": 0.03458953255515828
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 247,
+        "below_min_step_count": 302,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 59.89252471923828,
+        "min_thrust_n": -42.911643981933594,
+        "negative_step_count": 302,
+        "negative_step_fraction": 0.09682590573901892,
+        "out_of_limits_step_count": 305,
+        "out_of_limits_step_fraction": 0.09778775248477076,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pushslider_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 25.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pushslider_seed51/PushSliderUAQuadAbsPID/demo-20261009_022246/episode_outcomes.json",
+          "sha256": "89113cd3d2a861a371d38ccdcabbf73e08f89d3d50e4f8b6a5ce489e18d31bdb"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pushslider_seed51/PushSliderUAQuadAbsPID/demo-20261009_022246/telemetry.jsonl",
+          "sha256": "c5e85b254f874e8588ab19493bd863b7c7833a0ae923681c9d886dd7ac5934dc"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 3119,
+      "success": false,
+      "task_id": "PushSlider-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 3119,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 172.376
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.5762983560562134,
+          -0.6589276790618896,
+          1.5402326583862305
+        ],
+        "path_length_m": 2.891812565560358,
+        "pitch_deg": {
+          "max": 5.218477411015169,
+          "max_abs": 5.572614262439409,
+          "min": -5.572614262439409
+        },
+        "position_bounds_m": [
+          [
+            -0.00033247843384742737,
+            1.5902738571166992
+          ],
+          [
+            -0.7261537313461304,
+            0.34196531772613525
+          ],
+          [
+            0.9986264109611511,
+            1.552154541015625
+          ]
+        ],
+        "roll_deg": {
+          "max": 8.89016529488575,
+          "max_abs": 8.89016529488575,
+          "min": -1.9159523816007993
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 1.2676221587177159,
+          "max_abs": 1.3501196768332095,
+          "min": -1.3501196768332095
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.8527032136917114,
+          -0.6708265542984009,
+          1.2503606081008911
+        ],
+        "path_length_m": 3.174703985932932,
+        "position_bounds_m": [
+          [
+            0.2663254737854004,
+            1.8669275045394897
+          ],
+          [
+            -0.7436413168907166,
+            0.3346644639968872
+          ],
+          [
+            0.696500837802887,
+            1.2708693742752075
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.13031868476987013,
+          "rms": 0.04514755540603234
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 482,
+        "below_min_step_count": 507,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 61.425628662109375,
+        "min_thrust_n": -43.25727081298828,
+        "negative_step_count": 507,
+        "negative_step_fraction": 0.16255210003206155,
+        "out_of_limits_step_count": 511,
+        "out_of_limits_step_fraction": 0.16383456235973068,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pushslider_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 25.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pushslider_seed52/PushSliderUAQuadAbsPID/demo-20261009_022540/episode_outcomes.json",
+          "sha256": "4ad0b9ea0967c0f3d0fb99dab5119de99895e3b6db4ecd52868bb4a6362d9cd5"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pushslider_seed52/PushSliderUAQuadAbsPID/demo-20261009_022540/telemetry.jsonl",
+          "sha256": "6e33b770d99130956153050e6858c067cea1d8913888d75357a8e84dd18b6a9c"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 3119,
+      "success": false,
+      "task_id": "PushSlider-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 3119,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 176.085
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.392611026763916,
+          0.02028662897646427,
+          1.5449275970458984
+        ],
+        "path_length_m": 2.378283118966676,
+        "pitch_deg": {
+          "max": 4.228322205331818,
+          "max_abs": 4.228322205331818,
+          "min": -3.661246474815158
+        },
+        "position_bounds_m": [
+          [
+            -0.00032890215516090393,
+            1.4029961824417114
+          ],
+          [
+            -0.09133803099393845,
+            0.13374009728431702
+          ],
+          [
+            0.9985129833221436,
+            1.560975193977356
+          ]
+        ],
+        "roll_deg": {
+          "max": 3.8773336034848644,
+          "max_abs": 4.327850298940359,
+          "min": -4.327850298940359
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 2.2940688876810067,
+          "max_abs": 2.2940688876810067,
+          "min": -0.7199301192721015
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.6691837310791016,
+          0.009300334379076958,
+          1.2553263902664185
+        ],
+        "path_length_m": 2.6070648625403807,
+        "position_bounds_m": [
+          [
+            0.26540499925613403,
+            1.6916320323944092
+          ],
+          [
+            -0.10663176327943802,
+            0.12883546948432922
+          ],
+          [
+            0.6945174336433411,
+            1.2709234952926636
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.22723157317588355,
+          "rms": 0.026500229667955694
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 95,
+        "below_min_step_count": 119,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 78.18468475341797,
+        "min_thrust_n": -51.14475631713867,
+        "negative_step_count": 119,
+        "negative_step_fraction": 0.049604001667361404,
+        "out_of_limits_step_count": 125,
+        "out_of_limits_step_fraction": 0.05210504376823676,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_rotatevalve_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 19.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_rotatevalve_seed51/RotateValveUAQuadAbsPID/demo-20261009_022834/episode_outcomes.json",
+          "sha256": "429306325158eac6bf9880068dd17fbdc06f7a361dd758d7ba31863389e29f6d"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_rotatevalve_seed51/RotateValveUAQuadAbsPID/demo-20261009_022834/telemetry.jsonl",
+          "sha256": "397559d895d1a390ee7b9c9a0e74505cebbf1395df3b4e062084eafaf400a836"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 2399,
+      "success": false,
+      "task_id": "RotateValve-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 2399,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 151.529
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.5317333936691284,
+          -0.07363869994878769,
+          1.5965192317962646
+        ],
+        "path_length_m": 2.5247359451395197,
+        "pitch_deg": {
+          "max": 3.543442357403828,
+          "max_abs": 3.543442357403828,
+          "min": -3.493022380065233
+        },
+        "position_bounds_m": [
+          [
+            -0.0003284625709056854,
+            1.5423513650894165
+          ],
+          [
+            -0.18527470529079437,
+            0.03938259556889534
+          ],
+          [
+            0.998529851436615,
+            1.6125988960266113
+          ]
+        ],
+        "roll_deg": {
+          "max": 3.919876962084514,
+          "max_abs": 4.4213203034466195,
+          "min": -4.4213203034466195
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 2.2851020744085977,
+          "max_abs": 2.2851020744085977,
+          "min": -0.7013506042796237
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.8083064556121826,
+          -0.08462422341108322,
+          1.3069185018539429
+        ],
+        "path_length_m": 2.7398991569930797,
+        "position_bounds_m": [
+          [
+            0.26464203000068665,
+            1.8307462930679321
+          ],
+          [
+            -0.20063605904579163,
+            0.03432430326938629
+          ],
+          [
+            0.6935214996337891,
+            1.322536826133728
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.2271148856341608,
+          "rms": 0.02657145595150317
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 98,
+        "below_min_step_count": 102,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 78.42105102539062,
+        "min_thrust_n": -52.83180236816406,
+        "negative_step_count": 102,
+        "negative_step_fraction": 0.0425177157148812,
+        "out_of_limits_step_count": 109,
+        "out_of_limits_step_fraction": 0.04543559816590246,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_rotatevalve_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 19.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_rotatevalve_seed52/RotateValveUAQuadAbsPID/demo-20261009_023109/episode_outcomes.json",
+          "sha256": "ff46e5d8426e3c517acf82c83db639772f9f1a13efb7d3a8593666a0993323f5"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_rotatevalve_seed52/RotateValveUAQuadAbsPID/demo-20261009_023109/telemetry.jsonl",
+          "sha256": "a853dd725ce8a600baaeaca8a5ee9fb78431057d272ffc16608e7577236b2d62"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 2399,
+      "success": false,
+      "task_id": "RotateValve-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 2399,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 140.911
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          0.8431226015090942,
+          -0.017735015600919724,
+          1.4827336072921753
+        ],
+        "path_length_m": 1.1088467703510136,
+        "pitch_deg": {
+          "max": 10.638797029231958,
+          "max_abs": 10.638797029231958,
+          "min": -3.0393578775917045
+        },
+        "position_bounds_m": [
+          [
+            -0.00033256784081459045,
+            0.8431226015090942
+          ],
+          [
+            -0.19805465638637543,
+            1.0339757656912846e-25
+          ],
+          [
+            0.9988341331481934,
+            1.49215567111969
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.158849704407961,
+          "max_abs": 10.8537234101303,
+          "min": -10.8537234101303
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.15982729466635723,
+          "max_abs": 2.8437144962665872,
+          "min": -2.8437144962665872
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.0824015140533447,
+          -0.09902485460042953,
+          1.1685755252838135
+        ],
+        "path_length_m": 1.1766494004174293,
+        "position_bounds_m": [
+          [
+            0.26313644647598267,
+            1.0824015140533447
+          ],
+          [
+            -0.22645534574985504,
+            -0.007291499525308609
+          ],
+          [
+            0.6943528056144714,
+            1.2018694877624512
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.1409479533917208,
+          "rms": 0.050026759361588936
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 57,
+        "below_min_step_count": 67,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 75.99404907226562,
+        "min_thrust_n": -62.94379806518555,
+        "negative_step_count": 67,
+        "negative_step_fraction": 0.16381418092909536,
+        "out_of_limits_step_count": 67,
+        "out_of_limits_step_fraction": 0.16381418092909536,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_opendoor_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 3.408333333333333,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_opendoor_seed51/OpenDoorUAQuadAbsPID/demo-20261009_023327/episode_outcomes.json",
+          "sha256": "c6c5c7ed23ab2dcc21729b36a49db5d48498efe8d192b05dcb2b4690b0bc36f2"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_opendoor_seed51/OpenDoorUAQuadAbsPID/demo-20261009_023327/telemetry.jsonl",
+          "sha256": "93e0b597eee67684485b3fec66e06af9ec62b0a76db49018d57179abe7c6a2d9"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 409,
+      "success": true,
+      "task_id": "OpenDoor-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 409,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 52.509
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.018510103225708,
+          0.05929349362850189,
+          1.4843847751617432
+        ],
+        "path_length_m": 1.2257203159749326,
+        "pitch_deg": {
+          "max": 9.762101416709669,
+          "max_abs": 9.762101416709669,
+          "min": -3.9278065181557893
+        },
+        "position_bounds_m": [
+          [
+            -0.0003298558294773102,
+            1.018510103225708
+          ],
+          [
+            -0.1108107939362526,
+            0.05929349362850189
+          ],
+          [
+            0.9988313317298889,
+            1.4898200035095215
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.0138064395175432,
+          "max_abs": 8.257902923891276,
+          "min": -8.257902923891276
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.3462782202199602,
+          "max_abs": 1.5800188531721258,
+          "min": -1.5800188531721258
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.2595783472061157,
+          -0.005948430392891169,
+          1.1687148809432983
+        ],
+        "path_length_m": 1.3334271908837272,
+        "position_bounds_m": [
+          [
+            0.2601190507411957,
+            1.2595783472061157
+          ],
+          [
+            -0.1375141441822052,
+            -0.005948430392891169
+          ],
+          [
+            0.6904086470603943,
+            1.2114388942718506
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.11041489750949984,
+          "rms": 0.04345199411514271
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 45,
+        "below_min_step_count": 51,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 66.08488464355469,
+        "min_thrust_n": -52.764739990234375,
+        "negative_step_count": 51,
+        "negative_step_fraction": 0.12718204488778054,
+        "out_of_limits_step_count": 53,
+        "out_of_limits_step_fraction": 0.13216957605985039,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_opendoor_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 3.341666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_opendoor_seed52/OpenDoorUAQuadAbsPID/demo-20261009_023427/episode_outcomes.json",
+          "sha256": "4c956ceeb7429c9c33e25af37ea0c3203d87acf1138489bf11d28e16360837d5"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_opendoor_seed52/OpenDoorUAQuadAbsPID/demo-20261009_023427/telemetry.jsonl",
+          "sha256": "ab20d06f6cf6e4af06f7848618aa1975acf568eaa07e7d157cc53499d57213dd"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 401,
+      "success": true,
+      "task_id": "OpenDoor-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 401,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 50.905
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.445542573928833,
+          -0.0981898307800293,
+          1.3570406436920166
+        ],
+        "path_length_m": 1.6140146678665621,
+        "pitch_deg": {
+          "max": 11.545434026184562,
+          "max_abs": 11.545434026184562,
+          "min": -5.751575277758223
+        },
+        "position_bounds_m": [
+          [
+            -0.0003825277090072632,
+            1.445542573928833
+          ],
+          [
+            -0.10287871956825256,
+            0.005824912805110216
+          ],
+          [
+            0.998999297618866,
+            1.374006986618042
+          ]
+        ],
+        "roll_deg": {
+          "max": 3.1087275163700516,
+          "max_abs": 3.1087275163700516,
+          "min": -0.8651797603220579
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 23.645395499088515,
+          "max_abs": 23.645395499088515,
+          "min": -0.2630728170099368
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.6390901803970337,
+          -0.00921817310154438,
+          1.017763614654541
+        ],
+        "path_length_m": 1.7849548442968046,
+        "position_bounds_m": [
+          [
+            0.2537117302417755,
+            1.6727969646453857
+          ],
+          [
+            -0.018535662442445755,
+            0.003472566604614258
+          ],
+          [
+            0.6798568964004517,
+            1.0561332702636719
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.09529218339386508,
+          "rms": 0.06122831147248304
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 85,
+        "below_min_step_count": 169,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 44.259456634521484,
+        "min_thrust_n": -28.22620964050293,
+        "negative_step_count": 169,
+        "negative_step_fraction": 0.07044601917465611,
+        "out_of_limits_step_count": 170,
+        "out_of_limits_step_fraction": 0.07086285952480201,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_peginhole_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 19.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_peginhole_seed51/PegInHoleUAQuadAbsPID/demo-20261009_023525/episode_outcomes.json",
+          "sha256": "9a5f68d3f3aeda3f260ef4c50b64f11a7a19c082485547e2bf66c444ddde9790"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_peginhole_seed51/PegInHoleUAQuadAbsPID/demo-20261009_023525/telemetry.jsonl",
+          "sha256": "564d5bc3a57305b6e596d25a5be6c77ac0356dab6899ad4fc3ff47b9e21c47cf"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 2399,
+      "success": false,
+      "task_id": "PegInHole-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 2399,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 143.996
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.5847045183181763,
+          -0.21021001040935516,
+          1.494668960571289
+        ],
+        "path_length_m": 1.771275679625343,
+        "pitch_deg": {
+          "max": 7.934267430042317,
+          "max_abs": 7.934267430042317,
+          "min": -4.419970076466406
+        },
+        "position_bounds_m": [
+          [
+            -0.000385921448469162,
+            1.5848578214645386
+          ],
+          [
+            -0.2160472571849823,
+            1.0339757656912846e-25
+          ],
+          [
+            0.9990448355674744,
+            1.4950761795043945
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.3454451935057272,
+          "max_abs": 1.3454451935057272,
+          "min": -0.5356765277828377
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 11.078223362194203,
+          "max_abs": 11.078223362194203,
+          "min": -0.26286390454281106
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.815869688987732,
+          -0.17186231911182404,
+          1.169620394706726
+        ],
+        "path_length_m": 2.4099080390448724,
+        "position_bounds_m": [
+          [
+            0.2581386864185333,
+            1.8160234689712524
+          ],
+          [
+            -0.18140403926372528,
+            -0.0068704839795827866
+          ],
+          [
+            0.6862519383430481,
+            1.1985864639282227
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.0622153119587242,
+          "rms": 0.04699393572425705
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 246,
+        "below_min_step_count": 368,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 35.516380310058594,
+        "min_thrust_n": -23.804073333740234,
+        "negative_step_count": 368,
+        "negative_step_fraction": 0.15339724885368905,
+        "out_of_limits_step_count": 369,
+        "out_of_limits_step_fraction": 0.15381408920383494,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_peginhole_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 19.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_peginhole_seed52/PegInHoleUAQuadAbsPID/demo-20261009_023750/episode_outcomes.json",
+          "sha256": "12d60c8b7d250c0580fda055a7fc61353d5c31ac55fb7d2d7a0706d46de63648"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_peginhole_seed52/PegInHoleUAQuadAbsPID/demo-20261009_023750/telemetry.jsonl",
+          "sha256": "2b8c7cf7ddf433a758e50814e948eda167c7aa2c424c4e4d9b023822733d2d31"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 2399,
+      "success": false,
+      "task_id": "PegInHole-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 2399,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 143.549
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.3896665573120117,
+          0.2902836203575134,
+          0.8792890310287476
+        ],
+        "path_length_m": 2.303590096969014,
+        "pitch_deg": {
+          "max": 35.14375682916426,
+          "max_abs": 35.14375682916426,
+          "min": -10.28144222392653
+        },
+        "position_bounds_m": [
+          [
+            -0.0003352053463459015,
+            1.5381287336349487
+          ],
+          [
+            -4.506983532337472e-05,
+            0.3127896785736084
+          ],
+          [
+            0.7986561059951782,
+            1.0751029253005981
+          ]
+        ],
+        "roll_deg": {
+          "max": 27.17025135017925,
+          "max_abs": 43.591130208056356,
+          "min": -43.591130208056356
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.0,
+          "max_abs": 63.47055669408646,
+          "min": -63.47055669408646
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.509968876838684,
+          0.04158928990364075,
+          0.5891174077987671
+        ],
+        "path_length_m": 3.450372699376931,
+        "position_bounds_m": [
+          [
+            0.2664579749107361,
+            1.6819417476654053
+          ],
+          [
+            -0.061184972524642944,
+            0.2271134853363037
+          ],
+          [
+            0.5296319723129272,
+            0.8450877666473389
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.8542517166964229,
+          "rms": 0.16826037207152095
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 411,
+        "below_min_step_count": 423,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 267.3745422363281,
+        "min_thrust_n": -259.2606506347656,
+        "negative_step_count": 423,
+        "negative_step_fraction": 0.35279399499582986,
+        "out_of_limits_step_count": 445,
+        "out_of_limits_step_fraction": 0.3711426188490409,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_tossball_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 9.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_tossball_seed51/TossBallUAQuadAbsPID/demo-20261009_024014/episode_outcomes.json",
+          "sha256": "bc38ddd4fa140e2ae170a748e886e085fdacd665c1506be54e2d2bd07c8d98b3"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_tossball_seed51/TossBallUAQuadAbsPID/demo-20261009_024014/telemetry.jsonl",
+          "sha256": "dc4b0b0120dcb32f65b9ff20ab5bfcdb74fd02027e79962af196ccdd65c4e6a3"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1199,
+      "success": false,
+      "task_id": "TossBall-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1199,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 77.747
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.2793726921081543,
+          0.4686954915523529,
+          0.9146335124969482
+        ],
+        "path_length_m": 2.3218631262611145,
+        "pitch_deg": {
+          "max": 33.77762822765208,
+          "max_abs": 33.77762822765208,
+          "min": -11.750735399714534
+        },
+        "position_bounds_m": [
+          [
+            -0.00034540146589279175,
+            1.4121582508087158
+          ],
+          [
+            -0.000242776790400967,
+            0.49094659090042114
+          ],
+          [
+            0.8268334269523621,
+            1.1023712158203125
+          ]
+        ],
+        "roll_deg": {
+          "max": 26.323392275176634,
+          "max_abs": 40.710234713300565,
+          "min": -40.710234713300565
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.4783178472142471,
+          "max_abs": 63.921135785840384,
+          "min": -63.921135785840384
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.3967339992523193,
+          0.21855467557907104,
+          0.6245000958442688
+        ],
+        "path_length_m": 3.500124428624352,
+        "position_bounds_m": [
+          [
+            0.26801809668540955,
+            1.5525447130203247
+          ],
+          [
+            -0.04706055670976639,
+            0.42191219329833984
+          ],
+          [
+            0.5443529486656189,
+            0.8866278529167175
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.8069040169383646,
+          "rms": 0.1500521466450424
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 477,
+        "below_min_step_count": 490,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 280.01507568359375,
+        "min_thrust_n": -245.65699768066406,
+        "negative_step_count": 490,
+        "negative_step_fraction": 0.408673894912427,
+        "out_of_limits_step_count": 506,
+        "out_of_limits_step_fraction": 0.42201834862385323,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_tossball_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 9.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_tossball_seed52/TossBallUAQuadAbsPID/demo-20261009_024130/episode_outcomes.json",
+          "sha256": "16e2a30ae3d7d130c85dc35fc1eb27b8ee8ea6afef258bc65e6dba6caaa2ad25"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_tossball_seed52/TossBallUAQuadAbsPID/demo-20261009_024130/telemetry.jsonl",
+          "sha256": "d40878e6f21f62aad82ff4351a1468f59acc7ef6b89e20f310c6bd865d11358d"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1199,
+      "success": false,
+      "task_id": "TossBall-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1199,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 73.991
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.2548760175704956,
+          0.562777042388916,
+          1.241382360458374
+        ],
+        "path_length_m": 3.2556940993543,
+        "pitch_deg": {
+          "max": 20.629280826565942,
+          "max_abs": 24.811639691335454,
+          "min": -24.811639691335454
+        },
+        "position_bounds_m": [
+          [
+            -8.240342140197754e-05,
+            1.372302532196045
+          ],
+          [
+            -3.4361099210400425e-07,
+            0.5644850134849548
+          ],
+          [
+            0.974942147731781,
+            1.4479777812957764
+          ]
+        ],
+        "roll_deg": {
+          "max": 4.436713152404198,
+          "max_abs": 4.436713152404198,
+          "min": -3.372729070777742
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.6573956872177344,
+          "max_abs": 0.6573956872177344,
+          "min": -0.5796407179464225
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.61969792842865,
+          0.46934521198272705,
+          1.1039310693740845
+        ],
+        "path_length_m": 4.380544264978438,
+        "position_bounds_m": [
+          [
+            0.27222388982772827,
+            1.758216142654419
+          ],
+          [
+            -0.012010369449853897,
+            0.47070133686065674
+          ],
+          [
+            0.7032483816146851,
+            1.338335633277893
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.3563103438338513,
+          "rms": 0.17724119415254508
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 25,
+        "below_min_step_count": 34,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 98.44656372070312,
+        "min_thrust_n": -64.8759536743164,
+        "negative_step_count": 34,
+        "negative_step_fraction": 0.009447068630175049,
+        "out_of_limits_step_count": 34,
+        "out_of_limits_step_fraction": 0.009447068630175049,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_lemonharvesting_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 29.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_lemonharvesting_seed51/LemonHarvestingUAQuadAbsPID/demo-20261009_024244/episode_outcomes.json",
+          "sha256": "72663cc6a09881a82a88e4eb9120d38fc5ca50984bccb107067daeec60f024ff"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_lemonharvesting_seed51/LemonHarvestingUAQuadAbsPID/demo-20261009_024244/telemetry.jsonl",
+          "sha256": "004975884ac48a9f97137192e81d644e5df52b9739a2afc6efcf847b9d216c9c"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 3599,
+      "success": false,
+      "task_id": "LemonHarvesting-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 3599,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 227.639
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.254869818687439,
+          0.5627819299697876,
+          1.2497214078903198
+        ],
+        "path_length_m": 3.356503731611463,
+        "pitch_deg": {
+          "max": 16.941178516424067,
+          "max_abs": 20.105649117472137,
+          "min": -20.105649117472137
+        },
+        "position_bounds_m": [
+          [
+            -8.257851004600525e-05,
+            1.363910436630249
+          ],
+          [
+            -0.2140238732099533,
+            0.5644064545631409
+          ],
+          [
+            0.9621432423591614,
+            1.296134114265442
+          ]
+        ],
+        "roll_deg": {
+          "max": 5.200790394585505,
+          "max_abs": 5.200790394585505,
+          "min": -4.690767145506529
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.7722791862444888,
+          "max_abs": 0.7722791862444888,
+          "min": -0.4772310421755236
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.619620680809021,
+          0.46937257051467896,
+          1.1122050285339355
+        ],
+        "path_length_m": 4.432178233579237,
+        "position_bounds_m": [
+          [
+            0.2722040116786957,
+            1.7503350973129272
+          ],
+          [
+            -0.22700941562652588,
+            0.47335654497146606
+          ],
+          [
+            0.688959002494812,
+            1.244451880455017
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.3245943540464983,
+          "rms": 0.17576421516100463
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 11,
+        "below_min_step_count": 24,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 93.90963745117188,
+        "min_thrust_n": -53.477622985839844,
+        "negative_step_count": 24,
+        "negative_step_fraction": 0.0066685190330647405,
+        "out_of_limits_step_count": 25,
+        "out_of_limits_step_fraction": 0.006946373992775771,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_lemonharvesting_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 29.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_lemonharvesting_seed52/LemonHarvestingUAQuadAbsPID/demo-20261009_024633/episode_outcomes.json",
+          "sha256": "82d442d658225da50f7f2111febea6a8a86e4c3e24658f2b9de11290424862dd"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_lemonharvesting_seed52/LemonHarvestingUAQuadAbsPID/demo-20261009_024633/telemetry.jsonl",
+          "sha256": "e007cf473fedca49956db0afa767ac0d0383fa4b6462e9b496d74c3f1188c1e5"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 3599,
+      "success": false,
+      "task_id": "LemonHarvesting-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 3599,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 223.738
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.8328877687454224,
+          0.3172094523906708,
+          2.049626588821411
+        ],
+        "path_length_m": 5.094710978817976,
+        "pitch_deg": {
+          "max": 31.04012100836698,
+          "max_abs": 31.04012100836698,
+          "min": -10.613497812531836
+        },
+        "position_bounds_m": [
+          [
+            -0.0003257356584072113,
+            1.8381742238998413
+          ],
+          [
+            -0.15082348883152008,
+            0.5121403932571411
+          ],
+          [
+            0.9986669421195984,
+            2.0620079040527344
+          ]
+        ],
+        "roll_deg": {
+          "max": 10.112806235688328,
+          "max_abs": 19.054189824547116,
+          "min": -19.054189824547116
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 2.615024327646179,
+          "max_abs": 9.665438947770516,
+          "min": -9.665438947770516
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          2.109452247619629,
+          0.3061111569404602,
+          1.7600208520889282
+        ],
+        "path_length_m": 6.404279706768718,
+        "position_bounds_m": [
+          [
+            0.2612799406051636,
+            2.134833574295044
+          ],
+          [
+            -0.188931405544281,
+            0.5045838356018066
+          ],
+          [
+            0.6902462244033813,
+            1.7910605669021606
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.27540099670457735,
+          "rms": 0.06854402712524803
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 829,
+        "below_min_step_count": 1109,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 484.6341247558594,
+        "min_thrust_n": -435.12158203125,
+        "negative_step_count": 1109,
+        "negative_step_fraction": 0.15404917349631894,
+        "out_of_limits_step_count": 1114,
+        "out_of_limits_step_fraction": 0.15474371440477844,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_cabinetpickplace_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 59.99166666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_cabinetpickplace_seed51/CabinetPickPlaceUAQuadAbsPID/demo-20261009_025018/episode_outcomes.json",
+          "sha256": "b924fa388d0d24f49bbf41bfee29cf37310036e6d2838337b2e771950e790661"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_cabinetpickplace_seed51/CabinetPickPlaceUAQuadAbsPID/demo-20261009_025018/telemetry.jsonl",
+          "sha256": "b8fd91c67290b56c32ba4e94779aa9328c9514d9ca8e752236c018b7c8706853"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 7199,
+      "success": false,
+      "task_id": "CabinetPickPlace-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 7199,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 387.577
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.8467917442321777,
+          0.33240967988967896,
+          2.0496251583099365
+        ],
+        "path_length_m": 5.268950607560104,
+        "pitch_deg": {
+          "max": 35.04807614113179,
+          "max_abs": 35.04807614113179,
+          "min": -10.902402887351096
+        },
+        "position_bounds_m": [
+          [
+            -0.0003257356584072113,
+            1.855017066001892
+          ],
+          [
+            -0.15067429840564728,
+            0.5121403932571411
+          ],
+          [
+            0.9986669421195984,
+            2.055739641189575
+          ]
+        ],
+        "roll_deg": {
+          "max": 10.375022703745074,
+          "max_abs": 33.37146708598001,
+          "min": -33.37146708598001
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 2.723258723715221,
+          "max_abs": 21.99206343666436,
+          "min": -21.99206343666436
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          2.1233577728271484,
+          0.32132023572921753,
+          1.7600206136703491
+        ],
+        "path_length_m": 6.792923839364987,
+        "position_bounds_m": [
+          [
+            0.2612799406051636,
+            2.152705669403076
+          ],
+          [
+            -0.18912681937217712,
+            0.5045838356018066
+          ],
+          [
+            0.6902462244033813,
+            1.7849208116531372
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.3373015683350188,
+          "rms": 0.07920334641605475
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 955,
+        "below_min_step_count": 1154,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 588.2664794921875,
+        "min_thrust_n": -565.0340576171875,
+        "negative_step_count": 1154,
+        "negative_step_fraction": 0.1603000416724545,
+        "out_of_limits_step_count": 1160,
+        "out_of_limits_step_fraction": 0.1611334907626059,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_cabinetpickplace_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 59.99166666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_cabinetpickplace_seed52/CabinetPickPlaceUAQuadAbsPID/demo-20261009_025646/episode_outcomes.json",
+          "sha256": "fe0b517b2f618de1e74020043d774016e863e41d171968cb6ad9fbd02a340c49"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_cabinetpickplace_seed52/CabinetPickPlaceUAQuadAbsPID/demo-20261009_025646/telemetry.jsonl",
+          "sha256": "165b283fb8cfeeccd79cbd302ce1ccd61528f33874b9e5f62a523fa0d5d01f41"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 7199,
+      "success": false,
+      "task_id": "CabinetPickPlace-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 7199,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 387.608
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          0.995607316493988,
+          0.035328738391399384,
+          1.5196177959442139
+        ],
+        "path_length_m": 3.4004465068071417,
+        "pitch_deg": {
+          "max": 4.912780098584959,
+          "max_abs": 5.649410758129714,
+          "min": -5.649410758129714
+        },
+        "position_bounds_m": [
+          [
+            -0.00033014267683029175,
+            1.3751991987228394
+          ],
+          [
+            -0.003037769813090563,
+            0.03597792983055115
+          ],
+          [
+            0.7579116821289062,
+            1.5223376750946045
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.0272411981064427,
+          "max_abs": 1.0272411981064427,
+          "min": -0.7627848463567208
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.07120849461011679,
+          "max_abs": 0.17593195861684985,
+          "min": -0.17593195861684985
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.272157073020935,
+          0.024221299216151237,
+          1.2299987077713013
+        ],
+        "path_length_m": 3.7377865647694124,
+        "position_bounds_m": [
+          [
+            0.26702699065208435,
+            1.6644337177276611
+          ],
+          [
+            -0.01777481660246849,
+            0.02516268566250801
+          ],
+          [
+            0.4583851993083954,
+            1.2584463357925415
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.04001180086553133,
+          "rms": 0.010957601476413989
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 7,
+        "below_min_step_count": 44,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 33.95112609863281,
+        "min_thrust_n": -15.515522956848145,
+        "negative_step_count": 44,
+        "negative_step_fraction": 0.012225618227285358,
+        "out_of_limits_step_count": 45,
+        "out_of_limits_step_fraction": 0.012503473186996388,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_frameassembly_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 29.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_frameassembly_seed51/FrameAssemblyUAQuadAbsPID/demo-20261009_030313/episode_outcomes.json",
+          "sha256": "2d8c77f628215b8589faae1a7a85b32be02920cfc0879c4bbc96a7918d32ada1"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+          "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_frameassembly_seed51/FrameAssemblyUAQuadAbsPID/demo-20261009_030313/telemetry.jsonl",
+          "sha256": "0054db4815c5b87b9f774a928a6a3e1a9ae1890fbe74bfc22ef1ce0ad0654dbd"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 3599,
+      "success": false,
+      "task_id": "FrameAssembly-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 3599,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 222.841
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.0656245946884155,
+          0.0959857776761055,
+          1.5196679830551147
+        ],
+        "path_length_m": 3.3401412458800546,
+        "pitch_deg": {
+          "max": 5.077734132699068,
+          "max_abs": 5.627299387200245,
+          "min": -5.627299387200245
+        },
+        "position_bounds_m": [
+          [
+            -0.0003299899399280548,
+            1.444758653640747
+          ],
+          [
+            -0.07478363066911697,
+            0.0968937873840332
+          ],
+          [
+            0.757928192615509,
+            1.5223151445388794
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.0379606697668071,
+          "max_abs": 1.0379606697668071,
+          "min": -0.6218457833956951
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.16043671402599244,
+          "max_abs": 0.17699220946974908,
+          "min": -0.17699220946974908
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.3421896696090698,
+          0.08487209677696228,
+          1.2300639152526855
+        ],
+        "path_length_m": 3.6598118817756164,
+        "position_bounds_m": [
+          [
+            0.2672804296016693,
+            1.734103798866272
+          ],
+          [
+            -0.08609522879123688,
+            0.08666476607322693
+          ],
+          [
+            0.45815449953079224,
+            1.2583539485931396
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.039891462774750155,
+          "rms": 0.010909787896468702
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 8,
+        "below_min_step_count": 16,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 34.076080322265625,
+        "min_thrust_n": -15.638643264770508,
+        "negative_step_count": 16,
+        "negative_step_fraction": 0.004445679355376493,
+        "out_of_limits_step_count": 17,
+        "out_of_limits_step_fraction": 0.004723534315087524,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_frameassembly_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 29.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_frameassembly_seed52/FrameAssemblyUAQuadAbsPID/demo-20261009_030701/episode_outcomes.json",
+          "sha256": "e85adb0b9f9cf5d5436246066bb81069f2b2ea7dcbb8f58c68cb271ad5670c90"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_frameassembly_seed52/FrameAssemblyUAQuadAbsPID/demo-20261009_030701/telemetry.jsonl",
+          "sha256": "58bd29a98b141566e49281a084defd9bf075a7ab8f6d540a8db9418f0a03bb77"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 3599,
+      "success": false,
+      "task_id": "FrameAssembly-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 3599,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 240.615
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.5000396966934204,
+          0.02819712460041046,
+          1.3646901845932007
+        ],
+        "path_length_m": 3.908359418827666,
+        "pitch_deg": {
+          "max": 21.686486232828578,
+          "max_abs": 23.228214316047502,
+          "min": -23.228214316047502
+        },
+        "position_bounds_m": [
+          [
+            -0.2851301431655884,
+            1.500780463218689
+          ],
+          [
+            -0.002752257278189063,
+            0.08682995289564133
+          ],
+          [
+            0.9839869737625122,
+            1.3662292957305908
+          ]
+        ],
+        "roll_deg": {
+          "max": 7.165700342339903,
+          "max_abs": 10.180566491453252,
+          "min": -10.180566491453252
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 2.4262134388710574,
+          "max_abs": 2.4262134388710574,
+          "min": -1.014294980712749
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7767277956008911,
+          0.017855368554592133,
+          1.0751516819000244
+        ],
+        "path_length_m": 6.931946615758813,
+        "position_bounds_m": [
+          [
+            -0.10250034928321838,
+            1.8225524425506592
+          ],
+          [
+            -0.030647553503513336,
+            0.10030044615268707
+          ],
+          [
+            0.6265561580657959,
+            1.1367852687835693
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.20011725374785855,
+          "rms": 0.05284495908611976
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 222,
+        "below_min_step_count": 284,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 75.35791778564453,
+        "min_thrust_n": -56.733272552490234,
+        "negative_step_count": 284,
+        "negative_step_fraction": 0.11838265944143393,
+        "out_of_limits_step_count": 339,
+        "out_of_limits_step_fraction": 0.1413088786994581,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_wipewindow_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 19.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_wipewindow_seed51/WipeWindowUAQuadAbsPID/demo-20261009_031057/episode_outcomes.json",
+          "sha256": "21148269a49cbaa122d9fdae70a74ef1bb8fad7c4781be5e074de01c81e19b2d"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_wipewindow_seed51/WipeWindowUAQuadAbsPID/demo-20261009_031057/telemetry.jsonl",
+          "sha256": "caaebe4835e013a31d09792467ffa515f94fdc771a12631c2828ae60a7e20a5c"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 2399,
+      "success": false,
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 2399,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 142.414
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.6384413242340088,
+          -0.009814677760004997,
+          1.3660088777542114
+        ],
+        "path_length_m": 4.128636526041151,
+        "pitch_deg": {
+          "max": 21.680167850441627,
+          "max_abs": 23.212416696098067,
+          "min": -23.212416696098067
+        },
+        "position_bounds_m": [
+          [
+            -0.28511932492256165,
+            1.6408193111419678
+          ],
+          [
+            -0.009910082444548607,
+            0.15214753150939941
+          ],
+          [
+            0.984182596206665,
+            1.3675360679626465
+          ]
+        ],
+        "roll_deg": {
+          "max": 15.185762842665108,
+          "max_abs": 16.941389941787268,
+          "min": -16.941389941787268
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 2.44778218236508,
+          "max_abs": 2.44778218236508,
+          "min": -1.8950379831691957
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.914995789527893,
+          -0.020952733233571053,
+          1.076369285583496
+        ],
+        "path_length_m": 7.273172053588913,
+        "position_bounds_m": [
+          [
+            -0.10250034928321838,
+            1.961246132850647
+          ],
+          [
+            -0.07981757074594498,
+            0.1844460815191269
+          ],
+          [
+            0.6265561580657959,
+            1.1398526430130005
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.20030929954038687,
+          "rms": 0.05760112255385178
+        }
+      },
+      "final_truncated": true,
+      "motors": {
+        "above_max_step_count": 257,
+        "below_min_step_count": 366,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 81.68043518066406,
+        "min_thrust_n": -66.42927551269531,
+        "negative_step_count": 366,
+        "negative_step_fraction": 0.15256356815339725,
+        "out_of_limits_step_count": 418,
+        "out_of_limits_step_fraction": 0.17423926636098375,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_wipewindow_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 19.991666666666667,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_wipewindow_seed52/WipeWindowUAQuadAbsPID/demo-20261009_031321/episode_outcomes.json",
+          "sha256": "fc24b54ec43843272cf6af909f62662b170605a3fb8789bc9f39098cadfe6a62"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_wipewindow_seed52/WipeWindowUAQuadAbsPID/demo-20261009_031321/telemetry.jsonl",
+          "sha256": "b7dd3cb91c11b8ce3b40d0bb760168167eaf9302ec4128a31e5f2e41e39e0d4a"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 2399,
+      "success": false,
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 2399,
+      "termination_reason": "timeout",
+      "timeout": true,
+      "wall_duration_s": 170.085
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.4912524223327637,
+          0.01105472818017006,
+          7.295910835266113
+        ],
+        "path_length_m": 6.883556516700836,
+        "pitch_deg": {
+          "max": 6.373711963191438,
+          "max_abs": 16.06597004898414,
+          "min": -16.06597004898414
+        },
+        "position_bounds_m": [
+          [
+            -0.0003319084644317627,
+            1.4913240671157837
+          ],
+          [
+            -0.003340799128636718,
+            0.011315419338643551
+          ],
+          [
+            0.9993918538093567,
+            7.348393440246582
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.0894664756168364,
+          "max_abs": 1.0894664756168364,
+          "min": -0.745612711639187
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.07180387334239541,
+          "max_abs": 0.18378144813943625,
+          "min": -0.18378144813943625
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.767267107963562,
+          -0.0003262097015976906,
+          7.005637168884277
+        ],
+        "path_length_m": 7.125841453102921,
+        "position_bounds_m": [
+          [
+            0.2597965598106384,
+            1.7706453800201416
+          ],
+          [
+            -0.017966382205486298,
+            0.0005813268944621086
+          ],
+          [
+            0.70633864402771,
+            7.06058931350708
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.46400556339155336,
+          "rms": 0.12371389155663455
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 24,
+        "below_min_step_count": 62,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 44.289737701416016,
+        "min_thrust_n": -39.9125862121582,
+        "negative_step_count": 62,
+        "negative_step_fraction": 0.05140961857379768,
+        "out_of_limits_step_count": 66,
+        "out_of_limits_step_fraction": 0.05472636815920398,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_ndt_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 10.05,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_ndt_seed51/NDTUAQuadAbsPID/demo-20261009_031614/episode_outcomes.json",
+          "sha256": "42982bec9b22820dfc12c352b9fea045523575903456c31ba0cd29513edea520"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_ndt_seed51/NDTUAQuadAbsPID/demo-20261009_031614/telemetry.jsonl",
+          "sha256": "e5987ab9de223f08529b89b227c8f5205796d2ae7350a5ccfb5814252fcea1a4"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1206,
+      "success": true,
+      "task_id": "NDT-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1206,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 134.906
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.4914722442626953,
+          0.011062039993703365,
+          7.302154541015625
+        ],
+        "path_length_m": 6.962285769639265,
+        "pitch_deg": {
+          "max": 4.579944452001046,
+          "max_abs": 8.814379521874883,
+          "min": -8.814379521874883
+        },
+        "position_bounds_m": [
+          [
+            -0.0003336109220981598,
+            1.4916629791259766
+          ],
+          [
+            -0.0033349222503602505,
+            0.011188524775207043
+          ],
+          [
+            0.9993345737457275,
+            7.372356414794922
+          ]
+        ],
+        "roll_deg": {
+          "max": 1.0863910195786437,
+          "max_abs": 1.0863910195786437,
+          "min": -0.7611037513627705
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.07429912746038485,
+          "max_abs": 0.1842783052193836,
+          "min": -0.1842783052193836
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7670053243637085,
+          -8.649658411741257e-05,
+          7.0113844871521
+        ],
+        "path_length_m": 7.121752636726154,
+        "position_bounds_m": [
+          [
+            0.2631961405277252,
+            1.7714420557022095
+          ],
+          [
+            -0.017983457073569298,
+            0.0003972630947828293
+          ],
+          [
+            0.706421434879303,
+            7.084982395172119
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.24502591027801202,
+          "rms": 0.09027838504976772
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 9,
+        "below_min_step_count": 35,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 34.967811584472656,
+        "min_thrust_n": -16.114788055419922,
+        "negative_step_count": 35,
+        "negative_step_fraction": 0.028925619834710745,
+        "out_of_limits_step_count": 36,
+        "out_of_limits_step_fraction": 0.02975206611570248,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_ndt_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 10.083333333333334,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_ndt_seed52/NDTUAQuadAbsPID/demo-20261009_031859/episode_outcomes.json",
+          "sha256": "3bf29c24f4f297c7dee96c72511b5d7822d3960acb78160cbf2f477261fab4c9"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_ndt_seed52/NDTUAQuadAbsPID/demo-20261009_031859/telemetry.jsonl",
+          "sha256": "ef7054e38447c7372f652a9abe283966fdbcedcc56166bf52f4755777ef0dbcf"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1210,
+      "success": true,
+      "task_id": "NDT-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1210,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 154.513
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.4630508422851562,
+          0.012000368908047676,
+          1.4266839027404785
+        ],
+        "path_length_m": 1.5506435371065816,
+        "pitch_deg": {
+          "max": 7.085708962158037,
+          "max_abs": 8.675251268411557,
+          "min": -8.675251268411557
+        },
+        "position_bounds_m": [
+          [
+            -3.725290298461914e-09,
+            1.4630508422851562
+          ],
+          [
+            -0.0028336700052022934,
+            0.01394578441977501
+          ],
+          [
+            0.9994694590568542,
+            1.4266839027404785
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.9863407797159499,
+          "max_abs": 0.9863407797159499,
+          "min": -0.8545528031167883
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.06561708072543558,
+          "max_abs": 0.10273883000261325,
+          "min": -0.10273883000261325
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 1.826915979385376,
+        "max_abs_fy_n": 0.0038439612835645676,
+        "max_xy_norm_n": 1.8269164658053847
+      },
+      "conditions": {
+        "enable_saturation": true,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7218091487884521,
+          0.0010996852070093155,
+          1.12108314037323
+        ],
+        "path_length_m": 1.7373005025696786,
+        "position_bounds_m": [
+          [
+            0.26080429553985596,
+            1.7218091487884521
+          ],
+          [
+            -0.018311332911252975,
+            0.004275527782738209
+          ],
+          [
+            0.6830921769142151,
+            1.1364316940307617
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.09667090586452491,
+          "rms": 0.03182048481495874
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 0,
+        "below_min_step_count": 0,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 23.0,
+        "min_thrust_n": 0.0,
+        "negative_step_count": 0,
+        "negative_step_fraction": 0.0,
+        "out_of_limits_step_count": 0,
+        "out_of_limits_step_fraction": 0.0,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pressbutton_wind_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 8.416666666666666,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_wind_seed51/PressButtonUAQuadAbsPID/demo-20261009_032201/episode_outcomes.json",
+          "sha256": "30a5467cf68f74c659da3f1c674670845e38473bd031bddf25049410ba4e0733"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_wind_seed51/PressButtonUAQuadAbsPID/demo-20261009_032201/telemetry.jsonl",
+          "sha256": "4f7227b0c092e9c5bbea6132cea6b0039f055bc00982d633551be84df5fdba57"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1010,
+      "success": true,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1010,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 99.634
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.0926874876022339,
+          0.001661772606894374,
+          0.8109867572784424
+        ],
+        "path_length_m": 1.314099481046167,
+        "pitch_deg": {
+          "max": 0.7805870373956962,
+          "max_abs": 0.7805870373956962,
+          "min": -0.33138976478500853
+        },
+        "position_bounds_m": [
+          [
+            -4.590244861901738e-05,
+            1.0961099863052368
+          ],
+          [
+            0.0,
+            0.001661772606894374
+          ],
+          [
+            0.7919139862060547,
+            1.0000414848327637
+          ]
+        ],
+        "roll_deg": {
+          "max": 6.755431666102182e-05,
+          "max_abs": 8.51563072737806e-05,
+          "min": -8.51563072737806e-05
+        },
+        "start_pos_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 8.916080080361308e-06,
+          "max_abs": 0.0006929254309683663,
+          "min": -0.0006929254309683663
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 189.4630584716797,
+        "max_abs_fy_n": 0.061272621154785156,
+        "max_xy_norm_n": 189.4630584728424
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.7170562744140625,
+          0.0016541874501854181,
+          1.1281663179397583
+        ],
+        "path_length_m": 1.493920341989378,
+        "position_bounds_m": [
+          [
+            0.22699981927871704,
+            1.7170562744140625
+          ],
+          [
+            -3.805143933277577e-08,
+            0.0016611877363175154
+          ],
+          [
+            1.1046148538589478,
+            1.1281663179397583
+          ]
+        ],
+        "start_pos_m": [
+          0.22699981927871704,
+          4.673640141561464e-09,
+          1.1237499713897705
+        ],
+        "target_error_m": {
+          "max": 0.008154153929299409,
+          "rms": 0.004097106987860264
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 2,
+        "below_min_step_count": 3,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/fa_hexa.py",
+          "sha256": "66ae1e4aa6b4b3f40edfeeb11a7dbd7611994bc5ca34c393bfe8a8a535cce6a5"
+        },
+        "max_thrust_n": 59.95657730102539,
+        "min_thrust_n": -130.21444702148438,
+        "negative_step_count": 3,
+        "negative_step_fraction": 0.00303951367781155,
+        "out_of_limits_step_count": 4,
+        "out_of_limits_step_fraction": 0.004052684903748734,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_reference_fahexa_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "fa_hexa",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "FAHexa",
+        "rotor_count": 6
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 8.225,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_reference_fahexa_seed51/PressButtonFAHexaAbsPID/demo-20261009_032423/episode_outcomes.json",
+          "sha256": "4d10f67558b7b4b5d2ac8db5cfe679025a9948efd8b4c9ec2d0d2a1d0955dfde"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_reference_fahexa_seed51/PressButtonFAHexaAbsPID/demo-20261009_032423/telemetry.jsonl",
+          "sha256": "28c34a243930ac97176a17b23342b0067c811871ae5ff8146b290955580796d7"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 987,
+      "success": true,
+      "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+      "telemetry_rows": 987,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 133.927
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.604987382888794,
+          -0.1588272750377655,
+          1.5262115001678467
+        ],
+        "path_length_m": 1.7154044316357757,
+        "pitch_deg": {
+          "max": 4.675837394829888,
+          "max_abs": 6.594028907083747,
+          "min": -6.594028907083747
+        },
+        "position_bounds_m": [
+          [
+            -3.725290298461914e-09,
+            1.604987382888794
+          ],
+          [
+            -0.1588272750377655,
+            1.0339757656912846e-25
+          ],
+          [
+            0.9994586110115051,
+            1.5262115001678467
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.9854366049759995,
+          "max_abs": 0.9854366049759995,
+          "min": -0.5035312264662113
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.058329691118488,
+          "max_abs": 0.20887326347774973,
+          "min": -0.20887326347774973
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 2.625739812850952,
+        "max_abs_fy_n": 0.008005404844880104,
+        "max_xy_norm_n": 2.625739872514635
+      },
+      "conditions": {
+        "enable_saturation": true,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.8669408559799194,
+          -0.16956773400306702,
+          1.2233624458312988
+        ],
+        "path_length_m": 1.8447497086517388,
+        "position_bounds_m": [
+          [
+            0.26799580454826355,
+            1.8673151731491089
+          ],
+          [
+            -0.16996179521083832,
+            -0.007443132344633341
+          ],
+          [
+            0.6924012899398804,
+            1.2424311637878418
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.08297767422746398,
+          "rms": 0.030078258436520507
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 0,
+        "below_min_step_count": 0,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 23.0,
+        "min_thrust_n": 0.0,
+        "negative_step_count": 0,
+        "negative_step_fraction": 0.0,
+        "out_of_limits_step_count": 0,
+        "out_of_limits_step_fraction": 0.0,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pressbutton_wind_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 8.3,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_wind_seed52/PressButtonUAQuadAbsPID/demo-20261009_032652/episode_outcomes.json",
+          "sha256": "bc028c7ebcc95f85a19ae2d10c427db0dc571f4c85c9101f1243443d06ae7d61"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_wind_seed52/PressButtonUAQuadAbsPID/demo-20261009_032652/telemetry.jsonl",
+          "sha256": "b0396f48d50d75faf41fd59a141914e48370d37248a7ec0630c25ef9042503c6"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 996,
+      "success": true,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 996,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 93.648
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.232073187828064,
+          -0.1696055680513382,
+          0.9120149612426758
+        ],
+        "path_length_m": 1.4413636905326956,
+        "pitch_deg": {
+          "max": 0.9092962876725755,
+          "max_abs": 0.9092962876725755,
+          "min": -0.4178368376079842
+        },
+        "position_bounds_m": [
+          [
+            -4.6379758714465424e-05,
+            1.2360202074050903
+          ],
+          [
+            -0.16960598528385162,
+            1.1667402599613297e-09
+          ],
+          [
+            0.9009986519813538,
+            1.076745629310608
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.005232109575998087,
+          "max_abs": 0.005232109575998087,
+          "min": -0.004090070501982038
+        },
+        "start_pos_m": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.0010949738465496212,
+          "max_abs": 0.0015513192263480289,
+          "min": -0.0015513192263480289
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 169.33633422851562,
+        "max_abs_fy_n": 0.5973024368286133,
+        "max_xy_norm_n": 169.336377255056
+      },
+      "conditions": {
+        "enable_saturation": false,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.8614739179611206,
+          -0.16960026323795319,
+          1.2268550395965576
+        ],
+        "path_length_m": 1.648837725184107,
+        "position_bounds_m": [
+          [
+            0.22699981927871704,
+            1.8614739179611206
+          ],
+          [
+            -0.16960905492305756,
+            7.356968367844274e-09
+          ],
+          [
+            1.1233633756637573,
+            1.2268550395965576
+          ]
+        ],
+        "start_pos_m": [
+          0.22699981927871704,
+          4.673640141561464e-09,
+          1.1237499713897705
+        ],
+        "target_error_m": {
+          "max": 0.009560599832556483,
+          "rms": 0.004593428166773585
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 2,
+        "below_min_step_count": 4,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/fa_hexa.py",
+          "sha256": "66ae1e4aa6b4b3f40edfeeb11a7dbd7611994bc5ca34c393bfe8a8a535cce6a5"
+        },
+        "max_thrust_n": 55.15245819091797,
+        "min_thrust_n": -114.98307800292969,
+        "negative_step_count": 4,
+        "negative_step_fraction": 0.0041025641025641026,
+        "out_of_limits_step_count": 4,
+        "out_of_limits_step_fraction": 0.0041025641025641026,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_reference_fahexa_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "fa_hexa",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "FAHexa",
+        "rotor_count": 6
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 8.125,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_reference_fahexa_seed52/PressButtonFAHexaAbsPID/demo-20261009_032847/episode_outcomes.json",
+          "sha256": "d927b5db0484c4a804c6d31245c283fd066b89a856953fc30eaa47aab7e1538e"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_reference_fahexa_seed52/PressButtonFAHexaAbsPID/demo-20261009_032847/telemetry.jsonl",
+          "sha256": "f1f2e5e3ed632726466426c35f50d619de7aa177d1120519effae895902d9c09"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 975,
+      "success": true,
+      "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+      "telemetry_rows": 975,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 96.902
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.476819634437561,
+          0.012861688621342182,
+          1.4287923574447632
+        ],
+        "path_length_m": 1.5614153884589932,
+        "pitch_deg": {
+          "max": 8.704922844302544,
+          "max_abs": 8.704922844302544,
+          "min": -7.323018144353201
+        },
+        "position_bounds_m": [
+          [
+            -3.725290298461914e-09,
+            1.476819634437561
+          ],
+          [
+            -0.002496509114280343,
+            0.013033974915742874
+          ],
+          [
+            0.9995929598808289,
+            1.4287923574447632
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.8902581671631388,
+          "max_abs": 0.8902581671631388,
+          "min": -0.772935203890766
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.08025726934229317,
+          "max_abs": 0.10185665636607562,
+          "min": -0.10185665636607562
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": true,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.723191261291504,
+          0.0020245425403118134,
+          1.1129170656204224
+        ],
+        "path_length_m": 1.7578970764388582,
+        "position_bounds_m": [
+          [
+            0.24952347576618195,
+            1.723191261291504
+          ],
+          [
+            -0.017655398696660995,
+            0.0020964685827493668
+          ],
+          [
+            0.6773660182952881,
+            1.1276243925094604
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.07437770616884347,
+          "rms": 0.024725466785995402
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 0,
+        "below_min_step_count": 0,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 23.0,
+        "min_thrust_n": 0.0,
+        "negative_step_count": 0,
+        "negative_step_fraction": 0.0,
+        "out_of_limits_step_count": 0,
+        "out_of_limits_step_fraction": 0.0,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pressbutton_saturation_seed51",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 51,
+      "simulation_elapsed_s": 8.533333333333333,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_saturation_seed51/PressButtonUAQuadAbsPID/demo-20261009_033050/episode_outcomes.json",
+          "sha256": "d65191c8e7c3e8f691fc615368209e20950ee375d9ec46af3476d862e48b0acd"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_saturation_seed51/PressButtonUAQuadAbsPID/demo-20261009_033050/telemetry.jsonl",
+          "sha256": "4fe475d27e237c5fef50c38e36ca3d20fd42851dc743c0a1711d86c919751c69"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1024,
+      "success": true,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1024,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 114.25
+    },
+    {
+      "base": {
+        "end_pos_m": [
+          1.6192392110824585,
+          -0.1587519645690918,
+          1.524640440940857
+        ],
+        "path_length_m": 1.7264333865181127,
+        "pitch_deg": {
+          "max": 6.378950337614208,
+          "max_abs": 6.378950337614208,
+          "min": -5.205204376580003
+        },
+        "position_bounds_m": [
+          [
+            -3.725290298461914e-09,
+            1.6192392110824585
+          ],
+          [
+            -0.1587620973587036,
+            1.0339757656912846e-25
+          ],
+          [
+            0.9995172023773193,
+            1.524640440940857
+          ]
+        ],
+        "roll_deg": {
+          "max": 0.972558490455783,
+          "max_abs": 0.972558490455783,
+          "min": -0.5092732614914769
+        },
+        "start_pos_m": [
+          -3.725290298461914e-09,
+          1.0339757656912846e-25,
+          1.0
+        ],
+        "yaw_deg": {
+          "max": 0.07443350466701726,
+          "max_abs": 0.20865810450902691,
+          "min": -0.20865810450902691
+        }
+      },
+      "body_force": {
+        "max_abs_fx_n": 0.0,
+        "max_abs_fy_n": 0.0,
+        "max_xy_norm_n": 0.0
+      },
+      "conditions": {
+        "enable_saturation": true,
+        "saturation_source": {
+          "kind": "episode_outcomes.experiment_conditions"
+        }
+      },
+      "ee": {
+        "end_pos_m": [
+          1.8673697710037231,
+          -0.16965776681900024,
+          1.2102711200714111
+        ],
+        "path_length_m": 1.8636617259677046,
+        "position_bounds_m": [
+          [
+            0.25680527091026306,
+            1.8673697710037231
+          ],
+          [
+            -0.1700199991464615,
+            -0.007472391240298748
+          ],
+          [
+            0.6852872371673584,
+            1.2274014949798584
+          ]
+        ],
+        "start_pos_m": [
+          0.2766016721725464,
+          -0.01109887845814228,
+          0.7104994654655457
+        ],
+        "target_error_m": {
+          "max": 0.059642746836373606,
+          "rms": 0.01999991629311606
+        }
+      },
+      "final_truncated": false,
+      "motors": {
+        "above_max_step_count": 0,
+        "below_min_step_count": 0,
+        "limits_source": {
+          "field": "RotorActuatorCfg.thrust_limits",
+          "kind": "robot_source_ast_fallback",
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        "max_thrust_n": 23.0,
+        "min_thrust_n": 0.0,
+        "negative_step_count": 0,
+        "negative_step_fraction": 0.0,
+        "out_of_limits_step_count": 0,
+        "out_of_limits_step_fraction": 0.0,
+        "thrust_limits_n": [
+          0.0,
+          23.0
+        ]
+      },
+      "name": "uaquad_pressbutton_saturation_seed52",
+      "profile": {
+        "action_mode": "absolute_ee_pose",
+        "action_mode_source": "episode_outcomes.robot_profile.action_mode",
+        "robot_id": "ua_quad",
+        "robot_id_source": "episode_outcomes.robot_profile.robot_id",
+        "robot_token": "UAQuad",
+        "rotor_count": 4
+      },
+      "record_exit_code": 0,
+      "seed": 52,
+      "simulation_elapsed_s": 8.441666666666666,
+      "source": {
+        "episode_outcomes": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_saturation_seed52/PressButtonUAQuadAbsPID/demo-20261009_033304/episode_outcomes.json",
+          "sha256": "7e74299f34189519a5f52cbd9cac1c551c88798bb7d99d4b4d9470be6404e73a"
+        },
+        "report": {
+          "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+          "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+        },
+        "telemetry": {
+          "path": "outputs/research/uaquad-20261009/experts/datasets/uaquad_pressbutton_saturation_seed52/PressButtonUAQuadAbsPID/demo-20261009_033304/telemetry.jsonl",
+          "sha256": "ca4bddb1aece5cc8d985056cc946c5bbb9276e6ff96f38142caa8e85195131a0"
+        }
+      },
+      "status": "verified",
+      "step_dt_s": 0.008333333333333333,
+      "steps": 1013,
+      "success": true,
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "telemetry_rows": 1013,
+      "termination_reason": "success",
+      "timeout": false,
+      "wall_duration_s": 87.966
+    }
+  ],
+  "verification_status": "passed"
+}

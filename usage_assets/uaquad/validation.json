@@ -1,0 +1,531 @@
+{
+  "schema_version": 1,
+  "status": "local_verified_public_validation_pending",
+  "updated_at_utc": "2026-10-09T04:34:28.388189+00:00",
+  "branch": "research",
+  "scope": "42 independent simulation attempts; no real UAV flight or converged model performance claim",
+  "experiments": {
+    "scripted": {
+      "verified": 30,
+      "success": 14,
+      "timeout": 16,
+      "default_uaquad": {
+        "attempts": 24,
+        "success": 8,
+        "timeout": 16
+      },
+      "uaquad_saturation": {
+        "attempts": 2,
+        "success": 2
+      },
+      "uaquad_wind_combination": {
+        "attempts": 2,
+        "success": 2
+      },
+      "fahexa_reference": {
+        "attempts": 2,
+        "success": 2
+      }
+    },
+    "learned_policy": {
+      "verified": 12,
+      "success": 0,
+      "timeout": 12,
+      "ee_transfer": 8,
+      "uaquad_one_step": 4,
+      "inference_device": "cpu",
+      "inference_seed": 42,
+      "checkpoint_optimizer_steps": 1
+    }
+  },
+  "media": {
+    "all_media_sha256_verified": 360,
+    "all_new_mp4_duration_s": 7,
+    "all_new_mp4_fps": 10,
+    "all_new_mp4_frame_count": 70,
+    "all_new_mp4_full_decode_passed": true,
+    "all_new_mp4_width": 320,
+    "animation_specs_sha256": "01abd58040844288298807bbdfbebaddca01c9f5201fc8132c4ba115a048ae70",
+    "camera_records": 180,
+    "frozen_policy_driver_sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140",
+    "global_media_bytes": 71513666,
+    "manifest_sha256": "8da66eb0994f9bfb5b341627fafe320ccfa3c5756aa3398695a0454f9e912ed9",
+    "new_camera_records": 126,
+    "new_independent_trials": 42,
+    "new_policy_trials": 12,
+    "new_scripted_trials": 30,
+    "original_media_sha256_preserved": 108,
+    "original_record_objects_preserved": 54,
+    "source_first_last_preserved": true,
+    "status": "passed",
+    "three_camera_trial_metadata_consistent": true
+  },
+  "github_file_limit_bytes": 100000000,
+  "README": {
+    "changed": false,
+    "sha256": "40f9d0b7bca019bca1e6329f3db9fb214caaa2f36e62cf0f3674830a1c472282"
+  },
+  "source_snapshot": {
+    "kind": "working_tree_source_snapshot",
+    "file_count": 98,
+    "files": [
+      {
+        "path": "README.md",
+        "sha256": "40f9d0b7bca019bca1e6329f3db9fb214caaa2f36e62cf0f3674830a1c472282"
+      },
+      {
+        "path": "ext/openpi/scripts/serve_policy.py",
+        "sha256": "eccc0448b4873fd30a1fff3355c5de7a7c227138e6db04b7dcaa5bb38a6a5809"
+      },
+      {
+        "path": "ext/openpi/src/openpi/policies/policy.py",
+        "sha256": "a2ac5236e23b11d0f5a840d4a8fef148d89dba921d5452ec5dfcd5a6ffa46f20"
+      },
+      {
+        "path": "ext/openpi/src/openpi/policies/policy_config.py",
+        "sha256": "aaf42ab04a33b6c91d2447926211646c33ebd8ebfa427f026d7b6c4f7c45ec52"
+      },
+      {
+        "path": "scripts/data/dp/lerobot_to_zarr.py",
+        "sha256": "41db1390d5588f60fe0d9cc7a7b7fac5bae5199cabac5fe44c3dd9061c437be6"
+      },
+      {
+        "path": "scripts/data/dp/validate_zarr.py",
+        "sha256": "dc32b25ee7e834d06eefd041e4a6d5c3f1f03e31ca12a096fb5e2424fbfe1ae8"
+      },
+      {
+        "path": "scripts/data/record_demos_scripted.py",
+        "sha256": "addc90efe8a3e3a08348903d9bb0cb7397f691145d8c0b7e51cf81d5e4c868a5"
+      },
+      {
+        "path": "scripts/data/validate_lerobotdataset.py",
+        "sha256": "d859f7246a962c336b7f565e8d23f76bb2e5c872ea025fbb6ab8c072de351b41"
+      },
+      {
+        "path": "scripts/research/build_uaquad_gallery.py",
+        "sha256": "dda702726b83cee0a776d3319839cfc640f90261e41c9b63483c5477ecd134d4"
+      },
+      {
+        "path": "scripts/research/build_uaquad_media_specs.py",
+        "sha256": "97e783c51b39eb52b7dca550bc80e0e999b58b80c0f25356f1ee055627aed257"
+      },
+      {
+        "path": "scripts/research/build_video_gallery.py",
+        "sha256": "8acd2a05e560338e82a84ccca75146f39448b16c2bcdfc665c7a9dbd18e5fbfc"
+      },
+      {
+        "path": "scripts/research/export_usage_animations.py",
+        "sha256": "76e0939423be4623b10c6896f9e987c6b5f82c72153b849f12bed1c6fcb20260"
+      },
+      {
+        "path": "scripts/research/record_uaquad_policies.py",
+        "sha256": "6b1987ab49c4d1b4bca10b5530ae5e4d0385c7b5aecd38abfff9f8274e3de8f8"
+      },
+      {
+        "path": "scripts/research/record_usage_variants.py",
+        "sha256": "58e6e7b4d43fec7ad002bdcc41b128dc955478bfa81af9508000986aedd57c36"
+      },
+      {
+        "path": "scripts/research/summarize_uaquad_policies.py",
+        "sha256": "4e240c46f947538802d1842c398f9ff2dfa094b3fda900e4d4aebcf835605a1e"
+      },
+      {
+        "path": "scripts/research/summarize_uaquad_trials.py",
+        "sha256": "17b3a1892b4352abca15044c74ba8b8bf0e5e3ad5b16aa647c445c0f31d091f9"
+      },
+      {
+        "path": "source/ambench/ambench/controllers/control_pipeline.py",
+        "sha256": "de79ab172de939e5790609e6419680fd3c9f63529928158a961980fb32b50fe7"
+      },
+      {
+        "path": "source/ambench/ambench/controllers/pid_4dof_ctrl.py",
+        "sha256": "fb5a1d494f48a901935b4cc84460be12b9c303a0d3150001f2963dcea89c5045"
+      },
+      {
+        "path": "source/ambench/ambench/controllers/pyroki_ik_ctrl.py",
+        "sha256": "da1b876c534770ad255d538235ed3d822192b662882ecbe3b3a5174cafc21e64"
+      },
+      {
+        "path": "source/ambench/ambench/controllers/utils/control_allocation.py",
+        "sha256": "9fa4cd1a2240606dc063bc7b5a6c19ac55b2e0b0e7cd5da32ea57b08a19106ea"
+      },
+      {
+        "path": "source/ambench/ambench/evaluation/success_criteria.py",
+        "sha256": "02d4ec59f522f18909aad8b4bc8e376ab02526d1dc16b68b611a3b977dc8650c"
+      },
+      {
+        "path": "source/ambench/ambench/evaluation/tracking/collect.py",
+        "sha256": "9f18b567c0be9a93c55961c97d221085bff30109870941d026f462ff084a85d5"
+      },
+      {
+        "path": "source/ambench/ambench/evaluation/tracking/log.py",
+        "sha256": "55291f8e0b778d9fc764effa74b90a272a64db464a00b22496b5d1c232bc0f3d"
+      },
+      {
+        "path": "source/ambench/ambench/evaluation/tracking/metrics.py",
+        "sha256": "0e21bd64831223933e80c6f189b07886e509380d2557b3ef0b60ae701148e3b1"
+      },
+      {
+        "path": "source/ambench/ambench/evaluation/tracking/plots.py",
+        "sha256": "a36b324188a06b17dbe3db1bd199b8c728b1e95329feba839c4162bb7e8eeec2"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/NDT.py",
+        "sha256": "9c4baf04d319fb218c6431048801b669edac43866f03080e91cb34946454bbee"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/base.py",
+        "sha256": "9bdc2f185cb831048607c753736f28797fd365c00c10a3c1a7cc1343f8856f1e"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/cabinet_pick_place.py",
+        "sha256": "2718a0767701360a63169f1567cbc3507dcee7ac1e48714e16b39d0f9fb987bf"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/frame_assembly.py",
+        "sha256": "8c52599c46479083a63b16c60f158bb6cdc6b8409e9d94fa1602443547179bfd"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/lemon_harvesting.py",
+        "sha256": "95a99bbb014b18440e5cea0259201f0860e00853bf6c3b2a1ef0468b952b762e"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/open_door.py",
+        "sha256": "026819217d699c4de8addd29b10f2a60f04f63d08a1f0bf2132bb43d82175e70"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/peg_in_hole.py",
+        "sha256": "db3c65fa25266494fa02fa0c92c8cf2607e3506c36c6b16aaa5dc666e83d47f8"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/press_button.py",
+        "sha256": "db9501236dd5b41cfa3885af78e65c4cc55c7360938db86118fcf31148524dca"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/pull_lever.py",
+        "sha256": "f5f2e3148ea0905df72ac9a1566d6e35bcbd3119c4c0c61b3a84b3aa87ea4642"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/push_slider.py",
+        "sha256": "708f9289d0cfd91fd67a6e0e49a598269becc0c063a730d162b1f5a72242bfad"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/rotate_valve.py",
+        "sha256": "0ccf0ad335e054b971ef5c85e16bde19c3308d2fa8c63b0ea79ea8bf00b6269b"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/toss_ball.py",
+        "sha256": "4e6380ee6995c84dafb7f470cb36a3d526c9f7d6b3972987450c6f45d8a67d7f"
+      },
+      {
+        "path": "source/ambench/ambench/policies/scripted/wipe_window.py",
+        "sha256": "bb284d624a3d2bca2dfca9f46c4ec27101cbb2ca7f3188354742fad502d7748e"
+      },
+      {
+        "path": "source/ambench/ambench/recording/dataset.py",
+        "sha256": "ee8e86f7539d27811c2cfadaf125f7cf82cdf2eb4e71398ea24b746350ed1bcb"
+      },
+      {
+        "path": "source/ambench/ambench/recording/lerobot_writer.py",
+        "sha256": "de446b69d57bc6657956021b98cfa226a83175dd50fb734d86c269c3e11598eb"
+      },
+      {
+        "path": "source/ambench/ambench/recording/video.py",
+        "sha256": "9b8f0a4011dc522ba5620b3afea02ca7fad5e09d7b95e3dd97a30bb25a448618"
+      },
+      {
+        "path": "source/ambench/ambench/robots/robot_io.py",
+        "sha256": "5cc46b9846f51da849f39e2ac12af3109d114228af1c13049b4c105ce1b9de4e"
+      },
+      {
+        "path": "source/ambench/ambench/robots/ua_quad.py",
+        "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/__init__.py",
+        "sha256": "ce3d467eeef2081bf60b2fd1d0d488359de4929481859fa6b01ee4a8f3c81b56"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/base/base_env.py",
+        "sha256": "06eecbbca6a5f65fd578fb6772cd0d71f255c646a5c14e5daaf70bee3b00ca5d"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/base/base_env_cfg.py",
+        "sha256": "83e79a6cd9964dc7ea5cee9379cec8fc12e4407502a3cc82a8bbfdfca378fbad"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/base/robot_profiles.py",
+        "sha256": "a52bc50f8f3e7ae1720da7fa9b57f503ff50d10054ffbddd64a6b4de85088ec7"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/cabinet_pick_place/cabinet_pick_place_env.py",
+        "sha256": "87560a0bc469e4576c05e36c101f84880623a05b06e5e4fa561ed215fcf31ce0"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/cabinet_pick_place/cabinet_pick_place_env_cfg.py",
+        "sha256": "efa444bbe6dec09a83aff7d3f25f51f4f816ace973582b967824d8aca34f0d10"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/frame_assembly/frame_assembly_env.py",
+        "sha256": "e8bba0a3639b03a74e4f30a6458e9b6c98874b9629d0d8b2b5e7304ba4772930"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/frame_assembly/frame_assembly_env_cfg.py",
+        "sha256": "fe71569d54788f73a03ffb4c12f09483a5c813fe813450f4ef20e5efe1595613"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/lemon_harvesting/lemon_harvesting_env.py",
+        "sha256": "77c7bf0fb9ddc47d86b803ba1827edadfcbbd665048353419cf62ac84dad3b3e"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/lemon_harvesting/lemon_harvesting_env_cfg.py",
+        "sha256": "99f4258e7d8274029f8dcb212c5be48187f60e512d343f8c1660ed93d7cd2582"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/ndt/ndt_env.py",
+        "sha256": "0689df469f6d93ff6488f046066272a1ea246628bbe0ec74d73edaeb74b93e68"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/ndt/ndt_env_cfg.py",
+        "sha256": "80e34c4d4219a9646fb0f2675f6441633ed78c0e30704fd9e456a7e694541a77"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/open_door/open_door_env.py",
+        "sha256": "221db03c2a0658e8626b336aafa9e0d516accd75bb001ee84117c282cfdbcf45"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/open_door/open_door_env_cfg.py",
+        "sha256": "022446386370cc328f1e2134c229a3be8928b34dccfa6c12e9bf3f7e3d11dd48"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/peg_in_hole/peg_in_hole_env.py",
+        "sha256": "74838ab1058312ea21776b342be02cce479490497d372f402e14e3964e701363"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/peg_in_hole/peg_in_hole_env_cfg.py",
+        "sha256": "3cbc2e6ce7c877080e72446cc941db1d84eae7b9e6c6b489eae57b0eaa2fdb5c"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/press_button/press_button_env.py",
+        "sha256": "fdcefa8cea647c2a41e29c41ce86194dcc588d83ef64c616c3425bc70c61700e"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/press_button/press_button_env_cfg.py",
+        "sha256": "4e4baaf384949a1817ca83811e63c7114b7be640b2ffcb3023f7b0d055e00994"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/pull_lever/pull_lever_env.py",
+        "sha256": "be680d6b1e07dc6efc9a789f33f3a30d16481d94bb61920e89cef7684d584266"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/pull_lever/pull_lever_env_cfg.py",
+        "sha256": "3e1fe86d748656caaafd1cdf56cb28faffe9c165b2b0df2e07f6232a4e3d670c"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/push_slider/push_slider_env.py",
+        "sha256": "cf4237a972d721efaca792e078ba9b9e27d174d71863763ddc8786afb458818e"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/push_slider/push_slider_env_cfg.py",
+        "sha256": "861d1b1d740f33537546a90f258a70504a75faf2212f25f2bda2e99dd5b34265"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/rotate_valve/rotate_valve_env.py",
+        "sha256": "b8092034f3122147ebb22303e05a83180baae61d400facc5ca94e974c8bcd9f2"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/rotate_valve/rotate_valve_env_cfg.py",
+        "sha256": "88caadb7c74f8b83f6794818ed9c0df47d58f70f64d18999217a9bd58b28cf05"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/toss_ball/toss_ball_env.py",
+        "sha256": "8730f7f389e1953656e8c8e0f9a99b184884b06405a8cc31a4959056f45b8a8c"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/toss_ball/toss_ball_env_cfg.py",
+        "sha256": "27460016810b10c74f9995954f34a9037fe7cfea0551334844fa5cdd15b6180b"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/wipe_window/wipe_window_env.py",
+        "sha256": "20f32cf94365d66b4e724908744675a00a7440973233842bcab6fdd8cbeb4a57"
+      },
+      {
+        "path": "source/ambench/ambench/tasks/wipe_window/wipe_window_env_cfg.py",
+        "sha256": "d0f80cefbe27f2ed88c6b7a34d08eede3793ff4d0da4293d024fd006cf5e7c8d"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/data/action_resampling.py",
+        "sha256": "5b0dd0365fcb4ef634c43ba25809456b10a7b801472f0c75691abb2918e21502"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/data/action_semantics.py",
+        "sha256": "313884eaa103c959da8520c4f7a137eabc08af681c38cb6857c4458ca49f889c"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/data/resampled_lerobot_dataset.py",
+        "sha256": "38c9b5b971c7e6ea2d7a010872f1915ecdacac3cbc66a83718d03259fb228fc6"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/eval/common.py",
+        "sha256": "8fa2742a5dcede0dceb02124172ab983f6517674deffc3b6ff9bbe0aa94f3d1c"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/eval/run.py",
+        "sha256": "065e5f21d96d4bd9c3562b35865f43ae2e877289396b04e5ac533587592bfce9"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/act/eval.py",
+        "sha256": "f6b6cf8f3ba1bec780a3164b0c4369c9e04356f1e8a09d03eda1d89be99ee840"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/act/eval_utils.py",
+        "sha256": "a1f068dbc9fb76f4840469a1803e80899df9195f41137e5c578ff3112aa90d79"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/act/se_relative_processor.py",
+        "sha256": "820dafa317833240c686ddbf9f7163fe08bc371d205683cfebede8398346b1b5"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/act/train.py",
+        "sha256": "683545ebc7ab6ca33e8799ffcb4632ccbaa2a31ee21631527f9e0e8a5a70899a"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/dp/eval.py",
+        "sha256": "6faf763261b9ed5b1631c8d3f965bb2a54a8457dc9212afb519039db2a57cfbf"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/dp/eval_utils.py",
+        "sha256": "9c44e926c332ed5298cd0458eaeb6be715a0619e9ddf23b47c2ec6f8e583599d"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/diffusion_policy/config/task/umi_drone_ee_pos.yaml",
+        "sha256": "79b8b3905f0b46f06ba388b9523a5d4c0babe6c340bb292828cc25895f4d4024"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/diffusion_policy/config/train_diffusion_unet_timm_umi_workspace.yaml",
+        "sha256": "d9024caeca855f5094e4e1eac61639f6df6136a53dfbe39ce362b4c3e785d817"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/train.py",
+        "sha256": "4dc8d6e876db25a62bf6c647444d7ee88f6754cda992c75728419d47f26374e5"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/pi/eval.py",
+        "sha256": "fd2c29cdadeeb94bcea2fce62c57d31ba3b6f4ea520c12c804abcd462fa908b4"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/pi/eval_utils.py",
+        "sha256": "c91a3c31deca7bf4f72b73b00a96eef936c8979c37afc3ea7583378d477a4b19"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/remote/protocol.py",
+        "sha256": "d1a6816db8ac435786c4a253aa2ecb1aaf102fcc19e6242cecd979ac646aa37c"
+      },
+      {
+        "path": "source/ambench_learn/ambench_learn/policies/remote/server.py",
+        "sha256": "eab9e6a25c13db4806a2672df96e8305883b22e79c579e457fca6fa0670b883e"
+      },
+      {
+        "path": "tools/research/publish_video_pages.py",
+        "sha256": "38c748ad14c6aff8a6f34abede54a64d873fcf629dc81ef17859e8e570c30d18"
+      },
+      {
+        "path": "tools/research/start_policy.sh",
+        "sha256": "d952d9f234bf3e5e59a0bf08e852e6fe5c285c2c3b60c7cfe7edc026ddf179cd"
+      },
+      {
+        "path": "tools/research/sync_dataset.sh",
+        "sha256": "8ee71b7deecfcdfe8f84b4ac07e8195862c970e014239684332aec351f7832c1"
+      },
+      {
+        "path": "tools/research/train_uaquad_cpu.sh",
+        "sha256": "c56ed6c2a86101965083e4602c935a2e2b698e6843ca25b65ac82c9d22ce0262"
+      },
+      {
+        "path": "tools/research/tunnel_policy.sh",
+        "sha256": "cc955c4a5451cd82c31d31875404d64f43683f41a933ca99a31bb0fa492d56bf"
+      },
+      {
+        "path": "tools/research/wait_policy.sh",
+        "sha256": "e70960e22cdd93fd8b193fe83efee718272e37c926484ea074ff8e766d703331"
+      },
+      {
+        "path": "usage_assets/uaquad/policy_specs.json",
+        "sha256": "f8c5d28e9f821aec0b4ee24dfc2c407c38319d5b9dc3b3ecfa31f8be7e32c9aa"
+      },
+      {
+        "path": "usage_assets/uaquad/recording_specs.json",
+        "sha256": "c606cefcea10a352231519fe33b5c9fc6cbc61660a5532c40cafd26e43eb43a9"
+      },
+      {
+        "path": "usage_assets/uaquad/training_provenance.json",
+        "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036"
+      }
+    ]
+  },
+  "source_reports": [
+    {
+      "path": "outputs/research/uaquad-20261009/press-initial/results.json",
+      "sha256": "0581f4e3635c8c4b31509bcd5ec74f22b10ad131e35ba040f54a3068623d080d"
+    },
+    {
+      "path": "outputs/research/uaquad-20261009/experts-prefix-revalidated/results.json",
+      "sha256": "e3ae29dd28c1fb91e2ce85c9ce86a25469e02eb03b348a859d41bd2ddb8fd31d"
+    },
+    {
+      "path": "outputs/research/uaquad-20261009/experts-tail-revalidated/results.json",
+      "sha256": "b434e29ce10641cf561548d756e688d523a77c8ac8112d725e9835fa6992d7ff"
+    },
+    {
+      "path": "outputs/research/uaquad-20261009/policy/results.json",
+      "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+    }
+  ],
+  "browser_offline": {
+    "status": "passed",
+    "report_path": "outputs/uaquad-ui-check/final-browser-offline.json",
+    "report_sha256": "7c51a87e27ebc8a3d58bdcc52d61fa50fa172fa6f9f46f57dc14c66f06944f32",
+    "verified_at_utc": "2026-10-09T04:26:14.024337+00:00",
+    "ui_checks_passed": 90,
+    "native_mp4_loaded_seeked_decoded_played": 126,
+    "general_gallery_checks_passed": 7,
+    "tested_source_sha256": {
+      "usage_assets/uaquad/index.html": "5b67b717ec66281f639881d073ea33499605ff9dfdbd69b7e81ffe735663398d",
+      "usage_assets/animations/manifest.json": "8da66eb0994f9bfb5b341627fafe320ccfa3c5756aa3398695a0454f9e912ed9",
+      "usage_assets/uaquad/trials.json": "aff466a9d1ab4014389720d9d7600db41f73b9bc78d2cb2d1d8460ba794894e4",
+      "usage_assets/uaquad/trajectories.json": "859467d715c9a64f39e4c200a4ede66f8d37ea88386a244786081972dd54eab5",
+      "usage_assets/playback.html": "a8fc10a0110e06aca136e42b3371f3abe0b2515dccb126fe9b0aa88c7168665d"
+    },
+    "caption_followup": {
+      "status": "passed",
+      "report_path": "outputs/uaquad-ui-check/caption-patch-check.json",
+      "report_sha256": "12eec41df519181db4da9cd86f33e7e2ec5e1628268a769ac3dac919bd50f66a",
+      "verified_at_utc": "2026-10-09T04:30:30.995422+00:00",
+      "checks_passed": 9,
+      "tested_html_sha256": "9baad28760e70a2f167677257083c463d12b1ab03d76c6b8f3610fe9b6d60867",
+      "scope": "Caption DOM updates and responsive layout only; no MP4 load/decode/play"
+    },
+    "coverage_note": "Full offline playback was checked before the caption patch. The final caption patch was checked separately; final HTML full playback will be tested online."
+  },
+  "public_access": {
+    "status": "pending",
+    "url": "https://zipengdai.com/ambench/uaquad/"
+  },
+  "limits": [
+    "No first-party RL trainer or task rewards suitable for an RL benchmark in this branch.",
+    "No PX4/MAVLink flight bridge, automatic system identification, or UAV hardware real2sim2real validation.",
+    "Two seeds and one optimizer step do not establish generalization or a fair model ranking.",
+    "Remote CPU inference and paused simulation do not demonstrate hardware real-time control bandwidth."
+  ],
+  "formatting": {
+    "status": "passed",
+    "scope": "all changed source, documentation, and JSON files before final delivery text update; final caption HTML checked separately",
+    "log_sha256": "8f36b2507a5d43671c4f3e0fbf55f52920923bc4edfe3c5c6d8bfe764784211e"
+  },
+  "candidate_release_size": {
+    "status": "passed",
+    "artifact_bytes_before_final_validation_text_updates": 82282920,
+    "limit_exclusive_bytes": 100000000,
+    "authoritative_final_artifact": "https://zipengdai.com/ambench/release.json"
+  }
+}

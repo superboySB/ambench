@@ -115,6 +115,25 @@ def stage_site(repo_root: Path, research_commit: str, worktree_clean: bool) -> t
             if len(data) != row[f"{suffix}_bytes"] or hashlib.sha256(data).hexdigest() != row[f"{suffix}_sha256"]:
                 raise ValueError("Preview bytes changed after the media release check")
             (staged_media / filename).write_bytes(data)
+    uaquad_dir = repo_root / "usage_assets" / "uaquad"
+    if (uaquad_dir / "index.html").exists():
+        staged_uaquad = stage / "uaquad"
+        staged_uaquad.mkdir()
+        for filename in (
+            "index.html",
+            "trials.json",
+            "trajectories.json",
+            "validation.json",
+            "recording_specs.json",
+            "animation_specs.json",
+            "policy_specs.json",
+            "policy_trials.json",
+            "training_provenance.json",
+        ):
+            source = uaquad_dir / filename
+            if source.is_symlink() or not source.is_file():
+                raise ValueError(f"Missing regular UAQuad documentation file: {filename}")
+            (staged_uaquad / filename).write_bytes(source.read_bytes())
     payload = file_records(stage)
     payload_bytes = sum(int(record["bytes"]) for record in payload)
     release = {

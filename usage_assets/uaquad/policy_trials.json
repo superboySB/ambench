@@ -1,0 +1,4024 @@
+{
+  "schema_version": 1,
+  "verification_status": "passed",
+  "coverage": {
+    "expected_count": 12,
+    "verified_count": 12,
+    "missing_names": [],
+    "invalid_names": []
+  },
+  "claim_limit": "One optimizer step per checkpoint verifies model and transport interfaces, not learned UAQuad task performance. UAQuad seed 51 was present in its own one-step training demonstration.",
+  "metric_basis": {
+    "source": "source/ambench/ambench/evaluation/tracking/collect.py and source/ambench/ambench/evaluation/tracking/metrics.py",
+    "sampling": "Evaluator tracking records post-step observations for nonterminal steps only. summarize_records omits the last tracking record when more than one exists; each numeric metric count then excludes nonfinite values independently. Executed steps and per-metric sample counts therefore differ.",
+    "time": "Tracking execution_time is metric_input_records multiplied by the logged simulator dt; it is neither the full executed_steps duration nor wall-clock inference time.",
+    "base_tilt_rad": "Euclidean norm of Euler XYZ roll and pitch recovered from actual base WXYZ quaternion, in radians. It is not the geometric angle between the thrust axis and world vertical.",
+    "max_tilt_utilization": "Maximum recorded base_tilt_rad. Despite the legacy field name, this is an angle in radians and is not normalized by an attitude limit.",
+    "saturation_rate": "Fraction of metric input records where any reported motor thrust is at or outside the configured thrust bounds within 1e-5 N, or the actuator reports thrust_saturated. This incidence can be high with saturation disabled and does not prove applied clipping.",
+    "tracking_errors": "Post-step controller desired pose minus measured pose; these are controller tracking errors, not task-target distance or a measure of task success."
+  },
+  "source_report": {
+    "path": "outputs/research/uaquad-20261009/policy/results.json",
+    "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+  },
+  "source_specs": {
+    "path": "usage_assets/uaquad/policy_specs.json",
+    "sha256": "f8c5d28e9f821aec0b4ee24dfc2c407c38319d5b9dc3b3ecfa31f8be7e32c9aa"
+  },
+  "trials": [
+    {
+      "name": "uaquad_policy_act_transfer_seed51",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_act_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "act",
+      "model_variant": "act",
+      "env_seed": 51,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.3028560511975934,
+        "avg_base_tracking_error_rot_geodesic": 1.2594671059023541,
+        "avg_normalized_base_deviation": 0.4520239570113334,
+        "avg_normalized_ee_error": 0.36837216057426486,
+        "avg_tracking_error_pos": 0.24680934758475748,
+        "avg_tracking_error_rot_geodesic": 1.4502836046324266,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 3.219121188522087,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.3138531138016989,
+            "mean": 0.01188605634422263,
+            "min": 0.0,
+            "p50": 0.000497765360214904,
+            "p90": 0.04217381134143537,
+            "p95": 0.076902479150228,
+            "p99": 0.14541255864633204
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.13669460178264,
+            "mean": 0.20614572647896462,
+            "min": 0.0,
+            "p50": 2.633125101432526e-16,
+            "p90": 0.6027946010841276,
+            "p95": 1.551477270467633,
+            "p99": 2.752871107450161
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.5585181568324449,
+            "mean": 0.3028560511975934,
+            "min": 0.028764532546926798,
+            "p50": 0.3076777079932058,
+            "p90": 0.4539202474687263,
+            "p95": 0.4848393295060952,
+            "p99": 0.5300145326718646
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1415231895734097,
+            "mean": 1.2594671059023541,
+            "min": 0.038302848618210504,
+            "p50": 1.1179365079601127,
+            "p90": 2.70646813195241,
+            "p95": 2.914025067960696,
+            "p99": 3.0901401383636897
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 3.219121188522087,
+            "mean": 0.5396764114365247,
+            "min": 0.005912901820779902,
+            "p50": 0.4046316954533295,
+            "p90": 1.036543925400607,
+            "p95": 1.5743677883627636,
+            "p99": 2.5944303027743305
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.7629427481199277,
+            "mean": 0.24680934758475748,
+            "min": 0.0032527289543705282,
+            "p50": 0.19688210086977248,
+            "p90": 0.5664865685256982,
+            "p95": 0.6174185564741677,
+            "p99": 0.6777664395482669
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.14054632222665,
+            "mean": 1.4502836046324266,
+            "min": 0.046662330064850335,
+            "p50": 1.377273280586975,
+            "p90": 2.5474980114530767,
+            "p95": 2.806860113596342,
+            "p99": 3.037032776044922
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.04261948633939028,
+            "mean": -0.020357042172217326,
+            "min": -0.06632738374173641,
+            "p50": -0.022393126040697098,
+            "p90": 0.010105959326028828,
+            "p95": 0.018048880994319904,
+            "p99": 0.030001473054289816
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 5.299986124038696,
+            "mean": 2.3760013522915173,
+            "min": 0.0002486705780029297,
+            "p50": 2.239399492740631,
+            "p90": 5.027152371406555,
+            "p95": 5.090386056900025,
+            "p99": 5.150917091369629
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 2.65298767821309,
+            "mean": 0.05886747650953491,
+            "min": 0.0,
+            "p50": 0.002217410087256065,
+            "p90": 0.16112910009687031,
+            "p95": 0.26517549922628614,
+            "p99": 0.7720991574498315
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 2.258907675743103,
+            "mean": 0.046153037584465206,
+            "min": 0.0,
+            "p50": 0.0018188392277806997,
+            "p90": 0.13385017216205597,
+            "p95": 0.21349026262760162,
+            "p99": 0.5729197978973404
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 8.442954608028534,
+            "mean": 3.3517631397253824,
+            "min": 0.00030269984367862693,
+            "p50": 2.5097021115546068,
+            "p90": 8.166690559640239,
+            "p95": 8.388771496320627,
+            "p99": 8.393953708792857
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 3.8600992038846016,
+            "mean": 1.3544685587996312,
+            "min": 0.00012648975825868547,
+            "p50": 0.897462148219347,
+            "p90": 3.559631548653124,
+            "p95": 3.630975177587106,
+            "p99": 3.692208410128951
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 737.4714965820312,
+            "mean": 130.61773199755598,
+            "min": -8.5205078125,
+            "p50": 106.98686981201172,
+            "p90": 255.49805908203126,
+            "p95": 325.0347290039062,
+            "p99": 466.6049316406249
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 0.8336091893021564,
+            "mean": 0.4520239570113334,
+            "min": 0.04293213812974149,
+            "p50": 0.45922045969135195,
+            "p90": 0.6774929066697407,
+            "p95": 0.7236407903076048,
+            "p99": 0.7910664666744247
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.1387205195819816,
+            "mean": 0.36837216057426486,
+            "min": 0.0048548193348813854,
+            "p50": 0.2938538818951828,
+            "p90": 0.8455023410831316,
+            "p95": 0.9215202335435339,
+            "p99": 1.0115917008183086
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9895702962035878
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "ResNet18 IMAGENET1K_V1",
+        "initialized_pretrained": true,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "act",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_act_train.log",
+              "bytes": 6789,
+              "sha256": "619add568de9ad4ba911417ff54056ccc4c4934e183d5a9b2fa0b63ddf0b8b29"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_act_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "config": {
+              "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/train_config.json",
+              "bytes": 5404,
+              "sha256": "c65ab8d36ee2b76b90131305ae7d421f6d94f635eb368a8bab6a634fcc811607"
+            },
+            "dataset_report": {
+              "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/benchmark_dataset_report.json",
+              "bytes": 440,
+              "sha256": "4de0cd1463dd77ff67b9f8ec6a7071ed8f7a7b5ae7aa1917c48663ffc038c2c4"
+            },
+            "checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+            "loss": null,
+            "loss_note": "Default log_freq 200 does not log the one-step loss; real checkpoint reload and finite model forward checked separately."
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 7941,
+        "start_time_ticks": "743460933",
+        "argv": [
+          "/opt/venvs/act/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "act",
+          "--checkpoint",
+          "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/eval_summary.json",
+          "sha256": "7c07d60f13aa64a91f0e7630df1d3bae8aa3a0bb85fb49d9af46e832569bce57"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/tracking/tracking.jsonl",
+          "sha256": "01dc28c060f06fb92c6e6fd801d9feb7db68d7bda6a8183a1dcbbb04918671b2"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/tracking/analysis.json",
+          "sha256": "8d89e08f2d47f8e0fd302ae3e5701d889084d007fe183ceaf1ad85c8a5a70f0b"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/env_cfg.yaml",
+          "sha256": "72e173da59c9b2fa5d1fd5deaf5ffc8f8dd523405b8dd6b6c6cde4173148a3e8"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/server-identity-before.json",
+          "sha256": "2085cdcfc8a52fc617327d7d33cb3161f4242efe7323c7e63036efcb4e7e2404"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/server-identity-after.json",
+          "sha256": "2085cdcfc8a52fc617327d7d33cb3161f4242efe7323c7e63036efcb4e7e2404"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/server-inference.log",
+          "sha256": "91d762af328af816ddbc11208969208d29e87ff30da16878fb59638ff6a6d700"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/videos/act-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "57b10c9fe664875de3f127870175e126f0f91241b97a7f8458528fbc2064bbe4",
+            "bytes": 1638250
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/videos/act-eval-base_camera-env0-eps0.mp4",
+            "sha256": "a93833992e0205e73d61fa67d0b3c0c0133c5cb5edffbd3fa1900eba8ab2e9ba",
+            "bytes": 2061342
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed51/videos/act-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "677a70ca4bd38f2428c14d6e1d9e554e1a4930e0c8d31b2c0671bde942ef2c7a",
+            "bytes": 1209898
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_act_transfer_seed52",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_act_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "act",
+      "model_variant": "act",
+      "env_seed": 52,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.3263036163152037,
+        "avg_base_tracking_error_rot_geodesic": 1.1202194838254016,
+        "avg_normalized_base_deviation": 0.487020322858513,
+        "avg_normalized_ee_error": 0.465351267032629,
+        "avg_tracking_error_pos": 0.31178534891186144,
+        "avg_tracking_error_rot_geodesic": 1.466462143362611,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 3.3055499500552177,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.29192888058771244,
+            "mean": 0.012910416878531865,
+            "min": 0.0,
+            "p50": 0.0004743572128959541,
+            "p90": 0.048003296550648604,
+            "p95": 0.08631870043832665,
+            "p99": 0.14034626419352925
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.1389067307453726,
+            "mean": 0.20221360609970196,
+            "min": 0.0,
+            "p50": 2.7755575615628914e-16,
+            "p90": 0.5969614576723568,
+            "p95": 1.4011881451382666,
+            "p99": 2.679883434678473
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.7280678079583124,
+            "mean": 0.3263036163152037,
+            "min": 0.028940051173524876,
+            "p50": 0.3327642022795628,
+            "p90": 0.4740848451281736,
+            "p95": 0.5117575427855281,
+            "p99": 0.6454085897820022
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.140030203405235,
+            "mean": 1.1202194838254016,
+            "min": 0.033316821519122936,
+            "p50": 0.9502586815708186,
+            "p90": 2.385279502132281,
+            "p95": 2.7503248974964953,
+            "p99": 3.017792979103245
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 3.3055499500552177,
+            "mean": 0.6476427244833058,
+            "min": 0.0017354373043340428,
+            "p50": 0.4189349838328355,
+            "p90": 1.8082354606253934,
+            "p95": 2.081301365478683,
+            "p99": 2.4661368175116687
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.8367286724309392,
+            "mean": 0.31178534891186144,
+            "min": 0.0030032647304433107,
+            "p50": 0.27137639993404145,
+            "p90": 0.6004616865103886,
+            "p95": 0.6445459373579605,
+            "p99": 0.7566064622711063
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1351852745612145,
+            "mean": 1.466462143362611,
+            "min": 0.08977042377074236,
+            "p50": 1.4617412323683183,
+            "p90": 2.465773314933117,
+            "p95": 2.693801465222999,
+            "p99": 2.9695239270613825
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.04198578558862209,
+            "mean": -0.016397754357320334,
+            "min": -0.066282594576478,
+            "p50": -0.012066708877682686,
+            "p90": 0.006398791074752818,
+            "p95": 0.015156282298266877,
+            "p99": 0.021010717544704675
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 3.368064045906067,
+            "mean": 1.0169983414360124,
+            "min": 0.00026175379753112793,
+            "p50": 0.715844988822937,
+            "p90": 2.7445644378662113,
+            "p95": 3.0289369344711305,
+            "p99": 3.262491512298584
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 2.3600715423434773,
+            "mean": 0.05911753286804282,
+            "min": 0.0,
+            "p50": 0.002089368510433856,
+            "p90": 0.1786152395462582,
+            "p95": 0.26562829499391927,
+            "p99": 0.7569736055484876
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 1.842572659254074,
+            "mean": 0.0452537688854697,
+            "min": 0.0,
+            "p50": 0.0016879830800462514,
+            "p90": 0.13801206648349762,
+            "p95": 0.20890454202890396,
+            "p99": 0.5896279095090019
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 3.6020225113580175,
+            "mean": 1.0699624538490264,
+            "min": 0.0003529775304622266,
+            "p50": 0.827297076260288,
+            "p90": 2.8130463475483998,
+            "p95": 3.100514378534737,
+            "p99": 3.30498457390515
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 1.522647738456726,
+            "mean": 0.335235177805643,
+            "min": 0.0001311747582803946,
+            "p50": 0.2535679950378835,
+            "p90": 0.8973675485351122,
+            "p95": 0.9563267186284065,
+            "p99": 1.1951801504194735
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 744.2703857421875,
+            "mean": 155.84346420007992,
+            "min": 5.443746566772461,
+            "p50": 134.80856323242188,
+            "p90": 311.06605834960936,
+            "p95": 377.4982727050781,
+            "p99": 483.3878540039061
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.0866683700870334,
+            "mean": 0.487020322858513,
+            "min": 0.043194106229141604,
+            "p50": 0.4966629884769594,
+            "p90": 0.7075893210868263,
+            "p95": 0.7638172280381016,
+            "p99": 0.9632964026597047
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.2488487648222972,
+            "mean": 0.465351267032629,
+            "min": 0.004482484672303448,
+            "p50": 0.405039402886629,
+            "p90": 0.896211472403565,
+            "p95": 0.9620088617282991,
+            "p99": 1.1292633765240392
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9858156028368794
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "ResNet18 IMAGENET1K_V1",
+        "initialized_pretrained": true,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "act",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_act_train.log",
+              "bytes": 6789,
+              "sha256": "619add568de9ad4ba911417ff54056ccc4c4934e183d5a9b2fa0b63ddf0b8b29"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_act_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "config": {
+              "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model/train_config.json",
+              "bytes": 5404,
+              "sha256": "c65ab8d36ee2b76b90131305ae7d421f6d94f635eb368a8bab6a634fcc811607"
+            },
+            "dataset_report": {
+              "path": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/benchmark_dataset_report.json",
+              "bytes": 440,
+              "sha256": "4de0cd1463dd77ff67b9f8ec6a7071ed8f7a7b5ae7aa1917c48663ffc038c2c4"
+            },
+            "checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+            "loss": null,
+            "loss_note": "Default log_freq 200 does not log the one-step loss; real checkpoint reload and finite model forward checked separately."
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 8115,
+        "start_time_ticks": "743474037",
+        "argv": [
+          "/opt/venvs/act/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "act",
+          "--checkpoint",
+          "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/eval_summary.json",
+          "sha256": "fdbddc8df88c5d7190b73817f0bd5fe8ba4053fc976ee87099983f5a39a10348"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/tracking/tracking.jsonl",
+          "sha256": "f6e97e61425a73a20d3c5a4e731350ccf1697d8f869e39ea57a50af6cac33f04"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/tracking/analysis.json",
+          "sha256": "e670431658dd99c546b4554725eee3ad09b3da93090e15585bb4c11136f7871e"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/env_cfg.yaml",
+          "sha256": "f205e3fc9a4c4969b2f69ccaf958e71f8892fc1b846d3f71ba7c58ae21b13e88"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/server-identity-before.json",
+          "sha256": "e2bff75a308a27dd678c325598c290311c7308abdd4d168f5463ef718f7da98b"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/server-identity-after.json",
+          "sha256": "e2bff75a308a27dd678c325598c290311c7308abdd4d168f5463ef718f7da98b"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/server-inference.log",
+          "sha256": "da1d9c1142d0c1d524f7050a50593115a62391bf3ed5461451606fd8cd2d4597"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/videos/act-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "846c1e4753c8d24f7d8af7f611b36931eb6d57af5d962e805def5e7384522e19",
+            "bytes": 1759470
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/videos/act-eval-base_camera-env0-eps0.mp4",
+            "sha256": "61f8c69320b05954f49d3470f188b9bde000694af420d737cb3d777447d9fc5c",
+            "bytes": 2096741
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_transfer_seed52/videos/act-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "aeb76dad07c42484b9e26c8fb3efa1f14a8069389ed23549bd857980ec67f267",
+            "bytes": 1271651
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_dp_transfer_seed51",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_dp_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "dp",
+      "model_variant": "dp",
+      "env_seed": 51,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.33640460927285926,
+        "avg_base_tracking_error_rot_geodesic": 1.9412990246342234,
+        "avg_normalized_base_deviation": 0.5020964317505362,
+        "avg_normalized_ee_error": 0.4230844712671275,
+        "avg_tracking_error_pos": 0.28346659574897537,
+        "avg_tracking_error_rot_geodesic": 2.183598478197269,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 3.1225031459816246,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.8677241509859324,
+            "mean": 0.053839633686618094,
+            "min": 3.235714327845565e-06,
+            "p50": 0.040995676196034364,
+            "p90": 0.09035164957480529,
+            "p95": 0.12494424991868919,
+            "p99": 0.3348867357938146
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.1387478600790906,
+            "mean": 0.46648404469699206,
+            "min": 0.0,
+            "p50": 2.5438405243138006e-16,
+            "p90": 1.8762311665693352,
+            "p95": 2.3891833480672178,
+            "p99": 2.903882261902173
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.9975775099831286,
+            "mean": 0.33640460927285926,
+            "min": 0.039706260316269136,
+            "p50": 0.31578986061671316,
+            "p90": 0.5491534521190368,
+            "p95": 0.6167499072453827,
+            "p99": 0.7724877001354848
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.139205958750128,
+            "mean": 1.9412990246342234,
+            "min": 0.21081290962339658,
+            "p50": 1.990374733836723,
+            "p90": 2.926305332566755,
+            "p95": 3.0297619730443444,
+            "p99": 3.1065813038442927
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 3.1225031459816246,
+            "mean": 0.814875562246189,
+            "min": 0.015356174522971226,
+            "p50": 0.6192228444550849,
+            "p90": 1.9136601871321601,
+            "p95": 2.6113383953199105,
+            "p99": 2.8819290778413156
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.9885570620318869,
+            "mean": 0.28346659574897537,
+            "min": 0.010101809560632308,
+            "p50": 0.2660766295831083,
+            "p90": 0.5306438303838652,
+            "p95": 0.6615480267895711,
+            "p99": 0.8202106783088504
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1400781919721177,
+            "mean": 2.183598478197269,
+            "min": 0.1518809521797737,
+            "p50": 2.2688886494813074,
+            "p90": 2.96226116667217,
+            "p95": 3.043766102498248,
+            "p99": 3.122634804222387
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.08489096537232399,
+            "mean": -0.0032755625249919103,
+            "min": -0.09762323499307968,
+            "p50": -0.006827147677540779,
+            "p90": 0.05115307047963145,
+            "p95": 0.06178976446390151,
+            "p99": 0.07880517944693566
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 8.187171816825867,
+            "mean": 2.9495754115194477,
+            "min": 0.006250143051147461,
+            "p50": 2.592430830001831,
+            "p90": 5.536898612976074,
+            "p95": 6.44858558177948,
+            "p99": 7.967751569747924
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 4.311202946272262,
+            "mean": 0.3266907600433798,
+            "min": 8.315649045274395e-06,
+            "p50": 0.22700217076567997,
+            "p90": 0.5526163900672688,
+            "p95": 0.8392081411419945,
+            "p99": 2.4770050682633684
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 3.8271301984786987,
+            "mean": 0.25745638824241013,
+            "min": 4.887580871582031e-06,
+            "p50": 0.17287057638168335,
+            "p90": 0.4539166819304228,
+            "p95": 0.679072767496109,
+            "p99": 1.8882193744182607
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 11.004900523342494,
+            "mean": 4.2539875843187485,
+            "min": 0.009498271349024923,
+            "p50": 3.8041307226249725,
+            "p90": 8.062285736182506,
+            "p95": 8.423776714384232,
+            "p99": 10.562133681446976
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 5.249279275536537,
+            "mean": 1.8540582860855142,
+            "min": 0.00430902699008584,
+            "p50": 1.6599050015211105,
+            "p90": 3.606295375712216,
+            "p95": 3.8595310688018793,
+            "p99": 4.722558826208115
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 730.1625366210938,
+            "mean": 166.9126815555192,
+            "min": -12.002516746520996,
+            "p50": 137.7229766845703,
+            "p90": 341.53635864257814,
+            "p95": 401.67295532226564,
+            "p99": 552.51005859375
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.4889216566912367,
+            "mean": 0.5020964317505362,
+            "min": 0.05926307509890916,
+            "p50": 0.4713281501741987,
+            "p90": 0.8196320180881146,
+            "p95": 0.9205222496199741,
+            "p99": 1.1529667166201265
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.4754583015401295,
+            "mean": 0.4230844712671275,
+            "min": 0.015077327702436279,
+            "p50": 0.3971292978852362,
+            "p90": 0.7920057169908435,
+            "p95": 0.9873851146113002,
+            "p99": 1.2241950422520154
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9995828118481435
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "random ResNet18",
+        "initialized_pretrained": false,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "dp",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_dp_train.log",
+              "bytes": 1192,
+              "sha256": "fc282343031b2be1c254574aa4869dd7292f6f21a1d1b0d85295bcbdb691fe6b"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_dp_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "config": {
+              "path": "/data/outputs/rebuild-20261007/press_button_dp_smoke/.hydra/config.yaml",
+              "bytes": 9729,
+              "sha256": "9f9fcaf5930a94c54fb604427e8022fa507023d86d7b1bd8b7e883eeaa52510e"
+            },
+            "metrics": {
+              "path": "/data/outputs/rebuild-20261007/press_button_dp_smoke/logs.json.txt",
+              "bytes": 160,
+              "sha256": "8d7afb5f94652d2a684387096aed5c4121a5550b7b20297ff0233d193237505c"
+            },
+            "checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+            "loss": 1.0600950717926025
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 8288,
+        "start_time_ticks": "743487020",
+        "argv": [
+          "/opt/venvs/dp/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "dp",
+          "--checkpoint",
+          "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/eval_summary.json",
+          "sha256": "539d8e1d3f0039cda81ae4967eea371fd1da94b2d22ab672c6a1eaed997b9b72"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/tracking/tracking.jsonl",
+          "sha256": "457b445b9f3176750c83357109527a82d47960c939a667d693d03921e3892e50"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/tracking/analysis.json",
+          "sha256": "ffb3640ce20876476297277898bbf4bb2db57345d1aaebde3069f7909a8e8642"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/env_cfg.yaml",
+          "sha256": "de0d6dddb92af1afe6ff04e48b3d45ee7b987d0b92e3e79e45e52ee0a46ef963"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/server-identity-before.json",
+          "sha256": "8bc298b5a1357f597f55735fe8a68569eaa162a0171d47455fad3c070a9283b0"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/server-identity-after.json",
+          "sha256": "8bc298b5a1357f597f55735fe8a68569eaa162a0171d47455fad3c070a9283b0"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/server-inference.log",
+          "sha256": "2691be6dcc410aceeb56f06e8400103dfb67617a79a44844253aa2733b0cf6a7"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/videos/dp-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "701331f2b4aca050b963f188cf74a9e84c6a8ff6bf3dbb96799eeb1183678737",
+            "bytes": 1513448
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/videos/dp-eval-base_camera-env0-eps0.mp4",
+            "sha256": "2eaf3c905f54d79c00c5e0ed789d40385b5ac65b6334b67a2390f45f9987f759",
+            "bytes": 1673671
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed51/videos/dp-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "9f10ee2f015b7a0ad7ae2f33f8d5e5e7ced93e7c2eccba386deb45546ecfcc8c",
+            "bytes": 1389996
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_dp_transfer_seed52",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_dp_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "dp",
+      "model_variant": "dp",
+      "env_seed": 52,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.36892788552319394,
+        "avg_base_tracking_error_rot_geodesic": 2.0599484871975497,
+        "avg_normalized_base_deviation": 0.5506386351092447,
+        "avg_normalized_ee_error": 0.45531112184051387,
+        "avg_tracking_error_pos": 0.3050584516331443,
+        "avg_tracking_error_rot_geodesic": 2.2365297495832483,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 3.420321545237283,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.7311237691444465,
+            "mean": 0.05317519631247191,
+            "min": 2.0272574838276622e-06,
+            "p50": 0.041852070735144103,
+            "p90": 0.08889928817028189,
+            "p95": 0.1145210685064324,
+            "p99": 0.37356810024235615
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.139085078213722,
+            "mean": 0.48480232136124163,
+            "min": 0.0,
+            "p50": 2.5438405243138006e-16,
+            "p90": 1.883483306465672,
+            "p95": 2.410142582446017,
+            "p99": 2.9895287570776734
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.9219423244947343,
+            "mean": 0.36892788552319394,
+            "min": 0.03820477934055398,
+            "p50": 0.35231358759018233,
+            "p90": 0.5670695489842175,
+            "p95": 0.6128578741443492,
+            "p99": 0.7235092478880035
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1411787709455252,
+            "mean": 2.0599484871975497,
+            "min": 0.07144078979985964,
+            "p50": 2.1222191187260298,
+            "p90": 2.9662367233014684,
+            "p95": 3.0622556643102357,
+            "p99": 3.1220890543292197
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 3.420321545237283,
+            "mean": 1.1083630566997158,
+            "min": 0.015885368609905175,
+            "p50": 0.7223240081023672,
+            "p90": 2.7363614702062398,
+            "p95": 2.879222851891743,
+            "p99": 3.2105608734461373
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.8461404636256262,
+            "mean": 0.3050584516331443,
+            "min": 0.00429428692580553,
+            "p50": 0.30498180293487437,
+            "p90": 0.5131173675709503,
+            "p95": 0.6149645499773123,
+            "p99": 0.7291016521632728
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1410854759429245,
+            "mean": 2.2365297495832483,
+            "min": 0.30311307835141127,
+            "p50": 2.336833873697059,
+            "p90": 2.9814723482066765,
+            "p95": 3.068075182352013,
+            "p99": 3.1273743555300992
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.08782437071204185,
+            "mean": -0.0007605627371898361,
+            "min": -0.09177297353744507,
+            "p50": -0.004826989956200123,
+            "p90": 0.05432708933949472,
+            "p95": 0.06289035007357596,
+            "p99": 0.07475981533527375
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 7.987021803855896,
+            "mean": 3.179670141791958,
+            "min": 0.1392740404116921,
+            "p50": 3.268076777458191,
+            "p90": 5.096717166900635,
+            "p95": 5.561290717124937,
+            "p99": 6.563833408355713
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 3.1374790300498723,
+            "mean": 0.2988440318110279,
+            "min": 2.0230487285229133e-06,
+            "p50": 0.21648225326656814,
+            "p90": 0.5086364136925181,
+            "p95": 0.7976246079589545,
+            "p99": 2.134724218682626
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 2.700904995203018,
+            "mean": 0.2272819358600548,
+            "min": 1.9073486328125e-06,
+            "p50": 0.16036753356456757,
+            "p90": 0.39973911829292774,
+            "p95": 0.5990359783172607,
+            "p99": 1.5221878990531064
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 10.330834503867996,
+            "mean": 4.351047343146286,
+            "min": 0.18251006496325034,
+            "p50": 4.250478728797909,
+            "p90": 7.7884311736926914,
+            "p95": 8.391377737350007,
+            "p99": 8.46564325176818
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 4.478746935725212,
+            "mean": 1.837037072928169,
+            "min": 0.06656571947678458,
+            "p50": 1.7830419577658176,
+            "p90": 3.465351549908519,
+            "p95": 3.6855212576687335,
+            "p99": 3.911434132410213
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 734.4326782226562,
+            "mean": 175.19646417482923,
+            "min": -16.1566219329834,
+            "p50": 149.9154510498047,
+            "p90": 358.8272399902344,
+            "p95": 419.23228149414064,
+            "p99": 551.712568359375
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.3760333201413946,
+            "mean": 0.5506386351092447,
+            "min": 0.05702205871724474,
+            "p50": 0.5258411755077348,
+            "p90": 0.8463724611704738,
+            "p95": 0.9147132449915659,
+            "p99": 1.0798645490865724
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.2628962143666063,
+            "mean": 0.45531112184051387,
+            "min": 0.006409383471351537,
+            "p50": 0.4551967207983199,
+            "p90": 0.7658468172700751,
+            "p95": 0.9178575372795705,
+            "p99": 1.088211421139213
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.999165623696287
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "random ResNet18",
+        "initialized_pretrained": false,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "dp",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_dp_train.log",
+              "bytes": 1192,
+              "sha256": "fc282343031b2be1c254574aa4869dd7292f6f21a1d1b0d85295bcbdb691fe6b"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_dp_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "config": {
+              "path": "/data/outputs/rebuild-20261007/press_button_dp_smoke/.hydra/config.yaml",
+              "bytes": 9729,
+              "sha256": "9f9fcaf5930a94c54fb604427e8022fa507023d86d7b1bd8b7e883eeaa52510e"
+            },
+            "metrics": {
+              "path": "/data/outputs/rebuild-20261007/press_button_dp_smoke/logs.json.txt",
+              "bytes": 160,
+              "sha256": "8d7afb5f94652d2a684387096aed5c4121a5550b7b20297ff0233d193237505c"
+            },
+            "checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+            "loss": 1.0600950717926025
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 8589,
+        "start_time_ticks": "743499275",
+        "argv": [
+          "/opt/venvs/dp/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "dp",
+          "--checkpoint",
+          "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/eval_summary.json",
+          "sha256": "7fdcce975504b72014041b004738739abb0495f03c31e3e45db679882dd9c6cc"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/tracking/tracking.jsonl",
+          "sha256": "8b027b0cd3395e681e909a078452cfaacc12549f79dd22ede098324df415af31"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/tracking/analysis.json",
+          "sha256": "b697e2bd1c8036eb9a1cbaeab4b60cc051826cd400585994b59d65c39fc6064f"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/env_cfg.yaml",
+          "sha256": "49e122c1fd9556434a7bef208d09b123318c1fa66d0380b842970086ba3c066a"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/server-identity-before.json",
+          "sha256": "70abdf53c4645cb30fb01930d9180521c121ef470f82622a30b6f8aeee73b0ac"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/server-identity-after.json",
+          "sha256": "70abdf53c4645cb30fb01930d9180521c121ef470f82622a30b6f8aeee73b0ac"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/server-inference.log",
+          "sha256": "523ce01f25f128a515748827933b8ac20599e27b9ef52e1f367dfbdcde88c636"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/videos/dp-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "00359016788f7375ad7b38773a5c6f4b783bf7fdbf6252f0af4d1fceff67e713",
+            "bytes": 1676082
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/videos/dp-eval-base_camera-env0-eps0.mp4",
+            "sha256": "4081bd32a6bc686d1b741ac2a03e4eebeb81c2c20aa43399d74c9fe1353d52d2",
+            "bytes": 1634992
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_transfer_seed52/videos/dp-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "25bcd43bbdb6510c91512a2a9b576b9bf254036470cd812c8bc5185b0d4e8571",
+            "bytes": 1422801
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_pi0_transfer_seed51",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_pi0_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "pi",
+      "model_variant": "pi0",
+      "env_seed": 51,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.24843072465589763,
+        "avg_base_tracking_error_rot_geodesic": 1.3662297458059058,
+        "avg_normalized_base_deviation": 0.37079212635208597,
+        "avg_normalized_ee_error": 0.4172567062094789,
+        "avg_tracking_error_pos": 0.27956199316035085,
+        "avg_tracking_error_rot_geodesic": 1.377088459296777,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 3.243733220661597,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.2642309106352176,
+            "mean": 0.00955054997910395,
+            "min": 0.0,
+            "p50": 0.0005484694761864635,
+            "p90": 0.03722563186923841,
+            "p95": 0.06055602198654453,
+            "p99": 0.11012405232530247
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.1393245898600504,
+            "mean": 0.20485659688053381,
+            "min": 0.0,
+            "p50": 2.5467944979662764e-16,
+            "p90": 0.6595709278394377,
+            "p95": 1.4519392404898164,
+            "p99": 2.707408743513482
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.8193703347218785,
+            "mean": 0.24843072465589763,
+            "min": 0.013485535906617403,
+            "p50": 0.2345975501806884,
+            "p90": 0.3832846797386914,
+            "p95": 0.4788281855081167,
+            "p99": 0.656160871239729
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1414437978978462,
+            "mean": 1.3662297458059058,
+            "min": 0.028975356115760794,
+            "p50": 1.2218798672044031,
+            "p90": 2.8354000558540537,
+            "p95": 2.987271951752293,
+            "p99": 3.1120616275152746
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 3.243733220661597,
+            "mean": 0.45403572849584245,
+            "min": 0.003523755211496674,
+            "p50": 0.36350212996092357,
+            "p90": 0.75191380687256,
+            "p95": 1.1880726429283444,
+            "p99": 2.4198417908101635
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.998304644891966,
+            "mean": 0.27956199316035085,
+            "min": 0.008220804314843304,
+            "p50": 0.2523042187732667,
+            "p90": 0.4609741029782488,
+            "p95": 0.5348680917912536,
+            "p99": 0.7292107385025736
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1014728006493706,
+            "mean": 1.377088459296777,
+            "min": 0.03478024042149796,
+            "p50": 1.2584002346431833,
+            "p90": 2.5851641730627857,
+            "p95": 2.667063338820487,
+            "p99": 2.865885266634016
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.042071744333952665,
+            "mean": -0.010946651350110023,
+            "min": -0.06203874573111534,
+            "p50": -0.010708268731832504,
+            "p90": 0.011583607643842697,
+            "p95": 0.017628229409456218,
+            "p99": 0.023325061127543446
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 3.4887635707855225,
+            "mean": 0.9412159742904042,
+            "min": 0.00018772482872009277,
+            "p50": 0.6465508937835693,
+            "p90": 2.452293443679811,
+            "p95": 2.7753047704696656,
+            "p99": 3.4134621238708496
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 1.8081067417067538,
+            "mean": 0.04499789909326389,
+            "min": 0.0,
+            "p50": 0.0020872058845421903,
+            "p90": 0.13042438960953484,
+            "p95": 0.23927059106658205,
+            "p99": 0.5413807326874944
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 1.3561160862445831,
+            "mean": 0.03455974533518317,
+            "min": 0.0,
+            "p50": 0.0015350872417911887,
+            "p90": 0.10000531375408173,
+            "p95": 0.18899931013584137,
+            "p99": 0.42099776268005445
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 5.577266096303364,
+            "mean": 1.3815263206718364,
+            "min": 0.00028281208191732846,
+            "p50": 0.8448620200564606,
+            "p90": 3.8309999504812926,
+            "p95": 4.37183516641212,
+            "p99": 5.50961823354272
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 2.574381586164236,
+            "mean": 0.5844190621413334,
+            "min": 0.00013332852904568426,
+            "p50": 0.352740871545393,
+            "p90": 1.7303261809051065,
+            "p95": 1.889087327872403,
+            "p99": 2.3827223145449534
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 622.8884887695312,
+            "mean": 120.72451985036525,
+            "min": -17.071788787841797,
+            "p50": 99.47587585449219,
+            "p90": 241.43815307617191,
+            "p95": 303.64290161132794,
+            "p99": 462.0647033691406
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.222940798092356,
+            "mean": 0.37079212635208597,
+            "min": 0.02012766553226478,
+            "p50": 0.35014559728460953,
+            "p90": 0.5720666861771513,
+            "p95": 0.7146689335942039,
+            "p99": 0.9793445839398939
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.490006932674576,
+            "mean": 0.4172567062094789,
+            "min": 0.01226985718633329,
+            "p50": 0.37657346085562193,
+            "p90": 0.6880210492212668,
+            "p95": 0.7983105847630649,
+            "p99": 1.0883742365710052
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9720483938256154
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "OpenPI base checkpoint",
+        "initialized_pretrained": true,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "pi0",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi0_train.log",
+              "bytes": 6765,
+              "sha256": "b604886c3d17dd89ca5f7bb7155fedf7fa28584ebd15bec47122abc7c32ff4c4"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi0_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+            "checkpoint_metadata": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/metadata.pt",
+              "bytes": 3187,
+              "sha256": "8f15dd262515596a55b1393898d15adbe5e30bd760c5cc05510578fc5b68e96d"
+            },
+            "norm_stats": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+              "bytes": 1400,
+              "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+            },
+            "export_report": {
+              "path": "/data/datasets/openpi-rebuild-20261007/am_bench/multitask_openpi_original_20hz_ee_local_relative/ambench_openpi_export_report.json",
+              "bytes": 558,
+              "sha256": "d447cd5acdf812bcd242327d77522b02a6539ae559e1abcea8870c1437434971"
+            },
+            "loss": 0.093
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 8890,
+        "start_time_ticks": "743511178",
+        "argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "cpu",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1"
+        ],
+        "listening_ports": [
+          8000
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/eval_summary.json",
+          "sha256": "f754a93928db40dd4a3084d9eccaa527695c0675e3bcdf3394bb655134e13d40"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/tracking/tracking.jsonl",
+          "sha256": "4a1fa68e679c53d71bb8c88374b45ac511fb04bff300138a6281c2ac1f6e0523"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/tracking/analysis.json",
+          "sha256": "0bb89a92f6328cf02b791155c143d91a14a87bf8eef43dce74fe5c5ca49cd0ba"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/env_cfg.yaml",
+          "sha256": "9ffd402fa56e8a914f7b3a9650993fa73900b8af7072e9853d42f6c8f2a61c4b"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/server-identity-before.json",
+          "sha256": "b539777fc859533bae4e5c28bd38ee10fe3d9b7def908fb83e1307450f3c1ce1"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/server-identity-after.json",
+          "sha256": "b539777fc859533bae4e5c28bd38ee10fe3d9b7def908fb83e1307450f3c1ce1"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/server-inference.log",
+          "sha256": "feac051022615647f1f23702cb6d483d7d61edccbc18e1949d4661afc392b4df"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/videos/pi-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "7b957e5a13bb47aa4a221c56a8794e3b8a662382a08f41f242374b8ded9fb294",
+            "bytes": 1507694
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/videos/pi-eval-base_camera-env0-eps0.mp4",
+            "sha256": "535feca71a86f88326487da0b06f7c91c811f8312c1846c7b5a76ae90dd78f3e",
+            "bytes": 1688419
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed51/videos/pi-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "60666a9bf7d08deff4788203a3b2b2013b68b819662e1c7328a1171fe9a751a9",
+            "bytes": 1109106
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_pi0_transfer_seed52",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_pi0_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "pi",
+      "model_variant": "pi0",
+      "env_seed": 52,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.3708418629880622,
+        "avg_base_tracking_error_rot_geodesic": 1.1217750789052194,
+        "avg_normalized_base_deviation": 0.5534953178926301,
+        "avg_normalized_ee_error": 0.5560846293670383,
+        "avg_tracking_error_pos": 0.37257670167591567,
+        "avg_tracking_error_rot_geodesic": 1.533406974974337,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 2.199670993182296,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.37559975205071044,
+            "mean": 0.01570664155208081,
+            "min": 0.0,
+            "p50": 0.0007987296784712028,
+            "p90": 0.0515950422567721,
+            "p95": 0.0982897437968131,
+            "p99": 0.19318370862043116
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.0358961246752427,
+            "mean": 0.15026607823196472,
+            "min": 0.0,
+            "p50": 2.7755575615628914e-16,
+            "p90": 0.417866462802135,
+            "p95": 0.9404777612032776,
+            "p99": 2.364262942785003
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.8599293618474272,
+            "mean": 0.3708418629880622,
+            "min": 0.01603280586447667,
+            "p50": 0.35320170429818953,
+            "p90": 0.6368022186842172,
+            "p95": 0.677235150862961,
+            "p99": 0.7835013176254277
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.141258075862292,
+            "mean": 1.1217750789052194,
+            "min": 0.03647522654705619,
+            "p50": 0.8192825481184646,
+            "p90": 2.4945936403906637,
+            "p95": 2.782954471485959,
+            "p99": 3.0510873114656945
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 2.199670993182296,
+            "mean": 0.5012628067161689,
+            "min": 0.0033384488182621476,
+            "p50": 0.3990199777352437,
+            "p90": 0.9368498794893484,
+            "p95": 1.1270162365479028,
+            "p99": 1.6510134455225978
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 1.0498518909826182,
+            "mean": 0.37257670167591567,
+            "min": 0.026533042835430135,
+            "p50": 0.3231215430434229,
+            "p90": 0.6941373397753123,
+            "p95": 0.7581932658668014,
+            "p99": 0.8720677012276763
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.140696646680545,
+            "mean": 1.533406974974337,
+            "min": 0.10360102680221311,
+            "p50": 1.4018950246619468,
+            "p90": 2.720726489628376,
+            "p95": 2.8801509469267716,
+            "p99": 3.083723695682078
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.042110783979296684,
+            "mean": -0.01295342336128659,
+            "min": -0.05936328321695328,
+            "p50": -0.011826112866401672,
+            "p90": 0.010030881315469743,
+            "p95": 0.02185763083398342,
+            "p99": 0.030244150068610906
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 3.647055983543396,
+            "mean": 0.7340273219211598,
+            "min": 0.00017093226142606,
+            "p50": 0.44278573989868164,
+            "p90": 1.8305394172668459,
+            "p95": 2.874273633956909,
+            "p99": 3.479389567375183
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 2.8397351483983253,
+            "mean": 0.07044073587660336,
+            "min": 0.0,
+            "p50": 0.002041958408747076,
+            "p90": 0.20600001667397783,
+            "p95": 0.3118096726575358,
+            "p99": 0.9318636622901147
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 2.176703080534935,
+            "mean": 0.05353256088535101,
+            "min": 0.0,
+            "p50": 0.001663826173171401,
+            "p90": 0.16139453649520874,
+            "p95": 0.23550723493099213,
+            "p99": 0.672405718266967
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 3.7097469989998055,
+            "mean": 0.7919950277094159,
+            "min": 0.00023871948089123257,
+            "p50": 0.5093596380287428,
+            "p90": 2.0134824579758335,
+            "p95": 3.026104196317124,
+            "p99": 3.5327664320932586
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 1.4479443840682507,
+            "mean": 0.2558331631147675,
+            "min": 8.98225698620081e-05,
+            "p50": 0.17262009903788567,
+            "p90": 0.6241181936115029,
+            "p95": 1.0164332688087596,
+            "p99": 1.1900115892291068
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 764.1182250976562,
+            "mean": 141.16755085982132,
+            "min": 1.8002471923828125,
+            "p50": 116.10214233398438,
+            "p90": 278.0762023925781,
+            "p95": 350.6521850585936,
+            "p99": 496.2513049316404
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.2834766594737719,
+            "mean": 0.5534953178926301,
+            "min": 0.023929560991756225,
+            "p50": 0.5271667228331187,
+            "p90": 0.9504510726630107,
+            "p95": 1.010798732631285,
+            "p99": 1.1694049516797427
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.5669431208695794,
+            "mean": 0.5560846293670383,
+            "min": 0.03960155647079124,
+            "p50": 0.4822709597663028,
+            "p90": 1.03602588026166,
+            "p95": 1.1316317400997034,
+            "p99": 1.3015935839219048
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9778890279516061
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "OpenPI base checkpoint",
+        "initialized_pretrained": true,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "pi0",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi0_train.log",
+              "bytes": 6765,
+              "sha256": "b604886c3d17dd89ca5f7bb7155fedf7fa28584ebd15bec47122abc7c32ff4c4"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi0_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+            "checkpoint_metadata": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/metadata.pt",
+              "bytes": 3187,
+              "sha256": "8f15dd262515596a55b1393898d15adbe5e30bd760c5cc05510578fc5b68e96d"
+            },
+            "norm_stats": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+              "bytes": 1400,
+              "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+            },
+            "export_report": {
+              "path": "/data/datasets/openpi-rebuild-20261007/am_bench/multitask_openpi_original_20hz_ee_local_relative/ambench_openpi_export_report.json",
+              "bytes": 558,
+              "sha256": "d447cd5acdf812bcd242327d77522b02a6539ae559e1abcea8870c1437434971"
+            },
+            "loss": 0.093
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 9066,
+        "start_time_ticks": "743538967",
+        "argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "cpu",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1"
+        ],
+        "listening_ports": [
+          8000
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/eval_summary.json",
+          "sha256": "9d0cdd95a2a787b28568a8c31c8cbc31c15ffe5a3f77bbef5758cdccba8fd08a"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/tracking/tracking.jsonl",
+          "sha256": "86dfab7b7441d2f44c8b32ca5d52e5cd2f2cfcee02019621f28ded20aba89b01"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/tracking/analysis.json",
+          "sha256": "081c29f7850f32681bb8dd082dabb1a32ceb0d9ff84270d5e578b1832225640d"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/env_cfg.yaml",
+          "sha256": "aff56bb8a397469a4cec4514f606ca995226d385ee5029ab73deb051c7a62726"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/server-identity-before.json",
+          "sha256": "d7bbdaf94168f4854a98ea5c3d6c5cefd6c80d430707593c8f2e30a411ebae1d"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/server-identity-after.json",
+          "sha256": "d7bbdaf94168f4854a98ea5c3d6c5cefd6c80d430707593c8f2e30a411ebae1d"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/server-inference.log",
+          "sha256": "11cae5bb553206b8739b86b211d0f8fe747e039575a047cebc8b8dfffd46c228"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/videos/pi-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "e1b765d696ba893c16c7d1739e4cd0aaa1c887a8f77dd55c3f909039d8850b85",
+            "bytes": 1720417
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/videos/pi-eval-base_camera-env0-eps0.mp4",
+            "sha256": "bd1a8d256070f2eb675198e0de213592894c549bf3ec0940c31bb51a9524ac34",
+            "bytes": 2166631
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi0_transfer_seed52/videos/pi-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "6ff36b63ff9648f23e45bc3b34240b3eb3c2891812eab666fc166b4b057cf3c8",
+            "bytes": 1264035
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_pi05_transfer_seed51",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_pi05_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "pi",
+      "model_variant": "pi05",
+      "env_seed": 51,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.2814183158902214,
+        "avg_base_tracking_error_rot_geodesic": 0.4635085443013047,
+        "avg_normalized_base_deviation": 0.42002733714958423,
+        "avg_normalized_ee_error": 0.5004850813126172,
+        "avg_tracking_error_pos": 0.33532500447945357,
+        "avg_tracking_error_rot_geodesic": 0.8305197873143861,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 0.9599542268012655,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.33469454401700105,
+            "mean": 0.013621460246348199,
+            "min": 0.0,
+            "p50": 0.0007557835817199798,
+            "p90": 0.0638667051511661,
+            "p95": 0.09254601659504275,
+            "p99": 0.1486026088719675
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 2.9300484709641577,
+            "mean": 0.08356517622407399,
+            "min": 0.0,
+            "p50": 1.5700924586837752e-16,
+            "p90": 0.2086762766280502,
+            "p95": 0.3831248627744508,
+            "p99": 1.2494043326749407
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.7315946371721503,
+            "mean": 0.2814183158902214,
+            "min": 0.013378619122239177,
+            "p50": 0.2744379484618102,
+            "p90": 0.47775411667506185,
+            "p95": 0.544380792430669,
+            "p99": 0.700844406285351
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 2.865605436874746,
+            "mean": 0.4635085443013047,
+            "min": 0.017190473572587846,
+            "p50": 0.2912317548927169,
+            "p90": 1.0582850811905755,
+            "p95": 1.6362562892462966,
+            "p99": 2.2515375659850094
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 0.9599542268012655,
+            "mean": 0.2602678214986004,
+            "min": 0.00524029486695339,
+            "p50": 0.21986956276390476,
+            "p90": 0.4796823317115241,
+            "p95": 0.6238899135981569,
+            "p99": 0.8283808936640202
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.9456730932068594,
+            "mean": 0.33532500447945357,
+            "min": 0.015188377622463129,
+            "p50": 0.3221548852028948,
+            "p90": 0.5010786444483303,
+            "p95": 0.6679237325278151,
+            "p99": 0.8558278434160808
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.111549458555746,
+            "mean": 0.8305197873143861,
+            "min": 0.007157411848872875,
+            "p50": 0.584421903411046,
+            "p90": 1.9328570182901113,
+            "p95": 2.5433998667577304,
+            "p99": 3.036030628588669
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.04445056989789009,
+            "mean": -0.019128057117269694,
+            "min": -0.04792608693242073,
+            "p50": -0.025056440383195877,
+            "p90": 0.0049148611724376765,
+            "p95": 0.018580973148345947,
+            "p99": 0.023856754750013347
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 3.9928447008132935,
+            "mean": 2.7409501319256635,
+            "min": 0.00037579238414764404,
+            "p50": 3.4704716205596924,
+            "p90": 3.6234516859054566,
+            "p95": 3.70169837474823,
+            "p99": 3.8426043224334716
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 2.0339475430919953,
+            "mean": 0.037287421051673354,
+            "min": 0.0,
+            "p50": 0.00213573858438092,
+            "p90": 0.10605477280793935,
+            "p95": 0.16440888216257593,
+            "p99": 0.3764083094806478
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 1.3141914076404646,
+            "mean": 0.030314244194025373,
+            "min": 0.0,
+            "p50": 0.0018315635388717055,
+            "p90": 0.08850708603858948,
+            "p95": 0.1414791836286895,
+            "p99": 0.30638953670859465
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 4.038450815340747,
+            "mean": 2.7971041572313267,
+            "min": 0.000501394441084092,
+            "p50": 3.5294157177152714,
+            "p90": 3.682816006530665,
+            "p95": 3.776537801577801,
+            "p99": 3.8953782975847764
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 1.4956934452056885,
+            "mean": 0.866646705621278,
+            "min": 0.000204694049898535,
+            "p50": 1.0867629360873252,
+            "p90": 1.1598798713530414,
+            "p95": 1.2050587206729686,
+            "p99": 1.2413853703439235
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 658.190673828125,
+            "mean": 88.59549739353847,
+            "min": 11.105944633483887,
+            "p50": 61.38148880004883,
+            "p90": 197.4852630615235,
+            "p95": 244.35714721679685,
+            "p99": 398.4727160644529
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.0919322942867915,
+            "mean": 0.42002733714958423,
+            "min": 0.019968088242148022,
+            "p50": 0.40960887830120923,
+            "p90": 0.7130658457836744,
+            "p95": 0.8125086454189088,
+            "p99": 1.0460364272915688
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.4114523779206856,
+            "mean": 0.5004850813126172,
+            "min": 0.02266922033203452,
+            "p50": 0.48082818686999224,
+            "p90": 0.7478785738034781,
+            "p95": 0.9969010933250972,
+            "p99": 1.2773549901732548
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.917813934084272
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "OpenPI base checkpoint",
+        "initialized_pretrained": true,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "pi05",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi05_train.log",
+              "bytes": 6770,
+              "sha256": "b83aed6b2d57b43981f0fdbde93bef9380a8c7528875a22b2d4e668da1aa4b2b"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi05_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+            "checkpoint_metadata": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/metadata.pt",
+              "bytes": 3251,
+              "sha256": "2302664c8d4eb412fdfba913643278611da020c5c735ddb6a6243b6d07d0e3a9"
+            },
+            "norm_stats": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+              "bytes": 1400,
+              "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+            },
+            "export_report": {
+              "path": "/data/datasets/openpi-rebuild-20261007/am_bench/multitask_openpi_original_20hz_ee_local_relative/ambench_openpi_export_report.json",
+              "bytes": 558,
+              "sha256": "d447cd5acdf812bcd242327d77522b02a6539ae559e1abcea8870c1437434971"
+            },
+            "loss": 0.0547
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 9242,
+        "start_time_ticks": "743565992",
+        "argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "cpu",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1"
+        ],
+        "listening_ports": [
+          8000
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/eval_summary.json",
+          "sha256": "1ae2121799626a18dd7d9d8183d5e1776258125945233b7f89ba22775e382553"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/tracking/tracking.jsonl",
+          "sha256": "5792f052cf68485e6e8885e107150124d5542af7dec38081cf297f7859f5d30e"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/tracking/analysis.json",
+          "sha256": "f02d8055d70567f6c6b54a9813bc726d2d8d9243c44ed4ce8ae3fea71b38ce16"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/env_cfg.yaml",
+          "sha256": "64dd5d5257e28b45e4191440144b509ca71819e616630c0b9f7ded0441e186d9"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/server-identity-before.json",
+          "sha256": "f09c9e3096c643e45736d5fbf58e863736eb3d5e4aa53925aa517db7dc622f4a"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/server-identity-after.json",
+          "sha256": "f09c9e3096c643e45736d5fbf58e863736eb3d5e4aa53925aa517db7dc622f4a"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/server-inference.log",
+          "sha256": "e8924954063523ae736a7212405705848bd9725d762460602daf88b801f0ff68"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/videos/pi-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "b3a7d5ba932f2dcb819dc11289d6cda5264757ca884faf4c3f0e540d66c7dddb",
+            "bytes": 1533028
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/videos/pi-eval-base_camera-env0-eps0.mp4",
+            "sha256": "efe0f25f7cff62259473febde769555175ccccf6319d622ab1bf1d8b98385360",
+            "bytes": 2512983
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed51/videos/pi-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "6435eb26faeabc8586ca5ef00b771b1bc1ab06ac5617ad9bf6c8098468456d55",
+            "bytes": 649438
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_pi05_transfer_seed52",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_pi05_transfer",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "pi",
+      "model_variant": "pi05",
+      "env_seed": 52,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.26910320283149625,
+        "avg_base_tracking_error_rot_geodesic": 0.4524491856554533,
+        "avg_normalized_base_deviation": 0.4016465713902928,
+        "avg_normalized_ee_error": 0.4851483151014517,
+        "avg_tracking_error_pos": 0.3250493711179727,
+        "avg_tracking_error_rot_geodesic": 0.8038050666377418,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 0.9690725868164642,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.30666407277419094,
+            "mean": 0.013533649776596986,
+            "min": 0.0,
+            "p50": 0.0007761185779047552,
+            "p90": 0.062757718487221,
+            "p95": 0.09788365824859234,
+            "p99": 0.13682312525567458
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 2.9048001289673424,
+            "mean": 0.0825375733098275,
+            "min": 0.0,
+            "p50": 1.412677265030661e-16,
+            "p90": 0.21239419700356632,
+            "p95": 0.3635682406956475,
+            "p99": 1.3020218875392469
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.7311328127187584,
+            "mean": 0.26910320283149625,
+            "min": 0.011422344070017198,
+            "p50": 0.2637543901873702,
+            "p90": 0.461009625155687,
+            "p95": 0.5218921088040411,
+            "p99": 0.6982441816829927
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 2.7860425626718133,
+            "mean": 0.4524491856554533,
+            "min": 0.01188282268915721,
+            "p50": 0.27894720287497504,
+            "p90": 1.0315022020287865,
+            "p95": 1.6059858736910206,
+            "p99": 2.223238006660863
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 0.9690725868164642,
+            "mean": 0.2525056713715779,
+            "min": 0.005413998750373434,
+            "p50": 0.2139948952306384,
+            "p90": 0.4728544260296649,
+            "p95": 0.6377445343764128,
+            "p99": 0.7891531981257807
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.9471510684410971,
+            "mean": 0.3250493711179727,
+            "min": 0.030221801123021676,
+            "p50": 0.3011806287579231,
+            "p90": 0.49214298771101395,
+            "p95": 0.6627539895108028,
+            "p99": 0.8256562065759971
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.106549980225123,
+            "mean": 0.8038050666377418,
+            "min": 0.013500084608041736,
+            "p50": 0.5575129801312784,
+            "p90": 1.9580259604122776,
+            "p95": 2.4870867531045397,
+            "p99": 3.0483832671761646
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.04445798322558403,
+            "mean": -0.019366681359942985,
+            "min": -0.04837053269147873,
+            "p50": -0.026280667632818222,
+            "p90": 0.005409400165081045,
+            "p95": 0.019234097748994823,
+            "p99": 0.023614521697163583
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 3.9414641857147217,
+            "mean": 2.730844644529668,
+            "min": 0.00016014277935028076,
+            "p50": 3.4683808088302612,
+            "p90": 3.613610339164734,
+            "p95": 3.6817973136901854,
+            "p99": 3.7889326763153077
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 2.1211913547675674,
+            "mean": 0.03609024045347192,
+            "min": 0.0,
+            "p50": 0.0020476345059355916,
+            "p90": 0.09984239925647986,
+            "p95": 0.1591946577735307,
+            "p99": 0.3895553567153405
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 1.3710009598871693,
+            "mean": 0.029440081541832863,
+            "min": 0.0,
+            "p50": 0.0017552520148456097,
+            "p90": 0.08523707836866379,
+            "p95": 0.1376221552491188,
+            "p99": 0.30427836179733414
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 4.02035563252108,
+            "mean": 2.7865178384557843,
+            "min": 0.00016758509380536554,
+            "p50": 3.522270588008582,
+            "p90": 3.673232436187523,
+            "p95": 3.74864490119332,
+            "p99": 3.8535566052473005
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 1.498733427375555,
+            "mean": 0.8636629800850397,
+            "min": 5.7194432883989066e-05,
+            "p50": 1.086498128657695,
+            "p90": 1.1533648923970758,
+            "p95": 1.1883142573962686,
+            "p99": 1.2324285136163233
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 639.645263671875,
+            "mean": 84.70370640394636,
+            "min": 10.495702743530273,
+            "p50": 54.54216766357422,
+            "p90": 193.39106140136724,
+            "p95": 240.10145263671862,
+            "p99": 422.62646484375
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.0912430040578482,
+            "mean": 0.4016465713902928,
+            "min": 0.01704827473136895,
+            "p50": 0.3936632689363734,
+            "p90": 0.6880740673965478,
+            "p95": 0.7789434459761807,
+            "p99": 1.0421554950492429
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.413658311106115,
+            "mean": 0.4851483151014517,
+            "min": 0.04510716585525623,
+            "p50": 0.44952332650436283,
+            "p90": 0.7345417727030059,
+            "p95": 0.9891850589713473,
+            "p99": 1.2323226963820852
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9161451814768461
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "ee_transfer",
+        "robot": "EE",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "OpenPI base checkpoint",
+        "initialized_pretrained": true,
+        "dataset": "/data/datasets/press_button_ee_rebuild_20261007/lerobot",
+        "dataset_sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637",
+        "dataset_hash_basis": "canonical meta/info.json",
+        "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+        "reference": {
+          "path": "usage_assets/policy_training_snapshot.json",
+          "sha256": "e2ba7fe4fac617025b7e2c34a5f9ce45fab178ab796f3ecc49f67cd4de24939a",
+          "job": {
+            "policy": "pi05",
+            "mode": "ee",
+            "seed": 42,
+            "training_steps": 1,
+            "canonical_info": {
+              "path": "/data/datasets/press_button_ee_rebuild_20261007/lerobot/meta/info.json",
+              "bytes": 2389,
+              "sha256": "61a14671dc0190533a6ed8eab8fee9057aaa388ef6f6a944be3596abf0ad1637"
+            },
+            "raw_frames": 994,
+            "logical_20hz_frames": 165,
+            "train_log": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi05_train.log",
+              "bytes": 6770,
+              "sha256": "b83aed6b2d57b43981f0fdbde93bef9380a8c7528875a22b2d4e668da1aa4b2b"
+            },
+            "train_exit": {
+              "path": "/data/outputs/rebuild-20261007/policy-gates/ee_pi05_train.exit",
+              "bytes": 2,
+              "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+            },
+            "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+            "checkpoint_metadata": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/metadata.pt",
+              "bytes": 3251,
+              "sha256": "2302664c8d4eb412fdfba913643278611da020c5c735ddb6a6243b6d07d0e3a9"
+            },
+            "norm_stats": {
+              "path": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1/assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+              "bytes": 1400,
+              "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+            },
+            "export_report": {
+              "path": "/data/datasets/openpi-rebuild-20261007/am_bench/multitask_openpi_original_20hz_ee_local_relative/ambench_openpi_export_report.json",
+              "bytes": 558,
+              "sha256": "d447cd5acdf812bcd242327d77522b02a6539ae559e1abcea8870c1437434971"
+            },
+            "loss": 0.0547
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 9418,
+        "start_time_ticks": "743595912",
+        "argv": [
+          "/opt/openpi/.venv/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "scripts/serve_policy.py",
+          "42",
+          "cpu",
+          "--port",
+          "8000",
+          "policy:checkpoint",
+          "--policy.config=pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative",
+          "--policy.dir=/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1"
+        ],
+        "listening_ports": [
+          8000
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/eval_summary.json",
+          "sha256": "926c0fa833760fb4067cbdab0ab2be9e2b5a7faa7d101448092990b7ca16b00c"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/tracking/tracking.jsonl",
+          "sha256": "6db607c784bf25adc14aa9a769868bb0281e0cc06e09a87e3faa9cfb79eb78e0"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/tracking/analysis.json",
+          "sha256": "ba456882b0d19edc26908cf01ae4794466a1a82dc60ae941cc04bc19cceaded6"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/env_cfg.yaml",
+          "sha256": "285303d18e6708c90dfe64b19e74d92a1d1e374899faffae58659ccf1b011bc3"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/server-identity-before.json",
+          "sha256": "5f3116287b0a4cc870bec7e12628e0b477f52c191eb9d1ced73aa819f3e4fd16"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/server-identity-after.json",
+          "sha256": "5f3116287b0a4cc870bec7e12628e0b477f52c191eb9d1ced73aa819f3e4fd16"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/server-inference.log",
+          "sha256": "a1671d1562d12d6990802dbe6dd13cbe065104a2694e3879d520b8790a331306"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/videos/pi-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "31ee108130f8a25f4dee31734b64beeb4a166d6f5c7b59e03afbf136895a1916",
+            "bytes": 1522706
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/videos/pi-eval-base_camera-env0-eps0.mp4",
+            "sha256": "3d448e50e723f56ec0d41f3a7dc9fdc7b918a6415e4318628de8f8aac3a3ecac",
+            "bytes": 2447288
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_pi05_transfer_seed52/videos/pi-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "8b481b73abdcab3665b9257a1af01953566e8bd347050a88e1ac19fe4153bc4d",
+            "bytes": 627762
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_act_trained_step1_seed51",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_act_trained_step1",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "act",
+      "model_variant": "act",
+      "env_seed": 51,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.013030224234480539,
+        "avg_base_tracking_error_rot_geodesic": 0.11685231799893599,
+        "avg_normalized_base_deviation": 0.01944809587235901,
+        "avg_normalized_ee_error": 0.06467400036939493,
+        "avg_tracking_error_pos": 0.0433315802474946,
+        "avg_tracking_error_rot_geodesic": 2.063450076291528,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 0.318935584550457,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.013358602916739442,
+            "mean": 0.0010525041273586292,
+            "min": 3.0725696648547065e-05,
+            "p50": 9.972442418032372e-05,
+            "p90": 0.0033375399633902084,
+            "p95": 0.007502018948533466,
+            "p99": 0.01056109097682929
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 1.136135502207729,
+            "mean": 0.03178658454462508,
+            "min": 0.0,
+            "p50": 3.6848074723016415e-16,
+            "p90": 0.04994844765626369,
+            "p95": 0.12979305728657514,
+            "p99": 0.5736986437348082
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.045116295266655095,
+            "mean": 0.013030224234480539,
+            "min": 0.000448793174073202,
+            "p50": 0.010624287683368426,
+            "p90": 0.025169897577846018,
+            "p95": 0.029169887716234917,
+            "p99": 0.033632724018050134
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 1.1412887364568498,
+            "mean": 0.11685231799893599,
+            "min": 0.0009615800151134173,
+            "p50": 0.04421649807170176,
+            "p90": 0.3362521181281514,
+            "p95": 0.40447631920092814,
+            "p99": 0.49118293715486794
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 0.318935584550457,
+            "mean": 0.09447953584819895,
+            "min": 0.0013112010246833074,
+            "p50": 0.09816543900737275,
+            "p90": 0.15155781916558375,
+            "p95": 0.1664536722029001,
+            "p99": 0.22435852361958222
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.1068855527335268,
+            "mean": 0.0433315802474946,
+            "min": 0.001460049343023777,
+            "p50": 0.04117280534444157,
+            "p90": 0.07523548070084095,
+            "p95": 0.08608517662337581,
+            "p99": 0.09363958814101377
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 2.201464149428604,
+            "mean": 2.063450076291528,
+            "min": 1.8597080458063548,
+            "p50": 2.0745137402131464,
+            "p90": 2.132735712713542,
+            "p95": 2.153600485404057,
+            "p99": 2.1864458430818043
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.04312506364658475,
+            "mean": 0.00597579225421443,
+            "min": -0.02495192363858223,
+            "p50": 0.0005043260753154755,
+            "p90": 0.0195789959281683,
+            "p95": 0.022414260357618333,
+            "p99": 0.024595026299357413
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 0.023983437567949295,
+            "mean": 0.00377121368921808,
+            "min": 9.150290861725807e-05,
+            "p50": 0.002315189689397812,
+            "p90": 0.009778507612645627,
+            "p95": 0.012228829227387904,
+            "p99": 0.0172720056772232
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 0.045718227508125035,
+            "mean": 0.003649396955317234,
+            "min": 2.5189277659216723e-05,
+            "p50": 0.00040225731567090147,
+            "p90": 0.011831746745724058,
+            "p95": 0.02166516440105406,
+            "p99": 0.03575863028941458
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 0.03556115215178579,
+            "mean": 0.0028249996440343978,
+            "min": 2.0401785150170326e-05,
+            "p50": 0.0003026952035725117,
+            "p90": 0.009097042493522167,
+            "p95": 0.017032047733664513,
+            "p99": 0.028549061977537357
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 0.02776010424035373,
+            "mean": 0.004774288801998671,
+            "min": 0.00014795033719908795,
+            "p50": 0.0029033738866190723,
+            "p90": 0.012521907175194627,
+            "p95": 0.016255644552842917,
+            "p99": 0.021748060099657147
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 0.011006011045537889,
+            "mean": 0.0019310576864551806,
+            "min": 6.520304123114329e-05,
+            "p50": 0.0011898538550667581,
+            "p90": 0.005240179842803627,
+            "p95": 0.006831615301780401,
+            "p99": 0.008432597179198637
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 253.3271484375,
+            "mean": 26.651329993008076,
+            "min": 9.34669017791748,
+            "p50": 19.632564544677734,
+            "p90": 47.744670104980486,
+            "p95": 71.10963745117186,
+            "p99": 116.37597534179685
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 0.06733775412933596,
+            "mean": 0.01944809587235901,
+            "min": 0.0006698405583182119,
+            "p50": 0.015857145796072277,
+            "p90": 0.03756701131021794,
+            "p95": 0.04353714584512674,
+            "p99": 0.05019809554932856
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 0.15953067572168178,
+            "mean": 0.06467400036939493,
+            "min": 0.0021791781239160852,
+            "p50": 0.061451948275285925,
+            "p90": 0.11229176224006111,
+            "p95": 0.1284853382438445,
+            "p99": 0.13976057931494593
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.4689194826866917
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "uaquad_one_step",
+        "robot": "UAQuad",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "random ResNet18",
+        "initialized_pretrained": false,
+        "dataset": "outputs/research/uaquad-20261009/press-initial/datasets/uaquad_pressbutton_seed51/PressButtonUAQuadAbsPID/demo-20261009_021614/lerobot",
+        "dataset_sha256": "c62131d04318b2ba1a3394d1e6377be234ad1efa7a8933a1d980f0a3f61ece61",
+        "dataset_hash_basis": "canonical data/chunk-000/file-000.parquet",
+        "checkpoint": "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/000001/pretrained_model",
+        "reference": {
+          "path": "usage_assets/uaquad/training_provenance.json",
+          "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036",
+          "job": {
+            "optimizer_steps": 1,
+            "training_seed": 42,
+            "batch_size": 1,
+            "num_workers": 0,
+            "policy_fps": 20,
+            "logical_frames": 170,
+            "vision_backbone": "resnet18",
+            "pretrained_backbone_weights": null,
+            "initialization": "random",
+            "camera_feature": "observation.images.ee_camera",
+            "camera_shape_chw": [
+              3,
+              384,
+              384
+            ],
+            "state_shape": [
+              8
+            ],
+            "action_shape": [
+              8
+            ],
+            "action_representation": "ee_local_relative",
+            "chunk_size": 16,
+            "n_action_steps": 8,
+            "checkpoint_container_path": "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/000001/pretrained_model",
+            "last_symlink_container_path": "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/last/pretrained_model",
+            "model_sha256": "2c779419ca28a6ef89ad3c6e492315d07be31cad28efb429db835c9b96843524",
+            "config_sha256": "dbbbf798ef359fb6cb7c6297ac24c639707bfd289636c9e204eb1d4ec962eba4",
+            "training_step_sha256": "8f725550995a48bfe32c4d478f147a8f86576f43191ab6981fbed8ef519a390e",
+            "cpu_backend_forward": {
+              "reset_action_representation": "ee_local_relative",
+              "inference_calls": 2,
+              "output_shape_each": [
+                1,
+                8
+              ],
+              "all_finite": true
+            },
+            "raw_log_container_path": "/data/outputs/uaquad-20261009/logs/act_train.log"
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 9594,
+        "start_time_ticks": "743625368",
+        "argv": [
+          "/opt/venvs/act/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "act",
+          "--checkpoint",
+          "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/000001/pretrained_model",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/eval_summary.json",
+          "sha256": "561f3dce793752ccb70b232f151e3875b4343e96207e206d2c4c6fbe7e25b1b8"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/tracking/tracking.jsonl",
+          "sha256": "aa7bd05521bb272c2247b4424db0092915a0d79b51cc2c73f109c09b27a9f97a"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/tracking/analysis.json",
+          "sha256": "bc3c3ceffd6a0d1dc71ad646f97246698e264a1bcbb0fe50448dc9c08d8a1af9"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/env_cfg.yaml",
+          "sha256": "ac74f0da2de2ebe4d7d21cd1829ad8282473df538ea1ea23df965af62ecd4266"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/server-identity-before.json",
+          "sha256": "1752c18eb4dd8dc5d0ec165df0328d6c1dbfab2962d109f4d5997c60b0ff830f"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/server-identity-after.json",
+          "sha256": "1752c18eb4dd8dc5d0ec165df0328d6c1dbfab2962d109f4d5997c60b0ff830f"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/server-inference.log",
+          "sha256": "af04f74ebe263520396a1a34615f7d388bd85b2aee9a734815ee272d22899d71"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/videos/act-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "4bc931e87ba8cd7c0efe4d31e7c1d93a72b5306a1329cf4e56325654c7190657",
+            "bytes": 1843426
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/videos/act-eval-base_camera-env0-eps0.mp4",
+            "sha256": "5640cca4d8343a2fe96eb8b1348e6736d3e8bf1cecbbd55a9ecc31f123e6f524",
+            "bytes": 2039818
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed51/videos/act-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "bd6ec96a3a964ba4e52b082893d58f659e2e2b8603030b49cc923c71af3d00a8",
+            "bytes": 2203064
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_act_trained_step1_seed52",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_act_trained_step1",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "act",
+      "model_variant": "act",
+      "env_seed": 52,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.013886753971451015,
+        "avg_base_tracking_error_rot_geodesic": 0.11962051352314941,
+        "avg_normalized_base_deviation": 0.02072649846485226,
+        "avg_normalized_ee_error": 0.06459152591990783,
+        "avg_tracking_error_pos": 0.04327632236633824,
+        "avg_tracking_error_rot_geodesic": 2.0665218057008685,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 0.32161016090761874,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.016292767178759358,
+            "mean": 0.00113783358705715,
+            "min": 0.0,
+            "p50": 0.000101796535936022,
+            "p90": 0.003852772484474216,
+            "p95": 0.008101397099002641,
+            "p99": 0.010928558423450608
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 1.1643880340865522,
+            "mean": 0.032564951645383124,
+            "min": 1.0842021724855044e-17,
+            "p50": 3.6148906861297195e-16,
+            "p90": 0.05124615067421316,
+            "p95": 0.1379759949156796,
+            "p99": 0.5649395304525479
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.050879542356368976,
+            "mean": 0.013886753971451015,
+            "min": 0.0002341440259987886,
+            "p50": 0.011581762425126714,
+            "p90": 0.02604978825933914,
+            "p95": 0.029582015624482347,
+            "p99": 0.034979619456275264
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 1.1831208285849966,
+            "mean": 0.11962051352314941,
+            "min": 0.0005597811327409121,
+            "p50": 0.04579504473382076,
+            "p90": 0.33773427253960026,
+            "p95": 0.3982323623622894,
+            "p99": 0.5292863119069114
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 0.32161016090761874,
+            "mean": 0.09199187349521411,
+            "min": 0.0014890283262855716,
+            "p50": 0.0978907737373906,
+            "p90": 0.148444530007572,
+            "p95": 0.16401880829390594,
+            "p99": 0.21920665858772878
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.10563532799734032,
+            "mean": 0.04327632236633824,
+            "min": 0.002032754602471938,
+            "p50": 0.04180116406584036,
+            "p90": 0.07380354660827232,
+            "p95": 0.08504448454221206,
+            "p99": 0.0973347857382017
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 2.2424049547462097,
+            "mean": 2.0665218057008685,
+            "min": 1.8596939265993415,
+            "p50": 2.073867015193192,
+            "p90": 2.1395916506653836,
+            "p95": 2.165943218706076,
+            "p99": 2.205764560858536
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.04306275211274624,
+            "mean": 0.004543493533313498,
+            "min": -0.02095210924744606,
+            "p50": 0.0001718662679195404,
+            "p90": 0.018238422647118568,
+            "p95": 0.021090793982148165,
+            "p99": 0.023899234756827353
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 0.028667151927947998,
+            "mean": 0.003903310198701838,
+            "min": 0.0001204272557515651,
+            "p50": 0.002271174394991249,
+            "p90": 0.010257397312670946,
+            "p95": 0.012697330117225642,
+            "p99": 0.0181182125210762
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 0.047087618582116526,
+            "mean": 0.004026431112422459,
+            "min": 0.0,
+            "p50": 0.00044898745035909304,
+            "p90": 0.01358429482389322,
+            "p95": 0.023776507122192016,
+            "p99": 0.03671893503275403
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 0.04107617513409423,
+            "mean": 0.0031254045533088853,
+            "min": 0.0,
+            "p50": 0.0003464030451141298,
+            "p90": 0.010494646616280079,
+            "p95": 0.018811522045780293,
+            "p99": 0.0288134147413075
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 0.03201998524003611,
+            "mean": 0.004934613124392602,
+            "min": 0.0001632617733496443,
+            "p50": 0.0028176013247979315,
+            "p90": 0.013669673833813767,
+            "p95": 0.01707891100252781,
+            "p99": 0.022442622409396783
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 0.014004269178258255,
+            "mean": 0.001975516025037464,
+            "min": 6.164825026644394e-05,
+            "p50": 0.0011221769000258064,
+            "p90": 0.005604685767320917,
+            "p95": 0.007037236342148383,
+            "p99": 0.008845138162141665
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 174.21827697753906,
+            "mean": 25.9053387437008,
+            "min": 9.492401123046875,
+            "p50": 18.674636840820312,
+            "p90": 45.81300506591801,
+            "p95": 71.72246093749999,
+            "p99": 124.46996643066403
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 0.07593961545726713,
+            "mean": 0.02072649846485226,
+            "min": 0.00034946869552058,
+            "p50": 0.01728621257481599,
+            "p90": 0.038880280984088265,
+            "p95": 0.04415226212609305,
+            "p99": 0.05220838724817203
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 0.15766466865274675,
+            "mean": 0.06459152591990783,
+            "min": 0.0030339620932416985,
+            "p50": 0.06238979711319457,
+            "p90": 0.11015454717652584,
+            "p95": 0.1269320664809135,
+            "p99": 0.14527579960925627
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.4476428869420108
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "uaquad_one_step",
+        "robot": "UAQuad",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "random ResNet18",
+        "initialized_pretrained": false,
+        "dataset": "outputs/research/uaquad-20261009/press-initial/datasets/uaquad_pressbutton_seed51/PressButtonUAQuadAbsPID/demo-20261009_021614/lerobot",
+        "dataset_sha256": "c62131d04318b2ba1a3394d1e6377be234ad1efa7a8933a1d980f0a3f61ece61",
+        "dataset_hash_basis": "canonical data/chunk-000/file-000.parquet",
+        "checkpoint": "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/000001/pretrained_model",
+        "reference": {
+          "path": "usage_assets/uaquad/training_provenance.json",
+          "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036",
+          "job": {
+            "optimizer_steps": 1,
+            "training_seed": 42,
+            "batch_size": 1,
+            "num_workers": 0,
+            "policy_fps": 20,
+            "logical_frames": 170,
+            "vision_backbone": "resnet18",
+            "pretrained_backbone_weights": null,
+            "initialization": "random",
+            "camera_feature": "observation.images.ee_camera",
+            "camera_shape_chw": [
+              3,
+              384,
+              384
+            ],
+            "state_shape": [
+              8
+            ],
+            "action_shape": [
+              8
+            ],
+            "action_representation": "ee_local_relative",
+            "chunk_size": 16,
+            "n_action_steps": 8,
+            "checkpoint_container_path": "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/000001/pretrained_model",
+            "last_symlink_container_path": "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/last/pretrained_model",
+            "model_sha256": "2c779419ca28a6ef89ad3c6e492315d07be31cad28efb429db835c9b96843524",
+            "config_sha256": "dbbbf798ef359fb6cb7c6297ac24c639707bfd289636c9e204eb1d4ec962eba4",
+            "training_step_sha256": "8f725550995a48bfe32c4d478f147a8f86576f43191ab6981fbed8ef519a390e",
+            "cpu_backend_forward": {
+              "reset_action_representation": "ee_local_relative",
+              "inference_calls": 2,
+              "output_shape_each": [
+                1,
+                8
+              ],
+              "all_finite": true
+            },
+            "raw_log_container_path": "/data/outputs/uaquad-20261009/logs/act_train.log"
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 9769,
+        "start_time_ticks": "743638963",
+        "argv": [
+          "/opt/venvs/act/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "act",
+          "--checkpoint",
+          "/data/checkpoints/uaquad-20261009/act_pressbutton_step1_cpu/checkpoints/000001/pretrained_model",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/eval_summary.json",
+          "sha256": "4fc8f8980f130b08ce9c75e867fc5bd0cc3507a131f1a216afb22da27d924317"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/tracking/tracking.jsonl",
+          "sha256": "98c687cf295f15d29cce8790837732bc66332d696c98620f4582c390a713276f"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/tracking/analysis.json",
+          "sha256": "ef1bf5634f08a34e91ae4d5f2e32b8f2e32ada54e9b48147a698209d96c115b6"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/env_cfg.yaml",
+          "sha256": "30a94d4282e19c43e0aaeb3fd2a3aa52c740eeaccf45ab5bc5505daeab907768"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/server-identity-before.json",
+          "sha256": "4856a49d681d7e9013ce17690feb99fd9afbe30656a7496a7abbc9a596409be9"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/server-identity-after.json",
+          "sha256": "4856a49d681d7e9013ce17690feb99fd9afbe30656a7496a7abbc9a596409be9"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/server-inference.log",
+          "sha256": "c57e774d2ec5abea98474af949fc1249a30a1848f51f2ea5106c7f44bce564e0"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/videos/act-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "ce7468eb214f3d44481adf1a4e68f070df2657dce58e33dee492b84739be9358",
+            "bytes": 1650381
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/videos/act-eval-base_camera-env0-eps0.mp4",
+            "sha256": "6831af662b79ceb47fe22651aaa7471784633642df0bc34be3c4433a8a05aab5",
+            "bytes": 1822474
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_act_trained_step1_seed52/videos/act-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "e4fe6c1388dfb1efa83e178463bd96d1ec6bd075ace9da5522c76a743d3219af",
+            "bytes": 2105579
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_dp_trained_step1_seed51",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_dp_trained_step1",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "dp",
+      "model_variant": "dp",
+      "env_seed": 51,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.34968689657043955,
+        "avg_base_tracking_error_rot_geodesic": 1.8947971216641337,
+        "avg_normalized_base_deviation": 0.5219207411499097,
+        "avg_normalized_ee_error": 0.46244324434043516,
+        "avg_tracking_error_pos": 0.3098369737080916,
+        "avg_tracking_error_rot_geodesic": 2.302387902147171,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 1.6122797690390076,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 0.7982906939022452,
+            "mean": 0.06419035338102501,
+            "min": 1.5158956482453366e-06,
+            "p50": 0.05585583359739882,
+            "p90": 0.09978733584047501,
+            "p95": 0.1262978276960432,
+            "p99": 0.3138415422670627
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.133946936733622,
+            "mean": 0.4965725692230865,
+            "min": 0.0,
+            "p50": 2.5916499797466135e-16,
+            "p90": 1.9951679673060116,
+            "p95": 2.5459815810394346,
+            "p99": 3.016379672129238
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.7891302274893922,
+            "mean": 0.34968689657043955,
+            "min": 0.02564834767673471,
+            "p50": 0.34560274495133414,
+            "p90": 0.529505163818244,
+            "p95": 0.6123240364584616,
+            "p99": 0.7083090304332152
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.1403750460362887,
+            "mean": 1.8947971216641337,
+            "min": 0.15367613233814112,
+            "p50": 1.9300776310040388,
+            "p90": 2.8697403880235366,
+            "p95": 3.0159454513193467,
+            "p99": 3.1226859210761497
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 1.6122797690390076,
+            "mean": 0.5641276619363386,
+            "min": 0.010253631261269729,
+            "p50": 0.5274605326523794,
+            "p90": 0.9452632124776111,
+            "p95": 1.1930253616087088,
+            "p99": 1.5185951797999029
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 1.0786853503391018,
+            "mean": 0.3098369737080916,
+            "min": 0.02003334591442581,
+            "p50": 0.29241443290247926,
+            "p90": 0.5123257758058476,
+            "p95": 0.5712446270264047,
+            "p99": 0.7806241523579847
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.141124174711211,
+            "mean": 2.302387902147171,
+            "min": 0.2662493083640515,
+            "p50": 2.4477254706344604,
+            "p90": 3.0038491010490023,
+            "p95": 3.0652158406492407,
+            "p99": 3.129012872491303
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.09257664810866117,
+            "mean": 0.00013238539556889215,
+            "min": -0.09291650936938822,
+            "p50": -0.0017831474542617798,
+            "p90": 0.05035701766610146,
+            "p95": 0.06191606856882572,
+            "p99": 0.07938299760222434
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 7.368300080299377,
+            "mean": 3.684648735900392,
+            "min": 0.007100045680999756,
+            "p50": 3.927471399307251,
+            "p90": 6.543245893716813,
+            "p95": 6.80851308107376,
+            "p99": 7.30572630405426
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 3.3053378752887834,
+            "mean": 0.33414286990609793,
+            "min": 1.0886621529417872e-05,
+            "p50": 0.24340335663778107,
+            "p90": 0.5867852088078533,
+            "p95": 0.8784511243930706,
+            "p99": 2.0775673029231676
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 3.272050201892853,
+            "mean": 0.2618301917040563,
+            "min": 7.152557373046875e-06,
+            "p50": 0.18734470009803772,
+            "p90": 0.4630310535430908,
+            "p95": 0.6882520616054535,
+            "p99": 1.606386482715607
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 10.789062902435651,
+            "mean": 5.327104179983513,
+            "min": 0.01003072424164382,
+            "p50": 5.534436749768316,
+            "p90": 9.475740685941474,
+            "p95": 10.13651026701342,
+            "p99": 10.500170717933099
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 5.175068516284227,
+            "mean": 2.3239240470820883,
+            "min": 0.0042327530682086945,
+            "p50": 2.3754961378872395,
+            "p90": 4.12973519563675,
+            "p95": 4.483713789284229,
+            "p99": 4.84349090822041
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 886.3451538085938,
+            "mean": 188.64080186282092,
+            "min": -13.345213890075684,
+            "p50": 161.82533264160156,
+            "p90": 372.82216796875,
+            "p95": 445.3675292968748,
+            "p99": 608.331640625
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.17780630968566,
+            "mean": 0.5219207411499097,
+            "min": 0.038281115935424936,
+            "p50": 0.5158249924646778,
+            "p90": 0.7903062146540953,
+            "p95": 0.913916472326062,
+            "p99": 1.0571776573630076
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.6099781348344804,
+            "mean": 0.46244324434043516,
+            "min": 0.029900516290187775,
+            "p50": 0.4364394520932526,
+            "p90": 0.7646653370236531,
+            "p95": 0.8526039209349322,
+            "p99": 1.1651106751611713
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9987484355444305
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "uaquad_one_step",
+        "robot": "UAQuad",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "random ResNet18",
+        "initialized_pretrained": false,
+        "dataset": "outputs/research/uaquad-20261009/press-initial/datasets/uaquad_pressbutton_seed51/PressButtonUAQuadAbsPID/demo-20261009_021614/lerobot",
+        "dataset_sha256": "c62131d04318b2ba1a3394d1e6377be234ad1efa7a8933a1d980f0a3f61ece61",
+        "dataset_hash_basis": "canonical data/chunk-000/file-000.parquet",
+        "checkpoint": "/data/checkpoints/uaquad-20261009/dp_pressbutton_step1_cpu/checkpoints/latest.ckpt",
+        "reference": {
+          "path": "usage_assets/uaquad/training_provenance.json",
+          "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036",
+          "job": {
+            "optimizer_steps": 1,
+            "training_seed": 42,
+            "batch_size": 1,
+            "num_epochs": 1,
+            "max_train_steps": 1,
+            "num_workers": 0,
+            "vision_backbone": "resnet18",
+            "pretrained_vision_weights": false,
+            "initialization": "random",
+            "zarr_container_path": "/data/datasets/uaquad-20261009/uaquad_pressbutton_ee.zarr.zip",
+            "zarr_sha256": "6677d1f8c245b774b79960f4d45d81c6da324b60a8885677dc4f62048cc4952d",
+            "zarr_validation": "passed: ee, 1 episode, 1024 raw steps, camera0_rgb 224x224",
+            "task_config": "umi_drone_ee_pos",
+            "obs_down_sample_steps": 6,
+            "action_horizon": 16,
+            "obs_pose_repr": "relative",
+            "action_pose_repr": "relative",
+            "model_action_dim": 10,
+            "env_action_dim": 8,
+            "unet_down_dims": [
+              64,
+              128
+            ],
+            "num_inference_steps": 4,
+            "noise_scheduler_train_timesteps": 8,
+            "checkpoint_container_path": "/data/checkpoints/uaquad-20261009/dp_pressbutton_step1_cpu/checkpoints/latest.ckpt",
+            "checkpoint_sha256": "89f386a7eb61ed7465f8c5e28d68b4b8473cceccaaa98978ec16986a1c075b3c",
+            "config_sha256": "75328eca0a65a752049ff998fa70a97d42eec6aec030c6960773ceaa7aee55ef",
+            "cpu_backend_forward": {
+              "inference_calls": 1,
+              "output_shape": [
+                96,
+                8
+              ],
+              "all_finite": true
+            },
+            "raw_log_container_path": "/data/outputs/uaquad-20261009/logs/dp_train.log"
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 9943,
+        "start_time_ticks": "743652080",
+        "argv": [
+          "/opt/venvs/dp/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "dp",
+          "--checkpoint",
+          "/data/checkpoints/uaquad-20261009/dp_pressbutton_step1_cpu/checkpoints/latest.ckpt",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/eval_summary.json",
+          "sha256": "29c10d3516a6a14c750e092e405faf341481bb78da2315732b5399080dca1907"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/tracking/tracking.jsonl",
+          "sha256": "fe97a40b20e5730983a471c45c519fc795b1a016ce53177aa71ac415a4f31c8a"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/tracking/analysis.json",
+          "sha256": "d3ee91f37a38c85d8a22c76021192a67ec442e2fcd155e0410578657162e3e25"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/env_cfg.yaml",
+          "sha256": "7ff1c9317c7c746edb0272c5819687c4d32d8e40908c451e0be912d3fdb12d15"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/server-identity-before.json",
+          "sha256": "5db4cc5ac87f30b77a075a7e3cb7f204ab89a23806286d0334e1556b831317d0"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/server-identity-after.json",
+          "sha256": "5db4cc5ac87f30b77a075a7e3cb7f204ab89a23806286d0334e1556b831317d0"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/server-inference.log",
+          "sha256": "c69015e798a0cf9a5bb6a7704564b03f84ef8502f01a3d1a4c559089fb83d9e6"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/videos/dp-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "dc543ec40a8aa13c02a97e016013239a20cb5ff5aa28d383020096de45a3538b",
+            "bytes": 2345011
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/videos/dp-eval-base_camera-env0-eps0.mp4",
+            "sha256": "613cb03df73e571c6dc3ca12f7ce99064fd66c1e0a3f4a2180f70b347021fd4f",
+            "bytes": 2852256
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed51/videos/dp-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "e499c0f8a108adee85571a7b7bebf0d2f7c145c13449c8b346b39a4b64a03a4d",
+            "bytes": 2602096
+          }
+        }
+      }
+    },
+    {
+      "name": "uaquad_policy_dp_trained_step1_seed52",
+      "status": "verified",
+      "experiment_id": "uaquad_policy_dp_trained_step1",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "policy_family": "dp",
+      "model_variant": "dp",
+      "env_seed": 52,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "environment_device": "cuda:0",
+      "action_semantics": "ee_absolute",
+      "episode_length_s": 20.0,
+      "attempt_selection": "first attempt; no success filtering",
+      "outcome": "timeout",
+      "success": false,
+      "steps": 2399,
+      "tracking": {
+        "avg_base_tracking_error_pos": 0.40422226238626846,
+        "avg_base_tracking_error_rot_geodesic": 1.8353855630094489,
+        "avg_normalized_base_deviation": 0.6033168095317439,
+        "avg_normalized_ee_error": 0.5679486931843939,
+        "avg_tracking_error_pos": 0.3805256244335439,
+        "avg_tracking_error_rot_geodesic": 2.2183869886835037,
+        "execution_time": 19.975,
+        "max_tilt_utilization": 1.7189672957086177,
+        "metrics": {
+          "base_cmd_step_pos_norm_m": {
+            "count": 2396,
+            "max": 1.0341999953670113,
+            "mean": 0.06553933074661772,
+            "min": 0.0025752048579974415,
+            "p50": 0.05644273196758961,
+            "p90": 0.09658691817147577,
+            "p95": 0.1249765772075382,
+            "p99": 0.3892334586818016
+          },
+          "base_cmd_step_rot_rad": {
+            "count": 2396,
+            "max": 3.1410915516302644,
+            "mean": 0.4365773643712476,
+            "min": 0.0,
+            "p50": 2.5438405243138006e-16,
+            "p90": 1.6254361368801933,
+            "p95": 2.2190679269753484,
+            "p99": 3.013030951549088
+          },
+          "base_pos_error_norm_m": {
+            "count": 2397,
+            "max": 0.9980199283252477,
+            "mean": 0.40422226238626846,
+            "min": 0.01909027462907244,
+            "p50": 0.39445967345679955,
+            "p90": 0.6121579879206045,
+            "p95": 0.66920818787289,
+            "p99": 0.8121898117586827
+          },
+          "base_rot_error_rad": {
+            "count": 2397,
+            "max": 3.140444598917439,
+            "mean": 1.8353855630094489,
+            "min": 0.12650286878875178,
+            "p50": 1.8913539741016867,
+            "p90": 2.8860467465651642,
+            "p95": 2.9978550019676513,
+            "p99": 3.096624235641738
+          },
+          "base_tilt_rad": {
+            "count": 2397,
+            "max": 1.7189672957086177,
+            "mean": 0.5364124607289121,
+            "min": 0.002935495688932492,
+            "p50": 0.4838603316907672,
+            "p90": 0.9444675483303984,
+            "p95": 1.0345916965940283,
+            "p99": 1.4493926223643347
+          },
+          "ee_pos_error_norm_m": {
+            "count": 2397,
+            "max": 1.1374216919823703,
+            "mean": 0.3805256244335439,
+            "min": 0.01757682623724196,
+            "p50": 0.3629946804523743,
+            "p90": 0.6304268198351579,
+            "p95": 0.7627804363153313,
+            "p99": 1.0198282389676523
+          },
+          "ee_rot_error_rad": {
+            "count": 2397,
+            "max": 3.140965691009662,
+            "mean": 2.2183869886835037,
+            "min": 0.15654087725312046,
+            "p50": 2.330514829905589,
+            "p90": 3.00963653915595,
+            "p95": 3.0867563785779715,
+            "p99": 3.1321721032104364
+          },
+          "gripper_width_error_m": {
+            "count": 2397,
+            "max": 0.0823249164968729,
+            "mean": -0.005788257863463045,
+            "min": -0.09984972626261879,
+            "p50": -0.007775157690048218,
+            "p90": 0.046850761026144036,
+            "p95": 0.05714202672243114,
+            "p99": 0.07487695172429085
+          },
+          "joint_abs_max_error_rad": {
+            "count": 2397,
+            "max": 8.041133642196655,
+            "mean": 4.209296538117683,
+            "min": 0.012270808219909668,
+            "p50": 4.360845685005188,
+            "p90": 7.457120132446289,
+            "p95": 7.88285059928894,
+            "p99": 7.99178159236908
+          },
+          "joint_cmd_step_l2_rad": {
+            "count": 2396,
+            "max": 3.4001252364499357,
+            "mean": 0.3082267566243785,
+            "min": 5.313101332329608e-05,
+            "p50": 0.23175330448176273,
+            "p90": 0.5165236977049592,
+            "p95": 0.7171464257135665,
+            "p99": 2.085938740136767
+          },
+          "joint_cmd_step_max_abs_rad": {
+            "count": 2396,
+            "max": 2.690881662070751,
+            "mean": 0.2385915374004932,
+            "min": 3.9517879486083984e-05,
+            "p50": 0.17918360978364944,
+            "p90": 0.4078405499458313,
+            "p95": 0.5521343648433685,
+            "p99": 1.6768230631947527
+          },
+          "joint_l2_error_rad": {
+            "count": 2397,
+            "max": 10.621031055526945,
+            "mean": 5.302145376518696,
+            "min": 0.017528805227827845,
+            "p50": 5.403520275435132,
+            "p90": 9.630617577559343,
+            "p95": 10.369182845735496,
+            "p99": 10.461914338999193
+          },
+          "joint_mean_abs_error_rad": {
+            "count": 2397,
+            "max": 4.884522321241093,
+            "mean": 2.1992879469316007,
+            "min": 0.007548241876065731,
+            "p50": 2.2392788734287024,
+            "p90": 4.116152011416853,
+            "p95": 4.398672389984131,
+            "p99": 4.624989301785827
+          },
+          "motor_max_thrust": {
+            "count": 2397,
+            "max": 869.1408081054688,
+            "mean": 215.9488778360993,
+            "min": -8.935428619384766,
+            "p50": 191.37014770507812,
+            "p90": 415.45184936523435,
+            "p95": 486.1536437988281,
+            "p99": 626.8925146484374
+          },
+          "normalized_base_deviation": {
+            "count": 2397,
+            "max": 1.4895819825749965,
+            "mean": 0.6033168095317439,
+            "min": 0.028492947207570805,
+            "p50": 0.5887457812788053,
+            "p90": 0.9136686386874693,
+            "p95": 0.9988181908550597,
+            "p99": 1.2122235996398247
+          },
+          "normalized_ee_error": {
+            "count": 2397,
+            "max": 1.6976443163915973,
+            "mean": 0.5679486931843939,
+            "min": 0.02623406901080889,
+            "p50": 0.5417831051527975,
+            "p90": 0.940935551992773,
+            "p95": 1.1384782631572108,
+            "p99": 1.5221316999517196
+          }
+        },
+        "num_tracking_steps": 2398,
+        "saturation_rate": 0.9995828118481435
+      },
+      "tracking_sample_basis": {
+        "post_step_records": 2398,
+        "metric_input_records": 2397,
+        "first_recorded_timestep": 1,
+        "last_recorded_timestep": 2398,
+        "step_dt_s": 0.008333333333333333
+      },
+      "training": {
+        "regime": "uaquad_one_step",
+        "robot": "UAQuad",
+        "seed": 42,
+        "optimizer_steps": 1,
+        "pretrained_initialization": "random ResNet18",
+        "initialized_pretrained": false,
+        "dataset": "outputs/research/uaquad-20261009/press-initial/datasets/uaquad_pressbutton_seed51/PressButtonUAQuadAbsPID/demo-20261009_021614/lerobot",
+        "dataset_sha256": "c62131d04318b2ba1a3394d1e6377be234ad1efa7a8933a1d980f0a3f61ece61",
+        "dataset_hash_basis": "canonical data/chunk-000/file-000.parquet",
+        "checkpoint": "/data/checkpoints/uaquad-20261009/dp_pressbutton_step1_cpu/checkpoints/latest.ckpt",
+        "reference": {
+          "path": "usage_assets/uaquad/training_provenance.json",
+          "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036",
+          "job": {
+            "optimizer_steps": 1,
+            "training_seed": 42,
+            "batch_size": 1,
+            "num_epochs": 1,
+            "max_train_steps": 1,
+            "num_workers": 0,
+            "vision_backbone": "resnet18",
+            "pretrained_vision_weights": false,
+            "initialization": "random",
+            "zarr_container_path": "/data/datasets/uaquad-20261009/uaquad_pressbutton_ee.zarr.zip",
+            "zarr_sha256": "6677d1f8c245b774b79960f4d45d81c6da324b60a8885677dc4f62048cc4952d",
+            "zarr_validation": "passed: ee, 1 episode, 1024 raw steps, camera0_rgb 224x224",
+            "task_config": "umi_drone_ee_pos",
+            "obs_down_sample_steps": 6,
+            "action_horizon": 16,
+            "obs_pose_repr": "relative",
+            "action_pose_repr": "relative",
+            "model_action_dim": 10,
+            "env_action_dim": 8,
+            "unet_down_dims": [
+              64,
+              128
+            ],
+            "num_inference_steps": 4,
+            "noise_scheduler_train_timesteps": 8,
+            "checkpoint_container_path": "/data/checkpoints/uaquad-20261009/dp_pressbutton_step1_cpu/checkpoints/latest.ckpt",
+            "checkpoint_sha256": "89f386a7eb61ed7465f8c5e28d68b4b8473cceccaaa98978ec16986a1c075b3c",
+            "config_sha256": "75328eca0a65a752049ff998fa70a97d42eec6aec030c6960773ceaa7aee55ef",
+            "cpu_backend_forward": {
+              "inference_calls": 1,
+              "output_shape": [
+                96,
+                8
+              ],
+              "all_finite": true
+            },
+            "raw_log_container_path": "/data/outputs/uaquad-20261009/logs/dp_train.log"
+          }
+        }
+      },
+      "initial_observation_available": false,
+      "server_identity": {
+        "pid": 10244,
+        "start_time_ticks": "743663510",
+        "argv": [
+          "/opt/venvs/dp/bin/python",
+          "-c",
+          "\nimport random\nimport runpy\nimport sys\n\nimport numpy as np\nimport torch\n\ntarget, seed, device = sys.argv[1:4]\ndel sys.argv[1:4]\nseed = int(seed)\nrandom.seed(seed)\nnp.random.seed(seed)\ntorch.manual_seed(seed)\nif device == \"cpu\":\n    torch.set_num_threads(8)\n    assert not torch.cuda.is_available(), \"CPU mode must hide all CUDA devices\"\nsys.argv[0] = target\nprint(f\"REMOTE_INFERENCE_SEED={seed}\", flush=True)\nprint(f\"REMOTE_INFERENCE_DEVICE={device}\", flush=True)\nif target.endswith(\".py\"):\n    runpy.run_path(target, run_name=\"__main__\")\nelse:\n    runpy.run_module(target, run_name=\"__main__\")\n",
+          "ambench_learn.policies.remote.server",
+          "42",
+          "cpu",
+          "--policy",
+          "dp",
+          "--checkpoint",
+          "/data/checkpoints/uaquad-20261009/dp_pressbutton_step1_cpu/checkpoints/latest.ckpt",
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "8001",
+          "--device",
+          "cpu"
+        ],
+        "listening_ports": [
+          8001
+        ],
+        "environment": {
+          "CUDA_VISIBLE_DEVICES": "-1",
+          "PYTHONHASHSEED": "42"
+        }
+      },
+      "sources": {
+        "driver_report": {
+          "path": "outputs/research/uaquad-20261009/policy/results.json",
+          "sha256": "36f4a79b7a0bfec7e9cf1174fea85bdfa34433b4b377bc1b1f3c509935beb140"
+        },
+        "eval_summary": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/eval_summary.json",
+          "sha256": "c57e64eae91741fb010f73b25b12e2b078c87fa9d06ab5c62af1e5437ffed1ad"
+        },
+        "tracking_jsonl": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/tracking/tracking.jsonl",
+          "sha256": "2d057252b63483d25145c7560cb7db64e973c6ab6db10f1363e6ffe3e5ef6e07"
+        },
+        "tracking_analysis": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/tracking/analysis.json",
+          "sha256": "cee5b04b2a4086dd58e7c297b23303c72e22b428f506a2fcc00e88afbc37db5d"
+        },
+        "runtime_env_cfg": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/env_cfg.yaml",
+          "sha256": "246bacfb682b78e5e94b04b06b46db9db4062d9ba059b5514ca6df61ce4a8319"
+        },
+        "server_identity_before": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/server-identity-before.json",
+          "sha256": "c7b01ff06967b56d8757192f432c368031e3285d73b8ecc21eeff1042028e1f4"
+        },
+        "server_identity_after": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/server-identity-after.json",
+          "sha256": "c7b01ff06967b56d8757192f432c368031e3285d73b8ecc21eeff1042028e1f4"
+        },
+        "server_log": {
+          "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/server-inference.log",
+          "sha256": "96f0c6591f0a19263964dc642dad39b435029ce9bb9807a8dbdec3d9843c2a17"
+        },
+        "videos": {
+          "scene_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/videos/dp-eval-scene_camera-env0-eps0.mp4",
+            "sha256": "54a9343706fc2ab51c4d079758bdadf5ab977dab33012def56bac8b54b51e19a",
+            "bytes": 1916476
+          },
+          "base_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/videos/dp-eval-base_camera-env0-eps0.mp4",
+            "sha256": "eb3605a17acb5483e10e6f33a2334309cc44de7525ecebff9cf5dd13726b12ab",
+            "bytes": 3004949
+          },
+          "ee_camera": {
+            "path": "outputs/research/uaquad-20261009/policy/uaquad_policy_dp_trained_step1_seed52/videos/dp-eval-ee_camera-env0-eps0.mp4",
+            "sha256": "bfcef86fcfdb931a99dbfe27e9a43ba458d2a2cbb0954b9ce90be6c43c84594b",
+            "bytes": 1056403
+          }
+        }
+      }
+    }
+  ]
+}

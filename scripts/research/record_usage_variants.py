@@ -12,6 +12,7 @@ missing outcomes, video or invalid canonical data are execution failures.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -34,6 +35,7 @@ def main() -> int:
     parser.add_argument("--name", action="append", default=[], help="Only record these names; repeatable.")
     parser.add_argument("--timeout-s", type=float, default=600)
     parser.add_argument("--device", default="cuda:0")
+    parser.add_argument("--revalidate-report", type=Path, help="Validate saved attempts without recording again.")
     args = parser.parse_args()
     specs = json.loads(args.specs_json.read_text())
     if not isinstance(specs, list) or not specs:
@@ -52,6 +54,18 @@ def main() -> int:
     prompts = json.loads(PROMPT_MAP.read_text())
     report = {"specs_json": str(args.specs_json), "max_episodes": 1, "results": []}
     selected = [spec for spec in specs if not args.name or spec["name"] in args.name]
+    saved_rows = None
+    if args.revalidate_report is not None:
+        saved_bytes = args.revalidate_report.read_bytes()
+        saved_report = json.loads(saved_bytes)
+        saved_rows = {row["name"]: row for row in saved_report["results"]}
+        if len(saved_rows) != len(saved_report["results"]) or set(saved_rows) - set(names):
+            parser.error("The saved report contains duplicate or unknown recording names")
+        selected = [spec for spec in selected if spec["name"] in saved_rows]
+        if not selected:
+            parser.error("The saved report has no selected attempts")
+        report["revalidated_report"] = str(args.revalidate_report)
+        report["revalidated_report_sha256"] = hashlib.sha256(saved_bytes).hexdigest()
     for index, spec in enumerate(selected, 1):
         print(f"[{index}/{len(selected)}] {spec['name']}", flush=True)
         family = spec["task_id"].split("-Am-")[0]
@@ -108,16 +122,34 @@ def main() -> int:
             "--device",
             args.device,
         ]
-        code, timed_out, duration = run_child(command, log_path=record_log, timeout_s=args.timeout_s)
-        row = {
-            "name": spec["name"],
-            "spec": spec,
-            "status": "failed",
-            "record_exit_code": code,
-            "wall_timeout": timed_out,
-            "wall_duration_s": duration,
-            "record_log": str(record_log),
-        }
+        if spec.get("telemetry"):
+            command.append("--telemetry")
+        if spec.get("saturation"):
+            command.append("--saturation")
+        if spec.get("disturbance"):
+            command.append("--disturbance")
+        if spec.get("wind_force") is not None:
+            command.extend(["--wind_force", *map(str, spec["wind_force"])])
+        if saved_rows is None:
+            code, timed_out, duration = run_child(command, log_path=record_log, timeout_s=args.timeout_s)
+            row = {
+                "name": spec["name"],
+                "spec": spec,
+                "status": "failed",
+                "record_exit_code": code,
+                "wall_timeout": timed_out,
+                "wall_duration_s": duration,
+                "record_log": str(record_log),
+            }
+        else:
+            row = dict(saved_rows[spec["name"]])
+            if row["spec"] != spec:
+                raise ValueError("The saved recording specification changed; do not relabel the experiment")
+            row["original_status"] = row["status"]
+            row["original_error"] = row.pop("error", None)
+            row["status"] = "failed"
+            code, timed_out = row["record_exit_code"], row["wall_timeout"]
+            record_log = Path(row["record_log"])
         session_root = session_root_from_log(record_log)
         try:
             if timed_out or session_root is None:
@@ -135,8 +167,11 @@ def main() -> int:
             episode = outcomes["episodes"][0]
             if episode["termination_reason"] not in {"success", "timeout"}:
                 raise ValueError("Unexpected recorded task outcome")
-            if code != (0 if episode["termination_reason"] == "success" else 1):
+            allowed_codes = {0} if episode["termination_reason"] == "success" else {0, 1}
+            if code not in allowed_codes:
                 raise ValueError("Exit code disagrees with the recorded task outcome")
+            if episode["termination_reason"] == "timeout" and code == 0:
+                row["execution_note"] = "Recorder exited 0; saved episode reports a task timeout, not success."
             videos = [session_root / "videos" / f"scripted-{camera}-env0-eps0.mp4" for camera in spec["camera_names"]]
             if not episode["exported"] or not videos or not all(path.is_file() for path in videos):
                 raise ValueError("Completed attempt or videos were not saved")

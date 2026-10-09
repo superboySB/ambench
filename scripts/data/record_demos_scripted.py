@@ -77,6 +77,14 @@ parser.add_argument(
 )
 parser.add_argument("--video", action="store_true", default=False, help="Record video of the agent.")
 parser.add_argument(
+    "--telemetry", action="store_true", help="Save numeric observations and controller outputs as JSONL."
+)
+parser.add_argument("--saturation", action="store_true", help="Enable rotor thrust limits without adding wind or drag.")
+parser.add_argument("--disturbance", action="store_true", help="Enable rotor saturation, aerodynamics and wind.")
+parser.add_argument(
+    "--wind_force", type=float, nargs=3, help="World-frame wind force in newtons; requires --disturbance."
+)
+parser.add_argument(
     "--save_failed_episodes",
     action="store_true",
     default=False,
@@ -123,6 +131,8 @@ if args_cli.max_episodes and args_cli.num_envs not in (None, 1):
     parser.error("--max_episodes requires --num_envs 1.")
 if args_cli.scene_camera_width < 1 or args_cli.scene_camera_height < 1:
     parser.error("Scene camera width and height must be positive.")
+if args_cli.wind_force is not None and not args_cli.disturbance:
+    parser.error("--wind_force requires --disturbance.")
 
 args_cli.enable_cameras = True
 
@@ -404,9 +414,44 @@ def run_simulation_loop(
         "status": "recording",
         "episodes": [],
         "successful_episodes": 0,
+        "telemetry_file": "telemetry.jsonl" if args_cli.telemetry else None,
+        "telemetry_rows": 0,
+        "video_fps": 30,
+        "video_frame_skip": 4,
+        "robot_profile": {
+            "robot_id": env_unwrapped.cfg.robot_profile.robot.robot_id,
+            "pipeline": env_unwrapped.cfg.robot_profile.control.class_type.__name__,
+            "controller": env_unwrapped.cfg.robot_profile.control.controller.class_type.__name__,
+            "action_mode": env_unwrapped.cfg.robot_profile.control.action_mode.value,
+        },
+        "experiment_conditions": {
+            "enable_saturation": env_unwrapped.cfg.enable_saturation,
+            "enable_aerodynamic_effects": env_unwrapped.cfg.enable_aerodynamic_effects,
+            "enable_wind_effect": env_unwrapped.cfg.enable_wind_effect,
+            "wind_force_w": (
+                list(env_unwrapped.cfg.robot_profile.robot.multirotor.aerodynamics.wind_force_w)
+                if env_unwrapped.cfg.robot_profile.robot.multirotor is not None
+                and env_unwrapped.cfg.robot_profile.robot.multirotor.aerodynamics is not None
+                else None
+            ),
+        },
+        "camera_poses": {},
     }
+    for camera_name in recorder.camera_names:
+        camera_cfg = env_unwrapped.scene.sensors[camera_name].cfg
+        episode_report["camera_poses"][camera_name] = {
+            "prim_path": camera_cfg.prim_path,
+            "position": list(camera_cfg.offset.pos),
+            "quaternion_wxyz": list(camera_cfg.offset.rot),
+            "convention": camera_cfg.offset.convention,
+            "width": camera_cfg.width,
+            "height": camera_cfg.height,
+        }
     write_episode_outcomes(recorder.output_dir, episode_report)
-    with contextlib.suppress(KeyboardInterrupt) and torch.inference_mode():
+    telemetry_context = (
+        (recorder.output_dir / "telemetry.jsonl").open("w") if args_cli.telemetry else contextlib.nullcontext(None)
+    )
+    with contextlib.suppress(KeyboardInterrupt), torch.inference_mode(), telemetry_context as telemetry_file:
         loop_step_count = 0
         while simulation_app.is_running():
             loop_step_count += 1
@@ -422,9 +467,36 @@ def run_simulation_loop(
             actions = torch.cat(actions_list, dim=0)
             actions = action_adapter.convert(actions)
 
+            telemetry_rows = []
+            if telemetry_file is not None:
+                for env_id in range(num_envs):
+                    numeric_observation = {
+                        key: obs["policy"][env_id][key]
+                        for key in ("ee_pos", "ee_quat", "base_pos", "base_quat", "arm_joint_pos", "gripper_width")
+                        if key in obs["policy"][env_id]
+                    }
+                    telemetry_rows.append({
+                        "env_id": env_id,
+                        "step_index": episode_steps[env_id],
+                        "timestamp_s": episode_steps[env_id] * float(env_unwrapped.step_dt),
+                        "observation_before_step": serialize_observation(numeric_observation),
+                        "action": serialize_observation(actions[env_id]),
+                    })
             recorder.add_step(obs["policy"], actions)
             obv = env.step(actions)
             obs, reward, terminated, truncated, info = obv
+            if telemetry_file is not None:
+                output = env_unwrapped.control_pipeline.last_output
+                for env_id, telemetry_row in enumerate(telemetry_rows):
+                    telemetry_row["controller_output"] = {
+                        key: serialize_observation(getattr(output, key)[env_id])
+                        for key in ("force_b", "torque_b", "motor_thrusts", "desired_wrench_b", "final_wrench_b")
+                        if output is not None and getattr(output, key) is not None
+                    }
+                    telemetry_row["terminated"] = bool(terminated[env_id])
+                    telemetry_row["truncated"] = bool(truncated[env_id])
+                    telemetry_file.write(json.dumps(telemetry_row, allow_nan=False) + "\n")
+                    episode_report["telemetry_rows"] += 1
             # Handle termination and truncation for each environment.
             envs_to_reset = []
             for env_id in range(num_envs):
@@ -526,6 +598,17 @@ def main() -> None:
         raise ValueError("--max_episodes requires a single environment.")
     if args_cli.seed is not None:
         env_cfg.seed = args_cli.seed
+    if args_cli.saturation:
+        env_cfg.enable_saturation = True
+    if args_cli.disturbance:
+        env_cfg.enable_saturation = True
+        env_cfg.enable_aerodynamic_effects = True
+        env_cfg.enable_wind_effect = True
+    if args_cli.wind_force is not None:
+        multirotor = env_cfg.robot_profile.robot.multirotor
+        if multirotor is None or multirotor.aerodynamics is None:
+            raise ValueError("--wind_force requires a physical robot with an aerodynamic configuration.")
+        multirotor.aerodynamics.wind_force_w = tuple(args_cli.wind_force)
 
     # Ensure rendering happens during internal resets to prevent stale observations.
     if hasattr(env_cfg, "num_rerenders_on_reset"):

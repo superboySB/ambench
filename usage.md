@@ -2,19 +2,21 @@
 
 本手册对应 [AM-Bench 公开文档](https://ambench.github.io/docs/) 的任务、机型、控制器、扰动、脚本专家、数据集和 ACT / Diffusion Policy / OpenPI 工作流。Docker 构建、远端策略容器和 SSH 隧道先按 [note.md](note.md) 完成。宿主机命令从仓库根目录执行；标有“容器内”的仿真命令先执行 `docker exec -it ambench-sim-research bash`，在默认的可写 `/workspace/ambench-run` 下运行。这个目录链接到只读源码和可写数据目录，并为 MPC 保留可写的 acados 生成路径；命令中的 `scripts/...` 相对路径保持不变。远端策略容器仍以 `/workspace/ambench` 为工作目录。
 
+**常规固定旋翼四旋翼加机械臂：** 请看新增独立手册 [uaquad.md](uaquad.md) 和 [UAQuad 交互专题](https://zipengdai.com/ambench/uaquad/)。2026-10-09 的专门实验按独立试次统计，不混入本页的历史结果。
+
 ![AM-Bench 公开总览](assets/ambench-overview.png)
 
 图片是仓库自带的项目总览。下文的验证表只记录实际运行结果；静态注册检查、仿真 reset/step、脚本任务成功和模型评估分别记录，不能互相代替。
 
 ## 先看动作与结果
 
-下面是同一 PressButton 场景的真实闭环：π₀.₅ 完成按压，ACT 到达 20 秒时限仍未完成。画面来自已验收的 2026-10-07 Docker 录像，结果读取对应评估报告；不是根据画面猜测成败。
+下面是 EE 参考模型上同一 PressButton 场景的真实闭环：π₀.₅ 完成按压，ACT 到达 20 秒时限仍未完成。画面来自已验收的 2026-10-07 Docker 录像，结果读取对应评估报告；不是根据画面猜测成败。
 
 | π₀.₅：成功，1/1 | ACT：超时未完成，0/1 |
 | --- | --- |
 | [![π₀.₅ 按钮任务成功的完整过程采样](usage_assets/animations/policy_pi05_ee.gif)](https://zipengdai.com/ambench/#policy_pi05_ee) | [![ACT 按钮任务超时未完成的完整过程采样](usage_assets/animations/policy_act_ee.gif)](https://zipengdai.com/ambench/#policy_act_ee) |
 
-本次发布共 **23 个实验组、54 段视频**；每组有 2–3 段记录。十二任务有 EE 与场景视角，四种飞机各有 EE、基座与外部全景，四个模型各保留旧基线及新试次的双视角。
+2026-10-08 的历史发布共 **23 个实验组、54 段视频**；每组有 2–3 段记录。十二任务有 EE 与场景视角，四种飞机各有 EE、基座与外部全景，四个模型各保留旧基线及新试次的双视角。在线总览另包含后续 UAQuad 专题，当前总数由页面读取来源清单显示。
 
 **[直接打开在线实验视频总览](https://zipengdai.com/ambench/)**：点击下文任意 GIF，会定位到对应实验组；可播放、暂停、拖动、调速，展开“比较 seed 与视角”查看补充记录与技术详情。Markdown 中的 GIF 仍自动循环。网络不可用时，下载或克隆仓库后用浏览器打开[离线播放页](usage_assets/playback.html)，同时保留 `usage_assets/animations/` 目录。
 

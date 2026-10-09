@@ -364,10 +364,10 @@ def main() -> int:
         chosen = []
         candidates = [(args.width, colors, frame_limit) for colors in (128, 64, 32, 16)]
         widths = {max(120, round(args.width * scale)) for scale in (0.875, 0.75, 0.625)}
-        widths.update(min(args.width, width) for width in (180, 160))
+        widths.update(min(args.width, width) for width in (180, 160, 128, 120))
         widths = sorted(widths, reverse=True)
-        candidates.extend((width, colors, frame_limit) for width in widths for colors in (32, 16))
-        candidates.extend((widths[-1], 16, max(2, round(frame_limit * scale))) for scale in (0.8, 0.6, 0.5, 0.4, 0.25))
+        candidates.extend((width, colors, frame_limit) for width in widths for colors in (32, 16, 8))
+        candidates.extend((widths[-1], 8, max(2, round(frame_limit * scale))) for scale in (0.8, 0.6, 0.5, 0.4, 0.25))
         for width, colors, frame_count in candidates:
             encoded, chosen, durations = encode_preview(
                 frames,
@@ -481,6 +481,7 @@ def main() -> int:
             "sample_durations_ms": durations,
             "final_hold_ms": round(args.final_hold_s * 1000),
         })
+        (args.output_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
         print(f"{spec['name']}: {outcome}, {gif_frame_count} frames, {output.stat().st_size} bytes")
     (args.output_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     print(f"Exported {len(manifest)} recorded animations to {args.output_dir}")

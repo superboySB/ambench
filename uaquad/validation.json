@@ -461,7 +461,9 @@
         "path": "usage_assets/uaquad/training_provenance.json",
         "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036"
       }
-    ]
+    ],
+    "research_commit": "042e2f2ec079505ab9a386634c419d9ce564a482",
+    "revision_note": "Frozen UAQuad evidence: validate source file hashes at this research commit; later shared research tooling may add other aircraft topics."
   },
   "source_reports": [
     {

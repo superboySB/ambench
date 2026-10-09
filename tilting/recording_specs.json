@@ -1,0 +1,766 @@
+[
+  {
+    "name": "tilting_pressbutton_seed61",
+    "experiment_id": "tilting_pressbutton",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pressbutton_seed62",
+    "experiment_id": "tilting_pressbutton",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pulllever_seed61",
+    "experiment_id": "tilting_pulllever",
+    "task_id": "PullLever-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pulllever_seed62",
+    "experiment_id": "tilting_pulllever",
+    "task_id": "PullLever-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pushslider_seed61",
+    "experiment_id": "tilting_pushslider",
+    "task_id": "PushSlider-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 26,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pushslider_seed62",
+    "experiment_id": "tilting_pushslider",
+    "task_id": "PushSlider-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 26,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_rotatevalve_seed61",
+    "experiment_id": "tilting_rotatevalve",
+    "task_id": "RotateValve-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_rotatevalve_seed62",
+    "experiment_id": "tilting_rotatevalve",
+    "task_id": "RotateValve-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_opendoor_seed61",
+    "experiment_id": "tilting_opendoor",
+    "task_id": "OpenDoor-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 15,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_opendoor_seed62",
+    "experiment_id": "tilting_opendoor",
+    "task_id": "OpenDoor-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 15,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_peginhole_seed61",
+    "experiment_id": "tilting_peginhole",
+    "task_id": "PegInHole-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_peginhole_seed62",
+    "experiment_id": "tilting_peginhole",
+    "task_id": "PegInHole-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_tossball_seed61",
+    "experiment_id": "tilting_tossball",
+    "task_id": "TossBall-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 10,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_tossball_seed62",
+    "experiment_id": "tilting_tossball",
+    "task_id": "TossBall-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 10,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_lemonharvesting_seed61",
+    "experiment_id": "tilting_lemonharvesting",
+    "task_id": "LemonHarvesting-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 30,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_lemonharvesting_seed62",
+    "experiment_id": "tilting_lemonharvesting",
+    "task_id": "LemonHarvesting-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 30,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_cabinetpickplace_seed61",
+    "experiment_id": "tilting_cabinetpickplace",
+    "task_id": "CabinetPickPlace-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 60,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_cabinetpickplace_seed62",
+    "experiment_id": "tilting_cabinetpickplace",
+    "task_id": "CabinetPickPlace-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 60,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_frameassembly_seed61",
+    "experiment_id": "tilting_frameassembly",
+    "task_id": "FrameAssembly-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 30,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_frameassembly_seed62",
+    "experiment_id": "tilting_frameassembly",
+    "task_id": "FrameAssembly-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 30,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_wipewindow_seed61",
+    "experiment_id": "tilting_wipewindow",
+    "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_wipewindow_seed62",
+    "experiment_id": "tilting_wipewindow",
+    "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_ndt_seed61",
+    "experiment_id": "tilting_ndt",
+    "task_id": "NDT-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 480,
+    "scene_camera_position": [
+      -8,
+      -8,
+      4
+    ],
+    "scene_camera_look_at": [
+      1.77,
+      0,
+      4
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_ndt_seed62",
+    "experiment_id": "tilting_ndt",
+    "task_id": "NDT-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 480,
+    "scene_camera_position": [
+      -8,
+      -8,
+      4
+    ],
+    "scene_camera_look_at": [
+      1.77,
+      0,
+      4
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pressbutton_wind_seed61",
+    "experiment_id": "tilting_pressbutton_wind",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true,
+    "disturbance": true,
+    "wind_force": [
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "tilting_reference_fahexa_seed61",
+    "experiment_id": "tilting_reference_fahexa",
+    "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pressbutton_wind_seed62",
+    "experiment_id": "tilting_pressbutton_wind",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true,
+    "disturbance": true,
+    "wind_force": [
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "name": "tilting_reference_fahexa_seed62",
+    "experiment_id": "tilting_reference_fahexa",
+    "task_id": "PressButton-Am-FAHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true
+  },
+  {
+    "name": "tilting_pressbutton_saturation_seed61",
+    "experiment_id": "tilting_pressbutton_saturation",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 61,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true,
+    "saturation": true
+  },
+  {
+    "name": "tilting_pressbutton_saturation_seed62",
+    "experiment_id": "tilting_pressbutton_saturation",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 62,
+    "episode_length_s": 20,
+    "camera_names": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "scene_camera_width": 480,
+    "scene_camera_height": 320,
+    "scene_camera_position": [
+      -2.5,
+      -3,
+      2.2
+    ],
+    "scene_camera_look_at": [
+      1.4,
+      0,
+      1.1
+    ],
+    "telemetry": true,
+    "saturation": true
+  }
+]

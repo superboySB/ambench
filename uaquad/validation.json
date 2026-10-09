@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "status": "local_verified_public_validation_pending",
-  "updated_at_utc": "2026-10-09T04:34:28.388189+00:00",
+  "status": "passed",
+  "updated_at_utc": "2026-10-09T04:43:46.997352+00:00",
   "branch": "research",
   "scope": "42 independent simulation attempts; no real UAV flight or converged model performance claim",
   "experiments": {
@@ -508,8 +508,42 @@
     "coverage_note": "Full offline playback was checked before the caption patch. The final caption patch was checked separately; final HTML full playback will be tested online."
   },
   "public_access": {
-    "status": "pending",
-    "url": "https://zipengdai.com/ambench/uaquad/"
+    "status": "passed",
+    "url": "https://zipengdai.com/ambench/uaquad/",
+    "payload_check": {
+      "report_path": "outputs/research/uaquad-20261009/public-first.json",
+      "report_sha256": "9e4baba7ee0602ce68f770236a488307f1c29dcd573d8dbd2e83e15bd0b7b828",
+      "verified_at_utc": "2026-10-09T04:37:23.284584+00:00",
+      "tested_research_commit": "9400464350356c365c794ddc8ec687f2b6bd497d",
+      "files": 373,
+      "bytes": 82215364,
+      "payload_sha256": "55c5fd6213b10ad62577d36ea522ba268088203374b021d56ab130044c61ded0",
+      "all_sha256_and_bytes_match": true,
+      "gif_mime_verified": 180,
+      "mp4_mime_verified": 180
+    },
+    "github_markdown_and_embedded_gifs": {
+      "status": "passed",
+      "tested_research_commit": "9400464350356c365c794ddc8ec687f2b6bd497d",
+      "embedded_gifs": 21
+    },
+    "mp4_byte_range": {
+      "accept_ranges": "bytes",
+      "bytes": 1024,
+      "content_range": "bytes 0-1023/88149",
+      "http_status": 206,
+      "mime": "video/mp4",
+      "path": "animations/uaquad_policy_act_transfer_seed51_scene_camera.mp4",
+      "prefix_sha256": "e6324d64d36acf86c6c30e90c3c89a26a0dadd02831fda58ebd0d84065e583c6",
+      "status": "passed"
+    },
+    "final_icon_page": {
+      "status": "passed",
+      "tested_research_commit": "76086da4406d0dd75c215ba17e51c2951eaffe16",
+      "html_sha256": "9842256ab0ece792bed993d6bd84463b2ecdcf6ba414276064d23b1f56bcafd5"
+    },
+    "latest_publication_manifest": "https://zipengdai.com/ambench/release.json",
+    "publication_note": "Tests record immutable source revisions. Final documentation and validation publication retains the tested HTML/media hashes; release.json identifies the latest research commit and every published payload hash."
   },
   "limits": [
     "No first-party RL trainer or task rewards suitable for an RL benchmark in this branch.",
@@ -519,13 +553,58 @@
   ],
   "formatting": {
     "status": "passed",
-    "scope": "all changed source, documentation, and JSON files before final delivery text update; final caption HTML checked separately",
+    "scope": "All changed source/docs/JSON verified with Docker hooks; final delivery doc/validation and inline icon are checked separately before committing.",
     "log_sha256": "8f36b2507a5d43671c4f3e0fbf55f52920923bc4edfe3c5c6d8bfe764784211e"
   },
-  "candidate_release_size": {
+  "browser_online": {
     "status": "passed",
-    "artifact_bytes_before_final_validation_text_updates": 82282920,
+    "functional_checks_passed": 89,
+    "native_mp4_loaded_seeked_decoded_played": 126,
+    "full_playback": {
+      "report_path": "outputs/uaquad-ui-check/final-browser-online.json",
+      "report_sha256": "a2e0d9aa7e2c053730673acacc69c1d4474c3d2abbc552bd02ca6abd205cde36",
+      "verified_at_utc": "2026-10-09T04:38:49.918359+00:00",
+      "tested_research_commit": "9400464350356c365c794ddc8ec687f2b6bd497d",
+      "tested_html_sha256": "9baad28760e70a2f167677257083c463d12b1ab03d76c6b8f3610fe9b6d60867",
+      "functional_status": "passed",
+      "original_zero_resource_diagnostic": "failed: domain-root automatic favicon request returned404; retained without changing the gate"
+    },
+    "favicon_fix_and_final_html": {
+      "report_path": "outputs/uaquad-ui-check/favicon-online-check.json",
+      "report_sha256": "61311daafb9114b989c53d0a8805ef27d084e16b0de6fb12148834c233003ed3",
+      "verified_at_utc": "2026-10-09T04:41:53.129533+00:00",
+      "status": "passed",
+      "checks_passed": 16,
+      "tested_research_commit": "76086da4406d0dd75c215ba17e51c2951eaffe16",
+      "tested_html_sha256": "9842256ab0ece792bed993d6bd84463b2ecdcf6ba414276064d23b1f56bcafd5",
+      "js_and_resource_errors": 0,
+      "external_favicon_requests": 0,
+      "first_three_camera_sync_playback": "passed",
+      "desktop_width_px": 1440,
+      "mobile_width_px": 390,
+      "delta": "Only an inline favicon link was added; loaded HTML without that link equals the previously tested full-playback document byte-for-byte."
+    },
+    "general_gallery_checks_passed": 7,
+    "own_browser_cleanup": "passed",
+    "final_html_sha256": "9842256ab0ece792bed993d6bd84463b2ecdcf6ba414276064d23b1f56bcafd5",
+    "media_manifest_sha256": "8da66eb0994f9bfb5b341627fafe320ccfa3c5756aa3398695a0454f9e912ed9"
+  },
+  "release_size_gate": {
+    "status": "passed",
+    "tested_artifact_bytes": 82285316,
     "limit_exclusive_bytes": 100000000,
-    "authoritative_final_artifact": "https://zipengdai.com/ambench/release.json"
+    "maximum_media_file_bytes": 460604,
+    "largest_existing_git_blob_bytes": 28728079,
+    "git_lfs_used": false,
+    "latest_artifact_bytes": "https://zipengdai.com/ambench/release.json"
+  },
+  "cleanup": {
+    "remote_owned_cpu_server": "stopped after identity verification",
+    "task_owned_local_tunnel_ports": [
+      8000,
+      8001
+    ],
+    "tunnel_forwards": "cancelled; shared SSH master retained",
+    "local_gpu_compute_processes_after_runs": 0
   }
 }

@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "experiment": "tilting_omnihexa_pressbutton_act_dp_one_step_cpu",
+  "date_utc": "2026-10-09",
+  "evidence_level": "one_step_cpu_interface_smoke",
+  "source_revision": "042e2f2ec079505ab9a386634c419d9ce564a482",
+  "source_revision_claim": "Base Git commit plus recorded mounted source hashes; research tools were uncommitted during execution.",
+  "source_sha256": {
+    "source/ambench_learn/ambench_learn/policies/act/train.py": "683545ebc7ab6ca33e8799ffcb4632ccbaa2a31ee21631527f9e0e8a5a70899a",
+    "source/ambench_learn/ambench_learn/policies/act/se_relative_processor.py": "820dafa317833240c686ddbf9f7163fe08bc371d205683cfebede8398346b1b5",
+    "source/ambench_learn/ambench_learn/policies/dp/eval_utils.py": "9c44e926c332ed5298cd0458eaeb6be715a0619e9ddf23b47c2ec6f8e583599d",
+    "source/ambench_learn/ambench_learn/policies/remote/server.py": "eab9e6a25c13db4806a2672df96e8305883b22e79c579e457fca6fa0670b883e",
+    "scripts/data/dp/lerobot_to_zarr.py": "41db1390d5588f60fe0d9cc7a7b7fac5bae5199cabac5fe44c3dd9061c437be6",
+    "scripts/data/dp/validate_zarr.py": "dc32b25ee7e834d06eefd041e4a6d5c3f1f03e31ca12a096fb5e2424fbfe1ae8",
+    "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/diffusion_policy/config/task/umi_drone_ee_pos.yaml": "79b8b3905f0b46f06ba388b9523a5d4c0babe6c340bb292828cc25895f4d4024",
+    "scripts/research/verify_policy_cpu.py": "502824de22a08da47a8069c0ce84f30510187613ff2603e475e513375eed2022",
+    "tools/research/train_uaquad_cpu.sh": "083721c1f189459c24d2af32493e696b01ac43c482755fcaca6b04645de0ea0a",
+    "tools/research/train_tilting_cpu.sh": "72d1e9845e4cb6c4c89183200a588093cd078a2010ca532e13465e8ad6affa55"
+  },
+  "reproduce_entrypoint": "tools/research/train_tilting_cpu.sh",
+  "forward_entrypoint": "scripts/research/verify_policy_cpu.py",
+  "policy_image": {
+    "tag": "ambench:research-policy",
+    "sha256": "ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8"
+  },
+  "execution": {
+    "device": "cpu",
+    "cuda_visible_devices": "-1",
+    "docker_runtime": "runc",
+    "network": "none",
+    "max_cpus": 8,
+    "memory_limit_gib": 20,
+    "memory_swap_limit_gib": 20,
+    "timeout_seconds_per_stage": 900,
+    "model_downloads": false,
+    "actual_act_training_container": {
+      "container": "ambench-omnihexa-tilting-20261009-act_train",
+      "id": "b034036a906b3cb4c5fb2ff1ebc97c90e6165fcf81c9d979de5364621f5dc168",
+      "image": "sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8",
+      "started_at": "2026-10-09T05:16:19.745389011Z",
+      "resources": {
+        "Runtime": "runc",
+        "NetworkMode": "none",
+        "Memory": 21474836480,
+        "MemorySwap": 21474836480,
+        "NanoCpus": 8000000000,
+        "DeviceRequests": null
+      },
+      "environment": {
+        "CUDA_VISIBLE_DEVICES": "-1",
+        "HF_HUB_OFFLINE": "1",
+        "TRANSFORMERS_OFFLINE": "1",
+        "OMP_NUM_THREADS": "8",
+        "MKL_NUM_THREADS": "8",
+        "OPENBLAS_NUM_THREADS": "1"
+      },
+      "command": [
+        "-m",
+        "ambench_learn.policies.act.train",
+        "--dataset.repo_id=am_bench/pressbutton_ee_absolute",
+        "--dataset.root=/data/datasets/tilting-20261009/lerobot",
+        "--dataset.use_imagenet_stats=true",
+        "--policy.type=act",
+        "--policy.input_features={\"observation.state\":{\"type\":\"STATE\",\"shape\":[8]},\"observation.images.ee_camera\":{\"type\":\"VISUAL\",\"shape\":[3,384,384]}}",
+        "--policy.chunk_size=16",
+        "--policy.n_action_steps=8",
+        "--policy.pretrained_backbone_weights=null",
+        "--policy.device=cpu",
+        "--policy.push_to_hub=false",
+        "--output_dir=/data/checkpoints/tilting-20261009/act",
+        "--job_name=omnihexa_pressbutton_act_cpu",
+        "--batch_size=1",
+        "--steps=1",
+        "--seed=42",
+        "--num_workers=0",
+        "--save_freq=1",
+        "--wandb.enable=false",
+        "--policy_target_hz=20",
+        "--policy_action_representation=ee_local_relative"
+      ],
+      "entrypoint": [
+        "/opt/venvs/act/bin/python"
+      ],
+      "mounts": [
+        {
+          "Source": "/diff/dzp_is_sb/ambench-research/source",
+          "Destination": "/workspace/ambench",
+          "RW": false
+        },
+        {
+          "Source": "/diff/dzp_is_sb/ambench-research/datasets",
+          "Destination": "/data/datasets",
+          "RW": false
+        },
+        {
+          "Source": "/diff/dzp_is_sb/ambench-research/checkpoints",
+          "Destination": "/data/checkpoints",
+          "RW": true
+        },
+        {
+          "Source": "/diff/dzp_is_sb/ambench-research/outputs",
+          "Destination": "/data/outputs",
+          "RW": true
+        }
+      ]
+    }
+  },
+  "canonical_dataset": {
+    "source_relative_path": "outputs/research/tilting-20261009/press-initial/datasets/tilting_pressbutton_seed61/PressButtonOmniHexaAbsPID/demo-20261009_051047/lerobot",
+    "container_path": "/data/datasets/tilting-20261009/lerobot",
+    "task": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "recording_seed": 61,
+    "scripted_success_episodes": 1,
+    "raw_frames": 994,
+    "raw_fps": 120,
+    "action_semantics": "ee_absolute",
+    "state_keys": [
+      "ee_pos",
+      "ee_quat",
+      "gripper_width"
+    ],
+    "state_dim": 8,
+    "action_dim": 8,
+    "sha256": {
+      "meta/info.json": "fb12db785231605ce32f06746206e9501d56bf007a7a83d7eda9527bc9ce8909",
+      "meta/stats.json": "0c3630b4d998c52d1fbd62b76bf54d851067702041f54477e9cdbb0aef7499af",
+      "data/chunk-000/file-000.parquet": "1561761e4b644649d1529eadc589ce816b1977d1d920845b56653e3d40cac208",
+      "meta/episodes/chunk-000/file-000.parquet": "b55e34d8ba6028a99c431dc6f9e0b23fd02239d4d542c8e2e172b22972a1254d"
+    }
+  },
+  "act": {
+    "optimizer_steps": 1,
+    "training_seed": 42,
+    "batch_size": 1,
+    "num_workers": 0,
+    "policy_fps": 20,
+    "logical_frames": 165,
+    "vision_backbone": "resnet18",
+    "pretrained_backbone_weights": null,
+    "initialization": "random",
+    "camera_feature": "observation.images.ee_camera",
+    "camera_shape_chw": [
+      3,
+      384,
+      384
+    ],
+    "state_shape": [
+      8
+    ],
+    "action_shape": [
+      8
+    ],
+    "action_representation": "ee_local_relative",
+    "chunk_size": 16,
+    "n_action_steps": 8,
+    "checkpoint_container_path": "/data/checkpoints/tilting-20261009/act/checkpoints/000001/pretrained_model",
+    "model_sha256": "f35351cef6026e870bf402d6e4bb63e4d410f93c190d81c584bb4f4422d3e2e5",
+    "config_sha256": "dbbbf798ef359fb6cb7c6297ac24c639707bfd289636c9e204eb1d4ec962eba4",
+    "training_step_sha256": "8f725550995a48bfe32c4d478f147a8f86576f43191ab6981fbed8ef519a390e",
+    "cpu_backend_forward": {
+      "status": "passed",
+      "evidence_level": "synthetic_observation_cpu_interface_smoke",
+      "policy": "act",
+      "checkpoint": "/data/checkpoints/tilting-20261009/act/checkpoints/000001/pretrained_model",
+      "device": "cpu",
+      "cuda_available": false,
+      "inference_seed": 42,
+      "reset": {
+        "action_representation": "ee_local_relative",
+        "state_keys": [
+          "ee_pos",
+          "ee_quat",
+          "gripper_width"
+        ]
+      },
+      "backend": {
+        "policy": "act",
+        "checkpoint": "/data/checkpoints/tilting-20261009/act/checkpoints/000001/pretrained_model",
+        "image_features": {
+          "observation.images.ee_camera": [
+            3,
+            384,
+            384
+          ]
+        },
+        "action_representation": null,
+        "n_action_steps": 8,
+        "temporal_ensemble_coeff": null
+      },
+      "inference_calls": 2,
+      "action_shapes": [
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          8
+        ]
+      ],
+      "all_finite": true,
+      "claim_limit": "Synthetic observations test the checkpoint interface, not learned task performance."
+    },
+    "raw_log_container_path": "/data/checkpoints/tilting-20261009/logs/act_train.log"
+  },
+  "diffusion_policy": {
+    "optimizer_steps": 1,
+    "training_seed": 42,
+    "batch_size": 1,
+    "num_epochs": 1,
+    "max_train_steps": 1,
+    "num_workers": 0,
+    "vision_backbone": "resnet18",
+    "pretrained_vision_weights": false,
+    "initialization": "random",
+    "zarr_container_path": "/data/checkpoints/tilting-20261009/omnihexa_pressbutton_ee.zarr.zip",
+    "zarr_sha256": "2081ba5975987de3ad37d33db40234ed570f51b83f65ad0fe0b710e14b5aaa46",
+    "zarr_validation": "passed: ee, 1 episode, 994 raw steps, camera0_rgb 224x224",
+    "task_config": "umi_drone_ee_pos",
+    "obs_down_sample_steps": 6,
+    "action_horizon": 16,
+    "obs_pose_repr": "relative",
+    "action_pose_repr": "relative",
+    "model_action_dim": 10,
+    "env_action_dim": 8,
+    "unet_down_dims": [
+      64,
+      128
+    ],
+    "num_inference_steps": 4,
+    "noise_scheduler_train_timesteps": 8,
+    "checkpoint_container_path": "/data/checkpoints/tilting-20261009/dp/checkpoints/latest.ckpt",
+    "checkpoint_sha256": "3bc1284d0896ee7007575b070fc45d8bca15d0264f3cddd013d9e0c53da6232a",
+    "config_sha256": "f0bd054061cf2600395d34c66b80274449f5cc4354389555dbbb837ee646db0d",
+    "train_loss_single_batch": 0.9454280138015747,
+    "metric_log_records": 2,
+    "unique_logged_step_numbers": [
+      0
+    ],
+    "metric_record_claim": "Two identical metric rows describe the same global_step 0; they are not two optimizer steps. Validation split is empty for the single source episode.",
+    "cpu_backend_forward": {
+      "status": "passed",
+      "evidence_level": "synthetic_observation_cpu_interface_smoke",
+      "policy": "dp",
+      "checkpoint": "/data/checkpoints/tilting-20261009/dp/checkpoints/latest.ckpt",
+      "device": "cpu",
+      "cuda_available": false,
+      "inference_seed": 42,
+      "reset": {
+        "status": "reset"
+      },
+      "backend": {
+        "policy": "dp",
+        "checkpoint": "/data/checkpoints/tilting-20261009/dp/checkpoints/latest.ckpt",
+        "action_mode": "ee_pose",
+        "action_pose_repr": "relative",
+        "hydra_workspace": "diffusion_policy.workspace.train_diffusion_unet_image_workspace.TrainDiffusionUnetImageWorkspace",
+        "camera_shapes": {
+          "ee_camera": [
+            3,
+            224,
+            224
+          ]
+        },
+        "obs_down_sample_steps": 6,
+        "query_frequency": 48,
+        "prediction_horizon_steps": 96
+      },
+      "inference_calls": 1,
+      "action_shapes": [
+        [
+          96,
+          8
+        ]
+      ],
+      "all_finite": true,
+      "claim_limit": "Synthetic observations test the checkpoint interface, not learned task performance."
+    },
+    "raw_log_container_path": "/data/checkpoints/tilting-20261009/logs/dp_train.log"
+  },
+  "transfer_checkpoints": {
+    "act": {
+      "checkpoint": "/data/checkpoints/rebuild-20261007/act_press_button_smoke/checkpoints/000001/pretrained_model",
+      "inference_files": [
+        {
+          "relative_file": "config.json",
+          "bytes": 1494,
+          "sha256": "91d32789f090d6cb6e3b1a5b65f3a5564cfa88d4eaeae763f07dcfd4a51bc693"
+        },
+        {
+          "relative_file": "model.safetensors",
+          "bytes": 206372056,
+          "sha256": "dbc78877e633241795f0599a57d571ecc88c279b67f379b74bb8d84e87af5a2d"
+        },
+        {
+          "relative_file": "policy_postprocessor.json",
+          "bytes": 935,
+          "sha256": "0ffb194ded3dd6f079af379a0cb2909e18d118846dbea91ab8cbf29bffa7a6ac"
+        },
+        {
+          "relative_file": "policy_postprocessor_step_0_unnormalizer_processor.safetensors",
+          "bytes": 6752,
+          "sha256": "e5ec1b415226c4a0b48694f43128abe269845635baa581e23d76fca8fd6a3c75"
+        },
+        {
+          "relative_file": "policy_preprocessor.json",
+          "bytes": 1433,
+          "sha256": "1a6bdf985fe2fd92cc3f472b21d0bec0645d49ebd3bad745338d980d64e9db0e"
+        },
+        {
+          "relative_file": "policy_preprocessor_step_5_normalizer_processor.safetensors",
+          "bytes": 6752,
+          "sha256": "e5ec1b415226c4a0b48694f43128abe269845635baa581e23d76fca8fd6a3c75"
+        },
+        {
+          "relative_file": "train_config.json",
+          "bytes": 5404,
+          "sha256": "c65ab8d36ee2b76b90131305ae7d421f6d94f635eb368a8bab6a634fcc811607"
+        }
+      ],
+      "optimizer_excluded": true
+    },
+    "dp": {
+      "checkpoint": "/data/outputs/rebuild-20261007/press_button_dp_smoke/checkpoints/latest.ckpt",
+      "inference_files": [
+        {
+          "relative_file": "latest.ckpt",
+          "bytes": 110881759,
+          "sha256": "356fd02dc6b1dfc6e0c09cd4183deb63cf6a601be7bee71ee637ea021de4ede5"
+        }
+      ],
+      "optimizer_excluded": true
+    },
+    "pi0": {
+      "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi0_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+      "inference_files": [
+        {
+          "relative_file": "assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+          "bytes": 1400,
+          "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+        },
+        {
+          "relative_file": "metadata.pt",
+          "bytes": 3187,
+          "sha256": "8f15dd262515596a55b1393898d15adbe5e30bd760c5cc05510578fc5b68e96d"
+        },
+        {
+          "relative_file": "model.safetensors",
+          "bytes": 7011543960,
+          "sha256": "62926a961ed7b700ac4d7923fa842cdacbcf89b78ab5affeaccb3227d9aa7428"
+        }
+      ],
+      "optimizer_excluded": true
+    },
+    "pi05": {
+      "checkpoint": "/data/checkpoints/openpi-rebuild-20261007/pi05_am_bench_multitask_openpi_original_20hz_h50_ee_local_relative/rebuild-20261007/1",
+      "inference_files": [
+        {
+          "relative_file": "assets/am_bench/multitask_openpi_original_20hz_ee_local_relative/norm_stats.json",
+          "bytes": 1400,
+          "sha256": "3d02b6432dee108570a8823dc7913ba7f49525cc103bce36790f65c2701ebaad"
+        },
+        {
+          "relative_file": "metadata.pt",
+          "bytes": 3251,
+          "sha256": "2302664c8d4eb412fdfba913643278611da020c5c735ddb6a6243b6d07d0e3a9"
+        },
+        {
+          "relative_file": "model.safetensors",
+          "bytes": 7473091464,
+          "sha256": "3c76224d288223071b89d7de6b8061b3ca40244a4ffc4d1de800b4af9d374983"
+        }
+      ],
+      "optimizer_excluded": true
+    }
+  },
+  "raw_evidence": {
+    "source_runtime": "outputs/research/tilting-20261009/cpu-il/train-container-runtime.json",
+    "dataset_hashes": "outputs/research/tilting-20261009/cpu-il/dataset-hashes.json",
+    "sha256_manifest": "outputs/research/tilting-20261009/cpu-il/sha256-manifest.txt",
+    "logs": "outputs/research/tilting-20261009/cpu-il/logs"
+  },
+  "claim_limit": "These randomly initialized policies received one optimizer step each. Their synthetic CPU forwards validate interfaces and checkpoint loading, not learned OmniHexa task performance. Environment seed 61 was included in the own-robot training demonstration; seed 62 is not a formal generalization benchmark."
+}

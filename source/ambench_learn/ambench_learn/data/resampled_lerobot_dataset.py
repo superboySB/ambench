@@ -211,11 +211,15 @@ class ResampledLeRobotDataset(Dataset[dict[str, Any]]):
 
     def _load_raw_actions(self) -> torch.Tensor:
         self.raw_dataset._ensure_hf_dataset_loaded()
-        return torch.stack(list(self.raw_dataset.hf_dataset["action"])).to(dtype=torch.float32)
+        column = self.raw_dataset.hf_dataset.select_columns(["action"]).with_format("torch")["action"]
+        return torch.stack(list(column)).to(dtype=torch.float32)
 
     def _load_raw_states(self) -> torch.Tensor:
         self.raw_dataset._ensure_hf_dataset_loaded()
-        return torch.stack(list(self.raw_dataset.hf_dataset["observation.state"])).to(dtype=torch.float32)
+        column = self.raw_dataset.hf_dataset.select_columns(["observation.state"]).with_format("torch")[
+            "observation.state"
+        ]
+        return torch.stack(list(column)).to(dtype=torch.float32)
 
     def _build_episode_actions(self) -> list[torch.Tensor]:
         episode_actions: list[torch.Tensor] = []

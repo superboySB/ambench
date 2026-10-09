@@ -398,6 +398,7 @@ def run_simulation_loop(
         policies.append(policy)
 
     env_unwrapped = env.unwrapped
+    motor_arm_joint_ids = env_unwrapped.robot_io.motor_arm_joint_ids
     action_adapter = BaseJointActionAdapter(env_unwrapped)
     initial_observations = [serialize_observation(obs["policy"][env_id]) for env_id in range(num_envs)]
     episode_steps = [0] * num_envs
@@ -437,6 +438,16 @@ def run_simulation_loop(
         },
         "camera_poses": {},
     }
+    if motor_arm_joint_ids:
+        episode_report["motor_tilt"] = {
+            "joint_names": [env_unwrapped.robot.joint_names[index] for index in motor_arm_joint_ids],
+            "soft_joint_limits_rad": serialize_observation(
+                env_unwrapped.robot.data.soft_joint_pos_limits[0, motor_arm_joint_ids, :]
+            ),
+            "initial_joint_pos_rad": serialize_observation(env_unwrapped.robot.data.joint_pos[0, motor_arm_joint_ids]),
+            "measurement_timing": "pre-step observation, allocated/clamped command, post-step joint state",
+            "terminal_post_step_is_reset_state": True,
+        }
     for camera_name in recorder.camera_names:
         camera_cfg = env_unwrapped.scene.sensors[camera_name].cfg
         episode_report["camera_poses"][camera_name] = {
@@ -475,6 +486,13 @@ def run_simulation_loop(
                         for key in ("ee_pos", "ee_quat", "base_pos", "base_quat", "arm_joint_pos", "gripper_width")
                         if key in obs["policy"][env_id]
                     }
+                    if motor_arm_joint_ids:
+                        numeric_observation["motor_arm_joint_pos"] = env_unwrapped.robot.data.joint_pos[
+                            env_id, motor_arm_joint_ids
+                        ]
+                        numeric_observation["motor_arm_joint_vel"] = env_unwrapped.robot.data.joint_vel[
+                            env_id, motor_arm_joint_ids
+                        ]
                     telemetry_rows.append({
                         "env_id": env_id,
                         "step_index": episode_steps[env_id],
@@ -490,9 +508,30 @@ def run_simulation_loop(
                 for env_id, telemetry_row in enumerate(telemetry_rows):
                     telemetry_row["controller_output"] = {
                         key: serialize_observation(getattr(output, key)[env_id])
-                        for key in ("force_b", "torque_b", "motor_thrusts", "desired_wrench_b", "final_wrench_b")
+                        for key in (
+                            "force_b",
+                            "torque_b",
+                            "motor_thrusts",
+                            "desired_wrench_b",
+                            "final_wrench_b",
+                            "motor_arm_angles",
+                        )
                         if output is not None and getattr(output, key) is not None
                     }
+                    if motor_arm_joint_ids:
+                        command = env_unwrapped.control_pipeline.last_command
+                        telemetry_row["controller_output"]["motor_arm_position_targets"] = serialize_observation(
+                            command.motor_arm_position_targets[env_id]
+                        )
+                        telemetry_row["observation_after_step"] = {
+                            "motor_arm_joint_pos": serialize_observation(
+                                env_unwrapped.robot.data.joint_pos[env_id, motor_arm_joint_ids]
+                            ),
+                            "motor_arm_joint_vel": serialize_observation(
+                                env_unwrapped.robot.data.joint_vel[env_id, motor_arm_joint_ids]
+                            ),
+                            "is_reset_state": bool(terminated[env_id] or truncated[env_id]),
+                        }
                     telemetry_row["terminated"] = bool(terminated[env_id])
                     telemetry_row["truncated"] = bool(truncated[env_id])
                     telemetry_file.write(json.dumps(telemetry_row, allow_nan=False) + "\n")

@@ -328,6 +328,31 @@ class TrackingCollector:
             },
         }
 
+        motor_arm_ids = self.env_unwrapped.robot_io.motor_arm_joint_ids
+        if motor_arm_ids:
+            # Evaluators call collect after stepping and exclude terminal/reset observations.
+            command = self.env_unwrapped.control_pipeline.last_command
+            allocated = control_output.motor_arm_angles
+            targets = command.motor_arm_position_targets
+            record["motor_tilt"] = {
+                "sample_phase": "post_step_nonterminal",
+                "joint_names": [self.env_unwrapped.robot.joint_names[index] for index in motor_arm_ids],
+                "allocated_rad": None if allocated is None else _float_list(_vector(allocated[self.env_idx])),
+                "command_target_rad": None if targets is None else _float_list(_vector(targets[self.env_idx])),
+                "actual_post_step_rad": _float_list(
+                    _vector(self.env_unwrapped.robot.data.joint_pos[self.env_idx, motor_arm_ids])
+                ),
+                "velocity_post_step_rad_s": _float_list(
+                    _vector(self.env_unwrapped.robot.data.joint_vel[self.env_idx, motor_arm_ids])
+                ),
+                "soft_limits_rad": (
+                    self.env_unwrapped.robot.data.soft_joint_pos_limits[self.env_idx, motor_arm_ids]
+                    .detach()
+                    .cpu()
+                    .tolist()
+                ),
+            }
+
         self.prev_desired_base_pos = None if desired_base_pos is None else desired_base_pos.copy()
         self.prev_desired_base_quat = None if desired_base_quat is None else desired_base_quat.copy()
         self.prev_desired_joint_pos = None if desired_joint_pos is None else desired_joint_pos.copy()

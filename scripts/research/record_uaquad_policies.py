@@ -13,6 +13,7 @@ Every attempt has its own output directory; task failures are retained.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import re
@@ -108,14 +109,14 @@ def read_server_identity(spec: dict, path: Path) -> dict:
     return identity
 
 
-def validate_rollout(path: Path, spec: dict) -> dict:
+def validate_rollout(path: Path, spec: dict, task_id: str = TASK_ID) -> dict:
     """Require a completed real rollout and all three recordings."""
     report_path = path / "eval_summary.json"
     payload = json.loads(report_path.read_text())
     metadata = payload["metadata"]
     if payload["status"] != "completed" or payload["error"] is not None:
         raise ValueError("Evaluator did not complete")
-    if metadata["Task"] != TASK_ID or metadata["Seed"] != spec["seed"]:
+    if metadata["Task"] != task_id or metadata["Seed"] != spec["seed"]:
         raise ValueError("Runtime task or seed differs from its specification")
     if metadata["Policy ID"] != spec["name"] or sorted(metadata["Video cameras"]) != sorted(CAMERAS):
         raise ValueError("Runtime policy identifier or cameras differ")
@@ -155,10 +156,74 @@ def validate_rollout(path: Path, spec: dict) -> dict:
     }
 
 
-def main() -> int:
+def verify_simulation_gpu(sim_container: str, path: Path, minimum_free_vram_mib: int | None) -> dict | None:
+    """Reject simulation overlap and optionally admit other workloads by free VRAM."""
+    gpu = subprocess.run(
+        ["nvidia-smi", "--id=0", "--query-compute-apps=pid,process_name", "--format=csv,noheader"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    (path / "gpu-processes-before.txt").write_text(gpu.stdout)
+    if minimum_free_vram_mib is None and gpu.stdout.strip():
+        raise RuntimeError("Local GPU 0 already has a compute process; finish it before recording")
+    if minimum_free_vram_mib is not None:
+        container_processes = subprocess.run(
+            ["docker", "top", sim_container, "-eo", "pid,ppid,args"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        (path / "sim-processes-before.txt").write_text(container_processes.stdout)
+        owned_pids = {line.split()[0] for line in container_processes.stdout.splitlines()[1:] if line.strip()}
+        gpu_processes = list(csv.reader(gpu.stdout.splitlines()))
+        if any(fields[0].strip() in owned_pids for fields in gpu_processes):
+            raise RuntimeError("The simulation container still owns an active GPU process")
+        memory = subprocess.run(
+            [
+                "nvidia-smi",
+                "--id=0",
+                "--query-gpu=index,name,memory.total,memory.used,memory.free",
+                "--format=csv,noheader,nounits",
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        fields = next(csv.reader(memory.stdout.splitlines()))
+        baseline = {
+            "gpu_index": int(fields[0]),
+            "name": fields[1].strip(),
+            "total_mib": int(fields[2]),
+            "used_mib": int(fields[3]),
+            "free_mib": int(fields[4]),
+            "required_free_mib": minimum_free_vram_mib,
+            "other_compute_processes": [
+                {"pid": int(item[0]), "process_name": item[1].strip()} for item in gpu_processes
+            ],
+            "sim_owned_compute_processes": [],
+        }
+        (path / "gpu-baseline-before.json").write_text(json.dumps(baseline, indent=2) + "\n")
+        if baseline["free_mib"] < minimum_free_vram_mib:
+            raise RuntimeError(
+                f"GPU 0 has {baseline['free_mib']} MiB free; this one-environment recording requires "
+                f"at least {minimum_free_vram_mib} MiB before startup"
+            )
+    return baseline if minimum_free_vram_mib is not None else None
+
+
+def main(
+    *,
+    task_id: str = TASK_ID,
+    asset_subdir: str = "uaquad",
+    minimum_free_vram_mib: int | None = None,
+    eval_timeout_s: int = 900,
+) -> int:
     """Run selected trials serially, restarting seeded inference for each seed."""
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--specs-json", type=Path, default=REPO_ROOT / "usage_assets/uaquad/policy_specs.json")
+    parser = argparse.ArgumentParser(description=__doc__.replace("UAQuad", task_id.split("-")[2]))
+    parser.add_argument(
+        "--specs-json", type=Path, default=REPO_ROOT / "usage_assets" / asset_subdir / "policy_specs.json"
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--sim-container", default="ambench-sim-research")
     parser.add_argument("--name", action="append", default=[])
@@ -173,8 +238,8 @@ def main() -> int:
     for spec in selected:
         if spec["family"] not in {"act", "dp", "pi"} or spec["inference_seed"] != 42:
             parser.error("Supported families are ACT/DP/PI with the server's fixed seed 42")
-        if spec["inference_device"] != "cpu" or spec["task_id"] != TASK_ID:
-            parser.error("This experiment requires CPU inference and UAQuad PressButton")
+        if spec["inference_device"] != "cpu" or spec["task_id"] != task_id:
+            parser.error(f"This experiment requires CPU inference and {task_id}")
     output_dir = args.output_dir.resolve()
     if not output_dir.is_relative_to(REPO_ROOT / "outputs"):
         parser.error("Raw artifacts must stay inside ignored outputs/")
@@ -197,7 +262,10 @@ def main() -> int:
                     args.sim_container,
                     "pgrep",
                     "-f",
-                    "record_usage_variants[.]py|verify_matrix[.]py|verify_scripted[.]py",
+                    (
+                        "record_usage_variants[.]py|record_demos_scripted[.]py|verify_matrix[.]py|verify_scripted[.]py|"
+                        "ambench_learn[.]policies[.](act|dp|pi)[.]eval"
+                    ),
                 ],
                 capture_output=True,
                 text=True,
@@ -206,15 +274,9 @@ def main() -> int:
                 raise RuntimeError("Could not inspect the simulation container's active batches")
             if active_batch.returncode == 0:
                 raise RuntimeError("A simulation recording or verification batch is still running")
-            gpu = subprocess.run(
-                ["nvidia-smi", "--id=0", "--query-compute-apps=pid,process_name", "--format=csv,noheader"],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
-            (path / "gpu-processes-before.txt").write_text(gpu.stdout)
-            if gpu.stdout.strip():
-                raise RuntimeError("Local GPU 0 already has a compute process; finish it before recording")
+            baseline = verify_simulation_gpu(args.sim_container, path, minimum_free_vram_mib)
+            if baseline is not None:
+                row["gpu_baseline"] = baseline
             start_command = ["bash", "tools/research/start_policy.sh", "--cpu", family]
             if family == "pi":
                 start_command.append(spec["openpi_config"])
@@ -231,12 +293,12 @@ def main() -> int:
                 args.sim_container,
                 "timeout",
                 "--kill-after=20s",
-                "900s",
+                f"{eval_timeout_s}s",
                 "python",
                 "-m",
                 f"ambench_learn.policies.{family}.eval",
                 "--task",
-                TASK_ID,
+                task_id,
                 "--num-envs",
                 "1",
                 "--num-rollouts",
@@ -264,7 +326,7 @@ def main() -> int:
                 command.extend(["--host", "127.0.0.1", "--port", "8000", "--prompt", "press the button"])
             if family in {"act", "pi"}:
                 command.extend(["--policy-target-hz", "20", "--n-action-steps", "8"])
-            row["eval_exit_code"] = run_logged(command, path / "eval.log", 960)
+            row["eval_exit_code"] = run_logged(command, path / "eval.log", eval_timeout_s + 60)
             identity_after = read_server_identity(spec, path / "server-identity-after.json")
             if (identity_before["pid"], identity_before["start_time_ticks"]) != (
                 identity_after["pid"],
@@ -278,7 +340,7 @@ def main() -> int:
                 raise ValueError("Remote CPU device and seed were not recorded")
             if row["eval_exit_code"] != 0:
                 raise RuntimeError("Evaluator failed or exceeded its wall time limit")
-            row.update(validate_rollout(path, spec))
+            row.update(validate_rollout(path, spec, task_id))
             row["status"] = "completed"
             print(f"  completed: {row['outcome']}, {row['steps']} steps", flush=True)
         except (OSError, RuntimeError, ValueError, KeyError, subprocess.SubprocessError) as error:

@@ -48,7 +48,7 @@ def gallery_records(manifest: list[dict]) -> list[dict]:
                 record["category"] = "tasks"
             else:
                 record["category"] = "checks"
-        if record["category"] not in {"models", "tasks", "aircraft", "checks", "uaquad"}:
+        if record["category"] not in {"models", "tasks", "aircraft", "checks", "uaquad", "tilting"}:
             raise ValueError(f"Unsupported experiment category: {record['category']!r}")
         for extension in ("gif", "mp4"):
             filename = record.get(extension, f"{name}.{extension}")

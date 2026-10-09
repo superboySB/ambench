@@ -21,6 +21,7 @@ import subprocess
 from pathlib import Path
 
 CAMERAS = ("scene_camera", "base_camera", "ee_camera")
+TOPIC_ROBOTS = {"uaquad": ("UAQuad", "ua_quad"), "tilting": ("OmniHexa", "omni_hexa")}
 PROBE_CODE = """
 import json
 import sys
@@ -171,7 +172,8 @@ def training_metadata(trial: dict, repo_root: Path) -> tuple[dict, Path]:
         dataset_sha256 = row["canonical_info"]["sha256"]
         dataset_hash_basis = "canonical meta/info.json"
         regime = "ee_transfer"
-    elif trial["training_robot"] == "UAQuad":
+    elif trial["training_robot"] in {"UAQuad", "OmniHexa"}:
+        training_robot = trial["training_robot"]
         canonical = reference["canonical_dataset"]
         dataset = resolve_source(canonical["source_relative_path"], repo_root)
         data_file = dataset / "data/chunk-000/file-000.parquet"
@@ -180,15 +182,15 @@ def training_metadata(trial: dict, repo_root: Path) -> tuple[dict, Path]:
             dataset_sha256 != trial["source_dataset_sha256"]
             or dataset_sha256 != canonical["sha256"]["data/chunk-000/file-000.parquet"]
         ):
-            raise ValueError("The UAQuad training dataset differs from its provenance")
+            raise ValueError(f"The {training_robot} training dataset differs from its provenance")
         row = reference["act" if trial["family"] == "act" else "diffusion_policy"]
         if row["optimizer_steps"] != trial["training_steps"] or row["training_seed"] != trial["training_seed"]:
-            raise ValueError(f"UAQuad training steps or seed differ from the trial: {trial['name']}")
+            raise ValueError(f"{training_robot} training steps or seed differ from the trial: {trial['name']}")
         if row["checkpoint_container_path"] != trial["checkpoint"]:
-            raise ValueError(f"UAQuad training checkpoint differs from the trial: {trial['name']}")
+            raise ValueError(f"{training_robot} training checkpoint differs from the trial: {trial['name']}")
         source_dataset = canonical["source_relative_path"]
         dataset_hash_basis = "canonical data/chunk-000/file-000.parquet"
-        regime = "uaquad_one_step"
+        regime = "uaquad_one_step" if training_robot == "UAQuad" else "tilting_one_step"
     else:
         raise ValueError(f"Unsupported training embodiment: {trial['training_robot']}")
     initialized = {
@@ -219,6 +221,7 @@ def build_policy_specs(
     repo_root: Path,
     container: str,
     container_root: Path,
+    topic: str = "uaquad",
 ) -> list[dict]:
     """Build model previews from one real evaluator rollout and its saved config."""
     trial = record["spec"]
@@ -242,8 +245,11 @@ def build_policy_specs(
     env_cfg = summary_path.parent / "env_cfg.yaml"
     training, training_cfg = training_metadata(trial, repo_root)
     snapshot = probe_snapshot(env_cfg, videos, repo_root, container, container_root, training_cfg)
-    expected_training_robot = {"EE": "end_effector", "UAQuad": "ua_quad"}[trial["training_robot"]]
-    if snapshot["training_robot_id"] != expected_training_robot or snapshot["robot_profile"]["robot_id"] != "ua_quad":
+    robot_token, robot_id = TOPIC_ROBOTS[topic]
+    expected_training_robot = {"EE": "end_effector", "UAQuad": "ua_quad", "OmniHexa": "omni_hexa"}[
+        trial["training_robot"]
+    ]
+    if snapshot["training_robot_id"] != expected_training_robot or snapshot["robot_profile"]["robot_id"] != robot_id:
         raise ValueError(
             f"Saved training/inference robot profiles differ from the declared experiment: {trial['name']}"
         )
@@ -277,9 +283,12 @@ def build_policy_specs(
             "One optimizer step validates software interfaces and does not establish trained task performance."
         )
         if training["training_regime"] == "ee_transfer":
-            note += " This EE-trained checkpoint is transferred to the physical UAQuad without UAQuad training."
+            note += (
+                f" This EE-trained checkpoint is transferred to the physical {robot_token} without"
+                f" {robot_token} training."
+            )
         else:
-            note += " The visual backbone was randomly initialized for this UAQuad one-step CPU training."
+            note += f" The visual backbone was randomly initialized for this {robot_token} one-step CPU training."
         specs.append({
             "name": f"{trial['name']}_{camera}",
             "title": f"{trial['model_variant']} / {camera} / seed{trial['seed']}",
@@ -290,7 +299,7 @@ def build_policy_specs(
             "outcome_labels": {"success": "SUCCESS", "timeout": "TIMEOUT"},
             "metadata": {
                 "experiment_id": trial["experiment_id"],
-                "category": "uaquad",
+                "category": topic,
                 "trial_id": trial["name"],
                 "camera": camera,
                 "task_id": runtime["Task"],
@@ -346,10 +355,13 @@ def build_policy_specs(
     return specs
 
 
-def build_specs(reports: list[Path], repo_root: Path, container: str, container_root: Path) -> list[dict]:
+def build_specs(
+    reports: list[Path], repo_root: Path, container: str, container_root: Path, topic: str = "uaquad"
+) -> list[dict]:
     """Build previews for actual exported outcomes, checking all camera headers."""
     specs = []
     seen_trials = set()
+    _, topic_robot_id = TOPIC_ROBOTS[topic]
     for report_path in reports:
         driver = json.loads(report_path.read_text())
         for record_index, record in enumerate(driver["results"]):
@@ -362,7 +374,7 @@ def build_specs(reports: list[Path], repo_root: Path, container: str, container_
             seen_trials.add(trial_id)
             if "eval_summary" in record:
                 specs.extend(
-                    build_policy_specs(record, record_index, report_path, repo_root, container, container_root)
+                    build_policy_specs(record, record_index, report_path, repo_root, container, container_root, topic)
                 )
                 continue
             outcomes_path = resolve_source(record["outcomes_json"], repo_root)
@@ -386,6 +398,8 @@ def build_specs(reports: list[Path], repo_root: Path, container: str, container_
                 videos[camera] = matches[0]
             env_cfg = session / "env_cfg.yaml"
             snapshot = probe_snapshot(env_cfg, videos, repo_root, container, container_root)
+            if snapshot["robot_profile"]["robot_id"] not in {topic_robot_id, "fa_hexa"}:
+                raise ValueError(f"Source robot is outside the declared {topic} topic: {trial_id}")
             if snapshot["seed"] != outcomes["seed"] or not math.isclose(snapshot["step_dt_s"], outcomes["step_dt_s"]):
                 raise ValueError(f"Saved environment timing/seed differs from the outcome: {trial_id}")
             for field in ("robot_profile", "experiment_conditions", "camera_poses"):
@@ -425,7 +439,7 @@ def build_specs(reports: list[Path], repo_root: Path, container: str, container_
                     "outcome_labels": {"success": "SUCCESS", "timeout": "TIMEOUT"},
                     "metadata": {
                         "experiment_id": trial["experiment_id"],
-                        "category": "uaquad",
+                        "category": topic,
                         "trial_id": trial_id,
                         "camera": camera,
                         "task_id": outcomes["task"],
@@ -552,12 +566,14 @@ def merge_previews(
     print(f"Verified {len(preserved)} existing media files; manifest now contains {len(existing)} camera records")
 
 
-def main() -> int:
+def main(topic: str = "uaquad") -> int:
     """Prepare actual-source specs and optionally merge their verified previews."""
     repo_root = Path(__file__).resolve().parents[2]
+    if topic not in TOPIC_ROBOTS:
+        raise ValueError(f"Unsupported documentation topic: {topic}")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results-json", type=Path, nargs="+", required=True)
-    parser.add_argument("--output", type=Path, default=repo_root / "usage_assets/uaquad/animation_specs.json")
+    parser.add_argument("--output", type=Path, default=repo_root / f"usage_assets/{topic}/animation_specs.json")
     parser.add_argument("--probe-container", default="ambench-sim-research")
     parser.add_argument("--container-root", type=Path, default=Path("/workspace/ambench"))
     parser.add_argument("--merge-previews", type=Path, nargs="+")
@@ -565,7 +581,7 @@ def main() -> int:
     parser.add_argument("--max-bytes", type=int, default=192 * 1024)
     args = parser.parse_args()
     reports = [resolve_source(str(path), repo_root) for path in args.results_json]
-    specs = build_specs(reports, repo_root, args.probe_container, args.container_root)
+    specs = build_specs(reports, repo_root, args.probe_container, args.container_root, topic)
     if not specs:
         parser.error("No completed recording trials were found")
     args.output.parent.mkdir(parents=True, exist_ok=True)

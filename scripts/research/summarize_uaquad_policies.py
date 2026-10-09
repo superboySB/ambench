@@ -60,7 +60,7 @@ def source(path: Path) -> dict[str, Any]:
     return {"path": str(path.relative_to(REPO_ROOT)), "sha256": sha256_file(path)}
 
 
-def training_source(spec: dict[str, Any]) -> dict[str, Any]:
+def training_source(spec: dict[str, Any], robot_name: str = "UAQuad", asset_subdir: str = "uaquad") -> dict[str, Any]:
     """Link the served checkpoint to its actual dataset and training record."""
     reference_path = (REPO_ROOT / spec["training_reference"]).resolve()
     if not reference_path.is_relative_to(REPO_ROOT / "usage_assets") or not reference_path.is_file():
@@ -82,26 +82,26 @@ def training_source(spec: dict[str, Any]) -> dict[str, Any]:
         dataset_sha256 = dataset["sha256"]
         dataset_hash_basis = "canonical meta/info.json"
         regime = "ee_transfer"
-    elif spec["training_robot"] == "UAQuad":
+    elif spec["training_robot"] == robot_name:
         job = reference["act" if spec["family"] == "act" else "diffusion_policy"]
         if (
             job["checkpoint_container_path"] != spec["checkpoint"]
             or job["optimizer_steps"] != spec["training_steps"]
             or job["training_seed"] != spec["training_seed"]
         ):
-            raise ValueError(f"UAQuad training provenance differs from {spec['name']}")
+            raise ValueError(f"{robot_name} training provenance differs from {spec['name']}")
         dataset = reference["canonical_dataset"]
         dataset_path = dataset["source_relative_path"]
         dataset_sha256 = dataset["sha256"]["data/chunk-000/file-000.parquet"]
         dataset_hash_basis = "canonical data/chunk-000/file-000.parquet"
         if dataset_sha256 != spec["source_dataset_sha256"]:
-            raise ValueError(f"UAQuad training dataset hash differs from {spec['name']}")
+            raise ValueError(f"{robot_name} training dataset hash differs from {spec['name']}")
         local_dataset = (REPO_ROOT / dataset_path).resolve()
         if not local_dataset.is_relative_to(OUTPUTS_ROOT) or not local_dataset.is_dir():
-            raise ValueError(f"UAQuad training dataset is unavailable for {spec['name']}")
+            raise ValueError(f"{robot_name} training dataset is unavailable for {spec['name']}")
         if sha256_file(local_dataset / "data/chunk-000/file-000.parquet") != dataset_sha256:
-            raise ValueError(f"UAQuad canonical data changed after training: {spec['name']}")
-        regime = "uaquad_one_step"
+            raise ValueError(f"{robot_name} canonical data changed after training: {spec['name']}")
+        regime = f"{asset_subdir}_one_step"
     else:
         raise ValueError(f"Unsupported training robot for {spec['name']}")
     return {
@@ -242,14 +242,106 @@ def verify_videos(row: dict[str, Any], run_dir: Path, name: str) -> dict[str, di
     return video_sources
 
 
-def summarize_trial(row: dict[str, Any], spec: dict[str, Any], report: Path) -> dict[str, Any]:
+def verify_motor_tilt(path: Path) -> dict[str, Any]:
+    """Validate six real tilt-joint readings and summarize all nonterminal samples."""
+    joint_names = [f"base_motor_arm{index}" for index in range(1, 7)]
+    samples = []
+    times = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        event = json.loads(line)
+        if event["event"] != "timestep":
+            continue
+        sample = event["record"]["motor_tilt"]
+        if sample["sample_phase"] != "post_step_nonterminal" or sample["joint_names"] != joint_names:
+            raise ValueError("Tilt telemetry has a different phase or joint order")
+        for field in ("allocated_rad", "command_target_rad", "actual_post_step_rad", "velocity_post_step_rad_s"):
+            if len(sample[field]) != 6 or not all(math.isfinite(value) for value in sample[field]):
+                raise ValueError(f"Tilt telemetry has invalid {field}")
+        limits = sample["soft_limits_rad"]
+        if len(limits) != 6 or any(
+            len(pair) != 2 or not all(math.isfinite(value) for value in pair) or pair[0] >= pair[1] for pair in limits
+        ):
+            raise ValueError("Tilt telemetry has invalid soft joint limits")
+        expected = [min(max(value, limit[0]), limit[1]) for value, limit in zip(sample["allocated_rad"], limits)]
+        if any(
+            not math.isclose(value, target, abs_tol=1e-6)
+            for value, target in zip(expected, sample["command_target_rad"])
+        ):
+            raise ValueError("Tilt command does not match clamping of the allocated angle")
+        if samples and samples[0]["soft_limits_rad"] != limits:
+            raise ValueError("Tilt soft joint limits changed during rollout")
+        samples.append(sample)
+        times.append((event["record"]["timestep"], event["record"]["timestep"] * event["record"]["dt"]))
+    if not samples:
+        raise ValueError("OmniHexa tracking has no real tilt readings")
+    ranges = {}
+    for field in ("allocated_rad", "command_target_rad", "actual_post_step_rad", "velocity_post_step_rad_s"):
+        ranges[field] = {
+            "min_by_joint": [min(sample[field][index] for sample in samples) for index in range(6)],
+            "max_by_joint": [max(sample[field][index] for sample in samples) for index in range(6)],
+        }
+    clamp_samples = sum(
+        any(abs(value - target) > 1e-6 for value, target in zip(sample["allocated_rad"], sample["command_target_rad"]))
+        for sample in samples
+    )
+    squared_error = sum(
+        (target - actual) ** 2
+        for sample in samples
+        for target, actual in zip(sample["command_target_rad"], sample["actual_post_step_rad"])
+    )
+    sampled_indices = {round(index * (len(samples) - 1) / 79) for index in range(80)}
+    for field in ranges:
+        for joint_index in range(6):
+            sampled_indices.add(min(range(len(samples)), key=lambda index: samples[index][field][joint_index]))
+            sampled_indices.add(max(range(len(samples)), key=lambda index: samples[index][field][joint_index]))
+    points = [
+        {
+            "step": times[index][0],
+            "time_s": times[index][1],
+            "motor_arm_allocated_rad": samples[index]["allocated_rad"],
+            "motor_arm_target_rad": samples[index]["command_target_rad"],
+            "motor_arm_actual_after_rad": samples[index]["actual_post_step_rad"],
+            "motor_arm_velocity_after_rad_s": samples[index]["velocity_post_step_rad_s"],
+        }
+        for index in sorted(sampled_indices)
+    ]
+    return {
+        "verification_status": "passed",
+        "sample_phase": "post_step_nonterminal",
+        "joint_names": joint_names,
+        "samples": len(samples),
+        "soft_limits_rad": samples[0]["soft_limits_rad"],
+        "ranges": ranges,
+        "clamped_command_samples": clamp_samples,
+        "command_actual_rms_rad": math.sqrt(squared_error / (6 * len(samples))),
+        "first_sample": samples[0],
+        "last_sample": samples[-1],
+        "sampled": {"selection": "80 evenly-spaced samples plus per-joint field extrema", "points": points},
+        "claim_limit": (
+            "Allocated and clamped commands are compared to post-step articulation joint readings. "
+            "Terminal auto-reset observations are excluded. The applied body wrench is based on allocation; "
+            "these joint readings do not prove that thrust directions were recomputed from servo lag."
+        ),
+    }
+
+
+def summarize_trial(
+    row: dict[str, Any],
+    spec: dict[str, Any],
+    report: Path,
+    *,
+    task_id: str = TASK_ID,
+    seeds: tuple[int, int] = (51, 52),
+    robot_name: str = "UAQuad",
+    asset_subdir: str = "uaquad",
+) -> dict[str, Any]:
     """Verify and summarize one completed real rollout without altering it."""
     name = spec["name"]
     if (
-        spec["task_id"] != TASK_ID
+        spec["task_id"] != task_id
         or spec["inference_device"] != "cpu"
         or spec["inference_seed"] != 42
-        or spec["seed"] not in (51, 52)
+        or spec["seed"] not in seeds
         or spec["family"] not in ("act", "dp", "pi")
     ):
         raise ValueError(f"Unexpected model trial conditions: {name}")
@@ -269,7 +361,7 @@ def summarize_trial(row: dict[str, Any], spec: dict[str, Any], report: Path) -> 
     if len(rollouts) != 1 or eval_summary["summary"]["num_rollouts"] != 1:
         raise ValueError(f"Expected one rollout in {name}")
     if (
-        metadata["Task"] != TASK_ID
+        metadata["Task"] != task_id
         or metadata["Seed"] != spec["seed"]
         or metadata["Policy ID"] != name
         or metadata["Action semantics"] != "ee_absolute"
@@ -309,12 +401,12 @@ def summarize_trial(row: dict[str, Any], spec: dict[str, Any], report: Path) -> 
     tracking_path, analysis_path, sample_basis = verify_tracking(row, eval_summary, rollout, run_dir, name)
     identity_before, before_path, after_path, server_log = verify_server(row, spec, run_dir, name)
     video_sources = verify_videos(row, run_dir, name)
-    training = training_source(spec)
-    return {
+    training = training_source(spec, robot_name, asset_subdir)
+    trial = {
         "name": name,
         "status": "verified",
         "experiment_id": spec["experiment_id"],
-        "task_id": TASK_ID,
+        "task_id": task_id,
         "policy_family": spec["family"],
         "model_variant": spec["model_variant"],
         "env_seed": spec["seed"],
@@ -344,25 +436,46 @@ def summarize_trial(row: dict[str, Any], spec: dict[str, Any], report: Path) -> 
             "videos": video_sources,
         },
     }
+    if robot_name == "OmniHexa":
+        trial["motor_tilt"] = verify_motor_tilt(tracking_path)
+        baseline_path = saved_file(str(run_dir / "gpu-baseline-before.json"))
+        baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
+        if (
+            baseline != row["gpu_baseline"]
+            or baseline["sim_owned_compute_processes"]
+            or baseline["free_mib"] < baseline["required_free_mib"]
+        ):
+            raise ValueError(f"Simulation GPU baseline or ownership differs from {name}")
+        trial["environment_gpu_baseline"] = baseline
+        trial["sources"]["environment_gpu_baseline"] = source(baseline_path)
+    return trial
 
 
-def main() -> int:
+def main(
+    *,
+    task_id: str = TASK_ID,
+    seeds: tuple[int, int] = (51, 52),
+    robot_name: str = "UAQuad",
+    asset_subdir: str = "uaquad",
+    run_name: str = "uaquad-20261009",
+) -> int:
     """Require the whole real trial matrix before publishing a JSON summary."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__.replace("UAQuad", robot_name))
     parser.add_argument(
-        "--report-json", type=Path, default=OUTPUTS_ROOT / "research/uaquad-20261009/policy/results.json"
+        "--report-json", type=Path, default=OUTPUTS_ROOT / "research" / run_name / "policy/results.json"
     )
-    parser.add_argument("--specs-json", type=Path, default=REPO_ROOT / "usage_assets/uaquad/policy_specs.json")
-    parser.add_argument("--output", type=Path, default=REPO_ROOT / "usage_assets/uaquad/policy_trials.json")
+    asset_root = REPO_ROOT / "usage_assets" / asset_subdir
+    parser.add_argument("--specs-json", type=Path, default=asset_root / "policy_specs.json")
+    parser.add_argument("--output", type=Path, default=asset_root / "policy_trials.json")
     args = parser.parse_args()
     output_path = args.output.resolve()
-    output_roots = (REPO_ROOT / "usage_assets/uaquad", OUTPUTS_ROOT / "research")
+    output_roots = (asset_root, OUTPUTS_ROOT / "research")
     if not any(output_path.is_relative_to(root) for root in output_roots):
-        parser.error("Policy trial summary must be inside usage_assets/uaquad/ or outputs/research/")
+        parser.error(f"Policy trial summary must be inside usage_assets/{asset_subdir}/ or outputs/research/")
     report_path = saved_file(str(args.report_json))
     specs_path = args.specs_json.resolve()
-    if not specs_path.is_relative_to(REPO_ROOT / "usage_assets/uaquad"):
-        parser.error("Policy specifications must be in usage_assets/uaquad/")
+    if not specs_path.is_relative_to(asset_root):
+        parser.error(f"Policy specifications must be in usage_assets/{asset_subdir}/")
     specs = json.loads(specs_path.read_text(encoding="utf-8"))
     report = json.loads(report_path.read_text(encoding="utf-8"))
     if report["status"] != "completed" or len(specs) != 12 or len(report["results"]) != 12:
@@ -370,14 +483,43 @@ def main() -> int:
     by_name = {row["name"]: row for row in report["results"]}
     if len(by_name) != 12 or set(by_name) != {spec["name"] for spec in specs}:
         raise ValueError("Driver results differ from the twelve declared policy trials")
-    trials = [summarize_trial(by_name[spec["name"]], spec, report_path) for spec in specs]
+    trials = [
+        summarize_trial(
+            by_name[spec["name"]],
+            spec,
+            report_path,
+            task_id=task_id,
+            seeds=seeds,
+            robot_name=robot_name,
+            asset_subdir=asset_subdir,
+        )
+        for spec in specs
+    ]
+    recording_seeds = sorted({
+        json.loads((REPO_ROOT / spec["training_reference"]).read_text(encoding="utf-8"))["canonical_dataset"][
+            "recording_seed"
+        ]
+        for spec in specs
+        if spec["training_robot"] == robot_name
+    })
+    if len(recording_seeds) == 1:
+        training_presence = (
+            f"{robot_name} seed {recording_seeds[0]} was present in its own one-step training demonstration."
+        )
+    elif recording_seeds:
+        training_presence = (
+            f"{robot_name} seeds {', '.join(str(seed) for seed in recording_seeds)} were present "
+            "in its own one-step training demonstrations."
+        )
+    else:
+        training_presence = f"No {robot_name} training demonstration was declared."
     payload = {
         "schema_version": 1,
         "verification_status": "passed",
         "coverage": {"expected_count": 12, "verified_count": 12, "missing_names": [], "invalid_names": []},
         "claim_limit": (
-            "One optimizer step per checkpoint verifies model and transport interfaces, not learned UAQuad "
-            "task performance. UAQuad seed 51 was present in its own one-step training demonstration."
+            f"One optimizer step per checkpoint verifies model and transport interfaces, not learned {robot_name} "
+            f"task performance. {training_presence}"
         ),
         "metric_basis": {
             "source": (
@@ -420,7 +562,7 @@ def main() -> int:
     temp_path = output_path.with_suffix(output_path.suffix + ".tmp")
     temp_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
     temp_path.replace(output_path)
-    print(f"Verified 12/12 UAQuad policy trials: {output_path}")
+    print(f"Verified 12/12 {robot_name} policy trials: {output_path}")
     return 0
 
 

@@ -4,6 +4,8 @@
 
 **常规固定旋翼四旋翼加机械臂：** 请看新增独立手册 [uaquad.md](uaquad.md) 和 [UAQuad 交互专题](https://zipengdai.com/ambench/uaquad/)。2026-10-09 的专门实验按独立试次统计，不混入本页的历史结果。
 
+**主动电机倾转六旋翼：** 请看独立手册 [tilting.md](tilting.md) 和 [OmniHexa 交互专题](https://zipengdai.com/ambench/tilting/)。本轮重新录制全部十二任务及模型试次；倾转分配目标和实际关节轨迹分别展示。
+
 ![AM-Bench 公开总览](assets/ambench-overview.png)
 
 图片是仓库自带的项目总览。下文的验证表只记录实际运行结果；静态注册检查、仿真 reset/step、脚本任务成功和模型评估分别记录，不能互相代替。
@@ -16,7 +18,7 @@
 | --- | --- |
 | [![π₀.₅ 按钮任务成功的完整过程采样](usage_assets/animations/policy_pi05_ee.gif)](https://zipengdai.com/ambench/#policy_pi05_ee) | [![ACT 按钮任务超时未完成的完整过程采样](usage_assets/animations/policy_act_ee.gif)](https://zipengdai.com/ambench/#policy_act_ee) |
 
-2026-10-08 的历史发布共 **23 个实验组、54 段视频**；每组有 2–3 段记录。十二任务有 EE 与场景视角，四种飞机各有 EE、基座与外部全景，四个模型各保留旧基线及新试次的双视角。在线总览另包含后续 UAQuad 专题，当前总数由页面读取来源清单显示。
+2026-10-08 的历史发布共 **23 个实验组、54 段视频**；每组有 2–3 段记录。十二任务有 EE 与场景视角，四种飞机各有 EE、基座与外部全景，四个模型各保留旧基线及新试次的双视角。在线总览另包含后续 UAQuad 与 OmniHexa 主动倾转专题，当前总数由页面读取来源清单显示。
 
 **[直接打开在线实验视频总览](https://zipengdai.com/ambench/)**：点击下文任意 GIF，会定位到对应实验组；可播放、暂停、拖动、调速，展开“比较 seed 与视角”查看补充记录与技术详情。Markdown 中的 GIF 仍自动循环。网络不可用时，下载或克隆仓库后用浏览器打开[离线播放页](usage_assets/playback.html)，同时保留 `usage_assets/animations/` 目录。
 
@@ -785,7 +787,7 @@ python3 scripts/research/check_media_release.py --history-ref all
 python3 tools/research/publish_video_pages.py --dry-run
 ```
 
-`--dry-run` 只在忽略目录 `outputs/research/pages-<timestamp>/` 生成静态站点，不修改 GitHub。检查该目录的 `index.html`、预览和 `release.json`；发布清单记录 research commit、每个发布文件哈希和站点总大小，动画清单保留试次来源与条件，整个 artifact 须小于 100,000,000 字节。站点仅包含播放器、短预览和校验清单，完整数据/模型/原始录像保留在实验目录。
+`--dry-run` 只在忽略目录 `outputs/research/pages-<timestamp>/` 生成静态站点，不修改 GitHub。检查该目录的 `index.html`、预览和 `release.json`；发布清单记录 research commit、每个发布文件哈希和站点总大小，动画清单保留试次来源与条件，整个 artifact 使用本项目的 200,000,000 字节预算；每个 Git 文件仍严格小于 100,000,000 字节。站点仅包含播放器、短预览和校验清单，完整数据/模型/原始录像保留在实验目录。
 
 将要发布的源码、文档、预览和清单提交到 `research`、推送该分支并确认工作区干净后运行：
 

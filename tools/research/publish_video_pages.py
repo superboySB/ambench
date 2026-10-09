@@ -12,8 +12,10 @@ another branch or changing the research worktree. Configure GitHub Pages to
 publish from the ``gh-pages`` branch, root directory, before viewing the site.
 
 Only the gallery HTML, documentation previews and their manifest are copied.
-Each preview must pass the media release checker, and the entire staged site
-must be smaller than 100,000,000 bytes. The release manifest hashes the payload
+Each preview must pass the media release checker. Individual files must remain
+smaller than 100,000,000 bytes, and the growing documentation site must remain
+smaller than 200,000,000 bytes. These are separate limits: a site's total size
+is not the Git single-file limit. The release manifest hashes the payload
 excluding itself; the printed artifact digest also includes release.json.
 Git output that might contain remote credentials is captured and withheld.
 """
@@ -31,7 +33,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-MAX_ARTIFACT_BYTES = 100_000_000
+MAX_ARTIFACT_BYTES = 200_000_000
+MAX_FILE_BYTES = 100_000_000
 MAX_MEDIA_BYTES = 450 * 1024
 PAGES_REF = "refs/heads/gh-pages"
 ZERO_OID = "0" * 40
@@ -63,7 +66,7 @@ def file_records(directory: Path) -> list[dict[str, str | int]]:
         if not path.is_file():
             continue
         data = path.read_bytes()
-        if len(data) >= MAX_ARTIFACT_BYTES:
+        if len(data) >= MAX_FILE_BYTES:
             raise ValueError("A staged file reaches the 100,000,000-byte limit")
         records.append({
             "path": path.relative_to(directory).as_posix(),
@@ -115,10 +118,12 @@ def stage_site(repo_root: Path, research_commit: str, worktree_clean: bool) -> t
             if len(data) != row[f"{suffix}_bytes"] or hashlib.sha256(data).hexdigest() != row[f"{suffix}_sha256"]:
                 raise ValueError("Preview bytes changed after the media release check")
             (staged_media / filename).write_bytes(data)
-    uaquad_dir = repo_root / "usage_assets" / "uaquad"
-    if (uaquad_dir / "index.html").exists():
-        staged_uaquad = stage / "uaquad"
-        staged_uaquad.mkdir()
+    for topic in ("uaquad", "tilting"):
+        topic_dir = repo_root / "usage_assets" / topic
+        if not (topic_dir / "index.html").exists():
+            continue
+        staged_topic = stage / topic
+        staged_topic.mkdir()
         for filename in (
             "index.html",
             "trials.json",
@@ -130,10 +135,10 @@ def stage_site(repo_root: Path, research_commit: str, worktree_clean: bool) -> t
             "policy_trials.json",
             "training_provenance.json",
         ):
-            source = uaquad_dir / filename
+            source = topic_dir / filename
             if source.is_symlink() or not source.is_file():
-                raise ValueError(f"Missing regular UAQuad documentation file: {filename}")
-            (staged_uaquad / filename).write_bytes(source.read_bytes())
+                raise ValueError(f"Missing regular {topic} documentation file: {filename}")
+            (staged_topic / filename).write_bytes(source.read_bytes())
     payload = file_records(stage)
     payload_bytes = sum(int(record["bytes"]) for record in payload)
     release = {
@@ -168,7 +173,7 @@ def stage_site(repo_root: Path, research_commit: str, worktree_clean: bool) -> t
     artifact = file_records(stage)
     total_bytes = sum(int(record["bytes"]) for record in artifact)
     if total_bytes >= MAX_ARTIFACT_BYTES:
-        raise ValueError("The complete Pages artifact must be smaller than 100,000,000 bytes")
+        raise ValueError("The complete Pages artifact must be smaller than 200,000,000 bytes")
     summary = {
         "research_commit": research_commit,
         "stage": stage.relative_to(repo_root).as_posix(),
@@ -200,7 +205,7 @@ def publish_site(repo_root: Path, stage: Path, research_commit: str) -> str:
     if release["research_commit"] != research_commit or payload != release["payload_files"]:
         raise ValueError("The staged artifact differs from its research release manifest")
     if total_bytes != release["artifact_bytes"] or total_bytes >= MAX_ARTIFACT_BYTES:
-        raise ValueError("The Pages artifact byte count is invalid or reaches the 100,000,000-byte limit")
+        raise ValueError("The Pages artifact byte count is invalid or reaches the 200,000,000-byte site limit")
     remote_lines = run_git(repo_root, ["ls-remote", "--heads", "origin", PAGES_REF]).splitlines()
     remote_commit = remote_lines[0].split()[0] if remote_lines else None
     local_lines = run_git(repo_root, ["for-each-ref", "--format=%(refname) %(objectname)", PAGES_REF]).splitlines()

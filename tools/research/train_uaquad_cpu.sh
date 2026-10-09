@@ -7,12 +7,31 @@ SSH_TARGET=tencent-86
 SSH_OPTIONS=(-p 22 -o BatchMode=yes -o PasswordAuthentication=no -o PreferredAuthentications=publickey -o StrictHostKeyChecking=accept-new)
 
 CHECK_ONLY=false
-if [[ $# -gt 0 && "$1" == --check ]]; then
-  CHECK_ONLY=true
-  shift
-fi
+ROBOT_TYPE=ua_quad
+while [[ $# -gt 0 && "$1" == --* ]]; do
+  case "$1" in
+    --check)
+      CHECK_ONLY=true
+      shift
+      ;;
+    --robot-type)
+      [[ $# -ge 2 ]] || { echo "--robot-type requires ua_quad or omni_hexa" >&2; exit 2; }
+      ROBOT_TYPE="$2"
+      shift 2
+      ;;
+    *)
+      echo "Unknown option: $1" >&2
+      exit 2
+      ;;
+  esac
+done
+case "$ROBOT_TYPE" in
+  ua_quad) ROBOT_LABEL=uaquad ;;
+  omni_hexa) ROBOT_LABEL=omnihexa ;;
+  *) echo "Supported robot types are ua_quad and omni_hexa" >&2; exit 2 ;;
+esac
 if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 [--check] /data/datasets/UAQUAD_SESSION/lerobot /data/checkpoints/NEW_RUN_DIR" >&2
+  echo "Usage: $0 [--check] [--robot-type ua_quad|omni_hexa] /data/datasets/SESSION/lerobot /data/checkpoints/NEW_RUN_DIR" >&2
   exit 2
 fi
 
@@ -33,13 +52,15 @@ for path in "$CANONICAL_DATASET" "$RUN_DIR"; do
   fi
 done
 
-printf -v REMOTE_ARGS '%q ' "$CHECK_ONLY" "$CANONICAL_DATASET" "$RUN_DIR"
+printf -v REMOTE_ARGS '%q ' "$CHECK_ONLY" "$CANONICAL_DATASET" "$RUN_DIR" "$ROBOT_TYPE" "$ROBOT_LABEL"
 ssh "${SSH_OPTIONS[@]}" "$SSH_TARGET" "bash -s -- $REMOTE_ARGS" <<'REMOTE'
 set -euo pipefail
 
 CHECK_ONLY="$1"
 CANONICAL_DATASET="$2"
 RUN_DIR="$3"
+ROBOT_TYPE="$4"
+ROBOT_LABEL="$5"
 REMOTE_ROOT=/diff/dzp_is_sb/ambench-research
 IMAGE=ambench:research-policy
 EXPECTED_IMAGE_ID=sha256:ba710cfc14e200c62efe0effbe3b6b265af7d004fbb38890c3f4cd30c7d7cac8
@@ -52,7 +73,7 @@ HOST_RUN_DIR="$REMOTE_ROOT${RUN_DIR#/data}"
 INFO_JSON="$HOST_DATASET/meta/info.json"
 ACT_OUTPUT="$RUN_DIR/act"
 DP_OUTPUT="$RUN_DIR/dp"
-ZARR_PATH="$RUN_DIR/uaquad_pressbutton_ee.zarr.zip"
+ZARR_PATH="$RUN_DIR/${ROBOT_LABEL}_pressbutton_ee.zarr.zip"
 
 docker info >/dev/null
 IMAGE_ID="$(docker image inspect "$IMAGE" --format '{{.Id}}')"
@@ -64,9 +85,9 @@ if [[ ! -s "$INFO_JSON" ]]; then
   echo "Canonical LeRobot meta/info.json is missing: $CANONICAL_DATASET" >&2
   exit 1
 fi
-if ! grep -Eq '"robot_type"[[:space:]]*:[[:space:]]*"ua_quad"' "$INFO_JSON" || \
+if ! grep -Eq "\"robot_type\"[[:space:]]*:[[:space:]]*\"$ROBOT_TYPE\"" "$INFO_JSON" || \
    ! grep -Eq '"action_semantics"[[:space:]]*:[[:space:]]*"ee_absolute"' "$INFO_JSON"; then
-  echo "Expected a UAQuad ee_absolute canonical dataset" >&2
+  echo "Expected a $ROBOT_TYPE ee_absolute canonical dataset" >&2
   exit 1
 fi
 if [[ -e "$HOST_RUN_DIR" || -L "$HOST_RUN_DIR" ]]; then
@@ -92,7 +113,7 @@ RUN_NAME="${RUN_DIR##*/}"
 
 run_stage() {
   local stage="$1"
-  local container_name="ambench-uaquad-${RUN_NAME}-${stage}"
+  local container_name="ambench-${ROBOT_LABEL}-${RUN_NAME}-${stage}"
   local log_path="$HOST_RUN_DIR/logs/${stage}.log"
   local -a statuses
   shift
@@ -130,7 +151,7 @@ run_stage act_train \
   --policy.chunk_size=16 --policy.n_action_steps=8 \
   --policy.pretrained_backbone_weights=null --policy.device=cpu \
   --policy.push_to_hub=false --output_dir="$ACT_OUTPUT" \
-  --job_name=uaquad_pressbutton_act_cpu --batch_size=1 --steps=1 --seed=42 \
+  --job_name="${ROBOT_LABEL}_pressbutton_act_cpu" --batch_size=1 --steps=1 --seed=42 \
   --num_workers=0 --save_freq=1 --wandb.enable=false \
   --policy_target_hz=20 --policy_action_representation=ee_local_relative
 
@@ -170,7 +191,7 @@ run_stage dp_train \
   training.device=cpu training.seed=42 \
   dataloader.batch_size=1 dataloader.num_workers=0 dataloader.persistent_workers=false \
   val_dataloader.batch_size=1 val_dataloader.num_workers=0 val_dataloader.persistent_workers=false \
-  exp_name=uaquad_dp_cpu logging.name=uaquad_dp_cpu logging.mode=disabled \
+  exp_name="${ROBOT_LABEL}_dp_cpu" logging.name="${ROBOT_LABEL}_dp_cpu" logging.mode=disabled \
   hydra.run.dir="$DP_OUTPUT"
 
 timeout --signal=TERM --kill-after=30s "$STAGE_TIMEOUT" docker run --rm \

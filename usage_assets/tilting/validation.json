@@ -1,0 +1,2373 @@
+{
+  "actuator_boundaries": {
+    "actual_velocity_max_rad_s": 10.2471284866333,
+    "claim_limit": "5rad/s is a configured simulator actuator parameter, not an empirical hard bound in this run. The observed nonterminal speed peak has no inferred contact/solver cause. Strict thrust counts remain unchanged and include1.9073486328125e-6N floating-point tails above23N; these tails do not establish significant clipping failure.",
+    "independent_review": {
+      "bytes": 3629,
+      "path": "outputs/research/tilting-20261009/strict-boundary-independent-review.json",
+      "sha256": "073a3c3e04d6c561d15d74eafc2f278774940d51fdd0efff80e1c228a9952913"
+    },
+    "limited_thrust_floating_point_tails": [
+      {
+        "maximum_tail_excess_n": 1.9073486328125e-06,
+        "name": "tilting_pressbutton_saturation_seed61",
+        "raw_strict_gt23_step_count": 1,
+        "strict_gt23_rows": [
+          [
+            969,
+            23.000001907348633
+          ]
+        ],
+        "telemetry": {
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_pressbutton_saturation_seed61/PressButtonOmniHexaAbsPID/demo-20261009_082143/telemetry.jsonl",
+          "sha256": "1528c26786ac13fe5f4142c496d860329a7e99e2f050180e5658bbb390662814"
+        }
+      },
+      {
+        "maximum_tail_excess_n": 1.9073486328125e-06,
+        "name": "tilting_pressbutton_wind_seed61",
+        "raw_strict_gt23_step_count": 2,
+        "strict_gt23_rows": [
+          [
+            969,
+            23.000001907348633
+          ],
+          [
+            982,
+            23.000001907348633
+          ]
+        ],
+        "telemetry": {
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_pressbutton_wind_seed61/PressButtonOmniHexaAbsPID/demo-20261009_080954/telemetry.jsonl",
+          "sha256": "b54213c84f52d721c703fb79ef978d8b2568b1f90487e94cbd339c1e58bb47d7"
+        }
+      }
+    ],
+    "native_nonterminal_peak": {
+      "joint_name": "base_motor_arm4",
+      "joint_velocity_rad_s": 10.2471284866333,
+      "phase": "observation_before_step",
+      "post_step_is_reset_state": false,
+      "step_index": 1603,
+      "terminated": false,
+      "timestamp_s": 13.358333333333333,
+      "truncated": false,
+      "zero_based_joint_index": 3
+    },
+    "review_script": {
+      "path": "outputs/research/tilting-20261009/review_strict_boundaries.py",
+      "sha256": "3ab71ece8488fc082baddeda3392674c9b98a4bb3ac8999379f50f29f1adaefe"
+    },
+    "root_observed_source": {
+      "path": "outputs/research/tilting-20261009/strict-boundary-observation.json",
+      "sha256": "f0a873989fa68272d0e57695b335ab7486de457cc2307d69237b0402625f00b4"
+    },
+    "status": "passed",
+    "strict_summary": {
+      "path": "usage_assets/tilting/trials.json",
+      "sha256": "06909506a5e8456366ae2ebab215d690156f00ceb07f145c5e36efdcf4d83168"
+    },
+    "velocity_limit_sim_config_rad_s": 5.0,
+    "velocity_source": {
+      "path": "outputs/research/tilting-20261009/experts/datasets/tilting_lemonharvesting_seed61/LemonHarvestingOmniHexaAbsPID/demo-20261009_055613/telemetry.jsonl",
+      "sha256": "c90d635de683dda737b1cb614d360ef63181e8e0acfa1847847982376fb9af21"
+    }
+  },
+  "browser_offline": {
+    "browser_version": {
+      "jsVersion": "14.3.127.17",
+      "product": "Chrome/143.0.7499.169",
+      "protocolVersion": "1.3",
+      "revision": "@164b20aab62509dad21fd46383951aeec084ad1e",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/143.0.0.0 Safari/537.36"
+    },
+    "checks_passed": 314,
+    "evidence": {
+      "bytes": 69256,
+      "path": "outputs/tilting-ui-check/final-browser-offline.json",
+      "sha256": "267b8c57ba5657640858d13c9130ccb158f65bfc6a25e9ca6e0174c0aaf150c1"
+    },
+    "general_errors": [],
+    "general_manifest_sha256": "ea0c34ce1b09006085db9662e9e0a7d1e4336b9ea1b95f94323af2f0d6cadce4",
+    "loaded_document_sha256": "ebb951df7d1ce45b77abd9a27097b01679823aacb38586d9670d2d1959b47fa9",
+    "media_decoded_and_played": 126,
+    "status": "passed",
+    "topic_errors": [],
+    "url": "file:///home/dzp/projects/ambench/usage_assets/tilting/index.html",
+    "verified_at_utc": "2026-10-09T09:27:13.095780+00:00"
+  },
+  "browser_online": {
+    "reason": "Actual final browser evidence not supplied",
+    "status": "pending"
+  },
+  "checks": [
+    {
+      "name": "experiments",
+      "status": "passed"
+    },
+    {
+      "name": "training",
+      "status": "passed"
+    },
+    {
+      "name": "media",
+      "status": "passed"
+    },
+    {
+      "name": "source_and_git",
+      "status": "passed"
+    },
+    {
+      "name": "upstream",
+      "status": "passed"
+    },
+    {
+      "name": "cpu_column_loading",
+      "status": "passed"
+    },
+    {
+      "name": "actuator_boundaries",
+      "status": "passed"
+    },
+    {
+      "name": "ndt_source_visual_review",
+      "status": "passed"
+    },
+    {
+      "name": "root_manual_visual_review",
+      "status": "passed"
+    },
+    {
+      "name": "payload_layout",
+      "status": "passed"
+    },
+    {
+      "name": "recording_recovery",
+      "status": "passed"
+    },
+    {
+      "name": "browser_offline",
+      "status": "passed"
+    },
+    {
+      "name": "browser_online",
+      "status": "pending"
+    },
+    {
+      "name": "public_access",
+      "status": "pending"
+    }
+  ],
+  "cpu_column_loading": {
+    "actual_cli": {
+      "evidence": {
+        "bytes": 1218,
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/cabinet-cli-validator.json",
+        "sha256": "755817ba5a561ddba3ed3ada10c48033b96b9755421af47b01b9f7de2ce3e536"
+      },
+      "exit_code": 0,
+      "module_identity": {
+        "module_file": "/workspace/ambench/source/ambench_learn/ambench_learn/data/resampled_lerobot_dataset.py",
+        "module_source_sha256": "727c359299a438c8d1d37d0f4a5cd42b49f76b9047580e53f4bfe8c1b0176ece"
+      },
+      "module_stdout": {
+        "bytes": 623,
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/cabinet-cli-module.log",
+        "sha256": "1eb363cb54cbd29a0f95a29c274a142819a65027c59279bd427cc946095a8242"
+      },
+      "stdout": {
+        "bytes": 1402,
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/cabinet-cli-validator.log",
+        "sha256": "4ee9575112a364794e4e1e0d131893765559457ed19182cea4eb948e2a4e2926"
+      },
+      "verified_at_utc": "2026-10-09T07:01:28.160442+00:00",
+      "wall_duration_s": 5.733948588022031
+    },
+    "base_joint_12d_fixture": {
+      "action_semantics": "base_joint_absolute",
+      "canonical_file_count": 6,
+      "canonical_path_set_and_file_sha_unchanged": true,
+      "columns": [
+        {
+          "all_values_finite": true,
+          "dtype": "torch.float32",
+          "key": "action",
+          "loader_duration_s": 0.06304687401279807,
+          "max_abs_difference": 0.0,
+          "raw_parquet_torch_equal": true,
+          "shape": [
+            999,
+            12
+          ]
+        },
+        {
+          "all_values_finite": true,
+          "dtype": "torch.float32",
+          "key": "observation.state",
+          "loader_duration_s": 0.05911568598821759,
+          "max_abs_difference": 0.0,
+          "raw_parquet_torch_equal": true,
+          "shape": [
+            999,
+            12
+          ]
+        }
+      ],
+      "dataset_root": "outputs/research/rebuild-20261007/scripted_press_base_joint/datasets/PressButton/PressButtonFAHexaBaseJointAbsPID/demo-20261007_050716/lerobot",
+      "dataset_rows": 999,
+      "evidence": {
+        "bytes": 2435,
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/base-joint-12d.json",
+        "sha256": "c5f9147172143fef7e6cdc7a1c3b726505566fd00c5820e6ead885d60e0d3070"
+      },
+      "execution": {
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/base-joint-12d-execution.json",
+        "sha256": "ae35d30a336b907f6a2ba2738795ee0d538d7e70a0c039928508d154460eeab2"
+      },
+      "image_decode_calls": 0,
+      "raw_dataset_format_and_columns_unchanged": true,
+      "scope": "One pre-existing FAHexa BaseJoint fixture; raw numeric loaders only, all 12D values equal original Parquet. No new recording, training, download or old task-outcome reevaluation.",
+      "script": {
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/verify_base_joint_fixture.py",
+        "sha256": "5f2997ac7188b5e059ee6d66147bd0137b8b0af41804f8c1c5242adacbdcbb8f"
+      },
+      "stdout": {
+        "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/base-joint-12d.log",
+        "sha256": "71d2412b16e7af22cf16a8b229abb917b472567d27240fbcfaa7258927f74d5a"
+      }
+    },
+    "claim_limit": "Only numeric column loading avoids unrelated RGB decoding. Raw and logical numeric values, canonical files, task conditions and existing experiment reports remain unchanged. Early validations used the old path; later subprocesses read the repaired source. Historical training source hashes remain historical.",
+    "comparisons": [
+      {
+        "canonical_file_count": 6,
+        "canonical_path_set_and_file_sha_unchanged": true,
+        "columns": [
+          {
+            "column": "action",
+            "dtype": "torch.float32",
+            "first_row": [
+              0.03587760031223297,
+              -7.051204065078309e-09,
+              1.2066224813461304,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "last_row": [
+              1.7821673154830933,
+              -0.08001507818698883,
+              1.072324275970459,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              -1.0
+            ],
+            "max_abs_difference": 0.0,
+            "maximum": 1.7821673154830933,
+            "minimum": -1.0,
+            "new_full_image_decode_calls": 0,
+            "new_full_parquet_equal": true,
+            "new_full_seconds": 0.1105946950847283,
+            "new_prefix_image_decode_calls": 0,
+            "new_prefix_seconds": 0.008748998981900513,
+            "numeric_parquet_seconds": 0.016794165945611894,
+            "old_new_prefix_equal": true,
+            "old_prefix_image_decode_calls": 192,
+            "old_prefix_parquet_equal": true,
+            "old_prefix_rows": 64,
+            "old_prefix_seconds": 0.9515858920058236,
+            "prefix_speedup": 108.76511632638389,
+            "shape": [
+              994,
+              8
+            ],
+            "total_rows": 994
+          },
+          {
+            "column": "observation.state",
+            "dtype": "torch.float32",
+            "first_row": [
+              0.03587760031223297,
+              -7.051204065078309e-09,
+              1.2066224813461304,
+              0.7071066498756409,
+              1.0258082738801022e-07,
+              0.7071068286895752,
+              -1.0712364328924195e-08,
+              -0.5
+            ],
+            "last_row": [
+              1.7889600992202759,
+              -0.0800967589020729,
+              1.0678417682647705,
+              0.6894183158874512,
+              9.041782323038206e-05,
+              0.724363386631012,
+              3.054376793443225e-05,
+              -4.977283606422134e-05
+            ],
+            "max_abs_difference": 0.0,
+            "maximum": 1.7889600992202759,
+            "minimum": -0.5000001788139343,
+            "new_full_image_decode_calls": 0,
+            "new_full_parquet_equal": true,
+            "new_full_seconds": 0.05159199901390821,
+            "new_prefix_image_decode_calls": 0,
+            "new_prefix_seconds": 0.005498923943378031,
+            "numeric_parquet_seconds": 0.004105599946342409,
+            "old_new_prefix_equal": true,
+            "old_prefix_image_decode_calls": 192,
+            "old_prefix_parquet_equal": true,
+            "old_prefix_rows": 64,
+            "old_prefix_seconds": 0.6379930389812216,
+            "prefix_speedup": 116.0214335660183,
+            "shape": [
+              994,
+              8
+            ],
+            "total_rows": 994
+          }
+        ],
+        "dataset_root": "outputs/research/tilting-20261009/press-initial/datasets/tilting_pressbutton_seed61/PressButtonOmniHexaAbsPID/demo-20261009_051047/lerobot",
+        "dataset_rows": 994,
+        "evidence": {
+          "bytes": 8099,
+          "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/press64.json",
+          "sha256": "12f86159b759e4bf9b88faf3465cd4660c34c572fb2b5f44997af0c6f976476c"
+        },
+        "original_hf_format_unchanged": true
+      },
+      {
+        "canonical_file_count": 6,
+        "canonical_path_set_and_file_sha_unchanged": true,
+        "columns": [
+          {
+            "column": "action",
+            "dtype": "torch.float32",
+            "first_row": [
+              0.03587760031223297,
+              -7.051204065078309e-09,
+              1.2066224813461304,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "last_row": [
+              2.1139941215515137,
+              0.2527689039707184,
+              1.7599999904632568,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "max_abs_difference": 0.0,
+            "maximum": 2.1139941215515137,
+            "minimum": -1.0,
+            "new_full_image_decode_calls": 0,
+            "new_full_parquet_equal": true,
+            "new_full_seconds": 0.4666896810522303,
+            "new_prefix_image_decode_calls": 0,
+            "new_prefix_seconds": 0.006064112996682525,
+            "numeric_parquet_seconds": 0.007518318016082048,
+            "old_new_prefix_equal": true,
+            "old_prefix_image_decode_calls": 192,
+            "old_prefix_parquet_equal": true,
+            "old_prefix_rows": 64,
+            "old_prefix_seconds": 0.5362551460275427,
+            "prefix_speedup": 88.43092902802275,
+            "shape": [
+              7199,
+              8
+            ],
+            "total_rows": 7199
+          },
+          {
+            "column": "observation.state",
+            "dtype": "torch.float32",
+            "first_row": [
+              0.03587760031223297,
+              -7.051204065078309e-09,
+              1.2066224813461304,
+              0.7071066498756409,
+              1.0258082738801022e-07,
+              0.7071068286895752,
+              -1.0712364328924195e-08,
+              -0.5
+            ],
+            "last_row": [
+              2.2739603519439697,
+              0.19424733519554138,
+              1.7841042280197144,
+              0.4698723554611206,
+              0.057864684611558914,
+              0.8808086514472961,
+              0.0068999058566987514,
+              -0.5027685761451721
+            ],
+            "max_abs_difference": 0.0,
+            "maximum": 2.2794675827026367,
+            "minimum": -0.5609831213951111,
+            "new_full_image_decode_calls": 0,
+            "new_full_parquet_equal": true,
+            "new_full_seconds": 0.4056737310020253,
+            "new_prefix_image_decode_calls": 0,
+            "new_prefix_seconds": 0.005387852084822953,
+            "numeric_parquet_seconds": 0.01171724998857826,
+            "old_new_prefix_equal": true,
+            "old_prefix_image_decode_calls": 192,
+            "old_prefix_parquet_equal": true,
+            "old_prefix_rows": 64,
+            "old_prefix_seconds": 0.5549437640001997,
+            "prefix_speedup": 102.99907184969341,
+            "shape": [
+              7199,
+              8
+            ],
+            "total_rows": 7199
+          }
+        ],
+        "dataset_root": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_cabinetpickplace_seed61/CabinetPickPlaceOmniHexaAbsPID/demo-20261009_062814/lerobot",
+        "dataset_rows": 7199,
+        "evidence": {
+          "bytes": 8117,
+          "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/cabinet64.json",
+          "sha256": "cc04036ccff9685c09a40615b481dc55219e5a7f825d7c17df140f02e542562f"
+        },
+        "original_hf_format_unchanged": true
+      },
+      {
+        "canonical_file_count": 6,
+        "canonical_path_set_and_file_sha_unchanged": true,
+        "columns": [
+          {
+            "key": "action",
+            "logical_shape": [
+              1199,
+              8
+            ],
+            "logical_stride_torch_equal": true,
+            "max_abs_difference": 0.0,
+            "raw_parquet_torch_equal": true,
+            "raw_shape": [
+              7199,
+              8
+            ]
+          },
+          {
+            "key": "observation.state",
+            "logical_shape": [
+              1199,
+              8
+            ],
+            "logical_stride_torch_equal": true,
+            "max_abs_difference": 0.0,
+            "raw_parquet_torch_equal": true,
+            "raw_shape": [
+              7199,
+              8
+            ]
+          }
+        ],
+        "constructor_image_decode_calls": 0,
+        "dataset_root": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_cabinetpickplace_seed61/CabinetPickPlaceOmniHexaAbsPID/demo-20261009_062814/lerobot",
+        "evidence": {
+          "bytes": 3353,
+          "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/cabinet-fixed-loader.json",
+          "sha256": "c29972219b2399d456762a61a8cc160c41f570b5961c1ae5e56c937ca8ac4f90"
+        },
+        "first_last_sample_validation_image_decode_calls": 6,
+        "logical_report": {
+          "action_semantics": "ee_absolute",
+          "logical_episode_lengths": [
+            1199
+          ],
+          "logical_num_frames": 1199,
+          "num_episodes": 1,
+          "policy_action_representation": "ee_local_relative",
+          "raw_episode_lengths": [
+            7199
+          ],
+          "raw_fps": 120,
+          "raw_num_frames": 7199,
+          "stride": 6,
+          "target_fps": 20
+        },
+        "raw_dataset_format_unchanged": true,
+        "resampled_construction_seconds": 1.2859657290391624
+      }
+    ],
+    "diagnosis": {
+      "bytes": 4759,
+      "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/diagnosis-summary.json",
+      "sha256": "bee6b801bb70a2c78df30dc48463f9ebe0b3af3cf783e8aed5df4101a2ebb128"
+    },
+    "fixed_source": {
+      "path": "source/ambench_learn/ambench_learn/data/resampled_lerobot_dataset.py",
+      "sha256": "727c359299a438c8d1d37d0f4a5cd42b49f76b9047580e53f4bfe8c1b0176ece"
+    },
+    "implementation_diff": {
+      "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/implementation-diff.patch",
+      "sha256": "5d1c28ef7c7605e8afa35791217139e0415a4b92caddb7ca66a271c94012e566"
+    },
+    "scoped_hooks": {
+      "exit_code": 0,
+      "first_run_black_reformat_only": true,
+      "path": "outputs/research/tilting-20261009/cpu-column-diagnosis/scoped-hooks-final.log",
+      "sha256": "5a3469c7fdf3244ca4b6b3321af9419370f120f0ec0650adb44512afb382f8ab"
+    },
+    "status": "passed"
+  },
+  "errors": [],
+  "experiments": {
+    "formal_independent_trials": 42,
+    "learned_policy": {
+      "attempts": 12,
+      "inference_devices": [
+        "cpu"
+      ],
+      "outcomes": {
+        "timeout": 12
+      },
+      "own_robot_attempts": 4,
+      "success": 0,
+      "timeout": 12,
+      "training_regimes": {
+        "ee_transfer": 8,
+        "tilting_one_step": 4
+      }
+    },
+    "scripted": {
+      "attempts": 30,
+      "groups": {
+        "default_omni": {
+          "attempts": 24,
+          "outcomes": {
+            "success": 14,
+            "timeout": 10
+          },
+          "success": 14,
+          "timeout": 10
+        },
+        "fahexa_reference": {
+          "attempts": 2,
+          "outcomes": {
+            "success": 2
+          },
+          "success": 2,
+          "timeout": 0
+        },
+        "omni_saturation": {
+          "attempts": 2,
+          "outcomes": {
+            "success": 2
+          },
+          "success": 2,
+          "timeout": 0
+        },
+        "omni_saturation_aero_world_x_1n": {
+          "attempts": 2,
+          "outcomes": {
+            "success": 2
+          },
+          "success": 2,
+          "timeout": 0
+        }
+      },
+      "omni_tilt_trials": 28,
+      "outcomes": {
+        "success": 20,
+        "timeout": 10
+      },
+      "success": 20,
+      "timeout": 10
+    },
+    "source_reports": [
+      {
+        "path": "outputs/research/tilting-20261009/press-initial/results.json",
+        "sha256": "624e86d8e898ffb53981b534bb73d71c645dd5c8d6bc5758c9198529d1ac3b13"
+      },
+      {
+        "path": "outputs/research/tilting-20261009/camera-correction/composite-results.json",
+        "sha256": "08161e2d453fab8590d7f3a33a73d5763778f927ead1cb3939784f8d47ba80bd"
+      },
+      {
+        "path": "outputs/research/tilting-20261009/policy/results.json",
+        "sha256": "233c5341c7c905c2e0fdb1e601bf6a73d0f680579b3da3a5374fea4a3d5d9045"
+      }
+    ],
+    "source_summaries": [
+      {
+        "bytes": 268637,
+        "path": "usage_assets/tilting/trials.json",
+        "sha256": "06909506a5e8456366ae2ebab215d690156f00ceb07f145c5e36efdcf4d83168"
+      },
+      {
+        "bytes": 1849102,
+        "path": "usage_assets/tilting/policy_trials.json",
+        "sha256": "52b0e7900a397fb713bb61e023e418b90c37c48e4b4a62ecb46bf96770b2d180"
+      },
+      {
+        "bytes": 9411329,
+        "path": "usage_assets/tilting/trajectories.json",
+        "sha256": "6dcb959b7ca1731bdb650da6b46bbf4524486205085aa77dc9a90c190c248fdd"
+      }
+    ],
+    "terminal_post_step_excluded": true
+  },
+  "limits": {
+    "global_media_maximum_bytes": 460800,
+    "new_media_maximum_bytes": 196608,
+    "ordinary_git_file_strictly_less_than_bytes": 100000000,
+    "whole_pages_artifact_strictly_less_than_bytes": 200000000
+  },
+  "media": {
+    "all_media_sha256_verified": 612,
+    "baseline": {
+      "bytes": 2509167,
+      "path": "outputs/research/tilting-20261009/old-media-baseline.json",
+      "sha256": "409ad53a03f648af3083e9b687037c85d012024c5925b09126b915a38c9432d5"
+    },
+    "camera_records": 306,
+    "global_media_bytes": 109467547,
+    "manifest": {
+      "bytes": 3952315,
+      "path": "usage_assets/animations/manifest.json",
+      "sha256": "ea0c34ce1b09006085db9662e9e0a7d1e4336b9ea1b95f94323af2f0d6cadce4"
+    },
+    "maximum_media_bytes": 460604,
+    "new_camera_records": 126,
+    "new_independent_trials": 42,
+    "new_media_limit_bytes": 196608,
+    "new_mp4_full_decode_metadata_passed": true,
+    "old_media_files_byte_identical": 360,
+    "old_record_objects_preserved": 180,
+    "source_first_last_preserved": true,
+    "status": "passed",
+    "three_camera_metadata_consistent": true
+  },
+  "ndt_source_visual_review": {
+    "claim_limit": "Both original source videos were fully decoded; visibility was manually inspected at the three listed original scene frames and corresponding contact-sheet cells, not detected for every frame. A near wall hides the target in the final base view; scene and EE complement it. Preview times are compressed playback times, distinct from original source timestamps.",
+    "contact_sheet": {
+      "path": "outputs/research/tilting-20261009/visual-review/tilting_ndt.png",
+      "real_frame_cells": 18,
+      "seeds": [
+        61,
+        62
+      ],
+      "sha256": "ac92ef85395db35d43f151e49f3cc9d0319f53c6806f4f0212b1ae74270565b8"
+    },
+    "first_omni_recordings": [
+      {
+        "base_view_limitation": "Final base-camera frame faces a near wall and does not show the marked target. Retained unchanged; scene and EE provide complementary evidence.",
+        "decoded_sources": [
+          {
+            "cached_mp4_dimensions_including_export_labels": [
+              320,
+              356
+            ],
+            "camera": "scene_camera",
+            "fps": 30.0,
+            "full_decoded_frame_count": 301,
+            "height": 480,
+            "last_source_time_s": 10.0,
+            "sha256": "5f18eb5c5c73e8eebcc93751a127ca4b9cd9e62ae128361a78f018b8a430c8ed",
+            "source": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed61/NDTOmniHexaAbsPID/demo-20261009_080031/videos/scripted-scene_camera-env0-eps0.mp4",
+            "width": 480
+          },
+          {
+            "cached_mp4_dimensions_including_export_labels": [
+              320,
+              356
+            ],
+            "camera": "base_camera",
+            "fps": 30.0,
+            "full_decoded_frame_count": 301,
+            "height": 384,
+            "last_source_time_s": 10.0,
+            "sha256": "6e8099a9ef2199457b2fa609f387a953e02b46de79ff26127a1c2ba2fd9c3526",
+            "source": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed61/NDTOmniHexaAbsPID/demo-20261009_080031/videos/scripted-base_camera-env0-eps0.mp4",
+            "width": 384
+          },
+          {
+            "cached_mp4_dimensions_including_export_labels": [
+              320,
+              356
+            ],
+            "camera": "ee_camera",
+            "fps": 30.0,
+            "full_decoded_frame_count": 301,
+            "height": 384,
+            "last_source_time_s": 10.0,
+            "sha256": "ae314ebd9ab15107287cf2bcf740857ecf3e3a92f82e95207fa59df92933929d",
+            "source": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed61/NDTOmniHexaAbsPID/demo-20261009_080031/videos/scripted-ee_camera-env0-eps0.mp4",
+            "width": 384
+          }
+        ],
+        "episode_outcomes": {
+          "bytes": 4267,
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed61/NDTOmniHexaAbsPID/demo-20261009_080031/episode_outcomes.json",
+          "sha256": "935ab4aeaa39ed58a3eb52d4458b066310b58d770b9aa76d1b7e48c4dbd4f56d"
+        },
+        "manual_source_frame_review": {
+          "all_three_actual_scene_frames_show_aircraft_and_high_target_inside_frame": true,
+          "image_view_detail": "original 480x480 RGB source frames and actual synchronized scene/base/EE contact sheet independently viewed",
+          "limits": "Visual review covers the three listed actual source frames; full temporal decoding does not constitute per-frame object detection.",
+          "reviewed_actual_pngs": [
+            "outputs/research/tilting-20261009/visual-review/ndt-source-seed61-scene-first.png",
+            "outputs/research/tilting-20261009/visual-review/ndt-source-seed61-scene-middle.png",
+            "outputs/research/tilting-20261009/visual-review/ndt-source-seed61-scene-last.png"
+          ]
+        },
+        "real_source_frame_images": [
+          {
+            "corresponding_compressed_preview_time_s": 0.0,
+            "decoded_frame_rgb_sha256": "d68a3437565db3b6352f0e885cfc453e15fed384c6f82c4eaf813292bfcdd895",
+            "label": "first",
+            "png": "outputs/research/tilting-20261009/visual-review/ndt-source-seed61-scene-first.png",
+            "png_sha256": "80b276f49706c005059fb4ddfd517b0625f55e35671a4d84ebc95eee9a584fcf",
+            "source_frame_index": 0,
+            "source_time_s": 0.0
+          },
+          {
+            "corresponding_compressed_preview_time_s": 3.5,
+            "decoded_frame_rgb_sha256": "2e802e00e69ccafe3cf430610edbbfe034709f54c61960c5ddbdc82c7b54b078",
+            "label": "middle",
+            "png": "outputs/research/tilting-20261009/visual-review/ndt-source-seed61-scene-middle.png",
+            "png_sha256": "5299a4782eb07d78320cb6cf4f0d38add9fc4dc2861136fb074a7f4abb38a56d",
+            "source_frame_index": 177,
+            "source_time_s": 5.9
+          },
+          {
+            "corresponding_compressed_preview_time_s": 6.8,
+            "decoded_frame_rgb_sha256": "20efae92c5a3991700f9a1fa66fcb94a8157b7362f8dc4fee30747215dd96545",
+            "label": "last",
+            "png": "outputs/research/tilting-20261009/visual-review/ndt-source-seed61-scene-last.png",
+            "png_sha256": "ae9b6f551f7221454c6cdd830d897ac043d6a1ac41bfbe40c715e5a8535d0c83",
+            "source_frame_index": 300,
+            "source_time_s": 10.0
+          }
+        ],
+        "review": {
+          "bytes": 7026,
+          "path": "outputs/research/tilting-20261009/visual-review/ndt-independent-review-seed61.json",
+          "sha256": "298a243087f331eebf5c7ecf087b09ea98beb097361f2dfa8e288ef2cf4a5a78"
+        },
+        "saved_env_cfg": {
+          "convention": "ros",
+          "filesystem_mtime_utc": "2026-10-09T08:01:11.809990+00:00",
+          "focal_length": 24.0,
+          "goal_position": [
+            1.77,
+            0.0,
+            7.0
+          ],
+          "height": 480,
+          "horizontal_aperture": 20.955,
+          "look_at_expected": [
+            1.77,
+            0,
+            4
+          ],
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed61/NDTOmniHexaAbsPID/demo-20261009_080031/env_cfg.yaml",
+          "position": [
+            -8.0,
+            -8.0,
+            4.0
+          ],
+          "quaternion_wxyz": [
+            0.6390500068664551,
+            -0.6390500068664551,
+            0.3026798665523529,
+            -0.3026798665523529
+          ],
+          "ros_forward_angular_error_deg": 1.9090959104164224e-06,
+          "sha256": "318e543bf3f615956805f1656fbfb30c7c12216d8cd8ae688cd1984b98ea4520",
+          "width": 480
+        },
+        "seed": 61,
+        "steps": 1206,
+        "trial_id": "tilting_ndt_seed61",
+        "whole_trial_outcome": "SUCCESS"
+      },
+      {
+        "base_view_limitation": "Final base-camera frame faces a near wall and does not show the marked target. Retained unchanged; scene and EE provide complementary evidence.",
+        "decoded_sources": [
+          {
+            "cached_mp4_dimensions_including_export_labels": [
+              320,
+              356
+            ],
+            "camera": "scene_camera",
+            "fps": 30.0,
+            "full_decoded_frame_count": 302,
+            "height": 480,
+            "last_source_time_s": 10.033333333333333,
+            "sha256": "866d3eee77b499312d34118ec3f583258a94ecb1ccaa36434fcd396513f08636",
+            "source": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed62/NDTOmniHexaAbsPID/demo-20261009_080522/videos/scripted-scene_camera-env0-eps0.mp4",
+            "width": 480
+          },
+          {
+            "cached_mp4_dimensions_including_export_labels": [
+              320,
+              356
+            ],
+            "camera": "base_camera",
+            "fps": 30.0,
+            "full_decoded_frame_count": 302,
+            "height": 384,
+            "last_source_time_s": 10.033333333333333,
+            "sha256": "2f5dde2a435efe592609cd3b8358c15436784a2a3b5bfae16b158af05fe0783d",
+            "source": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed62/NDTOmniHexaAbsPID/demo-20261009_080522/videos/scripted-base_camera-env0-eps0.mp4",
+            "width": 384
+          },
+          {
+            "cached_mp4_dimensions_including_export_labels": [
+              320,
+              356
+            ],
+            "camera": "ee_camera",
+            "fps": 30.0,
+            "full_decoded_frame_count": 302,
+            "height": 384,
+            "last_source_time_s": 10.033333333333333,
+            "sha256": "728902c8641bfc24b2dc74cd57f87385f250a6e3c673872321485abb5a0df610",
+            "source": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed62/NDTOmniHexaAbsPID/demo-20261009_080522/videos/scripted-ee_camera-env0-eps0.mp4",
+            "width": 384
+          }
+        ],
+        "episode_outcomes": {
+          "bytes": 4280,
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed62/NDTOmniHexaAbsPID/demo-20261009_080522/episode_outcomes.json",
+          "sha256": "d49b492d58043548f76d1538050df2a0fe407bd9c3ab114eeb52aa38e53d258c"
+        },
+        "manual_source_frame_review": {
+          "all_three_actual_scene_frames_show_aircraft_and_high_target_inside_frame": true,
+          "image_view_detail": "original 480x480 RGB source frames and actual synchronized scene/base/EE contact sheet independently viewed",
+          "limits": "Visual review covers the three listed actual source frames; full temporal decoding does not constitute per-frame object detection.",
+          "reviewed_actual_pngs": [
+            "outputs/research/tilting-20261009/visual-review/ndt-source-seed62-scene-first.png",
+            "outputs/research/tilting-20261009/visual-review/ndt-source-seed62-scene-middle.png",
+            "outputs/research/tilting-20261009/visual-review/ndt-source-seed62-scene-last.png"
+          ]
+        },
+        "real_source_frame_images": [
+          {
+            "corresponding_compressed_preview_time_s": 0.0,
+            "decoded_frame_rgb_sha256": "e09894e9e42f4f66456f86564033e19e0f2d31241e32dab0fd2e663531ce3c7b",
+            "label": "first",
+            "png": "outputs/research/tilting-20261009/visual-review/ndt-source-seed62-scene-first.png",
+            "png_sha256": "c6fffd901661d34cac310936fd3e654642ea3e4f9fda6cd2b290679bf5c158a1",
+            "source_frame_index": 0,
+            "source_time_s": 0.0
+          },
+          {
+            "corresponding_compressed_preview_time_s": 3.5,
+            "decoded_frame_rgb_sha256": "8b4445e11e602d67b63dcc1a5f7004181223edf5f19474dd8325711ef88ea4ce",
+            "label": "middle",
+            "png": "outputs/research/tilting-20261009/visual-review/ndt-source-seed62-scene-middle.png",
+            "png_sha256": "c561c6121bff43e3e6ef30b59d7a8332dd5b2bf9e4b4a2ba4262b745052850c1",
+            "source_frame_index": 178,
+            "source_time_s": 5.933333333333334
+          },
+          {
+            "corresponding_compressed_preview_time_s": 6.8,
+            "decoded_frame_rgb_sha256": "7cf1617e94539c0c1cefef87e6b63c97eeb264f416c77ac1733e2c7346579412",
+            "label": "last",
+            "png": "outputs/research/tilting-20261009/visual-review/ndt-source-seed62-scene-last.png",
+            "png_sha256": "1739bf2966ec27bbe49b69a08ab665e212a95d3c1130b02988eed2ad8db6e3a4",
+            "source_frame_index": 301,
+            "source_time_s": 10.033333333333333
+          }
+        ],
+        "review": {
+          "bytes": 6855,
+          "path": "outputs/research/tilting-20261009/visual-review/ndt-independent-review-seed62.json",
+          "sha256": "d6c510146f5aaed1049535c530b5d327d76331fda51f538126e89d03936f0eb1"
+        },
+        "saved_env_cfg": {
+          "convention": "ros",
+          "filesystem_mtime_utc": "2026-10-09T08:05:51.870232+00:00",
+          "focal_length": 24.0,
+          "goal_position": [
+            1.77,
+            0.0,
+            7.0
+          ],
+          "height": 480,
+          "horizontal_aperture": 20.955,
+          "look_at_expected": [
+            1.77,
+            0,
+            4
+          ],
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed62/NDTOmniHexaAbsPID/demo-20261009_080522/env_cfg.yaml",
+          "position": [
+            -8.0,
+            -8.0,
+            4.0
+          ],
+          "quaternion_wxyz": [
+            0.6390500068664551,
+            -0.6390500068664551,
+            0.3026798665523529,
+            -0.3026798665523529
+          ],
+          "ros_forward_angular_error_deg": 1.9090959104164224e-06,
+          "sha256": "1013c7c23d09a42055e1c2e8aef0da2e982a524904a60be344595771dd1caf59",
+          "width": 480
+        },
+        "seed": 62,
+        "steps": 1211,
+        "trial_id": "tilting_ndt_seed62",
+        "whole_trial_outcome": "SUCCESS"
+      }
+    ],
+    "independent_review": {
+      "bytes": 1594,
+      "path": "outputs/research/tilting-20261009/visual-review/ndt-independent-review.json",
+      "sha256": "0e857d762a6cfdb7ce4d6497fe28554dcae77d309e2a1e8410bbd26db12ae2bd"
+    },
+    "old_camera_omni_ndt_capture_count": 0,
+    "original_base_ee_dimensions": [
+      384,
+      384
+    ],
+    "original_scene_dimensions": [
+      480,
+      480
+    ],
+    "predeclared_plan": {
+      "bytes": 2475,
+      "path": "outputs/research/tilting-20261009/camera-correction/predeclared-plan.json",
+      "sha256": "53100c0a82af17dd576b7a154244c4e241c003d1b7d9cfdf57b551f8def5c3a1"
+    },
+    "preview_dimensions_including_labels": [
+      320,
+      356
+    ],
+    "status": "passed"
+  },
+  "payload_layout": {
+    "artifact_file_count_including_release_derived": 635,
+    "claim_limit": "Exact whole-artifact bytes, including release.json, are measured by the publisher and anonymous release evidence; no estimated release size is labeled measured.",
+    "existing_payload_bytes_excluding_new_validation_and_release": 142996267,
+    "maximum_existing_static_file_bytes": 9411329,
+    "payload_file_count_derived": 634,
+    "publisher": {
+      "bytes": 14761,
+      "path": "tools/research/publish_video_pages.py",
+      "sha256": "28b4ce5cc9f36943e0fac41e4b39cbcb92465d9fda8d5b2ca4feb6670e7ae0ae"
+    },
+    "status": "passed"
+  },
+  "public_access": {
+    "reason": "Final anonymous payload/SHA/MIME/Range evidence not supplied",
+    "status": "pending"
+  },
+  "recording_recovery": {
+    "budget_decision": {
+      "bytes": 4493,
+      "path": "outputs/research/tilting-20261009/budget-recovery/decision.json",
+      "sha256": "192a5031e269b094a01f3a014a564f67ab9c9079500a0988a95c2fef97568b3d"
+    },
+    "camera_execution_update": {
+      "corrected_camera_used_for_first_omni_ndt": true,
+      "corrected_source_report": "outputs/research/tilting-20261009/budget-recovery/experts/results.json",
+      "old_camera_omni_ndt_capture_count": 0,
+      "reason": "Budget recovery stops original batch before either NDT is launched, allowing corrected camera on their first Omni capture. No old-camera Omni NDT captures exist or need exclusion. The old UAQuad frame remains diagnostic evidence only.",
+      "time_utc": "2026-10-09T06:27:34.176490+00:00"
+    },
+    "camera_only_changed_specs": [
+      "tilting_ndt_seed61",
+      "tilting_ndt_seed62"
+    ],
+    "completed_captures": 42,
+    "composite_completed_rows": 29,
+    "composite_report": {
+      "bytes": 45743,
+      "path": "outputs/research/tilting-20261009/camera-correction/composite-results.json",
+      "sha256": "08161e2d453fab8590d7f3a33a73d5763778f927ead1cb3939784f8d47ba80bd"
+    },
+    "decision_time_utc": "2026-10-09T06:26:31.407898+00:00",
+    "first_completed_rows": 1,
+    "first_omni_ndt_outcomes": [
+      {
+        "episode_outcomes": {
+          "bytes": 4267,
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed61/NDTOmniHexaAbsPID/demo-20261009_080031/episode_outcomes.json",
+          "sha256": "935ab4aeaa39ed58a3eb52d4458b066310b58d770b9aa76d1b7e48c4dbd4f56d"
+        },
+        "name": "tilting_ndt_seed61",
+        "steps": 1206,
+        "termination_reason": "success"
+      },
+      {
+        "episode_outcomes": {
+          "bytes": 4280,
+          "path": "outputs/research/tilting-20261009/budget-recovery/experts/datasets/tilting_ndt_seed62/NDTOmniHexaAbsPID/demo-20261009_080522/episode_outcomes.json",
+          "sha256": "d49b492d58043548f76d1538050df2a0fe407bd9c3ab114eeb52aa38e53d258c"
+        },
+        "name": "tilting_ndt_seed62",
+        "steps": 1211,
+        "termination_reason": "success"
+      }
+    ],
+    "first_report": {
+      "bytes": 1618,
+      "path": "outputs/research/tilting-20261009/press-initial/results.json",
+      "sha256": "624e86d8e898ffb53981b534bb73d71c645dd5c8d6bc5758c9198529d1ac3b13"
+    },
+    "formal_independent_trials": 42,
+    "infrastructure_partial_capture_count": 1,
+    "infrastructure_partial_captures": [
+      {
+        "claim_limit": "Interrupted infrastructure capture has no completed task outcome. No success, native timeout, termination reason or process exit code is inferred. Raw metadata is retained as saved.",
+        "episode_count_as_saved": 0,
+        "kind": "incomplete_infrastructure_capture_not_task_outcome",
+        "metadata_status_as_saved": "recording",
+        "name": "tilting_cabinetpickplace_seed61",
+        "native_episode_length_s": 60,
+        "raw_files": [
+          {
+            "bytes": 43179,
+            "path": "outputs/research/tilting-20261009/experts/datasets/tilting_cabinetpickplace_seed61/CabinetPickPlaceOmniHexaAbsPID/demo-20261009_061427/env_cfg.yaml",
+            "sha256": "e336accf433d34f7a7ea7558cd7ede215104db19f852c7e80c1fc8bacc20bd8b"
+          },
+          {
+            "bytes": 2904,
+            "path": "outputs/research/tilting-20261009/experts/datasets/tilting_cabinetpickplace_seed61/CabinetPickPlaceOmniHexaAbsPID/demo-20261009_061427/episode_outcomes.json",
+            "sha256": "d1cd8aff10c94bc906ce04ac672af5b95b33a67f4d24b84309bc5ba07a651774"
+          },
+          {
+            "bytes": 12486226,
+            "path": "outputs/research/tilting-20261009/experts/datasets/tilting_cabinetpickplace_seed61/CabinetPickPlaceOmniHexaAbsPID/demo-20261009_061427/telemetry.jsonl",
+            "sha256": "bac7014d0907d27aa78279023657bcb9cb19e3739852ddbbc91ff4f4b29cb954"
+          }
+        ],
+        "reason": "Original 900-second wall-clock budget cannot fit a full 60-second simulation plus encoding at measured Omni three-camera throughput. Stop one incomplete Cabinet seed61 capture and continue every remaining configuration with 1800-second wall-clock budget; native episode lengths and task/control logic unchanged.",
+        "record_log": {
+          "bytes": 13780,
+          "path": "outputs/research/tilting-20261009/experts/logs/tilting_cabinetpickplace_seed61.log",
+          "sha256": "3615780608672426dbf645af04bb2d85e9512c92a5c0f53f8d7b738a772c5d14"
+        },
+        "session_root": "outputs/research/tilting-20261009/experts/datasets/tilting_cabinetpickplace_seed61/CabinetPickPlaceOmniHexaAbsPID/demo-20261009_061427",
+        "task_outcome_available": false
+      }
+    ],
+    "old_camera_omni_ndt_capture_count": 0,
+    "old_uaquad_reference_is_diagnostic_only": true,
+    "original_completed_rows": 15,
+    "original_report": {
+      "bytes": 22635,
+      "path": "outputs/research/tilting-20261009/experts/results.json",
+      "sha256": "aacb95331edf65e51ccd3e02e29a0b65b395c927f0d9608b43928ec7d5155f80"
+    },
+    "original_wall_timeout_s": 900,
+    "outcome_selection": "Every completed original is retained; every remaining specification is recorded once under the longer wall-clock budget, retaining task success and native timeout. NDT uses the predeclared camera on its first Omni capture.",
+    "predeclared_camera_plan": {
+      "bytes": 2475,
+      "path": "outputs/research/tilting-20261009/camera-correction/predeclared-plan.json",
+      "sha256": "53100c0a82af17dd576b7a154244c4e241c003d1b7d9cfdf57b551f8def5c3a1"
+    },
+    "recovery_completed_rows": 14,
+    "recovery_expected_count": 14,
+    "recovery_expected_names": [
+      "tilting_cabinetpickplace_seed61",
+      "tilting_cabinetpickplace_seed62",
+      "tilting_frameassembly_seed61",
+      "tilting_frameassembly_seed62",
+      "tilting_ndt_seed61",
+      "tilting_ndt_seed62",
+      "tilting_pressbutton_saturation_seed61",
+      "tilting_pressbutton_saturation_seed62",
+      "tilting_pressbutton_wind_seed61",
+      "tilting_pressbutton_wind_seed62",
+      "tilting_reference_fahexa_seed61",
+      "tilting_reference_fahexa_seed62",
+      "tilting_wipewindow_seed61",
+      "tilting_wipewindow_seed62"
+    ],
+    "recovery_report": {
+      "bytes": 22504,
+      "path": "outputs/research/tilting-20261009/budget-recovery/experts/results.json",
+      "sha256": "49e410a8e479b290b0554c4ab31ee88ba875bce7e7ebc1f33394cb39675622aa"
+    },
+    "recovery_wall_timeout_s": 1800,
+    "source_specs": [
+      {
+        "bytes": 15557,
+        "path": "outputs/research/tilting-20261009/camera-correction/original-recording-specs.json",
+        "sha256": "bab80c55e861272adb5621ee6a1580c59330671bbd05f0f747c3f24aafaa6959"
+      },
+      {
+        "bytes": 967,
+        "path": "outputs/research/tilting-20261009/camera-correction/recording_specs.json",
+        "sha256": "c43297404fc2d27031ee97dd4c387b49001e830cce530a21bc06b3814f573d8c"
+      },
+      {
+        "bytes": 15553,
+        "path": "usage_assets/tilting/recording_specs.json",
+        "sha256": "c4b4d1c1df6b02ccfbd32ba912682860a1af59d0445df6633c952dfc4be7b44e"
+      }
+    ],
+    "started_captures_including_infrastructure_partial": 43,
+    "status": "passed",
+    "stopped_at_utc": "2026-10-09T06:27:34.174855+00:00",
+    "task_or_controller_changes": false
+  },
+  "root_manual_visual_review": {
+    "claim_limit": "Only root-recorded view_image observations of the current actual decoded contact sheets count. Historical or single-seed reviews are preserved but do not satisfy a complete group. Each group covers selected first/middle/near-final compressed preview times for both seeds and three views, not continuous causal or per-frame object annotation.",
+    "current_complete_groups_reviewed": 21,
+    "expected_groups": 21,
+    "groups": [
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_cabinetpickplace",
+        "input_fingerprint": "843ff71c21676056c7cd44cf3a969470b739a67254b92722e74aac907763b6ff",
+        "observations": "Both seed scenes retain aircraft and cabinet through start/mid/end; later aircraft appears near cabinet top. Mounted views show close wood surfaces and local occlusion. Both native final timeouts retained; no causal diagnosis inferred.",
+        "reviewed_at_utc": "2026-10-09T07:30:10.277861+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_cabinetpickplace.png",
+        "sheet_sha256": "c9881d4878569b5a80990fb5ce13ba3a4a601031b2355cc10ee8b1763906032d",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_cabinetpickplace.json",
+        "sidecar_sha256": "ba79855c7ede656eaa9c7a76153ec520c4fdaf12f6d807b502c307ab9b6a21f7"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_frameassembly",
+        "input_fingerprint": "e40b24f3d4a2744879954c4ceb3fe032efa01d792dae1b96882144f7e2f83bdb",
+        "observations": "Both seed scene views retain aircraft, wall pegs and yellow frame; mid and end show the frame raised to peg area. EE views show frame bar close to tool; base view crops contact at end. Both final success labels correspond to native source outcomes; seed frame and peg placements visibly differ.",
+        "reviewed_at_utc": "2026-10-09T07:49:24.519324+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_frameassembly.png",
+        "sheet_sha256": "9aa23f8787088d5cf0c6d34f8a1c31443866cd39504b789a19a6f3a9999a0e6b",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_frameassembly.json",
+        "sidecar_sha256": "85dab61ede685f327ebcfca145fea10e85e7459d208e3a613396df3f2ee0771f"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_lemonharvesting",
+        "input_fingerprint": "d4a0a615a5ba095df606e58285fff1295eb5187662b717a4a9a1a0345a471026",
+        "observations": "Scene retains lemons/bin/aircraft context; mounted views face bin later; final timeout is retained.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_lemonharvesting.png",
+        "sheet_sha256": "abe204a4899e32f1bbe3bfe4b4140cd5b801e9fb6ca7586baebd7d0e8f517068",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_lemonharvesting.json",
+        "sidecar_sha256": "b4b5e8dd996a75e8bb4f2cb8152ceb6b3721befb5a2fe7a8a6ae00c3863d946e"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_ndt",
+        "input_fingerprint": "0246f8850c2301e16580c2b649f10126b9cc8af39fb11796c946212ee1c68f79",
+        "observations": "已实际查看双seed18帧拼图：scene三时刻均保留飞机与高空标记，飞机在远景中较小；EE中末段保留黄黑目标框，base末段目标移出近墙视野。两seed均标签全程最终success，标签不代表每帧已完成。仅抽帧观察，不以画面推断失败因果。",
+        "reviewed_at_utc": "2026-10-09T08:18:08.724662+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_ndt.png",
+        "sheet_sha256": "ac92ef85395db35d43f151e49f3cc9d0319f53c6806f4f0212b1ae74270565b8",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_ndt.json",
+        "sidecar_sha256": "26ca5e27a4d99969d7b6878925a0636676ffd0b7f35fd74bc5916d7cfa7f24d0"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_opendoor",
+        "input_fingerprint": "e432673741cbcc2c82abee22b9c10f5f8f70659f232d6bfefa198d85eba09a4e",
+        "observations": "Scene shows door opening gap; mounted views show close door surface and can lose handle at contact.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_opendoor.png",
+        "sheet_sha256": "1d723e8344f7f423191c5681936328c426370ab618278ed62755144540f45a0e",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_opendoor.json",
+        "sidecar_sha256": "ab6b962c709344e6b49ed1b7cd9c950173efb36f0fe0bf40d72aafa378fd61a9"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_peginhole",
+        "input_fingerprint": "1ead8e25cffaffa215249904eccade17951f5f94ea96de49571b139f8484cee6",
+        "observations": "Both seed sheets show close approach at hole and final timeout; no success inferred from apparent contact.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_peginhole.png",
+        "sheet_sha256": "0bbe9c00cce877fd0ee8fec5a54f634ac1e45f4f30cf467f459ce8714b2c74b4",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_peginhole.json",
+        "sidecar_sha256": "834ef70d1e687f450fce432b02a799a7641c3b00d046542248a160cb8a897448"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_policy_act_trained_step1",
+        "input_fingerprint": "5d1fcc3f68899bb66a9462531a88240b05b2c21a2e4fd95270ceafc548257735",
+        "observations": "实际查看双seed18帧：scene初帧有飞机/按钮，中段飞机在按钮附近且姿态明显改变，末段飞机移出固定scene视野；base中末有墙/地面视角翻转，EE中末被机体机械结构明显遮挡。两seed完整试次最终TIMEOUT，靠近按钮的中帧不被写成任务成功。保留固定相机局限，结合轨迹；仅三时刻抽帧人工观察。",
+        "reviewed_at_utc": "2026-10-09T09:19:42.562751+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_policy_act_trained_step1.png",
+        "sheet_sha256": "501e437d420cdaff4b3c55468fd82cff5b747ef95f7f294aa908e4e3150928ea",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_policy_act_trained_step1.json",
+        "sidecar_sha256": "a930fd78a8d082b115fcdca60a6520e6f48ac486a62a74af831ed13954e2c2c1"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_policy_act_transfer",
+        "input_fingerprint": "9199c0de1bd084ca82969b0923de72676627a8c50e456cbcba4c575e49702072",
+        "observations": "实际查看双seed18帧：全景保留飞机与墙面按钮，飞机中末段姿态明显倾斜且未接近按钮；base与EE随姿态转动出现机体/桨自遮挡并丢失按钮。两seed标签均全episode最终TIMEOUT，画面保留真实失败表现，不用单帧判定原因。仅三个压缩预览时刻的人工观察。",
+        "reviewed_at_utc": "2026-10-09T08:42:17.575825+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_policy_act_transfer.png",
+        "sheet_sha256": "f21623f899ced39471ead88674d320b59775fab690e6f02e94b0196ed2fe40d1",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_policy_act_transfer.json",
+        "sidecar_sha256": "51d28fa8413d66fa3b3c82aec23d8164739b503dec2de2cff123220763838a41"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_policy_dp_trained_step1",
+        "input_fingerprint": "1e8b7503f83bae119f3c8518bd0cb13629e3e0c6632dba34c4be8c98d13b17cb",
+        "observations": "实际查看双seed18帧：初帧scene有飞机与按钮，中末飞机移出固定scene画面而墙和按钮仍可见；base主要显示倾斜地面网格，EE有机体/桨自遮挡及短暂墙面视野。两seed全试次最终TIMEOUT保留，不能从墙面静止画面推断飞机静止或成功。需结合三视角和完整位置/姿态数据；仅三个抽帧时刻人工检查，不做失败因果诊断。",
+        "reviewed_at_utc": "2026-10-09T09:24:44.660120+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_policy_dp_trained_step1.png",
+        "sheet_sha256": "458e57a5b6183066492cc33df233b50a2d4cfbec1f6b2aef8d7a53fc80188d49",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_policy_dp_trained_step1.json",
+        "sidecar_sha256": "66e2e617b19df27e2557d120dc23b26d26c29a7aa394bc20229bd4668f266028"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_policy_dp_transfer",
+        "input_fingerprint": "b6cc5ad1d8d281cd881f4762c302686b172d973245ccbce0af9c094261590f3e",
+        "observations": "实际查看双seed18帧：scene始帧有飞机与按钮，seed61中末段飞机离开固定全景下缘，seed62中段近下缘、末段低处可见；base和EE随翻转视线大幅转动且有机体自遮挡。两seed最终TIMEOUT标签保留。固定镜头不能给出整条机体连续可见性，需要同时看轨迹数值；仅三时刻抽帧观察，未由画面推断具体失效原因。",
+        "reviewed_at_utc": "2026-10-09T08:47:25.883424+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_policy_dp_transfer.png",
+        "sheet_sha256": "0cc02eb04fcb2190147739001b1401734be99c6bc5ac83dbd3fd82621374fad3",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_policy_dp_transfer.json",
+        "sidecar_sha256": "1f769f26623b381c4d793cf89189bd9e5d588de08ff8fe4a55b1cba3e5ad0df5"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_policy_pi05_transfer",
+        "input_fingerprint": "bc5c4291447538ef5c16f503826cee4d7f2d06b7e9a39fc95e0adde44265ad2d",
+        "observations": "实际查看双seed18帧：scene保留墙和按钮，飞机中末段移至左/下缘，seed62末帧移出scene视野；base/EE有翻转视线与机体自遮挡。两个完整试次均标最终TIMEOUT，末帧近墙或机体画面不视为成功证据。结合三视角与轨迹解释可见范围；仅三时刻抽帧人工观察，不推断具体失败因果。",
+        "reviewed_at_utc": "2026-10-09T09:10:56.772774+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_policy_pi05_transfer.png",
+        "sheet_sha256": "375814b10a0ee71efc29b0f52f613fde9e1f4dcf633e503faec6b100534b1294",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_policy_pi05_transfer.json",
+        "sidecar_sha256": "83fdc66e880930128563ae0d9e45159ec10b73d8fe22b480fa342258aca39414"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_policy_pi0_transfer",
+        "input_fingerprint": "1ea320a3878ded3c874dac80e6f65e97ff395b6398dd3da6c59c547f2fa18226",
+        "observations": "实际查看双seed18帧：scene首帧有飞机和按钮，中末机体在左侧边缘或移出固定视野；base/EE发生大视线转动与机体自遮挡，seed62末base又看到墙面按钮而EE被机体遮挡。完整试次标签均TIMEOUT，没有把局部按钮可见当成成功。三视角局限保留，结合完整轨迹；仅三个抽帧时刻人工观察，不解释失败因果。",
+        "reviewed_at_utc": "2026-10-09T08:57:21.807755+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_policy_pi0_transfer.png",
+        "sheet_sha256": "63c5aaa9fe8682fed6b6374fe3fe147b916c2b6e4ec7ef6ff19c0ac669ca1086",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_policy_pi0_transfer.json",
+        "sidecar_sha256": "4288407ff0c4beebeba554082459b487701c3ceafb01134bb07fd65007fc74ce"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_pressbutton",
+        "input_fingerprint": "866481d1c038684d93027097b04aae059f1c1d11ba2c0fd5c5a49bd7290db148",
+        "observations": "Scene covers aircraft and wall; EE view shows button contact at end; final success visible in labels.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_pressbutton.png",
+        "sheet_sha256": "a8e38677ce1bb2d39aa70c5e0139ebb375cbf24643ad4ee7395847b307c89545",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_pressbutton.json",
+        "sidecar_sha256": "3c4fd1b523a7dde0626be870d65cecb7dcb1b4affb520823a91e2c7c6ea38aae"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_pressbutton_saturation",
+        "input_fingerprint": "41730a8966f581c41d16500027a143a27176682e410c396d11f3ce63d54ce48a",
+        "observations": "实际查看双seed18帧：全景持续显示飞机靠近墙上按钮，EE末段靠近红色按钮，base末段近墙裁切丢失按钮。两个seed全episode最终success标签清楚。图像不能独立证明推力裁剪是否触发，须结合遥测和配置；仅三时刻抽帧观察。",
+        "reviewed_at_utc": "2026-10-09T08:30:12.455478+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_pressbutton_saturation.png",
+        "sheet_sha256": "ce112096a5147bf9056d5fee7533e0bc13aa18ed0970f8a0c06a5251571f948f",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_pressbutton_saturation.json",
+        "sidecar_sha256": "03c287072ba19d74c71912e42a29021817b7f4e29e5336b5d337b4d477a4aaff"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_pressbutton_wind",
+        "input_fingerprint": "a6ca77b86ede46fefaa1a15a1534355dcbce14d03e1769d6a6586428c8965cfe",
+        "observations": "实际查看双seed18帧：全景首中末保持飞机、墙和按钮；EE显示末端靠近红色按钮，base末段仅见近墙局部纹理。成功标签为全episode结果。画面本身不能测定1N风力或气动，须结合配置和遥测。仅抽帧人工观察。",
+        "reviewed_at_utc": "2026-10-09T08:26:17.048108+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_pressbutton_wind.png",
+        "sheet_sha256": "cf2d2b351b6ab09f03db2d0cf32185cc5f2a960e15fc7a7328d031ce2fb1092f",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_pressbutton_wind.json",
+        "sidecar_sha256": "e91a1261e86b7211b0b936cd4ae7498a895ea8940dd51a1283b435d8b4a6dfa2"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_pulllever",
+        "input_fingerprint": "97455c5ffaa38283862c66c40432794a119466b0ad3c153231581003b8e91116",
+        "observations": "Scene preserves lever and aircraft context; mounted cameras turn away during approach and show close side contact later.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_pulllever.png",
+        "sheet_sha256": "2dbba35d3323ad8e5588127650af411cce0f3577534df5a9aa2d46f9202b4c0b",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_pulllever.json",
+        "sidecar_sha256": "a5521171a6154c4c43f6e5c9642472cac84315d55152bb211d0f6ebee12f0bf6"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_pushslider",
+        "input_fingerprint": "ef3b90164baba6acb8363cb348f12018ef38a679f1217384ab3d47536479e3f7",
+        "observations": "Scene preserves wall/aircraft context; EE view shows red slider and rail at contact and endpoint.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_pushslider.png",
+        "sheet_sha256": "383d73a58c3c25096a28304f0473ddc817eae779481814b802e6cb557bde3225",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_pushslider.json",
+        "sidecar_sha256": "0a211e9f8c9214f830f360583c4345f8d84ac71c0650ba9f457a9486ee45ad5a"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_reference_fahexa",
+        "input_fingerprint": "e6dc45550953b144810f28eb8d5534de4c603895e5be6a19896342c3a3d97223",
+        "observations": "实际查看双seed18帧：全景保留固定倾角参考飞机和墙面按钮；EE末段按钮清楚，base有机体机械臂自遮挡仍保留原画面。与Omni的形态与夹爪不同，画面对比不构成公平性能排名；全程最终success标签独立于单帧。仅抽帧人工观察。",
+        "reviewed_at_utc": "2026-10-09T08:26:17.085073+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_reference_fahexa.png",
+        "sheet_sha256": "4df7929bab9d4ac4bd89b0870f0e8fe236c71812b2934a869e7b16bf7557c274",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_reference_fahexa.json",
+        "sidecar_sha256": "9343d29b04bfcd3e7b969da52b4d0148923c1acec52f1d811a869e97ec1aec67"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_rotatevalve",
+        "input_fingerprint": "575cb17b5a91146b0479f4d42f6133cb50a9b647c82b48be3ba880218d3cf387",
+        "observations": "Scene and EE views show valve approach and changed knob orientation; mounted close views crop wheel during contact.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_rotatevalve.png",
+        "sheet_sha256": "90823928fb08f49860851c6990f43044352420a0c1162bffbf1f52a055422707",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_rotatevalve.json",
+        "sidecar_sha256": "ed3d1ff03cae41aa3047fbe1bedd310d1372132aa9d3070198a8254e3afc0a13"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_tossball",
+        "input_fingerprint": "354204ecc5eb3b72fd175bec9493084693bd597e5091e87cb1b4b5d63fb1bc39",
+        "observations": "Initial ball and target bin visible; later scene/base/EE retain bin context; final timeout is retained.",
+        "reviewed_at_utc": "2026-10-09T07:12:13.869991+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_tossball.png",
+        "sheet_sha256": "b970a0adde7a0abd6a1e7788923b892df38b667879a4c72eaa7a2b47033e2838",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_tossball.json",
+        "sidecar_sha256": "f18518cad1f0d6889dfb40767961d11fdebad669c8886e17bebf49860df174d2"
+      },
+      {
+        "claim_limit": "Three selected preview times per view, not continuous visual annotation or a causal diagnosis of task failure.",
+        "experiment_id": "tilting_wipewindow",
+        "input_fingerprint": "0b47e014b5bd3200371c98609287f4a4459ac5fb11066aba2b2c56239af3a192",
+        "observations": "Both seed scenes retain aircraft and window outline; EE view shows red target patches near wiping tool. Base view turns away and loses window during close motion, so scene/EE are needed together. Both final native timeouts are retained; no unrecorded coverage count or causal explanation inferred.",
+        "reviewed_at_utc": "2026-10-09T08:04:52.449303+00:00",
+        "reviewer": "root assistant via view_image of actual decoded contact sheet",
+        "seeds": [
+          61,
+          62
+        ],
+        "sheet": "outputs/research/tilting-20261009/visual-review/tilting_wipewindow.png",
+        "sheet_sha256": "6ad7169ece727d9623cea38959f8e9d05938a8884092199220ba18c878422b81",
+        "sidecar": "outputs/research/tilting-20261009/visual-review/tilting_wipewindow.json",
+        "sidecar_sha256": "894230976e50a27faddfadba1dd60d8e46904ff8c5af0876db806052cd39bba3"
+      }
+    ],
+    "manual_review_log": {
+      "bytes": 29576,
+      "path": "outputs/research/tilting-20261009/visual-review/manual-review.json",
+      "sha256": "d83b024ad5d73ce93a45c63e21767276a021255094beed60da66c4169b8a017e"
+    },
+    "pending_groups": [],
+    "recorded_review_count_including_history": 23,
+    "reviewed_formal_trials": 42,
+    "reviewed_selected_cells": 378,
+    "status": "passed"
+  },
+  "schema_version": 1,
+  "scope": "Target scope is 30 scripted plus 12 policy full simulation trials; one interrupted infrastructure capture is archived separately without a task outcome. Actual completed/started counts derive from final source reports. No real UAV flight, hardware realizability, RL training or converged learned-policy performance claim.",
+  "self_snapshot_limit": "This JSON records the evidence supplied at assembly. Its newly written bytes are not claimed to already exist on GitHub/Pages; published validation self-reference is explicitly excluded from current-byte comparison.",
+  "source_and_git": {
+    "README": {
+      "baseline_revision": "042e2f2ec079505ab9a386634c419d9ce564a482",
+      "changed": false,
+      "sha256": "40f9d0b7bca019bca1e6329f3db9fb214caaa2f36e62cf0f3674830a1c472282"
+    },
+    "ordinary_git_files": {
+      "checked": 1064,
+      "largest": [
+        {
+          "bytes": 28728079,
+          "path": "source/ambench/ambench/assets/robots/configuration/omni_scorpion_base.usd"
+        },
+        {
+          "bytes": 22409776,
+          "path": "source/ambench/ambench/assets/robots/quad_scorpion.usd"
+        },
+        {
+          "bytes": 20186870,
+          "path": "source/ambench/ambench/assets/robots/configuration/hexa_scorpion_base.usd"
+        },
+        {
+          "bytes": 20150483,
+          "path": "source/ambench/ambench/assets/robots/configuration/hexa_scorpion_uac_base.usd"
+        },
+        {
+          "bytes": 9411329,
+          "path": "usage_assets/tilting/trajectories.json"
+        }
+      ],
+      "lfs_attribute_count": 0,
+      "maximum_file_bytes": 28728079,
+      "status": "passed",
+      "strict_maximum_bytes": 100000000
+    },
+    "source_snapshot": {
+      "base_git_commit": "042e2f2ec079505ab9a386634c419d9ce564a482",
+      "claim": "Generated only when root invokes final assembly after code freeze; historical execution hashes remain distinct.",
+      "file_count": 186,
+      "files": [
+        {
+          "path": ".gitattributes",
+          "sha256": "1758df9c50aa9f57a7bcf491ecd53c955836f824341cfb5955ae3a0d86aea0c4"
+        },
+        {
+          "path": ".gitignore",
+          "sha256": "a7e9ab6f7382bb2ef3560699ed3d25f883352ae5d7d775317251806e32bb1f98"
+        },
+        {
+          "path": "AGENTS.md",
+          "sha256": "d30b31f7023dc8e5f4095475780e0a314f3be4265318d1ecc0c708fdef67d735"
+        },
+        {
+          "path": "CODING_STYLE.md",
+          "sha256": "7c0b5038c5ea046d6fc82df4e12c891cef4215b0a767afbd2f9af44968227dd3"
+        },
+        {
+          "path": "README.md",
+          "sha256": "40f9d0b7bca019bca1e6329f3db9fb214caaa2f36e62cf0f3674830a1c472282"
+        },
+        {
+          "path": "docker/Dockerfile.policy",
+          "sha256": "77f96e58b6587afe38e706042cda63491115d95266edb1892297b36666524df9"
+        },
+        {
+          "path": "docker/Dockerfile.policy.dockerignore",
+          "sha256": "950358aff088a6af50ceec47bc5262f4e9be34749363c47d9f25c27eab4c3411"
+        },
+        {
+          "path": "docker/Dockerfile.sim",
+          "sha256": "34b86fa1b8f23c4db86cbd1772012e2f4b7d8b26ffa1e9f1bdccbf8d4163b81f"
+        },
+        {
+          "path": "docker/Dockerfile.sim.dockerignore",
+          "sha256": "fec32f07fd639ef181e691a12899a18be139b27c15ecd66e46bb66273f71e5e2"
+        },
+        {
+          "path": "docker/compose.gui.yml",
+          "sha256": "6fe1fb1e2bd1daa861dd3957325395dea186b977c1112a483362081c704acf71"
+        },
+        {
+          "path": "docker/compose.sim.yml",
+          "sha256": "dbbb9c028a1fbc4218d89158e25651377c2c9cf475238815a9c34bbb74551fe0"
+        },
+        {
+          "path": "docker/constraints.act.txt",
+          "sha256": "f38450793b89e2b32a28352b4722a7f7a379b2cfd2f05a0dcc4fe4d976cce249"
+        },
+        {
+          "path": "docker/constraints.dp.txt",
+          "sha256": "ec04c8ae09a2f0de0311a0be3555152cc2e52b0d180ad6cbdfcbfdbda3a7d134"
+        },
+        {
+          "path": "docker/constraints.sim.txt",
+          "sha256": "f53e2c96f67c3a9b4e235c94adb9c7c87ee34d294b476ba1de9a5c7e894996f2"
+        },
+        {
+          "path": "docker/pyroki-runtime.txt",
+          "sha256": "cd37e792106ea82154a12a21a47e8bab0fa1b968df1e5aad0fc334a38456d3c0"
+        },
+        {
+          "path": "ext/openpi/scripts/serve_policy.py",
+          "sha256": "eccc0448b4873fd30a1fff3355c5de7a7c227138e6db04b7dcaa5bb38a6a5809"
+        },
+        {
+          "path": "ext/openpi/src/openpi/models/pi0.py",
+          "sha256": "24b32d7c6ed5e409459afa8ca5af96a4dae09c2dcdf48e828907e411f4f12342"
+        },
+        {
+          "path": "ext/openpi/src/openpi/models/pi0_config.py",
+          "sha256": "d321858c30b398126035ea2b6da09e1c422eeeebb5ebf8df631daf9dc77647fa"
+        },
+        {
+          "path": "ext/openpi/src/openpi/policies/policy.py",
+          "sha256": "a2ac5236e23b11d0f5a840d4a8fef148d89dba921d5452ec5dfcd5a6ffa46f20"
+        },
+        {
+          "path": "ext/openpi/src/openpi/policies/policy_config.py",
+          "sha256": "aaf42ab04a33b6c91d2447926211646c33ebd8ebfa427f026d7b6c4f7c45ec52"
+        },
+        {
+          "path": "ext/openpi/src/openpi/training/config.py",
+          "sha256": "801c79b8ff3b21b2bcb9e97f19fbace2799613abbb7528bcd28d6518c8a79792"
+        },
+        {
+          "path": "ext/openpi/src/openpi/transforms.py",
+          "sha256": "a1b94e9e72849a18834778f229c6bb389a495eb7fbe0aa800edea728b9424ff4"
+        },
+        {
+          "path": "scripts/data/dp/lerobot_to_zarr.py",
+          "sha256": "41db1390d5588f60fe0d9cc7a7b7fac5bae5199cabac5fe44c3dd9061c437be6"
+        },
+        {
+          "path": "scripts/data/dp/validate_zarr.py",
+          "sha256": "dc32b25ee7e834d06eefd041e4a6d5c3f1f03e31ca12a096fb5e2424fbfe1ae8"
+        },
+        {
+          "path": "scripts/data/record_demos_scripted.py",
+          "sha256": "a3ce32de741e9e9bec2a5218846ba6f0ff66fcb90ce2f38634634a2feaa9827e"
+        },
+        {
+          "path": "scripts/data/validate_lerobotdataset.py",
+          "sha256": "d859f7246a962c336b7f565e8d23f76bb2e5c872ea025fbb6ab8c072de351b41"
+        },
+        {
+          "path": "scripts/research/build_tilting_gallery.py",
+          "sha256": "94f7a338144edca3aa981e792e6379371d34f86e689806fbc837701ce1a9b5f8"
+        },
+        {
+          "path": "scripts/research/build_tilting_media_specs.py",
+          "sha256": "1e93d7e74c0730dda7578c24158619005ad99d048db0faca4f1d2b7acfd102f1"
+        },
+        {
+          "path": "scripts/research/build_uaquad_gallery.py",
+          "sha256": "dda702726b83cee0a776d3319839cfc640f90261e41c9b63483c5477ecd134d4"
+        },
+        {
+          "path": "scripts/research/build_uaquad_media_specs.py",
+          "sha256": "a4b9b1b07e65d55879e97223bdebe73d27f1d7722c6a77807a11282e1cbcea0f"
+        },
+        {
+          "path": "scripts/research/build_video_gallery.py",
+          "sha256": "3aae1e3cdb1bea8bd77a10db0f8a79df1356dea8eacb1cdd7af272303dbd4762"
+        },
+        {
+          "path": "scripts/research/export_usage_animations.py",
+          "sha256": "76e0939423be4623b10c6896f9e987c6b5f82c72153b849f12bed1c6fcb20260"
+        },
+        {
+          "path": "scripts/research/record_tilting_policies.py",
+          "sha256": "10d2f8a2820c13439907b4a5f70600c9b90da12d4bd66cb280660276c0078b92"
+        },
+        {
+          "path": "scripts/research/record_uaquad_policies.py",
+          "sha256": "bf38ca36530664979115c0a0d10c4f917dbf91544bab0df9853626bcd1dca93d"
+        },
+        {
+          "path": "scripts/research/record_usage_variants.py",
+          "sha256": "58e6e7b4d43fec7ad002bdcc41b128dc955478bfa81af9508000986aedd57c36"
+        },
+        {
+          "path": "scripts/research/summarize_tilting_policies.py",
+          "sha256": "3b3bf10f78dd0a94a9c10ae04dc99f254a2670dea833ad2026a28c3dd014c856"
+        },
+        {
+          "path": "scripts/research/summarize_tilting_trials.py",
+          "sha256": "077535d9ce6254b609cc192cf7c118058cd37f585bc55fbf0cd9c742107052e1"
+        },
+        {
+          "path": "scripts/research/summarize_uaquad_policies.py",
+          "sha256": "4b759038361b9f6031d08beef19aa6369d70de199d8ebabe292fbc222b443ebc"
+        },
+        {
+          "path": "scripts/research/summarize_uaquad_trials.py",
+          "sha256": "17b3a1892b4352abca15044c74ba8b8bf0e5e3ad5b16aa647c445c0f31d091f9"
+        },
+        {
+          "path": "scripts/research/validate_tilting_gallery.py",
+          "sha256": "296e81a16d885066094392cecd22fb8ca57ce085a16240b3e7325a20cc8ee523"
+        },
+        {
+          "path": "scripts/research/verify_policy_cpu.py",
+          "sha256": "502824de22a08da47a8069c0ce84f30510187613ff2603e475e513375eed2022"
+        },
+        {
+          "path": "source/ambench/ambench/assets/robots/omni_scorpion.usd",
+          "sha256": "d72502d24ea8b708575704bc44deee32b929341e45182939d5b7a67aa938ad30"
+        },
+        {
+          "path": "source/ambench/ambench/assets/robots/urdf/omni_scorpion.urdf",
+          "sha256": "27b42761641bc62b0685a9fbf071a7d29d2f7b0668d5402cbba48b127bad34b9"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/__init__.py",
+          "sha256": "295e265d413f26f532dffca7c941077240d526973a7e59c86d5636489e62a7a3"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/control_pipeline.py",
+          "sha256": "de79ab172de939e5790609e6419680fd3c9f63529928158a961980fb32b50fe7"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/controller_cfg.py",
+          "sha256": "239ce2ee71b22ccc00caf45b00f28f9df1d1f7c2493090184ae45181177fa6f6"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/l1_adaptive_ctrl.py",
+          "sha256": "3f9386a0c6b0c6dbd7b827467e25a6b91805b589c40cec9817b66973c1c746fe"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/pid_4dof_ctrl.py",
+          "sha256": "fb5a1d494f48a901935b4cc84460be12b9c303a0d3150001f2963dcea89c5045"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/pid_6dof_ctrl.py",
+          "sha256": "2766f5a71ddfafa0c233b85273b6bb798b3ba97147b305cdf4f24a1ef3e012e2"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/pid_joint_ctrl.py",
+          "sha256": "932ea6fee48be08a965149e67e2c5155457b657f3644dd3e83bc303dd58daed3"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/pyroki_ctrl/__init__.py",
+          "sha256": "4f79abdee230cf3a1d98ff7b9cbe681c1eb8de04fdfcaac970307fe8167f76c9"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/pyroki_ctrl/floating_base_ik.py",
+          "sha256": "cc849da14bf4d63c8a1c9a724fc197ea28fcc069e5afafd72d9cb00d6a19270e"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/pyroki_ik_ctrl.py",
+          "sha256": "da1b876c534770ad255d538235ed3d822192b662882ecbe3b3a5174cafc21e64"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/teleop_target.py",
+          "sha256": "8ef8715974c3db1baeb46e862a7e65d06d6805d43b7f3b9405a3dc0920954d8f"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/utils/__init__.py",
+          "sha256": "8d18e49364dfcf9de2b61bd4b60b8cab966094df0f7fa67a398d29e691eea5c4"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/utils/control_allocation.py",
+          "sha256": "9fa4cd1a2240606dc063bc7b5a6c19ac55b2e0b0e7cd5da32ea57b08a19106ea"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/utils/control_utils.py",
+          "sha256": "b48ecf960e5bb492cee68b9a54b5d5e9111882fa0731a3635ee76b82d2498f4c"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/utils/mpc_utils.py",
+          "sha256": "7ac635fd4b945d2dc6a183acf2da1cd33dae7b1785cf082d0bdba79064644281"
+        },
+        {
+          "path": "source/ambench/ambench/controllers/wholebody_mpc_ctrl.py",
+          "sha256": "36748f891a841b2f645ef028555bd346a7cd101c914e868fe902d60836700b74"
+        },
+        {
+          "path": "source/ambench/ambench/disturbance/__init__.py",
+          "sha256": "2332a630604e47df5a026ef0fd9c4a8aba8f65562327adecfe72e839395925b3"
+        },
+        {
+          "path": "source/ambench/ambench/disturbance/aerodynamic.py",
+          "sha256": "54d91d2dcbb9f60b4847c2fae567e3780728930d22eeb4643167e65be37af42b"
+        },
+        {
+          "path": "source/ambench/ambench/disturbance/utils/__init__.py",
+          "sha256": "8d18e49364dfcf9de2b61bd4b60b8cab966094df0f7fa67a398d29e691eea5c4"
+        },
+        {
+          "path": "source/ambench/ambench/disturbance/utils/aerodynamic_utils.py",
+          "sha256": "5a4233b1331c96d856cdb5a8146ffeea97effe4237e3a81045b6171c85bce19c"
+        },
+        {
+          "path": "source/ambench/ambench/evaluation/success_criteria.py",
+          "sha256": "02d4ec59f522f18909aad8b4bc8e376ab02526d1dc16b68b611a3b977dc8650c"
+        },
+        {
+          "path": "source/ambench/ambench/evaluation/tracking/collect.py",
+          "sha256": "26f068f45e5ef521372956ff6ff231e4dad0d0c5680f5729776e3320472416e9"
+        },
+        {
+          "path": "source/ambench/ambench/evaluation/tracking/log.py",
+          "sha256": "55291f8e0b778d9fc764effa74b90a272a64db464a00b22496b5d1c232bc0f3d"
+        },
+        {
+          "path": "source/ambench/ambench/evaluation/tracking/metrics.py",
+          "sha256": "0e21bd64831223933e80c6f189b07886e509380d2557b3ef0b60ae701148e3b1"
+        },
+        {
+          "path": "source/ambench/ambench/evaluation/tracking/plots.py",
+          "sha256": "a36b324188a06b17dbe3db1bd199b8c728b1e95329feba839c4162bb7e8eeec2"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/NDT.py",
+          "sha256": "9c4baf04d319fb218c6431048801b669edac43866f03080e91cb34946454bbee"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/__init__.py",
+          "sha256": "c637a6b53538f847cecaa92238306e4b0f7e0f726c12e297a5333133d4c680fe"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/base.py",
+          "sha256": "9bdc2f185cb831048607c753736f28797fd365c00c10a3c1a7cc1343f8856f1e"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/cabinet_pick_place.py",
+          "sha256": "2718a0767701360a63169f1567cbc3507dcee7ac1e48714e16b39d0f9fb987bf"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/frame_assembly.py",
+          "sha256": "8c52599c46479083a63b16c60f158bb6cdc6b8409e9d94fa1602443547179bfd"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/lemon_harvesting.py",
+          "sha256": "95a99bbb014b18440e5cea0259201f0860e00853bf6c3b2a1ef0468b952b762e"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/open_door.py",
+          "sha256": "026819217d699c4de8addd29b10f2a60f04f63d08a1f0bf2132bb43d82175e70"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/peg_in_hole.py",
+          "sha256": "db3c65fa25266494fa02fa0c92c8cf2607e3506c36c6b16aaa5dc666e83d47f8"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/press_button.py",
+          "sha256": "db9501236dd5b41cfa3885af78e65c4cc55c7360938db86118fcf31148524dca"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/pull_lever.py",
+          "sha256": "f5f2e3148ea0905df72ac9a1566d6e35bcbd3119c4c0c61b3a84b3aa87ea4642"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/push_slider.py",
+          "sha256": "708f9289d0cfd91fd67a6e0e49a598269becc0c063a730d162b1f5a72242bfad"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/rotate_valve.py",
+          "sha256": "0ccf0ad335e054b971ef5c85e16bde19c3308d2fa8c63b0ea79ea8bf00b6269b"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/toss_ball.py",
+          "sha256": "4e6380ee6995c84dafb7f470cb36a3d526c9f7d6b3972987450c6f45d8a67d7f"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/wipe_window.py",
+          "sha256": "bb284d624a3d2bca2dfca9f46c4ec27101cbb2ca7f3188354742fad502d7748e"
+        },
+        {
+          "path": "source/ambench/ambench/policies/scripted/zero.py",
+          "sha256": "b17dbe7dd768118602c967c7b694b2b52bb3f3d0453c55b15e7ac5a88a1a74c9"
+        },
+        {
+          "path": "source/ambench/ambench/recording/dataset.py",
+          "sha256": "ee8e86f7539d27811c2cfadaf125f7cf82cdf2eb4e71398ea24b746350ed1bcb"
+        },
+        {
+          "path": "source/ambench/ambench/recording/lerobot_writer.py",
+          "sha256": "de446b69d57bc6657956021b98cfa226a83175dd50fb734d86c269c3e11598eb"
+        },
+        {
+          "path": "source/ambench/ambench/recording/video.py",
+          "sha256": "9b8f0a4011dc522ba5620b3afea02ca7fad5e09d7b95e3dd97a30bb25a448618"
+        },
+        {
+          "path": "source/ambench/ambench/robots/__init__.py",
+          "sha256": "49be99e9770d7c339c89beab387b3ae3f56f9522c27ebf1c6684f88505d66afb"
+        },
+        {
+          "path": "source/ambench/ambench/robots/eef.py",
+          "sha256": "af025b11397614829d5b4b6dac40ef2c04a0311f9dfdfb47388969362a6ce27f"
+        },
+        {
+          "path": "source/ambench/ambench/robots/fa_hexa.py",
+          "sha256": "66ae1e4aa6b4b3f40edfeeb11a7dbd7611994bc5ca34c393bfe8a8a535cce6a5"
+        },
+        {
+          "path": "source/ambench/ambench/robots/omni_hexa.py",
+          "sha256": "337ba3dc00cabdb3c3fcd3faf2e531d88ac025074be31b66681fced6b2167c34"
+        },
+        {
+          "path": "source/ambench/ambench/robots/robot_cfg.py",
+          "sha256": "1292c06ada600a5b9f9cf9095ba26cd77db80fce6327921de4061745c09ce77e"
+        },
+        {
+          "path": "source/ambench/ambench/robots/robot_io.py",
+          "sha256": "5cc46b9846f51da849f39e2ac12af3109d114228af1c13049b4c105ce1b9de4e"
+        },
+        {
+          "path": "source/ambench/ambench/robots/rotor_actuator.py",
+          "sha256": "ff072820c8d1d0bfa3dcd59e595969855a872ad72f19c3687f181e6ad4043492"
+        },
+        {
+          "path": "source/ambench/ambench/robots/ua_hexa.py",
+          "sha256": "7254f73c33d040332c284d9a44934a00f9321e23844b5c00e70c61c7f37963cf"
+        },
+        {
+          "path": "source/ambench/ambench/robots/ua_quad.py",
+          "sha256": "5f47ca25742205a9b7a93a311ff5bcf6f6ef025ece56eb2ba2515161281a36b5"
+        },
+        {
+          "path": "source/ambench/ambench/robots/visuals/__init__.py",
+          "sha256": "6abe0538cb5eb9360d7e4c987626c0c2f52cab9675ca9a9c9a558f2848089fea"
+        },
+        {
+          "path": "source/ambench/ambench/robots/visuals/propeller_animation.py",
+          "sha256": "61df4e4e07c8225967a12b55e19dfd9fc666d84a90413eabb32605b12f6d6c26"
+        },
+        {
+          "path": "source/ambench/ambench/robots/visuals/propeller_cfg.py",
+          "sha256": "54b9ff4d64e61a8769eb40ed9b9f9d446bb515cfddcea5c0478ced8097b50f83"
+        },
+        {
+          "path": "source/ambench/ambench/robots/visuals/propeller_specs.py",
+          "sha256": "97ca9336b1847a992fff2edfcfac5faca787af354a3d8efa66f4871a6c5798b5"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/__init__.py",
+          "sha256": "ce3d467eeef2081bf60b2fd1d0d488359de4929481859fa6b01ee4a8f3c81b56"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/_registration.py",
+          "sha256": "198c33a6252f1e3c5216ac2a07b7830fada2756b087dbcbf9c7ac544bf2162f0"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/base/__init__.py",
+          "sha256": "743b21e67f7c113ffa0adb49cfa216b66b916fa163e2bd707dabf518d454571f"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/base/base_env.py",
+          "sha256": "06eecbbca6a5f65fd578fb6772cd0d71f255c646a5c14e5daaf70bee3b00ca5d"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/base/base_env_cfg.py",
+          "sha256": "83e79a6cd9964dc7ea5cee9379cec8fc12e4407502a3cc82a8bbfdfca378fbad"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/base/robot_profiles.py",
+          "sha256": "a52bc50f8f3e7ae1720da7fa9b57f503ff50d10054ffbddd64a6b4de85088ec7"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/cabinet_pick_place/__init__.py",
+          "sha256": "7e999e098b64795a8b4bed74147c2796ef3a8f761d4be9b7bb8cdb656c5a7fa7"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/cabinet_pick_place/cabinet_pick_place_env.py",
+          "sha256": "87560a0bc469e4576c05e36c101f84880623a05b06e5e4fa561ed215fcf31ce0"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/cabinet_pick_place/cabinet_pick_place_env_cfg.py",
+          "sha256": "efa444bbe6dec09a83aff7d3f25f51f4f816ace973582b967824d8aca34f0d10"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/frame_assembly/__init__.py",
+          "sha256": "cdf2c7b5bdfccadbece42c7950ad2161a1a59a4e5d9bb43d1dc41371d3154b09"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/frame_assembly/frame_assembly_env.py",
+          "sha256": "e8bba0a3639b03a74e4f30a6458e9b6c98874b9629d0d8b2b5e7304ba4772930"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/frame_assembly/frame_assembly_env_cfg.py",
+          "sha256": "fe71569d54788f73a03ffb4c12f09483a5c813fe813450f4ef20e5efe1595613"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/frame_assembly/frame_assembly_events.py",
+          "sha256": "7fd9d545579057806b3a4f5490fac687b9743d1e54dd5bde6111e4a7c5b31230"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/lemon_harvesting/__init__.py",
+          "sha256": "8b01322c64038be71bab16e766b21127c208a2ef2e6df71665c53514d72b91ce"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/lemon_harvesting/lemon_harvesting_env.py",
+          "sha256": "77c7bf0fb9ddc47d86b803ba1827edadfcbbd665048353419cf62ac84dad3b3e"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/lemon_harvesting/lemon_harvesting_env_cfg.py",
+          "sha256": "99f4258e7d8274029f8dcb212c5be48187f60e512d343f8c1660ed93d7cd2582"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/lemon_harvesting/lemon_harvesting_events.py",
+          "sha256": "14235870efde978b0d5186ff74a6baaba9e791c70baba2f5032d39b0315761f4"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/ndt/__init__.py",
+          "sha256": "7ee34fd34c61c609c68ba97c8c2892099cc385097cae305ce5a2404d5f316e7f"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/ndt/ndt_env.py",
+          "sha256": "0689df469f6d93ff6488f046066272a1ea246628bbe0ec74d73edaeb74b93e68"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/ndt/ndt_env_cfg.py",
+          "sha256": "80e34c4d4219a9646fb0f2675f6441633ed78c0e30704fd9e456a7e694541a77"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/open_door/__init__.py",
+          "sha256": "68e2a8b3de162d778c515cb51cde2504fb34b9e56df032248e086714b8114713"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/open_door/open_door_env.py",
+          "sha256": "221db03c2a0658e8626b336aafa9e0d516accd75bb001ee84117c282cfdbcf45"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/open_door/open_door_env_cfg.py",
+          "sha256": "022446386370cc328f1e2134c229a3be8928b34dccfa6c12e9bf3f7e3d11dd48"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/peg_in_hole/__init__.py",
+          "sha256": "76a385d0e46359ce585fcedb4d1812d6f02e1d2497893cfa9a6eb808d554d6fd"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/peg_in_hole/peg_in_hole_env.py",
+          "sha256": "74838ab1058312ea21776b342be02cce479490497d372f402e14e3964e701363"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/peg_in_hole/peg_in_hole_env_cfg.py",
+          "sha256": "3cbc2e6ce7c877080e72446cc941db1d84eae7b9e6c6b489eae57b0eaa2fdb5c"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/peg_in_hole/peg_in_hole_events.py",
+          "sha256": "5ca681468cfa3dc02bf52082f2e2fd52c79dee3e455ddaadefe5a98cf36221af"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/press_button/__init__.py",
+          "sha256": "1abd6d64d1d20960d737d7dcb64f6e5384ee92860fdf6aa3138d52b7d7605016"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/press_button/press_button_env.py",
+          "sha256": "fdcefa8cea647c2a41e29c41ce86194dcc588d83ef64c616c3425bc70c61700e"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/press_button/press_button_env_cfg.py",
+          "sha256": "4e4baaf384949a1817ca83811e63c7114b7be640b2ffcb3023f7b0d055e00994"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/press_button/press_button_events.py",
+          "sha256": "d5cbd0de7accb7325c9563a11b6d0615ed45515572ae3b96fef60f2277fa2704"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/pull_lever/__init__.py",
+          "sha256": "9cf475c81eaf6933e1ad700c433826a8010b8b8591701ffb29af1cb180b094f3"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/pull_lever/pull_lever_env.py",
+          "sha256": "be680d6b1e07dc6efc9a789f33f3a30d16481d94bb61920e89cef7684d584266"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/pull_lever/pull_lever_env_cfg.py",
+          "sha256": "3e1fe86d748656caaafd1cdf56cb28faffe9c165b2b0df2e07f6232a4e3d670c"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/pull_lever/pull_lever_events.py",
+          "sha256": "ccc709f4cf6d6f50ea3703afea3a13f02b0947c97a89eed35359b9930cec3293"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/push_slider/__init__.py",
+          "sha256": "e29507e38c1d612f6530aabe80f5b2b72223073bd7561ab082f5df6e9b0a3761"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/push_slider/push_slider_env.py",
+          "sha256": "cf4237a972d721efaca792e078ba9b9e27d174d71863763ddc8786afb458818e"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/push_slider/push_slider_env_cfg.py",
+          "sha256": "861d1b1d740f33537546a90f258a70504a75faf2212f25f2bda2e99dd5b34265"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/push_slider/push_slider_events.py",
+          "sha256": "3a91ce6fa5ff147e1e05f099d98d2278e1e7332df666ea14f87600c87f1b50de"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/rotate_valve/__init__.py",
+          "sha256": "be94ab32e82bf3a8006baaf0e6eccee242f627bdb2fca2abd2e6b76b40f268f2"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/rotate_valve/rotate_valve_env.py",
+          "sha256": "b8092034f3122147ebb22303e05a83180baae61d400facc5ca94e974c8bcd9f2"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/rotate_valve/rotate_valve_env_cfg.py",
+          "sha256": "88caadb7c74f8b83f6794818ed9c0df47d58f70f64d18999217a9bd58b28cf05"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/rotate_valve/rotate_valve_events.py",
+          "sha256": "04cfd112db038a4f3b4a76b92c0e8fb805b57d2df191c9b09b67c66fc7f2e05f"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/toss_ball/__init__.py",
+          "sha256": "b53c5e727d012428a7d46e17e97b2fed48d488e60045e0ae6d0c7a0088499121"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/toss_ball/toss_ball_env.py",
+          "sha256": "8730f7f389e1953656e8c8e0f9a99b184884b06405a8cc31a4959056f45b8a8c"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/toss_ball/toss_ball_env_cfg.py",
+          "sha256": "27460016810b10c74f9995954f34a9037fe7cfea0551334844fa5cdd15b6180b"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/wipe_window/__init__.py",
+          "sha256": "6c4afb50b12fea8fab04ffcf20b9903f1b0ce0f28fff06a066c8196622959745"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/wipe_window/wipe_window_env.py",
+          "sha256": "20f32cf94365d66b4e724908744675a00a7440973233842bcab6fdd8cbeb4a57"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/wipe_window/wipe_window_env_cfg.py",
+          "sha256": "d0f80cefbe27f2ed88c6b7a34d08eede3793ff4d0da4293d024fd006cf5e7c8d"
+        },
+        {
+          "path": "source/ambench/ambench/tasks/wipe_window/wipe_window_events.py",
+          "sha256": "680d2aa232fb617a517d001e97d55120d39c94ca56c5aed74636f445db154134"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/data/action_resampling.py",
+          "sha256": "5b0dd0365fcb4ef634c43ba25809456b10a7b801472f0c75691abb2918e21502"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/data/action_semantics.py",
+          "sha256": "313884eaa103c959da8520c4f7a137eabc08af681c38cb6857c4458ca49f889c"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/data/resampled_lerobot_dataset.py",
+          "sha256": "727c359299a438c8d1d37d0f4a5cd42b49f76b9047580e53f4bfe8c1b0176ece"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/eval/common.py",
+          "sha256": "8fa2742a5dcede0dceb02124172ab983f6517674deffc3b6ff9bbe0aa94f3d1c"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/eval/run.py",
+          "sha256": "065e5f21d96d4bd9c3562b35865f43ae2e877289396b04e5ac533587592bfce9"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/act/eval.py",
+          "sha256": "f6b6cf8f3ba1bec780a3164b0c4369c9e04356f1e8a09d03eda1d89be99ee840"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/act/eval_utils.py",
+          "sha256": "a1f068dbc9fb76f4840469a1803e80899df9195f41137e5c578ff3112aa90d79"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/act/se_relative_processor.py",
+          "sha256": "820dafa317833240c686ddbf9f7163fe08bc371d205683cfebede8398346b1b5"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/act/train.py",
+          "sha256": "683545ebc7ab6ca33e8799ffcb4632ccbaa2a31ee21631527f9e0e8a5a70899a"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/dp/eval.py",
+          "sha256": "6faf763261b9ed5b1631c8d3f965bb2a54a8457dc9212afb519039db2a57cfbf"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/dp/eval_utils.py",
+          "sha256": "9c44e926c332ed5298cd0458eaeb6be715a0619e9ddf23b47c2ec6f8e583599d"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/diffusion_policy/config/task/umi_drone_ee_pos.yaml",
+          "sha256": "79b8b3905f0b46f06ba388b9523a5d4c0babe6c340bb292828cc25895f4d4024"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/diffusion_policy/config/train_diffusion_unet_timm_umi_workspace.yaml",
+          "sha256": "d9024caeca855f5094e4e1eac61639f6df6136a53dfbe39ce362b4c3e785d817"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface/train.py",
+          "sha256": "4dc8d6e876db25a62bf6c647444d7ee88f6754cda992c75728419d47f26374e5"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/pi/eval.py",
+          "sha256": "fd2c29cdadeeb94bcea2fce62c57d31ba3b6f4ea520c12c804abcd462fa908b4"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/pi/eval_utils.py",
+          "sha256": "c91a3c31deca7bf4f72b73b00a96eef936c8979c37afc3ea7583378d477a4b19"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/remote/protocol.py",
+          "sha256": "d1a6816db8ac435786c4a253aa2ecb1aaf102fcc19e6242cecd979ac646aa37c"
+        },
+        {
+          "path": "source/ambench_learn/ambench_learn/policies/remote/server.py",
+          "sha256": "eab9e6a25c13db4806a2672df96e8305883b22e79c579e457fca6fa0670b883e"
+        },
+        {
+          "path": "tools/research/build_images.sh",
+          "sha256": "e6e701a1fc5a73e3bc6c691caca5d615045eabc625bedfeba768a21c867ba610"
+        },
+        {
+          "path": "tools/research/deploy_policy.sh",
+          "sha256": "41c34ae6b01b25821b25a49588ef13a5eff86d75eee21258f5ec8c4c190f4f0c"
+        },
+        {
+          "path": "tools/research/fetch_openpi_base.py",
+          "sha256": "65e5c813acd0b86fb3ded1ae913fada2a1fddce68d18fb368a9b8c8d0865e803"
+        },
+        {
+          "path": "tools/research/fetch_openpi_base.sh",
+          "sha256": "b118aaff3e19454a02c8916a907b0572a03f8cd9ef0e107c51b0c0c3fbf86675"
+        },
+        {
+          "path": "tools/research/publish_video_pages.py",
+          "sha256": "28b4ce5cc9f36943e0fac41e4b39cbcb92465d9fda8d5b2ca4feb6670e7ae0ae"
+        },
+        {
+          "path": "tools/research/reset_images.sh",
+          "sha256": "9097fbfb12f7bf9f0926c3871d06c9d55721fbbe6c566cb76d9b477b95b9455e"
+        },
+        {
+          "path": "tools/research/sim_workspace.sh",
+          "sha256": "23f4de4e8a408451fb7741da0087ebbda29601f3785f3640a99440e56a98a14a"
+        },
+        {
+          "path": "tools/research/start_policy.sh",
+          "sha256": "d952d9f234bf3e5e59a0bf08e852e6fe5c285c2c3b60c7cfe7edc026ddf179cd"
+        },
+        {
+          "path": "tools/research/sync_dataset.sh",
+          "sha256": "8ee71b7deecfcdfe8f84b4ac07e8195862c970e014239684332aec351f7832c1"
+        },
+        {
+          "path": "tools/research/sync_openpi_export.sh",
+          "sha256": "5afa64beaeb6e8d7399bbdb5ce05d4572976cb2d46e7116df467b564ac445822"
+        },
+        {
+          "path": "tools/research/train_tilting_cpu.sh",
+          "sha256": "72d1e9845e4cb6c4c89183200a588093cd078a2010ca532e13465e8ad6affa55"
+        },
+        {
+          "path": "tools/research/train_uaquad_cpu.sh",
+          "sha256": "083721c1f189459c24d2af32493e696b01ac43c482755fcaca6b04645de0ea0a"
+        },
+        {
+          "path": "tools/research/tunnel_policy.sh",
+          "sha256": "cc955c4a5451cd82c31d31875404d64f43683f41a933ca99a31bb0fa492d56bf"
+        },
+        {
+          "path": "tools/research/wait_policy.sh",
+          "sha256": "e70960e22cdd93fd8b193fe83efee718272e37c926484ea074ff8e766d703331"
+        },
+        {
+          "path": "usage_assets/tilting/policy_specs.json",
+          "sha256": "a33e127c453e6e6456af33643a229fa72153967f6afdcd69f76e924db2554a2d"
+        },
+        {
+          "path": "usage_assets/tilting/recording_specs.json",
+          "sha256": "c4b4d1c1df6b02ccfbd32ba912682860a1af59d0445df6633c952dfc4be7b44e"
+        },
+        {
+          "path": "usage_assets/uaquad/policy_specs.json",
+          "sha256": "f8c5d28e9f821aec0b4ee24dfc2c407c38319d5b9dc3b3ecfa31f8be7e32c9aa"
+        },
+        {
+          "path": "usage_assets/uaquad/recording_specs.json",
+          "sha256": "c606cefcea10a352231519fe33b5c9fc6cbc61660a5532c40cafd26e43eb43a9"
+        },
+        {
+          "path": "usage_assets/uaquad/training_provenance.json",
+          "sha256": "e521b12386c960cfa96b3bc98ed2051f964d7a797e68e1989994d38f34a9d036"
+        }
+      ],
+      "kind": "working_tree_source_snapshot_at_final_assembly",
+      "plan": {
+        "bytes": 11188,
+        "path": "outputs/research/tilting-20261009/source-audit-plan.json",
+        "sha256": "c83be9cfcd1ad820ac668e06537bf7e6babfc2c6e74e565cb4fb553dff97ef54"
+      },
+      "sha256": "3d931bb525434ffbecc8d1542b43cfce593e9812dba53b50a075af3c4c768961"
+    }
+  },
+  "status": "local_verified_online_pending",
+  "training": {
+    "canonical_dataset": {
+      "action_dim": 8,
+      "action_semantics": "ee_absolute",
+      "container_path": "/data/datasets/tilting-20261009/lerobot",
+      "raw_fps": 120,
+      "raw_frames": 994,
+      "recording_seed": 61,
+      "scripted_success_episodes": 1,
+      "sha256": {
+        "data/chunk-000/file-000.parquet": "1561761e4b644649d1529eadc589ce816b1977d1d920845b56653e3d40cac208",
+        "meta/episodes/chunk-000/file-000.parquet": "b55e34d8ba6028a99c431dc6f9e0b23fd02239d4d542c8e2e172b22972a1254d",
+        "meta/info.json": "fb12db785231605ce32f06746206e9501d56bf007a7a83d7eda9527bc9ce8909",
+        "meta/stats.json": "0c3630b4d998c52d1fbd62b76bf54d851067702041f54477e9cdbb0aef7499af"
+      },
+      "source_relative_path": "outputs/research/tilting-20261009/press-initial/datasets/tilting_pressbutton_seed61/PressButtonOmniHexaAbsPID/demo-20261009_051047/lerobot",
+      "state_dim": 8,
+      "state_keys": [
+        "ee_pos",
+        "ee_quat",
+        "gripper_width"
+      ],
+      "task": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0"
+    },
+    "claim_limit": "These randomly initialized policies received one optimizer step each. Their synthetic CPU forwards validate interfaces and checkpoint loading, not learned OmniHexa task performance. Environment seed 61 was included in the own-robot training demonstration; seed 62 is not a formal generalization benchmark.",
+    "evidence_level": "one_step_cpu_interface_smoke",
+    "models": {
+      "act": {
+        "action_shapes": [
+          [
+            1,
+            8
+          ],
+          [
+            1,
+            8
+          ]
+        ],
+        "all_finite": true,
+        "forward_calls": 2,
+        "initialization": "random",
+        "optimizer_steps": 1
+      },
+      "diffusion_policy": {
+        "action_shapes": [
+          [
+            96,
+            8
+          ]
+        ],
+        "all_finite": true,
+        "forward_calls": 1,
+        "initialization": "random",
+        "optimizer_steps": 1
+      }
+    },
+    "provenance": {
+      "bytes": 15096,
+      "path": "usage_assets/tilting/training_provenance.json",
+      "sha256": "5f22ddfb0bf95e32c328a3b56beb1d0a0c776e3db7b76667b8a12a723b0fc516"
+    },
+    "raw_evidence_files": [
+      {
+        "bytes": 2183,
+        "path": "outputs/research/tilting-20261009/cpu-il/train-container-runtime.json",
+        "sha256": "a3f9983c399a29c4b49a28758d9e6cd385f23eddb471154dae8824bbabbbe4dc"
+      },
+      {
+        "bytes": 664,
+        "path": "outputs/research/tilting-20261009/cpu-il/dataset-hashes.json",
+        "sha256": "ebb3cc8425470c4752dc26adecc4b8c7cd3545664c3babbe83b176c6aa9715a2"
+      },
+      {
+        "bytes": 956,
+        "path": "outputs/research/tilting-20261009/cpu-il/sha256-manifest.txt",
+        "sha256": "8dfa79be9bff02d5122b63f6257bfdd909b8d56e4ba24c08a438fa2ae44c8e35"
+      }
+    ],
+    "status": "passed"
+  },
+  "updated_at_utc": "2026-10-09T09:30:04.736490+00:00",
+  "upstream": {
+    "branch": "main",
+    "checked_at_utc": "2026-10-09T09:19:15.962541+00:00",
+    "claim_limit": "This preserves the actual git ls-remote observation at the recorded time and independently verifies local ancestry at assembly. It does not claim the remote has remained unchanged after that observation.",
+    "commit": "60bf5b73041df4eab571f7d9f0a297aeecbf2e0d",
+    "current_head": "042e2f2ec079505ab9a386634c419d9ce564a482",
+    "current_head_contains_commit": true,
+    "evidence": {
+      "bytes": 232,
+      "path": "outputs/research/tilting-20261009/upstream-check.json",
+      "sha256": "02df302e23561d905876d54be19dfbd2cf8cd375e34bfcb6814e0d8ffe2ba0f6"
+    },
+    "recorded_included_in_research_head": true,
+    "status": "passed",
+    "upstream_url": "https://github.com/ambench/ambench.git"
+  }
+}

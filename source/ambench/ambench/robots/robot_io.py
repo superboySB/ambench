@@ -159,18 +159,18 @@ class RobotIO:
         return ee_state_w[:, :3] + math_utils.quat_apply(ee_state_w[:, 3:7], offset_local)
 
     def command_to_link_quat(self, quat_cmd_w: torch.Tensor) -> torch.Tensor:
-        """Map command-frame orientations into the authored end-effector link frame."""
+        """Return link world orientations by composing the robot-local offset on the right."""
         if self._command_to_link_quat_wxyz is None:
             return quat_cmd_w
         offset = self._command_to_link_quat_wxyz.to(dtype=quat_cmd_w.dtype)
-        return math_utils.quat_mul(offset.unsqueeze(0).expand(quat_cmd_w.shape[0], -1), quat_cmd_w)
+        return math_utils.quat_mul(quat_cmd_w, offset.unsqueeze(0).expand(quat_cmd_w.shape[0], -1))
 
     def link_to_command_quat(self, quat_link_w: torch.Tensor) -> torch.Tensor:
-        """Map authored end-effector link orientations into the command frame."""
+        """Return command/tool world orientations using the inverse robot-local offset."""
         if self._link_to_command_quat_wxyz is None:
             return quat_link_w
         offset = self._link_to_command_quat_wxyz.to(dtype=quat_link_w.dtype)
-        return math_utils.quat_mul(offset.unsqueeze(0).expand(quat_link_w.shape[0], -1), quat_link_w)
+        return math_utils.quat_mul(quat_link_w, offset.unsqueeze(0).expand(quat_link_w.shape[0], -1))
 
     def apply(self, command: RobotCommand) -> None:
         """Apply a complete command to the articulation."""

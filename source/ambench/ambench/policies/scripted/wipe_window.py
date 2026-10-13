@@ -66,6 +66,13 @@ class WipeWindowPolicy(BasePolicy):
 
         identity_quat = self.identity_quat()
 
+        # Match the sponge's robot-specific fixed-joint attachment. With the
+        # identity command orientation the sponge axes are world-aligned.
+        ee_state = ee_pos.new_zeros((1, 13))
+        ee_state[:, 3:7] = self.env.robot_io.command_to_link_quat(identity_quat.unsqueeze(0))
+        sponge_offset_w = self.env.robot_io.compute_tool_tip_pos_w(ee_state)[0]
+        sponge_half_thickness = 0.5 * self.env.cfg.sponge_size[0]
+
         visible_dots = self._get_visible_dots(env_id=env_id)
 
         waypoints: list[Waypoint] = []
@@ -102,21 +109,21 @@ class WipeWindowPolicy(BasePolicy):
 
         # Stand off from the stain itself. The window pose is randomised, so an
         # absolute x put the approach in the wrong place whenever it moved.
-        hover_offset_x = 0.40
+        hover_offset_x = 0.22
 
         for dot_index, dot_pos in enumerate(dot_positions):
-            far = dot_pos.clone()
-            far[0] = dot_pos[0] - hover_offset_x
+            far = dot_pos - sponge_offset_w
+            far[0] -= hover_offset_x
             far[2] -= 0.1
 
             close = far.clone()
-            close[0] = dot_pos[0] - 0.28
+            close[0] = dot_pos[0] - sponge_offset_w[0] - 0.10
             close[1] += 0.01
             close[2] += 0.1
 
             contact = close.clone()
             # Keep the contact pose shallow to avoid excessive window force.
-            contact[0] = dot_pos[0] - 0.235
+            contact[0] = dot_pos[0] - sponge_offset_w[0] - sponge_half_thickness + 0.005
 
             sweep = contact.clone()
             sweep[1] -= 0.04

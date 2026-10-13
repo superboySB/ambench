@@ -123,7 +123,9 @@ case "$policy" in
     ;;
   dp)
     [[ -e "$checkpoint" ]] || { echo "Missing DP checkpoint: $checkpoint" >&2; exit 1; }
-    nohup env CUDA_VISIBLE_DEVICES="$visible_devices" PYTHONHASHSEED="$inference_seed" /opt/venvs/dp/bin/python \
+    nohup env CUDA_VISIBLE_DEVICES="$visible_devices" PYTHONHASHSEED="$inference_seed" \
+      PYTHONPATH=/workspace/ambench/source/ambench:/workspace/ambench/source/ambench_learn:/workspace/ambench/source/ambench_learn/ambench_learn/policies/dp/universal_manipulation_interface \
+      /opt/venvs/dp/bin/python \
       -c "$seed_runner" ambench_learn.policies.remote.server "$inference_seed" "$inference_device" \
       --policy dp --checkpoint "$checkpoint" --host 0.0.0.0 --port 8001 --device "$inference_device" \
       > "$log_file" 2>&1 < /dev/null &

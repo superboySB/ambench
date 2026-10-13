@@ -68,6 +68,8 @@ class TimmObsEncoder(ModuleAttrMixin):
             feature_aggregation: str='spatial_embedding',
             downsample_ratio: int=32,
             position_encording: str='learnable',
+            normalize_rgb: bool=False,
+            eval_crop_ratio: float | None=None,
 
         ):
         """
@@ -75,6 +77,10 @@ class TimmObsEncoder(ModuleAttrMixin):
         Assumes low_dim input: B,T,D
         """
         super().__init__()
+        if eval_crop_ratio is not None and not 0 < eval_crop_ratio <= 1:
+            raise ValueError('eval_crop_ratio must be in (0, 1].')
+        self.normalize_rgb = normalize_rgb
+        self.eval_crop_ratio = eval_crop_ratio
         
         rgb_keys = list()
         low_dim_keys = list()
@@ -88,6 +94,16 @@ class TimmObsEncoder(ModuleAttrMixin):
             pretrained=pretrained,
             global_pool=global_pool, # '' means no pooling
             num_classes=0            # remove classification layer
+        )
+        # Keep legacy checkpoints unchanged unless normalization is explicitly
+        # enabled. Use the actual pretrained model's RGB statistics (CLIP uses
+        # different values from ImageNet), after crops and color augmentation.
+        pretrained_cfg = model.pretrained_cfg
+        self.register_buffer(
+            '_rgb_mean', torch.tensor(pretrained_cfg['mean']).reshape(1, 3, 1, 1), persistent=False
+        )
+        self.register_buffer(
+            '_rgb_std', torch.tensor(pretrained_cfg['std']).reshape(1, 3, 1, 1), persistent=False
         )
 
         if frozen:
@@ -263,7 +279,17 @@ class TimmObsEncoder(ModuleAttrMixin):
             assert B == batch_size
             assert img.shape[2:] == self.key_shape_map[key]
             img = img.reshape(B*T, *img.shape[2:])
-            img = self.key_transform_map[key](img)
+            if not self.training and self.eval_crop_ratio is not None:
+                # Explicit deterministic inference/validation, matching the
+                # training crop's field of view without random ColorJitter.
+                height, width = self.key_shape_map[key][-2:]
+                crop = (int(height * self.eval_crop_ratio), int(width * self.eval_crop_ratio))
+                img = torchvision.transforms.functional.center_crop(img, crop)
+                img = torchvision.transforms.functional.resize(img, [height, width], antialias=True)
+            else:
+                img = self.key_transform_map[key](img)
+            if self.normalize_rgb:
+                img = (img - self._rgb_mean) / self._rgb_std
             raw_feature = self.key_model_map[key](img)
             feature = self.aggregate_feature(raw_feature)
             assert len(feature.shape) == 2 and feature.shape[0] == B * T

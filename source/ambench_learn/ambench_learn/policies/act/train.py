@@ -17,7 +17,6 @@ from pprint import pformat
 import lerobot.policies.act.processor_act as lerobot_act_processor
 import torch
 from lerobot.datasets.factory import IMAGENET_STATS, ImageTransforms
-from lerobot.datasets.lerobot_dataset import LeRobotDataset
 from lerobot.scripts import lerobot_train as train_module
 
 from ambench_learn.data.action_resampling import (
@@ -29,6 +28,7 @@ from ambench_learn.data.action_semantics import (
     resolve_policy_action_representation_for_dataset,
 )
 from ambench_learn.data.resampled_lerobot_dataset import ResampledLeRobotDataset
+from ambench_learn.data.selected_lerobot_dataset import SelectedLeRobotDataset
 from ambench_learn.policies.act.se_relative_processor import (
     make_act_pre_post_processors as make_am_act_pre_post_processors,
 )
@@ -66,7 +66,7 @@ def main() -> None:
         image_transforms = (
             ImageTransforms(cfg.dataset.image_transforms) if cfg.dataset.image_transforms.enable else None
         )
-        raw_dataset = LeRobotDataset(
+        raw_dataset = SelectedLeRobotDataset(
             cfg.dataset.repo_id,
             root=cfg.dataset.root,
             episodes=cfg.dataset.episodes,

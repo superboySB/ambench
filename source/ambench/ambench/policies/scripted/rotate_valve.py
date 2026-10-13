@@ -134,6 +134,8 @@ class RotateValvePolicy(BasePolicy):
             grasp_pos, valve_end_pos, self.arc_sweep_angle, num_arc_points, wall_y_axis, wall_z_axis
         )
         self.circle_generated = True
+        # The construction diameter endpoint is not the end of the 1.8*pi arc.
+        arc_end_pos = self.circle_points[-1]
 
         identity_quat = self.identity_quat()
 
@@ -150,8 +152,8 @@ class RotateValvePolicy(BasePolicy):
                 gripper=-1.0,
                 interpolation_type="circle",
             ),
-            Waypoint(t=self.t_end_arc, xyz=valve_end_pos, quat=identity_quat, gripper=-1.0),
-            Waypoint(t=self.t_release_valve, xyz=valve_end_pos, quat=identity_quat, gripper=1.0),
+            Waypoint(t=self.t_end_arc, xyz=arc_end_pos, quat=identity_quat, gripper=-1.0),
+            Waypoint(t=self.t_release_valve, xyz=arc_end_pos, quat=identity_quat, gripper=1.0),
         ]
 
         self._log_trajectory_summary(f"goal_pos={goal_pos}")

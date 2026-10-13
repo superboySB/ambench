@@ -10,7 +10,13 @@ from dataclasses import dataclass
 from typing import Any
 
 import torch
+from lerobot.datasets.compute_stats import aggregate_stats
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
+from lerobot.datasets.utils import (
+    cast_stats_to_numpy,
+    load_nested_dataset,
+    unflatten_dict,
+)
 from torch.utils.data import Dataset
 
 from ambench_learn.data.action_resampling import (
@@ -33,6 +39,7 @@ class ResampledEpisode:
     """Logical benchmark episode aligned to the canonical raw episode."""
 
     episode_index: int
+    source_episode_index: int
     raw_from_index: int
     raw_to_index: int
     raw_length: int
@@ -100,19 +107,33 @@ class _ResampledMetaView:
 
 
 def build_resampled_episodes(raw_dataset: LeRobotDataset, stride: int) -> list[ResampledEpisode]:
-    """Build logical episode boundaries from canonical raw metadata."""
+    """Build logical boundaries in the loaded, possibly filtered, raw dataset."""
 
     episodes: list[ResampledEpisode] = []
     logical_cursor = 0
-    for episode_index in range(len(raw_dataset.meta.episodes)):
-        raw_episode = raw_dataset.meta.episodes[episode_index]
-        raw_from_index = int(raw_episode["dataset_from_index"])
-        raw_to_index = int(raw_episode["dataset_to_index"])
+    selected_episodes = getattr(raw_dataset, "episodes", None)
+    source_episode_indices = (
+        list(range(len(raw_dataset.meta.episodes))) if selected_episodes is None else sorted(set(selected_episodes))
+    )
+    absolute_to_relative = getattr(raw_dataset, "_absolute_to_relative_idx", None)
+    for episode_index, source_episode_index in enumerate(source_episode_indices):
+        raw_episode = raw_dataset.meta.episodes[source_episode_index]
+        source_from_index = int(raw_episode["dataset_from_index"])
+        source_to_index = int(raw_episode["dataset_to_index"])
         raw_length = int(raw_episode["length"])
+        if absolute_to_relative is None:
+            raw_from_index = source_from_index
+            raw_to_index = source_to_index
+        else:
+            raw_from_index = absolute_to_relative[source_from_index]
+            raw_to_index = absolute_to_relative[source_to_index - 1] + 1
+        if raw_to_index - raw_from_index != raw_length:
+            raise ValueError(f"Selected source episode {source_episode_index} is not contiguous in the loaded data.")
         logical_length = raw_length // stride
         episodes.append(
             ResampledEpisode(
                 episode_index=episode_index,
+                source_episode_index=source_episode_index,
                 raw_from_index=raw_from_index,
                 raw_to_index=raw_to_index,
                 raw_length=raw_length,
@@ -173,12 +194,15 @@ class ResampledLeRobotDataset(Dataset[dict[str, Any]]):
             policy_action_representation,
             policy_name="Resampled LeRobot dataset",
         )
-        self._raw_actions = self._load_raw_actions()
-
         self.episodes = build_resampled_episodes(raw_dataset, self.stride)
+        if not self.episodes:
+            raise ValueError("The resampled dataset requires at least one selected episode.")
         self._episode_logical_stops = [episode.logical_to_index for episode in self.episodes]
         self.num_frames = sum(episode.logical_length for episode in self.episodes)
+        if self.num_frames == 0:
+            raise ValueError("Selected episodes contain no complete policy-rate sampling interval.")
         self.num_episodes = len(self.episodes)
+        self._raw_actions = self._load_raw_actions()
         self._episode_actions = self._build_episode_actions()
         self._episode_states = self._build_episode_states()
         self._logical_states = (
@@ -243,15 +267,28 @@ class ResampledLeRobotDataset(Dataset[dict[str, Any]]):
         logical_states: list[torch.Tensor] = []
         for episode in self.episodes:
             if episode.logical_length == 0:
+                logical_states.append(torch.empty((0, raw_states.shape[-1]), dtype=torch.float32))
                 continue
             episode_states = raw_states[episode.raw_from_index : episode.raw_to_index]
             logical_states.append(episode_states[:: self.stride][: episode.logical_length])
         return logical_states
 
     def _build_logical_stats(self) -> dict[str, dict[str, torch.Tensor]]:
-        logical_stats = deepcopy(self.raw_dataset.meta.stats)
-        if self.num_frames == 0:
-            return logical_stats
+        if getattr(self.raw_dataset, "episodes", None) is None:
+            logical_stats = deepcopy(self.raw_dataset.meta.stats)
+        else:
+            # LeRobot keeps global meta.stats even when its frames are filtered.
+            # Reuse recorded episode statistics without decoding RGB or touching
+            # canonical files, so validation episodes cannot affect normalization.
+            episode_metadata = load_nested_dataset(self.raw_dataset.root / "meta" / "episodes")
+            selected_stats = []
+            for episode in self.episodes:
+                row = episode_metadata[episode.source_episode_index]
+                stats = {key.removeprefix("stats/"): value for key, value in row.items() if key.startswith("stats/")}
+                if not stats:
+                    raise ValueError(f"Source episode {episode.source_episode_index} is missing recorded statistics.")
+                selected_stats.append(cast_stats_to_numpy(unflatten_dict(stats)))
+            logical_stats = aggregate_stats(selected_stats)
 
         logical_stats["action"] = self._build_action_stats()
         if "observation.state" in self.raw_dataset.meta.features:
@@ -346,6 +383,7 @@ class ResampledLeRobotDataset(Dataset[dict[str, Any]]):
             "raw_num_frames": int(self.raw_dataset.num_frames),
             "logical_num_frames": int(self.num_frames),
             "num_episodes": int(self.num_episodes),
+            "source_episode_indices": tuple(episode.source_episode_index for episode in self.episodes),
             "raw_episode_lengths": tuple(episode.raw_length for episode in self.episodes),
             "logical_episode_lengths": tuple(episode.logical_length for episode in self.episodes),
         }

@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 from pathlib import Path
@@ -27,6 +28,7 @@ from ambench_learn.data.action_resampling import (
 )
 from ambench_learn.data.action_semantics import dataset_metadata
 from ambench_learn.data.resampled_lerobot_dataset import build_resampled_episodes
+from ambench_learn.data.selected_lerobot_dataset import SelectedLeRobotDataset
 
 DEFAULT_REPO_ID = "am_bench/openpi_export"
 DEFAULT_EE_IMAGE_KEY = "observation.images.ee_camera"
@@ -452,6 +454,18 @@ def parse_args() -> argparse.Namespace:
         help="Output dataset root. Defaults to $HF_LEROBOT_HOME/<repo_id>.",
     )
     parser.add_argument("--target_hz", type=int, default=20, help="Logical policy FPS for the OpenPI export.")
+    parser.add_argument(
+        "--episodes",
+        type=int,
+        nargs="+",
+        default=None,
+        help="Source episode IDs to export from every input root; omit to export all episodes.",
+    )
+    parser.add_argument(
+        "--require_success",
+        action="store_true",
+        help="Require recorder episode_outcomes.json to verify every selected episode succeeded.",
+    )
     parser.add_argument("--ee_image_key", default=DEFAULT_EE_IMAGE_KEY, help="Canonical EE camera feature key.")
     parser.add_argument("--base_image_key", default=DEFAULT_BASE_IMAGE_KEY, help="Canonical base camera feature key.")
     parser.add_argument(
@@ -475,13 +489,46 @@ def main() -> None:
     if args.require_task_prompt_map and args.task_prompt_map is None and not args.task_prompt:
         raise ValueError("--require_task_prompt_map requires --task_prompt_map unless --task_prompt is set.")
 
+    if args.episodes is not None and (len(set(args.episodes)) != len(args.episodes) or min(args.episodes) < 0):
+        raise ValueError("--episodes must contain unique, nonnegative source episode IDs.")
+    resolved_roots = [resolve_dataset_root(path) for path in args.dataset_roots]
+    success_proofs = []
+    for dataset_root in resolved_roots:
+        info = json.loads((dataset_root / "meta/info.json").read_text(encoding="utf-8"))
+        selected = list(range(int(info["total_episodes"]))) if args.episodes is None else sorted(args.episodes)
+        if any(index >= int(info["total_episodes"]) for index in selected):
+            raise ValueError(f"--episodes contains an out-of-range episode for {dataset_root}.")
+        outcome_path = dataset_root.parent / "episode_outcomes.json"
+        proof = {"success_verified": False, "task_id": None, "selected_successful_episodes": None}
+        if outcome_path.is_file():
+            outcomes = json.loads(outcome_path.read_text(encoding="utf-8"))
+            exported = {
+                int(row["exported_episode_index"]): row
+                for row in outcomes["episodes"]
+                if row.get("exported") and row.get("exported_episode_index") is not None
+            }
+            verified = all(
+                index in exported and exported[index]["termination_reason"] == "success" for index in selected
+            )
+            proof.update({
+                "success_verified": verified,
+                "task_id": outcomes.get("task"),
+                "selected_successful_episodes": sum(
+                    index in exported and exported[index]["termination_reason"] == "success" for index in selected
+                ),
+                "episode_outcomes_path": str(outcome_path),
+                "episode_outcomes_sha256": hashlib.sha256(outcome_path.read_bytes()).hexdigest(),
+            })
+            if args.episodes is not None and not verified:
+                raise ValueError(f"Selected source episodes include failed or unverified recordings in {dataset_root}.")
+        if args.require_success and not proof["success_verified"]:
+            raise ValueError(f"Cannot verify successful source episodes from {outcome_path}.")
+        success_proofs.append(proof)
     output_root = (args.output_root or (Path(HF_LEROBOT_HOME) / args.repo_id)).expanduser().resolve()
     if output_root.exists():
         if not args.overwrite:
             raise FileExistsError(f"Output dataset already exists: {output_root}. Pass --overwrite to replace it.")
         shutil.rmtree(output_root)
-
-    resolved_roots = [resolve_dataset_root(path) for path in args.dataset_roots]
     prompt_map = load_task_prompt_map(args.task_prompt_map)
     output_dataset: OpenPIV21Writer | None = None
     output_action_semantics: str | None = None
@@ -495,7 +542,9 @@ def main() -> None:
         repo_id = info.get("repo_id")
         if not isinstance(repo_id, str) or not repo_id:
             repo_id = f"ambench/local_export_{source_index}"
-        raw_dataset = LeRobotDataset(repo_id=repo_id, root=dataset_root, download_videos=False)
+        raw_dataset = SelectedLeRobotDataset(
+            repo_id=repo_id, root=dataset_root, episodes=args.episodes, download_videos=False
+        )
         action_semantics = resolve_dataset_action_semantics(raw_dataset)
         if action_semantics not in (EE_ABSOLUTE, BASE_JOINT_ABSOLUTE):
             raise ValueError(
@@ -511,6 +560,20 @@ def main() -> None:
             )
         stride = compute_stride(int(raw_dataset.fps), args.target_hz)
         episodes = build_resampled_episodes(raw_dataset, stride)
+        source_files = {info_path, dataset_root / "meta/stats.json"}
+        for episode in episodes:
+            source_files.add(dataset_root / raw_dataset.meta.get_data_file_path(episode.source_episode_index))
+            for video_key in raw_dataset.meta.video_keys:
+                source_files.add(
+                    dataset_root / raw_dataset.meta.get_video_file_path(episode.source_episode_index, video_key)
+                )
+        source_hashes = {}
+        for path in sorted(source_files):
+            digest = hashlib.sha256()
+            with path.open("rb") as stream:
+                for block in iter(lambda: stream.read(1024 * 1024), b""):
+                    digest.update(block)
+            source_hashes[path.relative_to(dataset_root).as_posix()] = digest.hexdigest()
         reports.append({
             "dataset_root": str(dataset_root),
             "repo_id": repo_id,
@@ -520,6 +583,11 @@ def main() -> None:
             "stride": stride,
             "raw_frames": int(raw_dataset.num_frames),
             "logical_frames": sum(episode.logical_length for episode in episodes),
+            "robot_type": info.get("robot_type"),
+            "selected_episode_indices": [episode.source_episode_index for episode in episodes],
+            "source_files_sha256": source_hashes,
+            "episodes": [],
+            **success_proofs[source_index],
         })
 
         for episode in episodes:
@@ -554,6 +622,12 @@ def main() -> None:
                     )
                 frames.append(frame)
             if output_dataset is not None:
+                reports[-1]["episodes"].append({
+                    "source_episode_index": episode.source_episode_index,
+                    "output_episode_index": output_dataset.episode_count if frames else None,
+                    "raw_frames": episode.raw_length,
+                    "logical_frames": len(frames),
+                })
                 output_dataset.save_episode(frames)
 
     if output_dataset is None:
@@ -566,6 +640,11 @@ def main() -> None:
                 "repo_id": args.repo_id,
                 "target_hz": int(args.target_hz),
                 "include_base_image": not args.omit_base_image,
+                "selected_episode_indices_per_root": args.episodes,
+                "require_success": args.require_success,
+                "success_verified": all(proof["success_verified"] for proof in success_proofs),
+                "total_episodes": output_dataset.episode_count,
+                "total_frames": output_dataset.frame_count,
                 "sources": reports,
             },
             indent=2,

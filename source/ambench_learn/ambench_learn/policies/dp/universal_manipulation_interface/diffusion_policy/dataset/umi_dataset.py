@@ -37,8 +37,13 @@ class UmiDataset(BaseDataset):
         repeat_frame_prob: float=0.0,
         seed: int=42,
         val_ratio: float=0.0,
-        max_duration: Optional[float]=None
+        max_duration: Optional[float]=None,
+        val_episode_indices: Optional[list[int]]=None,
+        normalizer_num_workers: int=32
     ):
+        if not isinstance(normalizer_num_workers, int) or isinstance(normalizer_num_workers, bool) or normalizer_num_workers < 0:
+            raise ValueError('normalizer_num_workers must be a nonnegative integer.')
+        self.normalizer_num_workers = normalizer_num_workers
         self.pose_repr = pose_repr
         self.obs_pose_repr = self.pose_repr.get('obs_pose_repr', 'rel')
         self.action_pose_repr = self.pose_repr.get('action_pose_repr', 'rel')
@@ -124,12 +129,29 @@ class UmiDataset(BaseDataset):
         key_latency_steps['action'] = shape_meta['action']['latency_steps']
         key_down_sample_steps['action'] = shape_meta['action']['down_sample_steps']
 
-        val_mask = get_val_mask(
-            n_episodes=replay_buffer.n_episodes, 
-            val_ratio=val_ratio,
-            seed=seed
-        )
+        if val_episode_indices is None:
+            val_mask = get_val_mask(
+                n_episodes=replay_buffer.n_episodes,
+                val_ratio=val_ratio,
+                seed=seed
+            )
+            self.split_selection = 'random'
+        else:
+            selected = list(val_episode_indices)
+            if any(not isinstance(index, int) or isinstance(index, bool) for index in selected):
+                raise ValueError('val_episode_indices must contain integer episode indices.')
+            if len(set(selected)) != len(selected):
+                raise ValueError('val_episode_indices must not contain duplicate episodes.')
+            if any(index < 0 or index >= replay_buffer.n_episodes for index in selected):
+                raise ValueError('val_episode_indices contains an out-of-range episode.')
+            if len(selected) == replay_buffer.n_episodes:
+                raise ValueError('val_episode_indices must leave at least one training episode.')
+            val_mask = np.zeros(replay_buffer.n_episodes, dtype=bool)
+            val_mask[selected] = True
+            self.split_selection = 'explicit'
         train_mask = ~val_mask
+        self.train_episode_indices = tuple(np.flatnonzero(train_mask).tolist())
+        self.val_episode_indices = tuple(np.flatnonzero(val_mask).tolist())
 
         self.sampler_lowdim_keys = list()
         for key in lowdim_keys:
@@ -205,7 +227,7 @@ class UmiDataset(BaseDataset):
         dataloader = torch.utils.data.DataLoader(
             dataset=self,
             batch_size=64,
-            num_workers=32,
+            num_workers=self.normalizer_num_workers,
         )
         for batch in tqdm(dataloader, desc='iterating dataset to get normalization'):
             for key in self.lowdim_keys:

@@ -144,7 +144,7 @@ class TrainDiffusionUnetImageWorkspace(BaseWorkspace):
         cfg.dataloader.persistent_workers = False
         cfg.val_dataloader.persistent_workers = False
         cfg.val_dataloader.shuffle = False
-        cfg.val_dataloader.drop_last = False
+        OmegaConf.update(cfg, "val_dataloader.drop_last", False, force_add=True)
         self.cfg = cfg
         pathlib.Path(self.output_dir).mkdir(parents=True, exist_ok=True)
         logging_enabled = cfg.logging.mode != "disabled"

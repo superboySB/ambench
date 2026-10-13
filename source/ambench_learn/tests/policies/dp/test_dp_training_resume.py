@@ -13,10 +13,12 @@ import sys
 from pathlib import Path
 
 import dill
+import hydra
 import numpy as np
 import pytest
 import torch
 from omegaconf import OmegaConf
+from omegaconf.errors import ConfigAttributeError
 
 UMI_ROOT = (
     Path(__file__).resolve().parents[3] / "ambench_learn" / "policies" / "dp" / "universal_manipulation_interface"
@@ -184,6 +186,44 @@ def assert_nested_equal(left, right) -> None:
             assert_nested_equal(a, b)
     else:
         assert left == right
+
+
+@pytest.mark.parametrize("drop_last", [None, True])
+def test_structured_hydra_config_keeps_complete_validation(tmp_path: Path, drop_last: bool | None) -> None:
+    config_dir = UMI_ROOT / "diffusion_policy" / "config"
+    with hydra.initialize_config_dir(config_dir=str(config_dir), version_base=None):
+        cfg = hydra.compose(config_name="train_diffusion_unet_timm_umi_workspace")
+    assert OmegaConf.is_struct(cfg.val_dataloader)
+    assert "drop_last" not in cfg.val_dataloader
+    if drop_last is not None:
+        OmegaConf.update(cfg, "val_dataloader.drop_last", drop_last, force_add=True)
+
+    # Retain the real structured loader config while avoiding model downloads.
+    small = training_config(stochastic=False, epochs=1)
+    for section in ("policy", "optimizer", "ema", "training", "logging", "checkpoint"):
+        cfg[section] = small[section]
+    cfg.task.dataset = small.task.dataset
+    cfg.task.env_runner = small.task.env_runner
+    for section in ("dataloader", "val_dataloader"):
+        for key, value in small[section].items():
+            cfg[section][key] = value
+        cfg[section].pin_memory = False
+    OmegaConf.resolve(cfg)
+
+    workspace = TrainDiffusionUnetImageWorkspace(cfg, output_dir=str(tmp_path))
+    workspace.run()
+    rows = [json.loads(line) for line in (tmp_path / "logs.json.txt").read_text().splitlines()]
+    assert len(rows) == 1
+    assert rows[0]["val_samples"] == 5 and rows[0]["val_batches"] == 3 and rows[0]["val_complete"]
+    assert workspace.epoch == 1 and workspace.optimizer_step == 2
+    assert workspace.cfg.val_dataloader.drop_last is False
+    assert OmegaConf.is_struct(workspace.cfg.val_dataloader)
+    with pytest.raises(ConfigAttributeError):
+        workspace.cfg.val_dataloader.unrecognized_loader_option = True
+    if drop_last is None:
+        assert "drop_last" not in cfg.val_dataloader
+    else:
+        assert cfg.val_dataloader.drop_last is True
 
 
 @pytest.mark.parametrize("workers", [0, 2])

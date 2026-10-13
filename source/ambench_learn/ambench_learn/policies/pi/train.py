@@ -213,7 +213,7 @@ def dataset_proof(request: TrainingRequest) -> dict:
         or shapes.get("ee_pos") != (3,)
         or shapes.get("ee_quat") != (4,)
         or shapes.get("gripper_width") != (1,)
-        or shapes.get("ee_image") != (384, 384, 3)
+        or shapes.get("ee_image") != (3, 384, 384)
     ):
         raise ValueError("Finalized OpenPI metadata does not match the 20Hz EE training contract.")
     robot = next(iter(robots))

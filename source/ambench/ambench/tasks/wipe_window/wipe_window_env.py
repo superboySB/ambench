@@ -7,6 +7,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 
 import isaaclab.sim as sim_utils
+import isaaclab.utils.math as math_utils
 import torch
 from isaaclab.assets import RigidObject
 from isaaclab.sensors import ContactSensor
@@ -23,6 +24,21 @@ class WipeWindow(BaseEnv):
 
     def __init__(self, cfg: WipeWindowEnvDefaultCfg, render_mode: str | None = None, **kwargs):
         super().__init__(cfg, render_mode, **kwargs)
+
+    @property
+    def sponge_attachment_point_local(self) -> tuple[float, float, float]:
+        """Return the sponge center in the authored end-effector link frame."""
+        frame = self.cfg.robot_profile.robot.end_effector
+        tool_tip = (0.0, 0.0, 0.0) if frame is None else frame.tool_tip_offset_local
+        return tuple(
+            base + extra for base, extra in zip(tool_tip, self.cfg.sponge_attachment_offset_local, strict=True)
+        )
+
+    def compute_sponge_attachment_pos_w(self, ee_state_w: torch.Tensor) -> torch.Tensor:
+        """Transform the fixed-joint attachment point using measured EE link states."""
+        point_local = ee_state_w.new_tensor(self.sponge_attachment_point_local)
+        point_local = point_local.unsqueeze(0).expand(ee_state_w.shape[0], -1)
+        return ee_state_w[:, :3] + math_utils.quat_apply(ee_state_w[:, 3:7], point_local)
 
     def _setup_scene(self):
         super()._setup_scene()
@@ -49,7 +65,7 @@ class WipeWindow(BaseEnv):
         if spec.ee_body_name is None:
             raise ValueError("WipeWindow requires an end-effector body to hold the sponge.")
         frame = spec.end_effector
-        tip_offset = (0.0, 0.0, 0.0) if frame is None else frame.tool_tip_offset_local
+        tip_offset = self.sponge_attachment_point_local
         command_to_link = None if frame is None else frame.command_to_link_quat_wxyz
         link_to_command = (
             (1.0, 0.0, 0.0, 0.0)
@@ -204,6 +220,13 @@ class WipeWindow(BaseEnv):
             env_ids=env_ids,
             grasp_width=self.cfg.sponge_size[1],
         )
+        # Place the tool at the same point as the fixed joint before physics steps.
+        ee_state = self.robot.data.body_link_state_w[env_ids, self.ee_link_idx, :]
+        sponge_state = self.sponge_object.data.root_state_w[env_ids].clone()
+        sponge_state[:, :3] = self.compute_sponge_attachment_pos_w(ee_state)
+        sponge_state[:, 3:7] = self.robot_io.link_to_command_quat(ee_state[:, 3:7])
+        sponge_state[:, 7:] = 0.0
+        self.sponge_object.write_root_state_to_sim(sponge_state, env_ids=env_ids)
 
     def _remove_stains_on_contact(self) -> None:
         """Remove dots when sponge contact conditions are met."""

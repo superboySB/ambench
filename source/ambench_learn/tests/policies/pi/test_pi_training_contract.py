@@ -6,9 +6,11 @@
 
 from __future__ import annotations
 
+import ast
 import dataclasses
 import json
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import pytest
@@ -68,7 +70,7 @@ def fixture_request(tmp_path: Path, **overrides) -> TrainingRequest:
                     "ee_pos": [3],
                     "ee_quat": [4],
                     "gripper_width": [1],
-                    "ee_image": [384, 384, 3],
+                    "ee_image": [3, 384, 384],
                 }.items()
             },
             "ambench": {"openpi_export": {"source_action_semantics": "ee_absolute", "include_base_image": False}},
@@ -212,6 +214,38 @@ def test_wrong_repo_validation_leak_and_stale_stats_are_rejected(tmp_path: Path)
         dataset_proof(request)
     with pytest.raises(ValueError, match="provenance"):
         validate_statistics(request, {**proof, "export_report_sha256": "changed"})
+
+
+def test_dataset_gate_matches_real_exporter_image_metadata(tmp_path: Path) -> None:
+    exporter = Path(__file__).resolve().parents[5] / "scripts/data/export_lerobot_to_openpi.py"
+    tree = ast.parse(exporter.read_text())
+    build_features = next(
+        node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "build_features"
+    )
+    # The exporter uses the newer LeRobot package. Load its actual pure metadata
+    # helper while these contract tests run in OpenPI's pinned older environment.
+    namespace = {"np": np, "Any": Any}
+    exec(compile(ast.Module(body=[build_features], type_ignores=[]), str(exporter), "exec"), namespace)
+    features = namespace["build_features"]({
+        "ee_image": np.zeros((384, 384, 3), dtype=np.uint8),
+        "actions": np.zeros(8, dtype=np.float32),
+        "ee_pos": np.zeros(3, dtype=np.float32),
+        "ee_quat": np.array([1, 0, 0, 0], dtype=np.float32),
+        "gripper_width": np.zeros(1, dtype=np.float32),
+        "task": "press the button",
+    })
+    assert features["ee_image"]["shape"] == (3, 384, 384)
+    assert features["ee_image"]["names"] == ["channel", "height", "width"]
+    request = fixture_request(tmp_path)
+    info_path = Path(request.dataset_home) / request.repo_id / "meta/info.json"
+    info = json.loads(info_path.read_text())
+    info["features"] = features
+    write_json(info_path, info)
+    assert dataset_proof(request)["total_episodes"] == 160
+    info["features"]["ee_image"]["shape"] = [384, 384, 3]
+    write_json(info_path, info)
+    with pytest.raises(ValueError, match="training contract"):
+        dataset_proof(request)
 
 
 def completed_fixture_manifest(

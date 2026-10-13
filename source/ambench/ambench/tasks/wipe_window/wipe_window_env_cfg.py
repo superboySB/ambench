@@ -145,6 +145,7 @@ class WipeWindowEnvDefaultCfg(BaseEnvCfg):
 
     # Sponge
     sponge_size = (0.12, 0.04, 0.08)
+    sponge_attachment_offset_local: tuple[float, float, float] = (0.0, 0.0, 0.0)
     sponge_object_cfg: RigidObjectCfg = RigidObjectCfg(
         prim_path="/World/envs/env_.*/Sponge",
         spawn=sim_utils.CuboidCfg(
@@ -236,6 +237,8 @@ class WipeWindowEnvUAQuadAbsPIDCfg(WipeWindowEnvDefaultCfg):
     """Wipe window environment configuration for UA-Quad robot, absolute action with 4DOF PID controller."""
 
     robot_profile = UA_QUAD_ABS_PID
+    # Extend the sponge beyond the authored fingers in the EE link's local frame.
+    sponge_attachment_offset_local = (0.0, 0.0, -0.06)
 
 
 @configclass

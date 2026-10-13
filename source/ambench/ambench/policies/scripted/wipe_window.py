@@ -70,7 +70,7 @@ class WipeWindowPolicy(BasePolicy):
         # identity command orientation the sponge axes are world-aligned.
         ee_state = ee_pos.new_zeros((1, 13))
         ee_state[:, 3:7] = self.env.robot_io.command_to_link_quat(identity_quat.unsqueeze(0))
-        sponge_offset_w = self.env.robot_io.compute_tool_tip_pos_w(ee_state)[0]
+        sponge_offset_w = self.env.compute_sponge_attachment_pos_w(ee_state)[0]
         sponge_half_thickness = 0.5 * self.env.cfg.sponge_size[0]
 
         visible_dots = self._get_visible_dots(env_id=env_id)

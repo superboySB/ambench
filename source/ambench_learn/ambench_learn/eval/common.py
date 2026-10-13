@@ -177,6 +177,15 @@ def configure_env_cfg(
         env_cfg.enable_wind_effect = True
     if scene_camera_cfg is not None:
         env_cfg.scene_camera_cfg = scene_camera_cfg
+    profile = getattr(env_cfg, "robot_profile", None)
+    camera_configs = (
+        getattr(profile, "ee_camera", None),
+        getattr(profile, "base_camera", None),
+        getattr(env_cfg, "scene_camera_cfg", None),
+    )
+    if hasattr(env_cfg, "num_rerenders_on_reset") and any(camera is not None for camera in camera_configs):
+        # Camera observations must reflect reset scene state before the first policy query.
+        env_cfg.num_rerenders_on_reset = max(1, env_cfg.num_rerenders_on_reset)
     return env_cfg
 
 

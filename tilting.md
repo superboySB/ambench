@@ -2,6 +2,10 @@
 
 本手册面向希望研究“电机轴相对机身主动转动”的空中操作读者，独立于项目 README。当前正式注册的主动倾转平台是 **OmniHexa / `omni_scorpion`**：六个旋翼、六个电机臂倾转关节、三个机械臂关节和一个转动夹爪。常规固定轴四旋翼另见 [uaquad.md](uaquad.md)，容器配置沿用 [note.md](note.md)。
 
+**版本与训练状态（2026-10-15）：** 本页十二任务、双 seed 与一步模型结果属于 **2026-10-09 历史专题**，首轮发布源码为 `aea900e4000cb85d3e8f774108552ea2bb1b6282`；该版本与 `ee291c8` 均匹配已记录的十个训练来源文件。当前充分训练的新成绩只属于 UAQuad PressButton（DP 30/30、ACT 0/30），见[新实验页](https://zipengdai.com/ambench/trained/)与 [usage.md](usage.md#当前正式训练结果2026-10-15)，不能作为 OmniHexa 的专属训练成绩。
+
+OmniHexa 的当前 right-v2 新预检中，seed 41001 按钮任务原生成功（1024 步、约 8.533 秒）。旧 MoviePy 时长舍入使 256 个采样图像只编码成 255 帧，原审计的 256 帧断言失败；原文件和失败记录保留，2026-10-15 新 CPU 审计显式按旧算法完整解码三路原片、逐行核对 canonical/telemetry/pre-reset 物理记录后通过。缺失的尾部采样未补造，成功由末次按钮位移 0.0050001135 m ≥0.004 m 证明。当前视频写入器已修复舍入，30/256 帧真实编码回归通过。复核命令见 [usage.md](usage.md#当前正式训练结果2026-10-15)，来源见[本轮快照](usage_assets/reproduction_20261015.json)。新多任务数据与 ACT/DP/OpenPI 专属充分训练仍未启动；下文旧结果、失败录像与原始训练来源全部保留。
+
 **[在线交互与多视角实验](https://zipengdai.com/ambench/tilting/)** · [离线交互页](usage_assets/tilting/index.html) · [本轮录制配置](usage_assets/tilting/recording_specs.json)
 
 介绍方式借鉴 [ARTEX README](https://github.com/mhtsec/ARTEX/blob/main/README.md) 的架构流程、交互入口和执行证据组织。这里的网页用于解释代码、查看真实试次和操作解析分配演示；运行 Isaac 物理仿真仍使用 Docker。解析滑块没有动力学积分、接触或真实飞控，不能当作额外实验成绩。
@@ -70,6 +74,8 @@ flowchart TB
 | PID6 | 基座位置/四元数/世界线速度/机体角速度与目标 | `[Fx,Fy,Fz,τx,τy,τz]` | 力 N，力矩 Nm；全部在机体坐标系 |
 | 分配器 | 六维 wrench、trim 几何、反扭矩比例、实测倾转角 | 六个推力模长、六个倾转角 | 推力 N；角度 rad；推力不是 ESC PWM 或转速 |
 | RobotIO | 净 wrench、机械臂/夹爪/倾转目标 | 下一步仿真状态 | 合力施加到基体；关节目标另行执行；旋翼旋转画面为视觉动画 |
+
+上述朝向偏移 `O` 在当前 right-v2 源码中满足 `q_link=q_command⊗O`，逆变换为 `q_command=q_link⊗O⁻¹`；Omni 的 `O` 为 Ry(+90°)。canonical 的 `ee_quat` 保持实测 authored EE-link 世界姿态，工具尖端位置另含局部偏移。2026-10-09 历史实现是 `O⊗q_command`，须固定历史源码重放；非单位姿态的旧动作或权重不能仅凭 8D/WXYZ 接口视为当前可复现。版本选择与显式动作迁移公式见 [note.md](note.md#先选择复现版本)。
 
 物理步长 `dt=1/120 s`、环境 `decimation=1`。Omni PID6 与分配每物理步运行；没有 UAQuad PID4 的 40 Hz 位置外环。位置增益 `kp/kd/ki=200/120/80`，姿态增益 `240/130/130`。这些是仿真调度和配置值，不代表远端推理或真机飞控的实测带宽。
 
@@ -220,6 +226,8 @@ ACT/DP 属于模仿学习；π₀/π₀.₅ 为视觉—语言—动作模型。
 
 默认 EE 模型没有显式读取六个倾转角或角速度；DP 默认 base 字段被 `ignore_by_policy` 忽略，ACT EE evaluator 固定选择八维状态。加入机体状态、倾转历史或双相机，需要同步更改训练输入、归一化、checkpoint 元数据和 evaluator，再重新训练验证。不同机型虽然接口维数相同，其相机视角、工具 frame、夹爪单位、可达范围与动力学并不相同。
 
+8D 状态的 `ee_quat` 是 raw link 世界姿态，8D 动作的四元数是任务 command 世界姿态。局部相对适配构造模型输入/目标时应遵循记录的 frame 契约，不能直接把 canonical state 改写成 command 姿态。夹爪 state 仍是 Omni 的角度 rad；与其他机型同名的 `gripper_width` 不自动具有相同物理单位。
+
 源码：[动作语义](source/ambench_learn/ambench_learn/data/action_semantics.py)、[ACT](source/ambench_learn/ambench_learn/policies/act/)、[DP](source/ambench_learn/ambench_learn/policies/dp/)、[OpenPI evaluator](source/ambench_learn/ambench_learn/policies/pi/)、[远端协议](source/ambench_learn/ambench_learn/policies/remote/)。
 
 ### 4.3 强化学习目前只到环境接口
@@ -319,6 +327,8 @@ ssh -p 22 -o BatchMode=yes -o PasswordAuthentication=no \
 柜体最终判定没有 XY 柜顶范围要求，插孔没有独立角度阈值，NDT 是位置保持而非真实探伤测量质量。任务名称不自动提供这些业务验收；分阶段子任务成功也不自动构成最终成功。
 
 ### 6.3 先录制一条完整按钮试次
+
+重放本页历史结果时，先从 `aea900e4000cb85d3e8f774108552ea2bb1b6282` 建立独立 worktree，并固定两端容器的源码挂载、原依赖、checkpoint 与配置；方法见 [note.md](note.md#先选择复现版本)。只固定基础提交 `042e2f2` 会缺少部分 Omni 专题工具；只保留旧 checkpoint 也无法冻结被挂载的当前源码。在当前 right-v2 分支执行下列命令属于新实验，使用新 run/trial ID 并独立统计。
 
 使用新的空输出目录，避免覆盖历史证据。下面的 20 s 是任务仿真时限；外层 timeout 是 15 分钟墙钟上限。
 
@@ -436,6 +446,8 @@ NDT 的全景镜位在第一次 Omni NDT 启动前已按检测高度纠正。旧
 <!-- END TILTING RESULTS -->
 
 ## 7. 模型训练与推理的实验边界
+
+本节是 **2026-10-09 历史一步训练与迁移接口记录**。OmniHexa 的充分训练数据和正式模型尚未完成；UAQuad 的 ACT40k/DP40epoch 结果另见[新训练证据](usage_assets/trained/validation.json)，不移植为本机型成绩。重放这里的模型还须冻结远端服务源码及仿真源码，不能把相同 checkpoint 路径当作完整复现版本。
 
 模型实验必须使用本轮 Omni rollout，不把旧 UAQuad 视频重命名。四组 EE 旧权重与两组 Omni 数据一步权重分别标记训练机型、数据 SHA、优化步数、checkpoint SHA、环境 seed、推理 seed 和服务身份。模型调用成功不代表任务成功。
 

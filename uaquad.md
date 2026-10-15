@@ -2,6 +2,10 @@
 
 面向熟悉 DJI 类常规四旋翼、希望先研究欠驱动空中操作的读者。本手册独立于项目 README；运行环境沿用 [note.md](note.md) 的双 Docker 配置。实验对象是项目的 **UAQuad / `quad_scorpion`**，四个旋翼方向固定，机身需要倾斜才能产生水平加速度，配有四自由度机械臂和双指夹爪。
 
+**2026-10-15 更新：** UAQuad PressButton 已完成充分训练后的独立最终测试：选中 ACT step 40,000 为 **0/30**，选中 DP EMA epoch 16 / 18,592 次更新为 **30/30**；DP 的完整训练链已完成 40 epochs / 46,480 次更新。查看[新训练实验与三视角来源](https://zipengdai.com/ambench/trained/)、[第 7.0 节](#70-充分训练与独立最终测试2026-10-15)及[证据快照](usage_assets/trained/validation.json)；[本地页面](usage_assets/trained/index.html)使用同一份外链媒体，播放仍需网络。
+
+除这次新增的训练结果外，本文的“本轮”、原专家表与一步模型表均指 **2026-10-09 历史专题**，源码冻结为 `042e2f2ec079505ab9a386634c419d9ce564a482`。旧失败和旧录像保留原条件；当前源码修复后重新运行须使用新试次 ID，不覆盖历史记录。冻结 worktree 的方法见 [note.md](note.md#先选择复现版本)。
+
 **[在线交互流程与三视角实验](https://zipengdai.com/ambench/uaquad/)** · [离线交互页](usage_assets/uaquad/index.html) · [录制配置](usage_assets/uaquad/recording_specs.json)
 
 交互页可以逐步查看观察、策略、IK、飞行控制和执行器之间传递的内容，比较不同 seed 的真实录像，并读取真实姿态与推力轨迹。它提供静态流程解释与实验回放；运行 Isaac 仿真使用下文的 Docker 命令。介绍组织借鉴了 [ARTEX README](https://github.com/mhtsec/ARTEX/blob/main/README.md) 的架构图、执行链与交互证据展示方式。
@@ -77,6 +81,8 @@ UAQuad 使用专门的 URDF、PID 转动增益和相机安装配置；LemonHarve
 
 对应实现：[ControlPipeline](source/ambench/ambench/controllers/control_pipeline.py)、[RobotIO](source/ambench/ambench/robots/robot_io.py)、[Pyroki IK](source/ambench/ambench/controllers/pyroki_ik_ctrl.py)、[LemonHarvesting 配置](source/ambench/ambench/tasks/lemon_harvesting/lemon_harvesting_env_cfg.py)。
 
+当前 right-v2 源码将机器人局部偏移 `O=command_to_link_quat_wxyz` 右乘到命令姿态：`q_link=q_command⊗O`，逆变换为 `q_command=q_link⊗O⁻¹`。canonical `ee_quat` 始终表示实测 authored EE-link 世界姿态，工具尖端位置另含局部偏移。历史专题使用左乘 `O⊗q_command`，因此“同为 8D/WXYZ”不等于坐标语义相同；历史重放应使用冻结源码，显式迁移公式见 [note.md 数据流](note.md#5-canonical-lerobot-数据流)。
+
 ## 3. 脚本专家、学习模型与强化学习分别在哪里
 
 ### 3.1 脚本专家：具有任务真值的状态机
@@ -118,6 +124,8 @@ flowchart TB
 ```
 
 Canonical 示例的 `observation.state` 在本轮选择 `ee_pos(3)+ee_quat(4)+gripper_width(1)`，动作是 8 维 `ee_absolute`。相机同时记录 `scene_camera/base_camera/ee_camera`。**数据中保存三个相机，不意味着默认模型会读取三个相机。** 本轮专用数值遥测另外保存机体姿态、四臂关节和控制器输出，不改变 canonical 的 8 维训练契约。
+
+状态中的四元数是 raw link 世界姿态，动作中的四元数是任务 command 姿态。`ee_local_relative` 适配还会把局部状态的平移与旋转归零，保留夹爪及图像/历史等输入；不要为“统一 frame”直接改写已记录的 raw state。飞行姿态与关节虽保存在遥测中，也不因此成为默认模型输入。
 
 | 方法 | 当前 EE 配置的输入 | 模型内部/输出表示 | 执行端 |
 | --- | --- | --- | --- |
@@ -286,6 +294,8 @@ UAQuad 的界限为 `[0,23] N`，FAHexa 使用其自身的 `[0,23] N` 配置界�
 
 ## 6. 完整复现脚本实验
 
+本节重放 2026-10-09 历史专题时，先在独立 worktree 固定 `042e2f2ec079505ab9a386634c419d9ce564a482`，并让仿真容器、远端策略源码挂载均指向该版本。直接在当前 `research` 执行下列命令会得到 right-v2 的新实验；保留新的名称、报告和配置，不能逐项替换下文旧表。
+
 本轮配置包含任务、seed、原生时限、三个相机、视角和扰动开关。`--max_episodes 1` 防止超时后悄悄持续采集直到成功；`--save_failed_episodes` 保留超时证据。
 
 ```bash
@@ -349,6 +359,31 @@ python3 scripts/research/summarize_uaquad_trials.py \
 
 ## 7. UAQuad 的模型推理与训练范围
 
+### 7.0 充分训练与独立最终测试（2026-10-15）
+
+新实验只覆盖 `PressButton-Am-UAQuad-Abs-PID-Direct-v0`。它使用当前 right-v2 命令坐标与 reset 相机重绘，保持原生 20 秒时限和成功阈值。
+
+| 项目 | ACT | Diffusion Policy |
+| --- | --- | --- |
+| 训练初始化 | ImageNet ResNet18 | CLIP ViT-B/16、完整 U-Net `[256,512,1024]` |
+| 完成预算 | 20k 基线恢复 optimizer/RNG 后到 40k 更新 | 40 epochs / 46,480 次更新，EMA |
+| 候选选模 | 8 个 checkpoint × 10 个独立 seeds | 8 个 checkpoint × 10 个独立 seeds |
+| 测试前锁定的候选 | step 40,000 | **epoch 16 / 18,592 次更新的 EMA** |
+| 独立最终测试 | **0/30**，全部超时 | **30/30** |
+| 95% Wilson 区间 | 0–11.35% | 88.65–100% |
+
+| DP 已选 EMA：seed 33001 成功 | ACT 已选 step40k：seed 33001 超时 |
+| --- | --- |
+| [![UAQuad DP 充分训练后独立按钮成功试次](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_dp_sealed_seed33001_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_dp_locked_final_seed33001_ee_camera.mp4) | [![UAQuad ACT 充分训练后独立按钮超时试次](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_act_sealed_seed33001_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_act_rerender1_locked_final_seed33001_ee_camera.mp4) |
+
+[播放页](https://zipengdai.com/ambench/trained/)同时提供基座与全景，另外保留 DP seeds 33015/33030 成功过程；三个视角来自同一 trial。预览压缩采样而非实时播放，完整统计读取全部最终试次，不根据精选画面重新计数；点击 GIF 可查看对应完整原片。
+
+100 条成功专家示范固定 **80 条训练、20 条离线验证**，stats 只读取训练部分；选模 reset seeds 为 **23001–23010**，最后锁定权重后才使用 **33001–33030** 最终 seeds。三组 episode 用途不同，最终集不用于挑 checkpoint。推理在远端 CPU，每条试次重启并以 seed 42 初始化；三相机同步录像只增加观察角度，不增加试次数。完整协议、哈希与全部最终结果见[验证快照](usage_assets/trained/validation.json)，可复制的来源检查与训练入口见 [usage.md](usage.md#当前正式训练结果2026-10-15)。
+
+DP 完成 40 epochs 后按预定规则选中 epoch 16，不能把最终 30/30 归给 epoch 40；ACT 的 optimizer continuation 重新建立 DataLoader，不声称逐位等价于连续 40k。ACT 的离线归一化误差下降与原生任务成功分别报告。这是已观察到的单任务结果，尚不能推出 UAQuad 十二任务已训练完成，也不能推出性能上限。
+
+UAQuad WipeWindow 的 100 条成功示范与 ACT/DP 数据转换已就绪，但正式训练尚未完成。OpenPI 的两任务 MT160/ST80 数据与统计已就绪，正式训练仍未完成。以下 7.1–7.3 节保留 2026-10-09 的迁移及一步训练接口记录；它们不与这张新表合并。
+
 将同样的 8D EE 接口接到 UAQuad 并不自动匹配训练分布。UAQuad 的相机安装、机体倾斜、机械臂和接触动态与 EE 参考模型不同。本轮保留现有一步 checkpoint 的来源，进行形态转移试验；模型结果独立于脚本专家统计。
 
 在另一个终端建立隧道后，先启动 ACT CPU 服务：
@@ -377,7 +412,7 @@ docker exec ambench-sim-research python -m ambench_learn.policies.act.eval \
 
 具体训练入口与 canonical→DP/OpenPI 派生步骤见 [usage.md 的双容器训练与推理说明](usage.md)。训练 UAQuad 专门的策略时必须将数据源换成本轮成功 UAQuad session、创建新的 stats/checkpoint/实验名。超时数据作为失败证据单列，不能混称成功示范；现有 EE checkpoint 不能改名后冒充 UAQuad 训练结果。
 
-### 7.1 一次复现十二条模型试次
+### 7.1 历史接口：一次复现十二条模型试次
 
 [模型配置](usage_assets/uaquad/policy_specs.json) 固定了六组 checkpoint、各两个环境 seed、推理随机种子 42 和训练来源。先结束脚本录制，确认没有 Isaac 子进程，再执行：
 
@@ -390,7 +425,7 @@ python3 scripts/research/record_uaquad_policies.py \
 
 这里 evaluator 的 `Device=cuda:0` 表示 **本地 Isaac 仿真设备**；远端日志单独记录 `REMOTE_INFERENCE_DEVICE=cpu`。两者分别运行在两个容器，不能用 evaluator 的设备字段推断模型占用了 GPU。
 
-### 7.2 UAQuad 自己的数据训练与推理
+### 7.2 历史接口：UAQuad 自己的数据一步训练与推理
 
 本轮成功的 PressButton seed51 canonical 数据包含 1024 个 120 Hz 样本。将新采集的成功 session 按 [数据同步入口](tools/research/sync_dataset.sh) 上传到远端新目录，然后运行实际验证过的 CPU 训练配置：
 

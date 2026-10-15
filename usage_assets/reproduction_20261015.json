@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "updated_date": "2026-10-15",
+  "timezone": "Asia/Shanghai",
+  "status": "CPU_checks_and_Omni_reaudit_completed_matrix_in_progress",
+  "scope": "Current mounted research source; separate from the historical2026-10-07/09 records and the completed trained-policy final tests.",
+  "runtime_source_note": "Simulation image09bb607e was restored from the existing local image, with baked revision02d1499. Current source is mounted separately; no image rebuild is claimed.",
+  "registered_environments": {
+    "count": 106,
+    "families": 12,
+    "robot_labels": [
+      "EE",
+      "FAHexa",
+      "OmniHexa",
+      "UAHexa",
+      "UAQuad"
+    ],
+    "source": {
+      "path": "outputs/research/reproduce-20261015/registry.json",
+      "sha256": "c44dc61fe4467248271c02623bf43741a35fcc0e0cc43a756a9bf8af2769c61b"
+    }
+  },
+  "matrix": {
+    "status": "in_progress",
+    "expected_environments": 106,
+    "seed": 42,
+    "steps_per_environment": 8,
+    "output_directory": "outputs/research/reproduce-20261015/matrix",
+    "full_matrix_pass_claimed": false,
+    "final_report": null
+  },
+  "CPU_test_groups": [
+    {
+      "scope": "ACT and shared policy contracts",
+      "passed": 37,
+      "validation_level": "CPU regression tests",
+      "source": {
+        "path": "outputs/research/reproduce-20261015/act-shared-tests.log",
+        "sha256": "5baf836174b748bea78cc505a0fbaad687fbff5d0f8c06d9f9b961a5960f5213"
+      }
+    },
+    {
+      "scope": "Diffusion Policy contracts and training state",
+      "passed": 22,
+      "validation_level": "CPU regression tests",
+      "source": {
+        "path": "outputs/research/reproduce-20261015/dp-tests-retry.log",
+        "sha256": "a9fce5ceee18aadbb9baab75af07085642f412a39e62610c7140e96e04762770"
+      }
+    },
+    {
+      "scope": "Orientation frame and camera reset contracts",
+      "passed": 40,
+      "validation_level": "CPU regression tests",
+      "source": {
+        "path": "outputs/research/reproduce-20261015/frame-camera-tests.log",
+        "sha256": "035eaae569025034fe22806c78e57f8f618d1cb5451d09b40cbf9b228a4c794b"
+      }
+    },
+    {
+      "scope": "Real MP4 frame count and final sampled image",
+      "passed": 2,
+      "validation_level": "CPU regression tests",
+      "source": {
+        "path": "outputs/research/reproduce-20261015/video-regression-final.log",
+        "sha256": "6556b90dde0fc0e2f9cddb80115d74c4dfa983d6195d7c9bee38a121aec2ce52"
+      }
+    }
+  ],
+  "initial_DP_test_failure": {
+    "reason": "pytest was not installed in the selected DP environment; original failure retained and successful rerun recorded separately.",
+    "source": {
+      "path": "outputs/research/reproduce-20261015/dp-tests.log",
+      "sha256": "cedfa922aac866310c3fae7d098013c25729e36d497dc2051f762ea668228fd4"
+    }
+  },
+  "recording_fix": {
+    "source": {
+      "path": "source/ambench/ambench/recording/video.py",
+      "sha256": "c9d0d122c47e77c651281980e7036beab734a32f6476e15c910055188952178c"
+    },
+    "regression_test": {
+      "path": "source/ambench/tests/recording/test_video.py",
+      "sha256": "e4e9d6781196902bea01508ec1d6c82e9ea070410a4d4ee38e29447f78bd6dd1"
+    },
+    "sample_counts_tested": [
+      30,
+      256
+    ],
+    "fps": 30,
+    "frame_skip": 4,
+    "last_sample_preserved_by_real_encoding": true,
+    "historical_clips_rewritten": false,
+    "cause": "MoviePy summed per-image durations and then floored duration times FPS; floating-point accumulation could omit the final sampled image.",
+    "fix": "Compute duration from the image count and round it upward by one representable float before encoding."
+  },
+  "Omni_preflight": {
+    "status": "passed_fresh_Omni_preflight",
+    "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+    "seed": 41001,
+    "native_successes": 1,
+    "native_attempts": 1,
+    "native_steps": 1024,
+    "simulation_duration_s": 8.533333333333333,
+    "terminal_button_position_m": 0.005000113509595394,
+    "native_success_threshold_m": 0.004,
+    "canonical_rows_verified": 1024,
+    "telemetry_rows_verified": 1024,
+    "pre_reset_physics_rows_verified": 1024,
+    "video_timing": {
+      "mode": "legacy_summed_duration_floor",
+      "sampled_frames": 256,
+      "encoded_frames": 255,
+      "omitted_tail_samples": 1,
+      "frame_skip": 4,
+      "first_canonical_frame": 0,
+      "last_canonical_frame": 1016,
+      "encoded_duration_s": 8.5,
+      "endpoint_RGB_mean_abs_error_limit": 8.0,
+      "sampling": "Pre-step image at raw indices 0,stride,...; terminal state is not an image."
+    },
+    "videos": [
+      {
+        "camera": "scene_camera",
+        "decoded_frames": 255,
+        "sha256": "0c0eace5f811fd5fed912ad56cd915fa1fb600cdd64858c532ec4dc432f3155e"
+      },
+      {
+        "camera": "base_camera",
+        "decoded_frames": 255,
+        "sha256": "2b64b619a811aa0388d5d186cc29aa472aac662bd916edb4d96e147105754d20"
+      },
+      {
+        "camera": "ee_camera",
+        "decoded_frames": 255,
+        "sha256": "6eca7464f6a57924887cc827ff0aa1646494d47f358f2573df7f06460db27182"
+      }
+    ],
+    "source": {
+      "path": "outputs/research/reproduce-20261015/omni41001-audit-formatted.json",
+      "sha256": "4ca89ec94f9e36cb88038d0fc0054be3b359544c6bebed060e71fae972faba62"
+    },
+    "auditor": {
+      "path": "scripts/research/verify_omni_preflight.py",
+      "sha256": "4cc89d68f024e932676188b2b4cd677fe02148dbba8c499874baeaf26871a181"
+    },
+    "original_failure_retained": {
+      "path": "outputs/research/fulltrain-20261013/omni-native-data-recovery-20261014/queue-state.json",
+      "sha256": "e2c49ff10ab81f2a3e3c9b2a6f2f8fb73fa1953b72b27c9caf2aedafd0f78040"
+    },
+    "historical_artifacts_modified": false,
+    "new_Isaac_run": false,
+    "GPU_used_for_reaudit": false,
+    "learned_policy_training_started": false,
+    "claim_limit": "One already-recorded scripted preflight, not a learned-policy or hardware success rate."
+  },
+  "OpenPI_formal_training": {
+    "status": "failed_without_verified_checkpoint_or_optimizer_updates",
+    "container_exit_code": 139,
+    "OOMKilled": false,
+    "OOM_cause_confirmed": false,
+    "source": {
+      "path": "outputs/research/reproduce-20261015/openpi-failure-readonly-audit.json",
+      "sha256": "4d27c7fb0d70779c73bbd67750caaca61fe020fea7d4f5f26e54dd793095368f"
+    }
+  },
+  "remaining": [
+    "Finish and verify the current106-environment matrix before claiming a full pass.",
+    "UAQuad WipeWindow formal ACT/DP training has not started;100 successful demonstrations and CPU data preparation are ready.",
+    "OmniHexa full multitask data collection and dedicated formal training have not started; the single preflight is now audited.",
+    "OpenPI proper MT/ST training remains incomplete; data and normalization readiness do not establish trained weights.",
+    "Public media delivery and browser playback require separate post-upload verification."
+  ]
+}

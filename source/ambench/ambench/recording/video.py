@@ -194,7 +194,12 @@ class _EpisodeVideoWriter:
                     from moviepy.video.io.ImageSequenceClip import ImageSequenceClip
 
                     clip = ImageSequenceClip(frames, fps=self.fps)
-                    clip.write_videofile(str(file_path), logger=None)
+                    # MoviePy sums frame durations, then floors duration * fps.
+                    # Round upward once so floating-point accumulation cannot
+                    # drop the final sampled frame (for example, 256 at 30 Hz).
+                    duration = float(np.nextafter(len(frames) / self.fps, np.inf))
+                    with clip.with_duration(duration) as encoded_clip:
+                        encoded_clip.write_videofile(str(file_path), logger=None)
                 else:
                     logger.error("Unsupported video format: %s", self.output_format)
                     continue

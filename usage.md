@@ -2,6 +2,75 @@
 
 本手册对应 [AM-Bench 公开文档](https://ambench.github.io/docs/) 的任务、机型、控制器、扰动、脚本专家、数据集和 ACT / Diffusion Policy / OpenPI 工作流。Docker 构建、远端策略容器和 SSH 隧道先按 [note.md](note.md) 完成。宿主机命令从仓库根目录执行；标有“容器内”的仿真命令先执行 `docker exec -it ambench-sim-research bash`，在默认的可写 `/workspace/ambench-run` 下运行。这个目录链接到只读源码和可写数据目录，并为 MPC 保留可写的 acados 生成路径；命令中的 `scripts/...` 相对路径保持不变。远端策略容器仍以 `/workspace/ambench` 为工作目录。
 
+## 当前正式训练结果（2026-10-15）
+
+最新已完成的学习实验是 **UAQuad / PressButton / EE absolute / PID**，原生任务 ID 为 `PressButton-Am-UAQuad-Abs-PID-Direct-v0`。下表来自全部最终试次的 `eval_summary.json`；`completed` 与任务成功分别核验。[独立播放页](https://zipengdai.com/ambench/trained/)展示成功与失败的真实过程，[小型证据快照](usage_assets/trained/validation.json)保存协议、来源 SHA-256、选中权重身份和全部 60 条最终结果。仓库内有[本地页面副本](usage_assets/trained/index.html)，视频通过 Release 外链加载，仍需网络。原有 2026-10-07–09 的视频、一步模型与结果表保留历史身份。
+
+| 模型 | 完成的训练预算 | 测试前锁定的权重 | 独立最终测试 | 95% Wilson 区间 |
+| --- | --- | --- | --- | --- |
+| ACT，ImageNet ResNet18 | 20k 基线后续训到 **40,000** 次 AdamW 更新 | step 40,000 | **0/30，0%**；全部原生超时 | 0–11.35% |
+| DP，CLIP ViT-B/16 + 完整 U-Net、EMA | **40 完整 epochs，46,480** 次 AdamW/EMA 更新 | **epoch 16，18,592 次更新**的 EMA | **30/30，100%** | 88.65–100% |
+
+| DP：seed 33001 原生成功 | ACT：同一 reset seed 原生超时 |
+| --- | --- |
+| [![DP 已选 epoch16 EMA 的按钮成功过程](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_dp_sealed_seed33001_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_dp_locked_final_seed33001_ee_camera.mp4) | [![ACT 已选 step40000 的按钮超时过程](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_act_sealed_seed33001_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_act_rerender1_locked_final_seed33001_ee_camera.mp4) |
+
+点击 GIF 打开对应完整原片，或进入[三视角播放页](https://zipengdai.com/ambench/trained/)查看同一次试验的 EE、基座和外部全景；另外包含 DP seeds 33015、33030 的成功过程。GIF 均匀采样原片首尾后压缩播放，画面时间不等于实时仿真速度。它们是代表试次，表中分母仍来自保留的全部 30 条最终测试；新 GIF/MP4 通过 GitHub Release 外链提供，不加入 Git 对象。
+
+DP 的训练链完成 40 epochs；最终评估用的是预先选出的 epoch 16，不是最后一个 epoch 40 checkpoint。ACT 恢复了 step 20k 的模型、AdamW 和随机状态后续训到 40k；DataLoader 重新建立，因此不声称等同于无中断训练的逐位结果。预算达标也不自动证明收敛。这两行只覆盖一个机型、一个任务和下述固定协议，不能推广为论文十二任务成绩、所有飞行器成功率或能力上限。
+
+数据和评估按四个用途隔离：
+
+1. 100 条已验证成功的 UAQuad PressButton canonical 示范固定为 episode **0–79 训练、80–99 离线验证**；归一化只使用训练部分。120 Hz 原始数据按 20 Hz 使用，ACT 分别有 13,555 / 3,448 个逻辑观测。
+2. ACT 的 8 个 5k 间隔候选、DP 的 8 个 epoch 候选，各以 **23001–23010** 十个 reset seeds 做独立应用选模，共 **80 条/模型**。原生成功数优先，离线验证指标用于同分排序；ACT 的归一化 MAE 与 DP 的扩散 loss 均不是厘米或成功率。
+3. 每个模型完成选模并写入不可变 selection lock，才运行 **33001–33030** 三十个最终 seeds；每 seed 只计第一次原生尝试，全部结果保留，最终集不参与选模。
+4. 仿真单环境、原生 20 秒时限、成功阈值不变、扰动关闭、`num_rerenders_on_reset=1`。每条试次录制场景/基座/EE 三相机，但模型只读取其 EE 输入；远端 CPU 推理在每个试次重启并设置 seed 42。
+
+ACT 的有效成绩使用修复 reset 旧图像后的完整重测；此前无重绘的选模记录独立保留，不能合入当前统计。两组模型共享最终 reset seeds，每个模型仍有独立应用与选模锁。成功率分母是 episode 数，三个视角不会增加样本数。
+
+原始证据位于忽略目录 `outputs/research/fulltrain-20261013/`：ACT 为 `act-corrected-evaluation-plan/queue-state.json`、`act-corrected-deployment/act-selection-lock.json` 和 `act-corrected-sealed30-final/results.json`；DP 为 `dp-native-evaluation-plan/native-completion.json`、`dp-native-evaluation-plan/dp-selection-lock.json` 和 `dp-native-sealed30/results.json`。快照记录这些来源及逐 episode 摘要哈希，可在原机器从仓库根目录检查：
+
+```bash
+python3 - <<'PY'
+import hashlib
+import json
+from pathlib import Path
+
+snapshot = json.loads(Path('usage_assets/trained/validation.json').read_text())
+for source in snapshot['sources']:
+    path = Path(source['path'])
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == source['sha256'], path
+for model in snapshot['models']:
+    print(model['family'], model['final_successes'], '/', model['final_cases'])
+PY
+```
+
+新训练入口分别为 [ACT](tools/research/train_act_full.sh) 与 [DP](tools/research/train_dp_full.sh)，都要求已准备好的 100-episode 数据与新的输出目录。脚本顶部记录容器、训练预算和资源设置；ACT 默认执行论文的 20k 基线，40k 是另行验证的 optimizer continuation，不能把默认命令写成已执行 40k。DP 可先只解析完整配置，不开始训练：
+
+```bash
+bash tools/research/train_dp_full.sh --check \
+  /data/datasets/uaquad_pressbutton_fulltrain_v1.zarr.zip \
+  /data/checkpoints/uaquad_pressbutton_dp_repeat01
+```
+
+这条命令要求现有 `ambench-policy-training` 容器与数据挂载；首次部署仍先执行 `note.md`。训练和评估都应冻结源码、数据、stats、依赖与实际权重，历史源码选择见 [note.md 的版本表](note.md#先选择复现版本)。只下载仓库不会包含原始数据、完整录像或模型权重。
+
+**尚未完成的扩展：** UAQuad WipeWindow 已有 100 条成功示范、80/20 数据转换与统计，正式 ACT/DP 训练尚未完成；OpenPI 已有 PressButton+WipeWindow 的 MT160 / ST80 数据及独立统计，正式训练尝试以 exit 139 结束，`OOMKilled=false`，尚无已验收的更新数或 checkpoint，未确证失败原因。OmniHexa seed 41001 按钮任务原生成功；原视频审计失败记录保留，2026-10-15 新 CPU 审计已通过，专属多任务数据与充分训练仍未完成。这些扩展与下文已完成的历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
+
+**2026-10-15 复测与录像修复。** ACT/shared、DP、坐标/相机、录像的四组 CPU 回归分别通过 **37、22、40、2** 项，日志及来源哈希见[本轮复测快照](usage_assets/reproduction_20261015.json)。Omni 原片按每 4 个仿真步采样一次，1024 步得到 256 个采样图像；旧 MoviePy 逐帧累加时长再向下取整，实际 MP4 只有 255 帧，原审计要求 256 帧因此失败。新审计显式选择旧编码算法，完整解码三路原片，并逐行核对 1024 条 canonical/telemetry/pre-reset 物理记录；末次按钮位移为 0.0050001135 m，超过原生 0.004 m 阈值。旧文件仍缺一个尾部采样，未补造或重写，任务成功由 pre-reset 数值证明。当前写入器修正时长舍入，真实 30 帧/256 帧的 CPU 编码回归均保留最后一个采样图像。
+
+在保存原始 session 的机器上，用新的输出路径重复 CPU 审计；该命令不启动 Isaac，也不重新录制，`--legacy-moviepy-timing` 只用于旧编码片段：
+
+```bash
+docker exec -e CUDA_VISIBLE_DEVICES=-1 -e JAX_PLATFORMS=cpu \
+  ambench-sim-research python scripts/research/verify_omni_preflight.py \
+  --session outputs/research/fulltrain-20261013/datasets/omni_fresh_preflights_framev2_v1/press_button-preflight-seed41001/PressButtonOmniHexaAbsPID/demo-20261014_184528 \
+  --physics outputs/research/fulltrain-20261013/omni-fulltrain-data-queue/physics-gen02/press_button-preflight-seed41001 \
+  --task-id PressButton-Am-OmniHexa-Abs-PID-Direct-v0 --seed 41001 \
+  --legacy-moviepy-timing \
+  --output outputs/research/omni41001-audit-repeat01.json
+```
+
 **常规固定旋翼四旋翼加机械臂：** 请看新增独立手册 [uaquad.md](uaquad.md) 和 [UAQuad 交互专题](https://zipengdai.com/ambench/uaquad/)。2026-10-09 的专门实验按独立试次统计，不混入本页的历史结果。
 
 **主动电机倾转六旋翼：** 请看独立手册 [tilting.md](tilting.md) 和 [OmniHexa 交互专题](https://zipengdai.com/ambench/tilting/)。本轮重新录制全部十二任务及模型试次；倾转分配目标和实际关节轨迹分别展示。
@@ -165,6 +234,8 @@ python scripts/research/extract_scene_frames.py \
 ### 2.2 观察、动作、奖励与成功率
 
 所有任务返回 Gymnasium 五元组 `obs, reward, terminated, truncated, info`。`obs["policy"]` 含末端位姿/速度、基座位姿/速度、夹爪宽度，物理机型还含机械臂关节状态；任务再添加目标与物体状态。四元数采用 WXYZ；位置相对各环境 origin。EE 绝对动作为位置 3 + 四元数 4 + 夹爪 1，共 8 维；BaseJoint 为基座位置 3 + 四元数 4 + 机械臂关节 4 + 夹爪 1，共 12 维。
+
+当前 right-v2 姿态动作满足 `q_link=q_command⊗O`，`O` 为机器人 `command_to_link_quat_wxyz`；canonical `ee_quat` 保持实际 authored EE-link 的世界姿态，不能将 state 与 action 的四元数因为同为 WXYZ 就视为同一 frame。工具尖端位置与 raw link 原点也应分别解释。历史实现为 `O⊗q_command`，旧实验须固定历史源码；保持原物理目标的显式动作迁移公式及注意事项见 [note.md](note.md#5-canonical-lerobot-数据流)。
 
 当前任务 reward 为零。最终成功由 `terminated` 表示，时间上限由 `truncated` 表示。有命名子任务的场景在 `info["success_criteria"]` 中返回布尔状态；评估器记录每项是否曾达到。要比较模型，使用相同任务 ID、配置、seed、动作语义、策略频率、相机、扰动和 episode 上限。
 
@@ -359,6 +430,8 @@ python scripts/data/record_demos_scripted.py \
 多任务导出使用 `--task_prompt_map scripts/data/am_bench_language_instructions.json --require_task_prompt_map`，把各任务的 canonical session 一起传入。若已在本地仿真容器导出，也可用 `tools/research/sync_openpi_export.sh` 将 v2.1 repo 上传到远端相同布局；同步脚本拒绝覆盖已有目录。数据、配置和评估命令见下一节。
 
 ## 5. ACT、Diffusion Policy 与 OpenPI 的双容器闭环
+
+本节保留 **2026-10-07 一步训练接口基线**的可执行配方与原始结果；充分训练和独立最终测试见页首[当前正式训练结果](#当前正式训练结果2026-10-15)。重放本节旧结果先按 `note.md` 固定历史源码；在当前 right-v2 源码执行这些配方属于新实验，应使用新 run ID。
 
 远端策略 Docker 持有 checkpoint 和高层模型；本地 Isaac Docker 采集相机与状态、运行低层控制并保存评估。先按 [note.md](note.md) 部署两个镜像并建立 SSH 隧道。2026-10-07 重建使用新采集的 seed 42 PressButton canonical 数据；本节的训练各为 **1 步接口验证**，EE 使用 20 秒时限并允许成功提前结束，BaseJoint 评估 0.5 秒。此前 2026-09-30 的 OpenPI 两步训练和旧目录属于历史记录。
 
@@ -657,7 +730,26 @@ EE 20 秒评估与 BaseJoint 0.5 秒评估分别记录。任务成功以环境�
 
 ### 6.1 从真实实验重新导出 GIF 与视频
 
-本页预览来自 2026-10-07 的基线和 2026-10-08 的补录。先完成第 6.2 节的真实运行，再按[导出配置](usage_assets/animation_specs.json)生成 GIF 和全彩 MP4。导出器使用现有仿真 Docker 中的 Pillow、OpenCV、PyArrow 与 PyAV，CPU 运行，不启动 Isaac Sim；源为 MP4 或 canonical Parquet 的相机图像。每项配置指定源报告、单个 episode、最终结果字段，以及 seed、相机、试次等条件；它不补造中间帧，也不将多个 episode 拼接成一次运行。
+本节保留 2026-10-07 基线、2026-10-08 补录及后续历史专题的预览导出流程；页首新训练视频使用[独立来源清单](usage_assets/trained/manifest.json)，生成视频保持 Git 未跟踪并通过外部媒体链接播放。先完成第 6.2 节的真实运行，再按[导出配置](usage_assets/animation_specs.json)生成 GIF 和全彩 MP4。导出器使用现有仿真 Docker 中的 Pillow、OpenCV、PyArrow 与 PyAV，CPU 运行，不启动 Isaac Sim；源为 MP4 或 canonical Parquet 的相机图像。每项配置指定源报告、单个 episode、最终结果字段，以及 seed、相机、试次等条件；它不补造中间帧，也不将多个 episode 拼接成一次运行。
+
+**新训练预览。** 已有本轮原始结果与录像时，在宿主机执行下面两条命令；第一条在现有仿真容器内仅做 CPU 导出，第二条生成纯 HTML/JSON 与忽略目录中的上传计划，不上传或启动仿真。重复导出用新的空目录：
+
+```bash
+docker exec ambench-sim-research python scripts/research/export_usage_animations.py \
+  --specs-json usage_assets/trained/animation_specs.json \
+  --source-root /workspace/ambench \
+  --output-dir outputs/research/trained-previews-repeat01 \
+  --width 480 --duration-s 10 --fps 10 --final-hold-s 1 \
+  --max-bytes 460800 --write-mp4
+python3 scripts/research/build_trained_preview_gallery.py \
+  --preview-dir outputs/research/trained-previews-repeat01 \
+  --release-tag research-media-20261015-uaquad-pressbutton \
+  --upload-plan outputs/research/trained-previews-repeat01/upload-plan.json
+```
+
+新清单保留 ACT/DP 各 80 条选模和 30 条最终试次，共 **220 条试次、660 段原片**；另有固定 seed 索引选择的四条试次、每条三视角，共 **12 个短预览**。新视频存储在 Release 附件，Git 只保存页面、配置和小型 JSON；代表预览不替代完整统计。重新导出原片不等于在当前源码重新完成了原仿真实验。
+
+**历史预览重编码。** 以下保留已跟踪历史 GIF/MP4 的原导出与覆盖命令，用于维护旧展示；新实验使用上面的外链流程，不将新生成视频加入 Git。
 
 从仓库根目录在**宿主机**执行；输出目录必须为空，重复导出请更改目录名：
 
@@ -800,6 +892,8 @@ python3 tools/research/publish_video_pages.py --publish
 2026-10-08 已在上述 HTTPS 地址完成全量验收：**54/54 段首末帧可解码**，原生播放/暂停/真实时间轴拖动/倍速/互斥播放、23 个实验组的分类和结果筛选、seed/相机搜索、深链接自动展开、1280 像素桌面和 390 像素手机布局均通过，页面及媒体加载错误为 0。另逐一下载全部 **113 个发布文件**核对大小与 SHA-256，54 MP4/54 GIF 的 MIME 正确，MP4 Range 返回 206 且内容匹配；整站 **34,312,592 字节**。验收绑定播放器、清单和媒体的精确哈希，见[多视角验收快照](usage_assets/multiview_validation_snapshot.json)的 `online_browser_validation` 与 `online_asset_delivery`。首轮缺 favicon 的 404 和一段视频网络中断的失败报告均保留；补齐 favicon、核验文件并重新执行全量验收后通过。GitHub 的媒体 CI 也已通过，持续检查 100 MB 文件上限及普通 Git 预览。
 
 ## 7. 本分支验证记录
+
+以下表格是 **2026-10-07–08 历史验收**，没有把当时一步训练升级成充分训练。2026-10-15 新增的 ACT/DP 原生最终测试与当前未完项见页首[当前结果](#当前正式训练结果2026-10-15)及[独立证据快照](usage_assets/trained/validation.json)。
 
 本节以 2026-10-07 删除旧研究镜像、重新构建后的结果为主要证据。下面的矩阵、脚本采集和模型训练统一 seed 42；公共 `zero_agent.py` / teleop 连续 smoke 保留默认 seed 未设置，单独注明。2026-10-08 本地双镜像再次构建到干净源码 `85d5957`，无仓库挂载、无 GPU、无网络的 12 项检查通过，包含默认录制配置；此轮未重新部署远端镜像，详情见[多视角验收快照](usage_assets/multiview_validation_snapshot.json)的 `local_docker_refresh`。2026-10-08 新 seed / 新视角 / CPU 推理记录按第 6.2 节和在线清单独立解释；表内基线成绩对应原始验收报告。此前 2026-09-30 及未固定 seed 的报告保留为历史，不参与本次合并。在**本地主机的仓库根目录**从原始报告生成[验证快照](usage_assets/validation_snapshot.json)：
 

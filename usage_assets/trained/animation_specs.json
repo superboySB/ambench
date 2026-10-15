@@ -1,0 +1,614 @@
+[
+  {
+    "name": "uaquad_dp_sealed_seed33001_ee_camera",
+    "title": "DP | seed 33001 | ee",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/videos/dp-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33001",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 7.941666666666666,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33001_scene_camera",
+    "title": "DP | seed 33001 | scene",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/videos/dp-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33001",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 7.941666666666666,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33001_base_camera",
+    "title": "DP | seed 33001 | base",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/videos/dp-eval-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33001",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 7.941666666666666,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33015_ee_camera",
+    "title": "DP | seed 33015 | ee",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/videos/dp-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33015",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 9.466666666666667,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33015_scene_camera",
+    "title": "DP | seed 33015 | scene",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/videos/dp-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33015",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 9.466666666666667,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33015_base_camera",
+    "title": "DP | seed 33015 | base",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/videos/dp-eval-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33015",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 9.466666666666667,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33030_ee_camera",
+    "title": "DP | seed 33030 | ee",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/videos/dp-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33030",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 9.283333333333333,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33030_scene_camera",
+    "title": "DP | seed 33030 | scene",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/videos/dp-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33030",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 9.283333333333333,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_sealed_seed33030_base_camera",
+    "title": "DP | seed 33030 | base",
+    "source_report": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/videos/dp-eval-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_sealed",
+      "category": "models",
+      "trial_id": "uaquad_dp_locked_final_seed33030",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 9.283333333333333,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_act_sealed_seed33001_ee_camera",
+    "title": "ACT | seed 33001 | ee",
+    "source_report": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/videos/act-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_act_sealed",
+      "category": "models",
+      "trial_id": "uaquad_act_rerender1_locked_final_seed33001",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 19.991666666666667,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 40000,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_act_sealed_seed33001_scene_camera",
+    "title": "ACT | seed 33001 | scene",
+    "source_report": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/videos/act-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_act_sealed",
+      "category": "models",
+      "trial_id": "uaquad_act_rerender1_locked_final_seed33001",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 19.991666666666667,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 40000,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_act_sealed_seed33001_base_camera",
+    "title": "ACT | seed 33001 | base",
+    "source_report": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/eval_summary.json",
+    "source_video": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/videos/act-eval-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Representative preview chosen by fixed seed index, preserving the complete recorded episode endpoints. Scores use all 30 sealed first attempts; three views count once. All raw recordings and new previews stay out of Git.",
+    "metadata": {
+      "experiment_id": "uaquad_act_sealed",
+      "category": "models",
+      "trial_id": "uaquad_act_rerender1_locked_final_seed33001",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-14",
+      "source_time_basis": "MP4 presentation timestamps; simulation duration separately records executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 19.991666666666667,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 40000,
+      "geometry_randomized": true,
+      "attempt_selection": "fixed first/middle/last seed indices for DP; first seed for ACT; all final outcomes retained in summary"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  }
+]

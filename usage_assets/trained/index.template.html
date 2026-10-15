@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AM-Bench · UAQuad 完整训练录像</title>
+    <style>
+      :root{font-family:system-ui,sans-serif;color:#192f42;background:#f4f7fa}*{box-sizing:border-box}body{margin:0}main{max-width:1300px;margin:auto;padding:28px 18px}h1{font-size:1.8rem}h2{font-size:1.1rem}p{line-height:1.65}a{color:#14589a;overflow-wrap:anywhere}article,.panel{background:#fff;border:1px solid #d4dfe8;border-radius:9px;padding:18px;margin:18px 0}.scores,.views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.scores{grid-template-columns:repeat(2,minmax(0,1fr))}.score{background:#eaf3f9;border-radius:7px;padding:15px}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}button,select,input{font:inherit;padding:8px;border:1px solid #9fb2c4;border-radius:5px;background:white}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}input[type=range]{flex:1;min-width:140px}label{display:flex;align-items:center;gap:6px}figure{margin:0;min-width:0}video{width:100%;display:block;aspect-ratio:1;object-fit:contain;background:#182b3c}figcaption{padding:8px 0;font-size:.9rem}.success{color:#176a36}.timeout{color:#984215}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem}details{margin-top:12px}.error{color:#b42020}:focus-visible{outline:3px solid #c78900;outline-offset:3px}@media(max-width:750px){.views,.scores{grid-template-columns:1fr}video{max-height:380px}main{padding:18px 12px}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>UAQuad · 按钮任务 · 完整训练录像</h1>
+      <p>ACT 与 Diffusion Policy 在同一 UAQuad 按钮任务的独立首次闭环测试。每个模型保留全部 80 条权重选择试次和 30 条最终测试；同一试次的三台相机只计一次。结果依据原生评估报告，视频用于观察动作过程。</p>
+      <section class="panel">
+        <div id="scores" class="scores"></div>
+        <p>ACT 完成 40,000 次训练更新，选中第 40,000 次权重。DP 完成 40 个 epoch，选中第 16 个 epoch 的 EMA 权重（18,592 次更新）。两套权重均在最终 30 个 seed 开始前锁定。推理 seed 为 42，推理使用 CPU；Isaac 仿真使用 GPU。相机在 reset 后重新渲染一次。</p>
+        <p>12 段短预览来自固定代表试次：DP seed 33001、33015、33030，以及 ACT seed 33001，每次三视角。预览均覆盖原录像首尾，均匀采样并压缩到约 10 秒；预览时间与实际仿真时间分别记录。完整录像保留在下方每条记录。原始 MP4 已核对来源哈希及首尾解码，短预览另经完整解码；这些检查不等于逐帧人工标注。</p>
+        <p>当前结果限于这一任务、机型与协议。训练预算完成、独立仿真成功率和真实机器人能力分别判断。原始视频及短预览由公开 Release 附件提供，Git 仅保存网页与来源清单。</p>
+        <p><a href="manifest.json">下载全部 220 次试验与 660 段原录像来源清单</a> · <a href="validation.json">训练预算、数据划分与锁定权重证据</a> · <a href="https://github.com/superboySB/ambench/blob/research/usage.md">返回复现手册</a> · <a href="../">历史实验总览</a></p>
+      </section>
+      <nav class="controls" aria-label="录像筛选">
+        <label>模型<select id="family"><option value="all">全部</option><option value="dp">DP</option><option value="act">ACT</option></select></label>
+        <label>阶段<select id="phase"><option value="sealed">独立最终测试</option><option value="selection">权重选择</option><option value="all">全部</option></select></label>
+        <label>结果<select id="outcome"><option value="all">全部</option><option value="success">成功</option><option value="timeout">超时</option></select></label>
+        <label>seed / 更新次数<input id="search" type="search" placeholder="例如 33015 或 18592" /></label>
+        <button id="pause-all" type="button">暂停全部</button>
+      </nav>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div id="gallery"></div>
+      <nav class="controls" aria-label="分页"><button id="previous" type="button">上一页</button><span id="page"></span><button id="next" type="button">下一页</button></nav>
+    </main>
+    <script>
+      "use strict";
+      const data = /* VERIFIED_RECORDINGS */ null;
+      const byId = id => document.getElementById(id);
+      const labels = {scene_camera:"外部场景",base_camera:"机载视角",ee_camera:"末端视角"};
+      const node = (tag,value,style) => {const item=document.createElement(tag);item.textContent=value;if(style)item.className=style;return item;};
+      const percent = value => `${(100*value).toFixed(1)}%`;
+      const pauseAll = () => document.querySelectorAll("video").forEach(video=>video.pause());
+      for (const family of ["dp","act"]) {const score=data.scores[family],item=node("div","","score");item.append(node("strong",`${family.toUpperCase()} · 独立最终成功 ${score.successes}/${score.attempts}`),node("p",`${percent(score.successes/score.attempts)} · Wilson 95% 区间 ${score.wilson95.map(percent).join(" – ")}`));byId("scores").append(item);}
+      const previews = new Map(data.previews.map(row=>[`${row.trial_id}/${row.camera}`,row]));
+      let pageNumber = 0;
+      function makeCase(row) {
+        const article=node("article","");article.id=row.id;
+        article.append(node("h2",`${row.family.toUpperCase()} · seed ${row.seed} · ${row.outcome==="success"?"成功":"超时"}`,row.outcome),node("p",`${row.phase==="sealed"?"独立最终测试":"权重选择试次"} · 权重更新 ${row.candidate_updates.toLocaleString()}${row.candidate_epochs?` / epoch ${row.candidate_epochs}`:""} · ${row.steps} 仿真步 / ${row.simulation_duration_s.toFixed(2)} 秒`));
+        const controls=node("div","","controls"),load=node("button","加载完整三视角"),sample=node("button","加载短预览"),play=node("button","同步播放"),pause=node("button","暂停"),slider=document.createElement("input"),timer=node("span","未加载"),error=node("p","","error"),grid=node("div","","views");
+        slider.type="range";slider.min="0";slider.max="1";slider.step="0.01";slider.value="0";slider.disabled=true;slider.setAttribute("aria-label",`${row.id} 三视角录像时间`);play.disabled=true;sample.hidden=!previews.has(`${row.id}/scene_camera`);
+        controls.append(load,sample,play,pause,slider,timer);article.append(controls,error,grid);
+        const local=[];
+        for (const view of row.views) {const figure=node("figure",""),video=document.createElement("video"),caption=node("figcaption","");video.controls=true;video.muted=true;video.playsInline=true;video.preload="none";video.dataset.camera=view.camera;const link=node("a",`${labels[view.camera]} · 下载完整 MP4`);link.href=view.url;caption.append(link);const preview=previews.get(`${row.id}/${view.camera}`);if(preview){caption.append(node("br",""));const gif=node("a","查看 GIF 预览");gif.href=preview.gif_url;caption.append(gif);}figure.append(video,caption);grid.append(figure);local.push(video);video.addEventListener("error",()=>{error.textContent=`${labels[view.camera]} 加载失败，可使用下载链接查看录像。`;});video.addEventListener("play",()=>document.querySelectorAll("video").forEach(other=>{if(!local.includes(other))other.pause();}));}
+        async function loadViews(short) {
+          pauseAll();load.disabled=sample.disabled=true;play.disabled=slider.disabled=true;error.textContent="";timer.textContent="加载中…";
+          const results=await Promise.allSettled(local.map((video,index)=>new Promise((resolve,reject)=>{const deadline=setTimeout(()=>reject(new Error("媒体加载超时")),60000);video.addEventListener("loadedmetadata",()=>{clearTimeout(deadline);resolve();},{once:true});video.addEventListener("error",()=>{clearTimeout(deadline);reject(new Error("公开附件加载失败"));},{once:true});video.src=short?previews.get(`${row.id}/${row.views[index].camera}`).mp4_url:row.views[index].url;video.load();})));
+          load.disabled=sample.disabled=false;const failed=results.find(result=>result.status==="rejected");if(failed){error.textContent=String(failed.reason);return;}slider.max=String(Math.min(...local.map(video=>video.duration)));slider.value="0";slider.disabled=play.disabled=false;timer.textContent=`0.00 / ${Number(slider.max).toFixed(2)} s${short?" · 采样预览":" · 完整录像"}`;
+        }
+        load.addEventListener("click",()=>loadViews(false));sample.addEventListener("click",()=>loadViews(true));pause.addEventListener("click",()=>local.forEach(video=>video.pause()));
+        play.addEventListener("click",async()=>{pauseAll();const time=local[0].currentTime;local.forEach(video=>{if(Math.abs(video.currentTime-time)>.02)video.currentTime=time;});const results=await Promise.allSettled(local.map(video=>video.play()));if(results.some(result=>result.status==="rejected")){local.forEach(video=>video.pause());error.textContent="播放失败，可使用各视角原生控件或下载链接。";}});
+        slider.addEventListener("input",()=>local.forEach(video=>{video.currentTime=Number(slider.value);}));local[0].addEventListener("timeupdate",()=>{slider.value=String(local[0].currentTime);timer.textContent=`${local[0].currentTime.toFixed(2)} / ${Number(slider.max).toFixed(2)} s`;if(!local[0].paused)local.slice(1).forEach(video=>{if(!video.seeking&&Math.abs(video.currentTime-local[0].currentTime)>.15)video.currentTime=local[0].currentTime;});});
+        const details=node("details","");details.append(node("summary","试次条件与来源 SHA-256"),node("pre",JSON.stringify(row,null,2)));article.append(details);return article;
+      }
+      function render(reset=false) {
+        pauseAll();if(reset)pageNumber=0;const query=byId("search").value.trim().toLowerCase();
+        const rows=data.cases.filter(row=>(byId("family").value==="all"||row.family===byId("family").value)&&(byId("phase").value==="all"||row.phase===byId("phase").value)&&(byId("outcome").value==="all"||row.outcome===byId("outcome").value)&&(!query||`${row.id} ${row.seed} ${row.candidate_updates}`.toLowerCase().includes(query))).sort((a,b)=>(a.family==="dp"?0:1)-(b.family==="dp"?0:1)||a.seed-b.seed);
+        const pages=Math.max(1,Math.ceil(rows.length/6));pageNumber=Math.min(pageNumber,pages-1);byId("gallery").replaceChildren(...rows.slice(pageNumber*6,(pageNumber+1)*6).map(makeCase));byId("status").textContent=`筛选 ${rows.length} 次试验；全部保留 220 次试验、660 段原录像。最终成功分母固定为每模型 30 次，不随筛选变化。`;byId("page").textContent=`${pageNumber+1} / ${pages}`;byId("previous").disabled=pageNumber===0;byId("next").disabled=pageNumber>=pages-1;
+      }
+      function openCaseFromHash() {
+        let identifier;try{identifier=decodeURIComponent(location.hash.slice(1));}catch{return;}
+        const target=data.cases.find(row=>row.id===identifier);if(!target)return;
+        byId("family").value=target.family;byId("phase").value=target.phase;byId("outcome").value="all";byId("search").value=target.id;render(true);byId(target.id)?.scrollIntoView({block:"start"});
+      }
+      for(const id of ["family","phase","outcome"])byId(id).addEventListener("change",()=>render(true));byId("search").addEventListener("input",()=>render(true));byId("pause-all").addEventListener("click",pauseAll);byId("previous").addEventListener("click",()=>{pageNumber--;render();});byId("next").addEventListener("click",()=>{pageNumber++;render();});window.addEventListener("hashchange",openCaseFromHash);render();openCaseFromHash();
+    </script>
+  </body>
+</html>

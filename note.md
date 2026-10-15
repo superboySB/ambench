@@ -2,7 +2,30 @@
 
 这份手册在 `research` 分支使用 Isaac Lab 2.3.2 / Isaac Sim 5.1.0，把仿真、机器人控制与脚本专家放在本地仿真容器，把 ACT、Diffusion Policy 和 OpenPI 的模型推理放在独立策略容器。默认部署策略容器到 `tencent-86`，本地和远端均只通过 Docker 安装项目依赖。[usage.md](usage.md) 给出功能清单、逐项命令和验证记录；[在线实验视频总览](https://zipengdai.com/ambench/)支持直接播放、暂停、拖动、调速，并按任务、飞机和模型查看 seed 与视角对照。成功、超时和场景烟测逐段标明。网络不可用时，下载或克隆仓库后用浏览器打开[离线播放页](usage_assets/playback.html)，同时保留其 `animations/` 目录。重新录制、导出和发布步骤见 usage.md 第 6.1–6.3 节。
 
-命令中的 `rebuild-20261007` 是本次验收的运行名。当前机器已有对应示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
+命令中的 `rebuild-20261007` 是 **2026-10-07 历史验收**的运行名，对应一步训练与接口闭环。当前充分训练结果另见 [usage.md 的当前结果](usage.md#当前正式训练结果2026-10-15)：UAQuad PressButton 的 ACT 完成 40,000 次更新，独立最终测试 0/30；DP 完成 40 epochs / 46,480 次更新，选中 epoch 16 / 18,592 次更新的 EMA 权重，独立最终测试 30/30。[新实验播放页](https://zipengdai.com/ambench/trained/)和[证据快照](usage_assets/trained/validation.json)与旧录像分别保存；仓库内有[本地页面副本](usage_assets/trained/index.html)，新视频使用外链，播放时仍需网络。
+
+当前机器已有历史示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
+
+### 先选择复现版本
+
+`research` 会继续变化，Compose 挂载和远端同步会使用当前 checkout；旧 checkpoint 路径和旧镜像标签不能单独固定运行源码。重放历史实验时，从下表指定提交建立独立 worktree，并在该 worktree 中使用相应手册、子模块、镜像依赖和保存的配置。不要切换正在被训练或评估容器挂载的 checkout。
+
+| 记录 | 固定源码 | 范围 |
+| --- | --- | --- |
+| 2026-10-07 通用接口基线 | `02d14993b717509d0dad940d4695689aad70f9a3` | 106-ID 矩阵、EE/BaseJoint 一步模型 |
+| 2026-10-09 UAQuad 专题 | `042e2f2ec079505ab9a386634c419d9ce564a482` | 历史专家、迁移与一步模型 |
+| 2026-10-09 OmniHexa 专题 | `aea900e4000cb85d3e8f774108552ea2bb1b6282` | 历史主动倾转专题；来源文件哈希另见 training provenance |
+| 2026-10-13–15 充分训练 | [逐模型快照](usage_assets/trained/validation.json) | right-v2 动作坐标、reset 相机重绘、独立选模和最终测试 |
+
+例如，以下命令只准备历史源码，不启动或替换当前容器：
+
+```bash
+git worktree add --detach ../ambench-replay-20261007 02d14993b717509d0dad940d4695689aad70f9a3
+cd ../ambench-replay-20261007
+git submodule update --init --recursive ext/pyroki ext/acados ext/openpi
+```
+
+随后按这个 worktree 内的 `note.md` 构建和启动；历史容器与当前容器使用不同名称、输出目录和源码挂载。重编码已有录像只需原始文件与导出配置；重新运行 Isaac 还需要匹配源码、权重、归一化、seed 和 `env_cfg.yaml`，不承诺视频字节逐一相同。
 
 > 本分支的容器流程是研究验证路径。主分支 README 所述的原生安装仍是项目目前的维护路径。
 
@@ -167,6 +190,8 @@ bash tools/research/start_policy.sh pi \
 
 三个示例都要求先按 `usage.md` 第 5 节生成训练 checkpoint 和对应数据统计；再次复现时统一改用新的运行名和空输出目录。运行 π₀ 时将 OpenPI 命令中的两处 `pi05` 替换为 `pi0`。
 
+这些 `rebuild-20261007` 服务示例保留历史一步模型身份。当前 ACT/DP 的已选权重与完整训练预算分别记录在 [usage.md 当前结果](usage.md#当前正式训练结果2026-10-15)，不要把本节旧路径当作新训练模型。
+
 启动后在本地宿主机等待服务加载完 checkpoint；把 `act` 替换为实际选择的 `dp` 或 `pi`：
 
 ```bash
@@ -192,6 +217,8 @@ DP 和 OpenPI 使用各自原有 checkpoint，按 usage.md 第 6.2 节的 CPU �
 ## 5. Canonical LeRobot 数据流
 
 唯一源数据格式是记录器写出的 LeRobot 0.4.4 数据集，位于 `<session>/lerobot`，包含 `observation.state`、`action`、`task`、相机图像，以及 `meta/info.json` 的 `ambench.action_semantics` 和有序 `state_keys`。EE 绝对动作 8 维；当前四关节 BaseJoint 动作 12 维；四元数顺序 WXYZ。
+
+当前 right-v2 契约区分 **命令姿态**与**实测 link 姿态**。令机器人配置偏移为 `O=command_to_link_quat_wxyz`，则 `q_link=q_command⊗O`，逆变换为 `q_command=q_link⊗O⁻¹`；canonical `ee_quat` 仍是实际 authored EE-link 的世界姿态。工具尖端位置也不同于 raw link 原点。历史实现使用 `O⊗q_command`；非单位姿态动作不可直接混用。若显式迁移旧动作，保持原物理目标需要 `q_command_new=O⊗q_command_old⊗O⁻¹`，同时记录版本；仅说明 WXYZ 或 8D 不足以确定坐标语义。
 
 ```text
 本地 Isaac 容器：脚本专家 / teleop → canonical LeRobot

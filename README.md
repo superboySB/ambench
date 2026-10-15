@@ -48,6 +48,16 @@ The [online experiment video gallery](https://zipengdai.com/ambench/) groups rea
 by task, aircraft and policy, with recorded seeds, camera views and success or timeout
 outcomes. An [offline copy](usage_assets/playback.html) is included with the same previews.
 
+For the 2026-10-15 research update, see [trained-policy results](https://zipengdai.com/ambench/trained/)
+and [the current reproduction guide](usage.md#当前正式训练结果2026-10-15).
+On UAQuad PressButton, the selected DP EMA checkpoint reached **30/30** native successes;
+the selected ACT checkpoint reached **0/30**. Both used separate training, validation,
+checkpoint-selection and final-test splits. DP completed 40 training epochs, then selected
+epoch 16; ACT completed 40,000 optimizer updates. These are results for one aircraft and
+one task. Earlier one-step model demonstrations remain documented as historical interface
+checks; [the evidence snapshot](usage_assets/trained/validation.json) records the source reports.
+The [local gallery page](usage_assets/trained/index.html) uses the same external video links.
+
 Once Isaac Sim and Isaac Lab are installed:
 
 ```bash

@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "study_id": "extensions-20261015",
+  "unit_id": "uaquad_wipewindow_act__WipeWindow",
+  "status": "native_anonymous_assets_and_local_actual_browser_passed_public_Pages_and_Markdown_pending",
+  "snapshot_at_UTC": "2026-10-15T11:38:19.684544+00:00",
+  "whole18_training_objective_complete": false,
+  "complete_training_runs_in18": 1,
+  "complete_native_units_in22": 1,
+  "result": {
+    "actual_training_updates": 40000,
+    "selection_trials": 80,
+    "sealed_final_trials": 30,
+    "sealed_final_successes": 0,
+    "native_final_timeouts": 30,
+    "native_final_steps_each": 2399,
+    "stains_cleared_each_final": 0,
+    "selected_candidate_id": "act_step040000",
+    "selected_actual_updates": 40000,
+    "selected_model_sha256": "93509c8f5a563c7a3c8bf88d17181f55972506789fc039631587758858cb29c6",
+    "wilson95_fraction": [
+      0,
+      0.11351339317396876
+    ]
+  },
+  "source": {
+    "frozen_learning_and_UA_sim_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+    "frozen_learning_manifest_sha256": "3f546f2f29c86925b6062ff3d27afc49b623986ccebf2b3168f49f60ec2e4410",
+    "original_UA_predeclaration_sha256": "efdda7ccbc81ad3b02e9209659477c750b11474d78d7398ee300cc020ce77849",
+    "selection_lock_sha256": "97f3416a291ac2d2d65e646f4b562f55e52b62ccd92c9e957e797d541d395d0c",
+    "candidate_inventory_sha256": "71848898d428bd3fc82835b599fad08903345ba01932f3c4f47e3b625325fa7b",
+    "completed_state_sha256": "053bf30daad3e7d8abdf525e136be9eddfdcb6260a81dcfd32c686e53465751b"
+  },
+  "independent_native_audit": {
+    "receipt": {
+      "path": "outputs/research/extensions-20261015/act-media/transfer-attempt01/files/native-eval/uaquad-wipe-act-independent-completion-audit-v2.json",
+      "sha256": "daec5363eeb66f89a04e40b7cdfc13599ba3d4bc3b759f48d64d117318eea107"
+    },
+    "scope": "Independent JSON/journal/ranking/seed/provenance and all raw file SHA checks; full CPU frame decode receipts were produced by each actual native case, not rerun here.",
+    "original_v1_first_valid_attempt_counted_once": true,
+    "source_model7files_all8candidates_rehashed": true,
+    "full20heldout_ranking_and_lock_verified": true,
+    "all110_pre_reset_journals_and_fresh_service_identity_verified": true,
+    "model_forward_warmup_calls": 0,
+    "inference_seed": 42,
+    "inference_device": "cuda:0"
+  },
+  "media_validation": {
+    "original_raw_videos": 330,
+    "producer_full_CPU_decoded_frames": 198000,
+    "producer_decode_receipts_verified_for_all110_cases": true,
+    "root_independent_repeat_raw_clips": 9,
+    "root_independent_repeat_raw_frames": 5400,
+    "root_viewed_source_images": 27,
+    "root_raw_visual_review": {
+      "path": "outputs/research/extensions-20261015/act-media/root-final-visual-review.json",
+      "sha256": "97dc551ce762b76bfa796521aa6117311d4a718731c993be77106596c3f6cc35"
+    },
+    "preview_files_independently_fully_CPU_decoded": 18,
+    "preview_decode_receipt": {
+      "path": "outputs/research/extensions-20261015/act-media/public-preview-decode-receipt.json",
+      "sha256": "316acbbadd6c1f1efd4b7203c181556db46f8a66065fc9959460706760e48dfe"
+    },
+    "last_source_image_native_step": 2396,
+    "terminal_physics_native_step": 2399,
+    "no_successful_final_clip_exists": true,
+    "preview_selection": "Fixed first/middle/last final seeds53001,53015,53030; all9 GIFs explicitly TIMEOUT; previews do not change denominator"
+  },
+  "public_asset_checks": {
+    "status": "passed_all353_anonymous_complete_downloads_and_exact_archive_member_SHAs",
+    "anonymous_asset_count": 353,
+    "complete_bytes": 465220547,
+    "all353_complete_file_SHAs_verified": true,
+    "evidence_archive_members_verified": 921,
+    "inference_package_original_members_verified": 7,
+    "normalizer_canonical_identity_verified": true,
+    "authentication_used": false,
+    "content_types_observed": [
+      "application/octet-stream"
+    ],
+    "media_MIME_match_claimed": false,
+    "transient_network_retry_count": 1,
+    "receipt": {
+      "path": "outputs/research/extensions-20261015/act-media/public-download-attempt01/receipt.json",
+      "sha256": "b64776b194718d55096368965bdc4cbf875b822dbd89d6d2b2809c51dc310a72"
+    },
+    "release_upload_receipt": {
+      "path": "outputs/research/extensions-20261015/act-media/release-upload-receipt.json",
+      "sha256": "b31ef0deffd3e419ee5349c95df3fb55cff8b0d2072adbbe5f677866f23bb74d"
+    },
+    "release_url": "https://github.com/superboySB/ambench/releases/tag/research-media-20261015-uaquad-wipe-act"
+  },
+  "actual_browser_checks": {
+    "status": "local_passed_public_delivery_pending",
+    "local": {
+      "schema_version": 1,
+      "status": "passed_local_gallery_with_anonymous_public_Release_raw_videos_actual_CPU_Chrome",
+      "scope": "Source local HTTP ACT gallery; published GitHub Release raw MP4 URLs unchanged; public Pages and GitHub Markdown still pending independently.",
+      "receipt_sha256": "b048633ee6b7e9347e8ee8f09ec466ddf40bcf3b892561165660965dfa3a6ecb",
+      "exact_owned_cleanup_receipt_sha256": "a9b252d804120ca0c1b53a7773b0429459a39d38c69766719de5f29518de033c",
+      "executed_helper_files_sha256": {
+        "run_cpu_browser.py": "4291ce455167274bc63ebac97e7dcb72a840b62b4d9571bf205f875715a20528",
+        "check_act_browser.py": "952da8dee6a3860847d3b0e670537f88868b82e069bbdcd99acb50478be1c4c3"
+      },
+      "preserved_strict_attempt01_receipt_sha256": "af2f653c4e9227c998dda16f3a3c2e513bc03fa7faa8a159d656dd4f732ddb7e",
+      "actual_detached_media_diagnostic_sha256": "9911bab5cfc370e55e098c315fb75229ed2002dacde5889cc8f9adededc92480",
+      "browser_version": "143.0.7499.169",
+      "HTML_sha256": "42e150509c7b7328c1b12e11645783136d2806be703738b726667b88ee182ba9",
+      "manifest_sha256": "549a087ca3110cfb5494db648f36defc0dcaeb276512cd6cc99b21bd0ba38513",
+      "manifest_trials": 110,
+      "manifest_raw_videos": 330,
+      "actual_played_trials": 5,
+      "actual_played_raw_videos": 15,
+      "trials": [
+        {
+          "phase": "sealed_final",
+          "candidate_id": "act_step040000",
+          "seed": 53001,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "label": "原生超时 · 2399 步 / 19.992 仿真秒 · 0/4 污点",
+          "three_view_drift_seconds": 2.1000000000048757e-05,
+          "half_speed_play_pause_mid_and_near_end_seek_verified": true,
+          "screenshot": {
+            "name": "sealed_final-act_step040000-seed53001-final.png",
+            "sha256": "92a8435f0eddb6d4324a10e288e13eee292e608152c452fd3e5eb3caa40be488"
+          }
+        },
+        {
+          "phase": "sealed_final",
+          "candidate_id": "act_step040000",
+          "seed": 53015,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "label": "原生超时 · 2399 步 / 19.992 仿真秒 · 0/4 污点",
+          "three_view_drift_seconds": 0.0005710000000000992,
+          "half_speed_play_pause_mid_and_near_end_seek_verified": true,
+          "screenshot": {
+            "name": "sealed_final-act_step040000-seed53015-final.png",
+            "sha256": "c125100af8f77ce1b162a281560d2a884a3698952fec2022c861da0930f0c236"
+          }
+        },
+        {
+          "phase": "sealed_final",
+          "candidate_id": "act_step040000",
+          "seed": 53030,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "label": "原生超时 · 2399 步 / 19.992 仿真秒 · 0/4 污点",
+          "three_view_drift_seconds": 0.00046800000000002395,
+          "half_speed_play_pause_mid_and_near_end_seek_verified": true,
+          "screenshot": {
+            "name": "sealed_final-act_step040000-seed53030-final.png",
+            "sha256": "6963f031604b0d57e6427f36c1b5b7435d974be597a621901a4968650aed2b4f"
+          }
+        },
+        {
+          "phase": "selection",
+          "candidate_id": "act_step005000",
+          "seed": 43001,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "label": "原生超时 · 2399 步 / 19.992 仿真秒 · 0/4 污点",
+          "three_view_drift_seconds": 2.5000000000052758e-05,
+          "half_speed_play_pause_mid_and_near_end_seek_verified": true,
+          "screenshot": {
+            "name": "selection-act_step005000-seed43001-final.png",
+            "sha256": "ba0fef6e6952b91c16de30a0f9d1b2c8e4148a2d589306d957f59ee015b9c438"
+          }
+        },
+        {
+          "phase": "selection",
+          "candidate_id": "act_step030000",
+          "seed": 43005,
+          "native_success": false,
+          "native_stains_cleared": 1,
+          "label": "原生超时 · 2399 步 / 19.992 仿真秒 · 1/4 污点",
+          "three_view_drift_seconds": 2.2999999999995246e-05,
+          "half_speed_play_pause_mid_and_near_end_seek_verified": true,
+          "screenshot": {
+            "name": "selection-act_step030000-seed43005-final.png",
+            "sha256": "24052c151f82d35c31dd4eccd9edb9a7e59dbf320638bcf6ea94f14835b0c406"
+          }
+        }
+      ],
+      "phase_candidate_seed_filter_and_unload_checks": 5,
+      "only_three_DOM_videos_after_every_switch": true,
+      "old_videos_pause_src_removed_readyState0_networkState0or3": true,
+      "no_old_play_progress_or_new_old_URL_requests_after_confirmed_unload": true,
+      "Chrome_detached_currentSrc_may_retain_history": true,
+      "actual_success_label_not_assigned_to_one_of_four_progress": true,
+      "download_HTTP_status_counts": {
+        "206": 57
+      },
+      "actual_download_Content_Type_counts": {
+        "application/octet-stream": 57
+      },
+      "video_mp4_Content_Type_claimed": false,
+      "actual_Chrome_H264_play_independently_verified": true,
+      "mobile_390px": {
+        "viewport": 390,
+        "document": 390,
+        "body": 390,
+        "videoElements": 3
+      },
+      "JavaScript_errors": [],
+      "source_HTML_and_manifest_unchanged": true,
+      "GPU_access": false,
+      "actual_container_Runtime": "runc",
+      "actual_container_DeviceRequests": null,
+      "own_container_exactly_stopped": true,
+      "own_HTTP_server_closed": true,
+      "cleanup_errors": [],
+      "screenshots_actually_viewed": [
+        "sealed_final-act_step040000-seed53015-final.png",
+        "selection-act_step030000-seed43005-final.png",
+        "mobile-390px.png"
+      ],
+      "visual_observation": "Near-end scene views show the robot beside the window frame; base and EE end views face a plain wall. Labels visibly retain timeout and0/4 or1/4. Mobile stacks all three views without horizontal overflow. These are actual retained failure videos, without fabricated success.",
+      "screenshot_boundary": "Desktop captures follow99% seek (about19.8s of20s), not the native terminal step2399 or an exact last-frame extraction. Root independently audited original last frames separately.",
+      "all330_videos_redecoded_by_this_browser": false
+    },
+    "public_Pages": null,
+    "GitHub_Markdown_GIF": null
+  },
+  "claim_limits": [
+    "Only1of18 formal training runs and1of22 native evaluation units completed in this extension",
+    "The original producer decodedall330 originals; independent root repeated9 representative originals, notall330",
+    "Three camera streams represent one native episode; denominator remains30",
+    "Training budget completion does not establish convergence or success on other tasks/robots",
+    "No additional hardware/RL/real-flight verification is claimed"
+  ]
+}

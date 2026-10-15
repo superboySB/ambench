@@ -4,7 +4,7 @@
 
 ## 当前正式训练结果（2026-10-15）
 
-最新已完成的学习实验是 **UAQuad / PressButton / EE absolute / PID**，原生任务 ID 为 `PressButton-Am-UAQuad-Abs-PID-Direct-v0`。下表来自全部最终试次的 `eval_summary.json`；`completed` 与任务成功分别核验。[独立播放页](https://zipengdai.com/ambench/trained/)展示成功与失败的真实过程，[小型证据快照](usage_assets/trained/validation.json)保存协议、来源 SHA-256、选中权重身份和全部 60 条最终结果。仓库内有[本地页面副本](usage_assets/trained/index.html)，视频通过 Release 外链加载，仍需网络。原有 2026-10-07–09 的视频、一步模型与结果表保留历史身份。
+已完成的基础学习实验为 **UAQuad / PressButton / EE absolute / PID**，原生任务 ID 为 `PressButton-Am-UAQuad-Abs-PID-Direct-v0`。下表来自全部最终试次的 `eval_summary.json`；`completed` 与任务成功分别核验。[独立播放页](https://zipengdai.com/ambench/trained/)展示成功与失败的真实过程，[小型证据快照](usage_assets/trained/validation.json)保存协议、来源 SHA-256、选中权重身份和全部 60 条最终结果。仓库内有[本地页面副本](usage_assets/trained/index.html)，视频通过 Release 外链加载，仍需网络。追加扩展已完成 UAQuad WipeWindow ACT，结果见下文；原有 2026-10-07–09 的一步模型与视频保留历史身份。
 
 这里的 `EE absolute` 指环境和规范数据集的世界坐标动作接口；表中原 ACT 策略学习的是 `ee_local_relative`，后处理还原世界坐标动作后再交给控制器。各模型的动作表示与归一化身份见[模型清单](usage_assets/trained/models.json)。
 
@@ -61,9 +61,17 @@ bash tools/research/train_dp_full.sh --check \
 
 **2026-10-15 追加长训练阶段：** 用户已授权全部 **18 次正式训练**：UAQuad WipeWindow ACT/DP 2 次、OmniHexa 两任务 ACT/DP 4 次，以及 UAQuad / OmniHexa 各 6 次 OpenPI。完整预算、80/20 数据划分、4 组隔离种子和选模规则见[公开预声明](usage_assets/extensions_20261015_plan.json)；22 个模型任务评估单元各需选模锁及 30 次独立最终测试。当前进展以真实状态与验收记录为准，不能把已启动写成已完成。
 
-UAQuad WipeWindow 已有 100 条成功示范与 80/20 数据准备；ACT 已完成 40,000 次真实更新，8 个候选的完整留出集验证通过，正在做原生闭环选模。DP 仍在执行完整 40 epoch（按实际采样器为 88,360 次更新）；最终封存成绩均尚未产生。UAQuad OpenPI 的 MT160 / ST80 数据与独立统计已准备；旧 exit 139、`OOMKilled=false` 的原记录保留，不能据此认定 OOM。独立环境修复后的新单卡 72 GB full-model / batch 32 探测出现显式分配 OOM，停在首个更新前；GPU 0/3 双卡 FSDP2 已通过完整模型真实更新并启动 UAQuad 多任务正式长训，保留完整模型、global batch 32 和 40k 预算；其后单任务阶段仍须容量门控与实际训练验收。OmniHexa seed 41001 原生成功与新 CPU 审计通过的证据保留，专属 200 条成功示范和充分训练仍待完成。这些扩展与下文历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
+**已完成扩展：UAQuad WipeWindow ACT。** 从 100 条成功示范中固定 80/20 划分，完成 **40,000 次真实更新、8 个候选的完整留出集验证、80 次原生选模和 30 次封存最终测试**。8 个候选选模均为 0/10，按预声明的完整留出集 MAE 锁定 step 40,000；最终 **0/30，全部在原生第 2399 步超时且未清除污点**，95% Wilson 区间为 0–11.35%。这批没有成功录像；固定首、中、末 seeds 的失败过程和全部 330 段原片见[三视角播放器](https://zipengdai.com/ambench/extensions/act.html)、[媒体与选中权重清单](usage_assets/extensions/act_manifest.json)及[验证记录](usage_assets/extensions/act_validation.json)。
 
-**Omni Wipe 采集前修订：** 原 `9ab28b0` fixture 的 seed 52001 原生失败，只清除 2/4 污点；夹爪 collider 与海绵重叠。仅加长安装点的 gen02 在 52011 仍失败，另确认工具位置计算遗漏 authored USD scale。经批准，gen03 包含两个显式记录 SHA 的文件变更：Omni 专属 authored EE 局部安装偏移 `(0, 0, 0.15)`（乘 USD scale 前），以及依据实际 USD scale 的通用工具坐标计算；固定关节仍使用 authored 局部坐标，原生 20 秒、4 污点、1.25 N / 80 mm 条件保持原定义。新示范及 ACT/DP/OpenPI 的 Omni Wipe 评估统一绑定 gen03，详见[预声明修订](usage_assets/extensions_20261015_plan.json)的 `fixture_amendments`。52021/52022 仅为采集前新预检，排除在训练、选模和最终测试之外；旧 UAQuad 物理版本及原始/gen02 失败证据保留。gen03 的两条独立脚本专家预检现已通过，完整示范采集及学习策略训练/最终测试继续执行中。
+[![UAQuad 擦窗 ACT，最终 seed53001 原生超时，未清除污点](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53001_ee_camera.gif)](https://zipengdai.com/ambench/extensions/act.html)
+
+**仍在执行：** UAQuad WipeWindow DP 的完整 40 epochs 目标为 **88,360 次更新**；UAQuad OpenPI 双卡 FSDP2 正式多任务训练已实际保存首个名义 5000 checkpoint，其存储更新和两个 Optax 计数均为 **5001**，尚未完成 40k。MT160 / ST80 数据及各自训练统计已准备，后续单任务阶段使用完整 MT 最终权重，不以这个早期保存点代替母本。旧 exit 139 和后续单卡 full-batch 显式 OOM 分别保留，双卡方案保持完整模型与 global batch 32。
+
+**OmniHexa 数据已完成：** PressButton 与 WipeWindow 各 100 条成功 canonical 示范通过官方校验，分别为 **99,907 / 194,806 原始帧**；每任务固定 80/20，失败采集尝试另留。四组 ACT/DP 的实际 CPU 准备发现统计类型与源码挂载问题，独立修复版本正在验证；OpenPI 专属导出与统计继续执行，尚无这批学习策略的最终成绩。详细训练表、种子、预算和复现步骤集中于[扩展手册](extensions.md)，截至此快照仅完成 **18 次训练中的 1 次、22 个评估单元中的 1 个**。
+
+SpaceMouse/gamepad、人工成功示范、RL、实机飞行和 real2sim2real 全流程仍没有完成证据；这些硬件与额外研究项目不计入本轮 18 次训练。
+
+**Omni Wipe 采集前修订：** 原 `9ab28b0` fixture 的 seed 52001 原生失败，只清除 2/4 污点；夹爪 collider 与海绵重叠。仅加长安装点的 gen02 在 52011 仍失败，另确认工具位置计算遗漏 authored USD scale。经批准，gen03 包含两个显式记录 SHA 的文件变更：Omni 专属 authored EE 局部安装偏移 `(0, 0, 0.15)`（乘 USD scale 前），以及依据实际 USD scale 的通用工具坐标计算；固定关节仍使用 authored 局部坐标，原生 20 秒、4 污点、1.25 N / 80 mm 条件保持原定义。新示范及 ACT/DP/OpenPI 的 Omni Wipe 评估统一绑定 gen03，详见[预声明修订](usage_assets/extensions_20261015_plan.json)的 `fixture_amendments`。52021/52022 仅为采集前新预检，排除在训练、选模和最终测试之外；旧 UAQuad 物理版本及原始/gen02 失败证据保留。gen03 的成功示范采集现已完成；学习策略的完整训练和最终测试仍未完成。另以修复后的运行源码真实复测全部八种 Wipe 配置，均完成 reset / 8 步 smoke 并清理 GPU；[逐配置快照](usage_assets/extensions/stock8_validation.json)明确区分烟测与完整任务成功。
 
 ### Omni 擦窗夹具修复：独立成功预检
 

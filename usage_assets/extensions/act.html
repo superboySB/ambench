@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AM-Bench · UAQuad WipeWindow ACT 完整评估</title>
+    <style>
+      :root{font-family:system-ui,sans-serif;color:#193146;background:#f4f7fa}
+      *{box-sizing:border-box}body{margin:0}main{max-width:1280px;margin:auto;padding:24px 18px}
+      h1{font-size:1.7rem}h2{font-size:1.2rem}p{line-height:1.65}a{color:#14589a}
+      article,.panel{background:white;border:1px solid #d4dfe8;border-radius:9px;padding:18px;margin:18px 0}
+      .views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+      figure{margin:0;min-width:0}video{width:100%;height:300px;object-fit:contain;background:#182b3c}
+      figcaption{padding:8px 0}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+      button,select,input{font:inherit}button,select{padding:7px;border:1px solid #9fb2c4;border-radius:5px;background:white}
+      button{cursor:pointer}input[type=range]{flex:1;min-width:120px}.timeout{color:#934123}
+      pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}:focus-visible{outline:3px solid #c78900}
+      table{border-collapse:collapse;width:100%}th,td{padding:8px;border-bottom:1px solid #d4dfe8;text-align:left}
+      @media(max-width:750px){.views{grid-template-columns:1fr}video{height:280px}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>UAQuad · WipeWindow · ACT</h1>
+      <p><a href="./">全部长训练扩展</a> ·
+        <a href="https://github.com/superboySB/ambench/blob/research/extensions.md">协议与复现</a> ·
+        <a href="act_manifest.json">全部 110 次试验与 330 段原片清单</a> ·
+        <a href="act_validation.json">验证记录</a></p>
+      <div class="panel">
+        <p><strong>完整训练 40,000 次更新；最终测试 0/30。</strong>80 次选模均超时，按预声明的完整留出集 MAE 锁定 step 40,000，之后运行 30 个封存 seeds。最终全部在原生第 2399 步超时，未清除污点；95% Wilson 区间为 0–11.35%。</p>
+        <p>每个 seed 对应一次真实尝试，三视角属于同一试次。模型只读取 EE 输入。原片 30 FPS，每 4 个原生步采一帧；末图为第 2396 步，终态成绩取第 2399 步、自动重置前的物理状态。选模的一次试验清除了 1 个污点，仍未达到全部 4 个污点的成功条件。</p>
+        <p>先选择阶段和 seed，再同步播放三路原片。仅加载当前选中的试次；GIF 预览只提供最终首、中、末 seeds，标注 TIMEOUT 表示整次试验超时。</p>
+        <div class="controls" id="selectors">
+          <label>阶段 <select id="phase"><option value="sealed_final">封存最终测试（30 次）</option><option value="selection">选模（8 × 10 次）</option></select></label>
+          <label id="candidate-label" hidden>候选 <select id="candidate"></select></label>
+          <label>seed <select id="seed"></select></label>
+        </div>
+        <p id="load-status" role="status">正在加载试次清单……</p>
+      </div>
+      <div id="trial"></div>
+      <details class="panel">
+        <summary>完整候选排序与离线验证</summary>
+        <p>8 个候选各 0/10；归一化 MAE 用于同分排序，不代表厘米或成功率。最终测试未参与排序。</p>
+        <table><thead><tr><th>实际更新</th><th>选模成功数</th><th>完整留出集 MAE</th></tr></thead><tbody id="candidates"></tbody></table>
+        <p id="evidence-links"></p>
+      </details>
+      <noscript>请通过原片清单或复现文档打开视频。交互播放器需要 JavaScript。</noscript>
+    </main>
+    <script>
+      const node = (tag, text, className) => {
+        const item = document.createElement(tag);
+        if (text !== undefined) item.textContent = text;
+        if (className) item.className = className;
+        return item;
+      };
+      const link = (text, url) => {const item=node("a", text);item.href=url;return item;};
+      const phase = document.querySelector("#phase"), candidate = document.querySelector("#candidate");
+      const seed = document.querySelector("#seed"), status = document.querySelector("#load-status");
+      const target = document.querySelector("#trial");
+      let data;
+
+      function renderTrial(trial) {
+        for (const video of target.querySelectorAll("video")) {
+          video.pause();video.removeAttribute("src");video.load();
+        }
+        target.replaceChildren();
+        const article=node("article");article.id=`seed${trial.seed}`;
+        article.append(node("h2", `${trial.phase === "sealed_final" ? "封存最终测试" : "选模"} · ${trial.candidate_id} · seed ${trial.seed}`),
+          node("p", `原生超时 · ${trial.native_steps} 步 / ${(trial.native_steps/120).toFixed(3)} 仿真秒 · ${trial.native_stains_cleared}/4 污点`, "timeout"));
+        const controls=node("div", undefined, "controls");
+        const play=node("button", "同步播放三视角");play.type="button";
+        const pause=node("button", "暂停");pause.type="button";
+        const speed=node("select");speed.setAttribute("aria-label", "播放倍速");
+        for (const value of [.25,.5,1,2]) {
+          const option=node("option", `${value}×`);option.value=value;option.selected=value===1;speed.append(option);
+        }
+        const seek=node("input");seek.type="range";seek.min=0;seek.max=1;seek.step=.001;seek.value=0;
+        seek.setAttribute("aria-label", "三视角同步进度");
+        const state=node("span", "等待原片加载");state.setAttribute("role", "status");
+        controls.append(play,pause,speed,seek,state);article.append(controls);
+        const views=node("div", undefined, "views"), videos=[];
+        for (const row of trial.videos) {
+          const figure=node("figure"), video=node("video");
+          video.controls=true;video.preload="metadata";video.playsInline=true;video.src=row.raw_mp4.url;
+          video.setAttribute("aria-label", `seed ${trial.seed} ${row.camera} 原始录像`);
+          const caption=node("figcaption");
+          caption.append(node("strong", row.camera),node("p", `${row.frames} 帧 · ${row.fps} FPS · 最后采样步 ${row.last_sample_step}`),
+            link("原始 MP4", row.raw_mp4.url));
+          if (row.gif) caption.append(document.createTextNode(" · "),link("GIF 预览", row.gif.url),
+            document.createTextNode(" · "),link("短片预览", row.preview_mp4.url));
+          figure.append(video,caption);views.append(figure);videos.push(video);
+          video.addEventListener("loadedmetadata", () => {state.textContent="原片已加载，可同步播放";});
+          video.addEventListener("error", () => {state.textContent="录像加载失败，请打开原始 MP4 链接";});
+        }
+        const ready = () => videos.every(video => Number.isFinite(video.duration) && video.duration>0);
+        const duration = () => Math.min(...videos.map(video => video.duration));
+        play.addEventListener("click", async () => {
+          try {
+            const time=videos[0].currentTime;
+            for (const video of videos) {video.currentTime=time;video.playbackRate=Number(speed.value);}
+            await Promise.all(videos.map(video => video.play()));state.textContent="三视角同步播放中";
+          } catch (_) {
+            for (const video of videos) video.pause();
+            state.textContent="同步播放未完成，请先分别加载三段原片";
+          }
+        });
+        pause.addEventListener("click", () => {for (const video of videos) video.pause();state.textContent="已暂停";});
+        speed.addEventListener("change", () => {for (const video of videos) video.playbackRate=Number(speed.value);});
+        seek.addEventListener("input", () => {if(ready()) for(const video of videos) video.currentTime=Number(seek.value)*duration();});
+        videos[0].addEventListener("timeupdate", () => {if(ready()) seek.value=videos[0].currentTime/duration();});
+        article.append(views);
+        const details=node("details"), summary=node("summary", "本次来源与原生结果");
+        details.append(summary,node("pre", JSON.stringify(trial,null,2)));article.append(details);
+        target.append(article);
+      }
+
+      function updateSeeds() {
+        seed.replaceChildren();
+        const rows=data.trials.filter(row => row.phase===phase.value &&
+          (phase.value==="sealed_final" || row.candidate_id===candidate.value));
+        rows.sort((a,b)=>a.seed-b.seed);
+        for (const row of rows) {
+          const option=node("option", `${row.seed} · ${row.native_stains_cleared}/4 · 超时`);option.value=row.seed;seed.append(option);
+        }
+        renderTrial(rows[0]);
+      }
+      phase.addEventListener("change", () => {
+        document.querySelector("#candidate-label").hidden=phase.value!=="selection";updateSeeds();
+      });
+      candidate.addEventListener("change", updateSeeds);
+      seed.addEventListener("change", () => renderTrial(data.trials.find(row => row.phase===phase.value &&
+        row.seed===Number(seed.value) && (phase.value==="sealed_final" || row.candidate_id===candidate.value))));
+      fetch("act_manifest.json").then(response => {
+        if (!response.ok) throw new Error(`清单 HTTP ${response.status}`);
+        return response.json();
+      }).then(manifest => {
+        data=manifest;
+        for (const row of [...data.candidates].sort((a,b)=>a.actual_optimizer_updates-b.actual_optimizer_updates)) {
+          const option=node("option", row.candidate_id);option.value=row.candidate_id;candidate.append(option);
+        }
+        for (const row of data.candidates) {
+          const tr=node("tr");tr.append(node("td", String(row.actual_optimizer_updates)),
+            node("td", `${row.selection_successes}/10`),node("td", row.whole_heldout_normalized_MAE.toFixed(8)));
+          document.querySelector("#candidates").append(tr);
+        }
+        document.querySelector("#evidence-links").append(link("全部原始证据与原生日志", data.evidence_archive.url),
+          document.createTextNode(" · "),link("证据文件 SHA 索引", data.evidence_index.url));
+        updateSeeds();status.textContent="已核算 80 次选模与 30 次最终测试；最终 0/30。";
+      }).catch(error => {status.textContent=`无法加载清单：${error.message}。请通过上方清单链接查看原片；本地副本需要用 HTTP 服务打开。`;});
+    </script>
+  </body>
+</html>

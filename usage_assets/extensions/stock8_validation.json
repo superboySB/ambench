@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "study_id": "extensions-20261015",
+  "validation_id": "wipe-current-runtime-smoke-v2",
+  "status": "passed_all_eight_stock_Wipe_construction_reset_eightstep_smoke_and_HOST_cleanup",
+  "observed_at_UTC": "2026-10-15T11:18:31.854450+00:00",
+  "source": {
+    "base_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+    "two_runtime_overlay_commit": "e95ebf1c2048e18ea341cb05524bf3c74189e7ad",
+    "full_sim_source_files": 394,
+    "full_sim_source_manifest_sha256": "08cd3b75da798670ad631d08a6830f252536b21b7f84656644964175f050e395",
+    "runtime_overlays_sha256": {
+      "source/ambench/ambench/tasks/wipe_window/wipe_window_env.py": "85cab3e30efb759c476c8c24d465eeddb49672e34d93d999fafe1d68d2f22121",
+      "source/ambench/ambench/tasks/wipe_window/wipe_window_env_cfg.py": "10751cc359c7cfce26c28eeeb7bb3ab068167b74a2098930229bba0e1b9d8889"
+    },
+    "plan_sha256": "fe3eb17cca6439723c00d8d7c1bf99accf2570e7dfa04f59e218f76d795b406f",
+    "launcher_sha256": "cb2066c087f55ef0f5983d400abb8ca89d0890339bb0cb3988cc4658e1a51a36",
+    "unchanged_HOST_resource_helper_sha256": "0c4c5e9b5d6c2c8a1aac891aba5a08b5086222f24e8a155329b7741dde0fc4aa",
+    "image_id": "sha256:54242d7be49f873e8f1dccaf25094b73a4f6980a16a5fbc000aa05f717a76a2c",
+    "whole_document_HEAD_byte_equivalence_claimed": false,
+    "native_training_variant_allowed_tasks_unchanged": true
+  },
+  "root_activation_sha256": "04c33021b3277be8446595cb5d253f25daacc168acef4c28985a5e9588ba46eb",
+  "registry": {
+    "actual_registered_environments": 106,
+    "actual_task_families": 12,
+    "selected_Wipe_profiles": 8,
+    "passed_smoke_checks": 8,
+    "failed_smoke_checks": 0
+  },
+  "steps_after_reset_per_profile": 8,
+  "num_envs": 1,
+  "seed": 42,
+  "video_recording": false,
+  "results": [
+    {
+      "task_id": "WipeWindow-Am-EE-Abs-L1-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "147cc558ccb1f4263d02310ffd397ccdea9e0ad804f67403ba43eb5d82f076bb",
+      "stdout_log_sha256": "e5e18de725e7fd65cbe800db6cb8c46a265d40fbd35028d95fef868774dc509b"
+    },
+    {
+      "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "74ae6de74434ada1cdef13bb142604752cc131ce5ca929e67fa866fa799d35f4",
+      "stdout_log_sha256": "669aceb237f8155b1d62de582a657d78226bc40dd756257237524dd28e11dacd"
+    },
+    {
+      "task_id": "WipeWindow-Am-FAHexa-Abs-L1-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "base_camera",
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "2aba94d6c5ebf35042b2168e8759c45e1fb5bb525e51b1c3d0351ec75ad47438",
+      "stdout_log_sha256": "5a6b681228533f7a37f13b67180ad58bb0f68bfe2f1556a06488333cc2688960"
+    },
+    {
+      "task_id": "WipeWindow-Am-FAHexa-Abs-MPC-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "base_camera",
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "4b54b77c565e8a45d576e06303121b3a1579c3fb1f0cefb317947be38fbcce78",
+      "stdout_log_sha256": "16d08f136a738752824f47d309de02965936ee37d419a88e08add5b1998211fd"
+    },
+    {
+      "task_id": "WipeWindow-Am-FAHexa-Abs-PID-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "base_camera",
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "092babd347fbc185a72aa69b27b8eee516a891bcfdf3c757ee7590149310a589",
+      "stdout_log_sha256": "67394f779a829143bf391b8938039d576ce501d89b2d70ce254831a2d65f2194"
+    },
+    {
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "base_camera",
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "63d9cc4ccc15decb19d8b1d6d4901d2c5943075c2b8ecc229c2c6a2416f420ea",
+      "stdout_log_sha256": "56cd04b3ec2c965a561281b176ab81e1cf6cdbc1e482564254f8e3555f450993"
+    },
+    {
+      "task_id": "WipeWindow-Am-UAHexa-Abs-PID-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "base_camera",
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "9ac1b3d0488eaf77c0afffb35400cefa033712639b61eb8b9c3a34680d74a5a2",
+      "stdout_log_sha256": "aee19b7e33df0eeecce3fbaef6307693c98cdf55b72d9a59230cd46094ba76b8"
+    },
+    {
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "status": "passed",
+      "exit_code": 0,
+      "stage": "complete",
+      "steps_completed": 8,
+      "num_envs": 1,
+      "seed": 42,
+      "action_shape": [
+        1,
+        8
+      ],
+      "sensor_names": [
+        "base_camera",
+        "contact_sensor",
+        "ee_camera"
+      ],
+      "record_sha256": "499173170fbe6fe2a7d4d66582ff79c794d6ac18aeaa94828ed142aac1268bbe",
+      "stdout_log_sha256": "f19b8c0007d3e270a048eccfa82d736fc55266b83846a04f4abe21a56e2c676e"
+    }
+  ],
+  "cleanup": {
+    "original_PID": 328020,
+    "original_start_ticks": "797969080",
+    "original_process_exited": true,
+    "exact_owned_container_stopped": true,
+    "full_Docker_ID": "21b1c1deb605f99183d14eefd9d35b96c9c192ffdc6fe91391c7ee94f2c38361",
+    "final_HOST_GPU_used_MiB": 0,
+    "final_HOST_compute_and_graphics_processes": [],
+    "final_HOST_XML_sha256": "eb70fd61beb114118a7542aeb0facd21e20a2de5ad79da16f6b9a32f78cd6a46",
+    "independent_fresh_HOST_GPU_used_MiB": 0,
+    "independent_fresh_HOST_compute_and_graphics_processes": [],
+    "independent_fresh_HOST_XML_sha256": "682212d7595c0a106b4e10b0563e5b982064796dda3bb1907ac9c46a9facb32c",
+    "shared_UUID_flock_actually_acquired_and_released_after_owner_exit": true,
+    "foreign_processes_or_containers_stopped": false
+  },
+  "prior_v1_attempt": {
+    "status": "failed_preserved_before_Isaac_start",
+    "failure_stage": "Docker start / runc nested mount target beneath readonly parent",
+    "cause": "The writable leaf target directory was absent inside the actual HOST source of its readonly parent bind. v2 precreated a distinct empty target placeholder and added an explicit real-directory/no-symlink check.",
+    "original_container_state": "created",
+    "original_container_PID": 0,
+    "original_container_StartedAt": "0001-01-01T00:00:00Z",
+    "GPU_started": false,
+    "Isaac_started": false,
+    "automatic_retry_performed": false,
+    "old_plan_sha256": "b5a4cfc8f75057c1fb21acb6976bccba2ab0c8e86c326cecd54f7183fc64a69d",
+    "old_state_sha256": "3c75a8a0136e3bb7aa4969edadca5796c4ba41ea74b568ecfd1ccb36abd854cd",
+    "old_launch_receipt_sha256": "7cb94da683a544710d31be94217ee1ca86125a87f96767a97703a3bc700bc28c",
+    "original_failed_attempt_and_container_preserved": true
+  },
+  "verification_boundary": {
+    "level": "smoke-test",
+    "verified": [
+      "Actual stock registry metadata reported106 environments in12families and selected exactly8 Wipe profiles.",
+      "Every selected profile constructed, reset and completed8 sequential environment steps with exit0 and saved child status=passed/stage=complete.",
+      "Actual action-shape and sensor-name metadata recorded per profile; exact parent/child task, seed, environment-count and step counts crosschecked.",
+      "Exact own container ownership and stopped/Pid0 state, original HOST owner exit, full HOST compute+graphics idle and common UUID lease release independently checked."
+    ],
+    "not_claimed": [
+      "Native full20s task success or task success rates.",
+      "Exhaustive finite-value checks of every observation/state or task geometry residuals.",
+      "Rerunning all126 CPU tests or the historical106 environment matrix.",
+      "Extending the original OmniWipe fixture manifest native/training allowed-task scope to the other7 stock profiles."
+    ],
+    "new_CPU_mount_probe_actual_create_start_verified": true,
+    "new_CPU_mount_probe_no_GPU_DeviceRequests": true,
+    "CPU_tests_rerun_in_this_stock_smoke": false,
+    "original_v1_failure_excluded_from_native_success_denominators": true
+  },
+  "private_audit_record_sha256": {
+    "independent_observer": "9e134457cd45c8de22be7cbb1d9a606a2a3aaa185f8ff461b22e35ab8ed7dc63",
+    "all30_files_light_mirror": "8f7435adcdd46953daa830722e7590bb6c650ad4135b9f7b4c6288b1e9f0803c",
+    "producer_final_state": "4f7d9ffbcc401dd1de5ba991ce0304cfad620de08b0ffae4a8dcb0ec8eb6ce81",
+    "matrix_results": "d57c2ef98fcf5ff7b02419870e5a74a1853e02f84d6b5176b8d03fc94c08d54f",
+    "preserved_v1_failure_boundary": "a30f338b7b429877294abb092faf5f16060b6206baaec55c86084f662060fc42",
+    "real_CPU_mount_probe": "e57b3c3245ef34fe68daa74351fdfc8891137256f836652e265b80aab5f0daaa",
+    "full394_CPU_check_inputs": "03e2df421d7a7d149f8f10dddda6051b25adb36c3e31e489bcb1fb9e572fc63f"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "status": "passed_two_fresh_native_expert_preflights_and_full_video_audits",
+  "claim_limit": "Two preregistered scripted-expert preflights, excluded from training, checkpoint selection and sealed-final testing. No learned-policy success rate or full18-training completion is claimed.",
+  "source_base_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+  "public_fix_commit": "e95ebf1c2048e18ea341cb05524bf3c74189e7ad",
+  "simulation_variant_id": "omni-wipe-sponge-mount150mm-scale-math-gen03",
+  "reconstruction": "Start from the full9ab simulation source; overlay only wipe_window_env.py and wipe_window_env_cfg.py from the public_fix_commit. The public fix also includes regression tests/docs that are not part of the frozen394-file runtime tree.",
+  "runtime_changed_files": {
+    "source/ambench/ambench/tasks/wipe_window/wipe_window_env.py": "85cab3e30efb759c476c8c24d465eeddb49672e34d93d999fafe1d68d2f22121",
+    "source/ambench/ambench/tasks/wipe_window/wipe_window_env_cfg.py": "10751cc359c7cfce26c28eeeb7bb3ab068167b74a2098930229bba0e1b9d8889"
+  },
+  "native_conditions": {
+    "episode_length_s": 20,
+    "step_hz": 120,
+    "stains_required": 4,
+    "force_strictly_greater_N": 1.25,
+    "distance_at_most_m": 0.08,
+    "contact_count": 1,
+    "reset_grace_steps": 10
+  },
+  "raw_video_sampling": "30FPS, frame_skip4; pre-step samples0,4,...; the last camera frame is earlier than terminal physics. Never append automatic-reset imagery.",
+  "preview_transform": "Original source frames sampled over their full timeline, resized and labelled; GIF palette compression; final original sampled image held for1s. Separate untouched raw MP4s are linked.",
+  "resource_boundary": "Second preflight briefly shared GPU7 with an independently authorized ACT trainer. Its native/physics/video evidence is retained. Container-local cleanup did not prove host GPU idle; subsequent collection uses the common host UUID flock and full host compute/graphics checks.",
+  "source_refs": {
+    "base291": {
+      "url": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/base_source_manifest.json",
+      "sha256": "3f546f2f29c86925b6062ff3d27afc49b623986ccebf2b3168f49f60ec2e4410"
+    },
+    "variant394": {
+      "url": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/sim_source_manifest.json",
+      "sha256": "08cd3b75da798670ad631d08a6830f252536b21b7f84656644964175f050e395"
+    },
+    "predeclaration": {
+      "url": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/predeclaration.json",
+      "sha256": "90e039f683e484e4199b0181a73cad40e81ea74926ca77177811bc5271a1cdde"
+    },
+    "resource_boundary": {
+      "url": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/resource_boundary.json",
+      "sha256": "54b1b7baae3464f137a9413f9d54d448fc7b1cef31aef67fdf07038d1e609e10"
+    }
+  },
+  "trials": [
+    {
+      "seed": 52021,
+      "native_steps": 2240,
+      "native_success": true,
+      "audit_ref": {
+        "url": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_audit.json",
+        "sha256": "6af11227c09c270ef13d748e885355c330b5210ad4e322acd6bb872d307719e4"
+      },
+      "audit": {
+        "all_native_rows_verified": 2240,
+        "native_stains_cleared": 4,
+        "off_window_samples": 958,
+        "off_window_peak_net_force_N": 0.0,
+        "off_window_maximum_full3D_attachment_error_m": 8.380719373235479e-05,
+        "terminal_full3D_attachment_error_m": 0.0006862647132948041,
+        "terminal_contact_force_N": 22.224231719970703,
+        "terminal_state_source": "after_original_get_dones_before_automatic_reset",
+        "video_last_sample_is_terminal_state": false
+      }
+    },
+    {
+      "seed": 52022,
+      "native_steps": 1750,
+      "native_success": true,
+      "audit_ref": {
+        "url": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_audit.json",
+        "sha256": "1f72fdf9368331a4a9db754a1ec216885129cd0cf1003b5353312e72e3c0ffd0"
+      },
+      "audit": {
+        "all_native_rows_verified": 1750,
+        "native_stains_cleared": 4,
+        "off_window_samples": 827,
+        "off_window_peak_net_force_N": 0.0,
+        "off_window_maximum_full3D_attachment_error_m": 8.380719373235479e-05,
+        "terminal_full3D_attachment_error_m": 0.0006159834447316825,
+        "terminal_contact_force_N": 18.745784759521484,
+        "terminal_state_source": "after_original_get_dones_before_automatic_reset",
+        "video_last_sample_is_terminal_state": false
+      }
+    }
+  ]
+}

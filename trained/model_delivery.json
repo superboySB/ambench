@@ -1,0 +1,65 @@
+{
+  "GPU_used": false,
+  "assets": [
+    {
+      "anonymous_range_status": 206,
+      "bytes": 206416684,
+      "content_range": "bytes 0-31/206416684",
+      "full_content_type": "application/octet-stream",
+      "full_download_SHA_verified": true,
+      "name": "uaquad-pressbutton-act40000-selected-native-v1.zip",
+      "range_content_type": "application/octet-stream",
+      "sha256": "f64d0b7578731ef6a30aa2cb82b38de9d1942ea86464f34caf763754ec11d3b3",
+      "url": "https://github.com/superboySB/ambench/releases/download/research-models-20261015-uaquad-pressbutton/uaquad-pressbutton-act40000-selected-native-v1.zip"
+    },
+    {
+      "anonymous_range_status": 206,
+      "bytes": 685431484,
+      "content_range": "bytes 0-31/685431484",
+      "full_content_type": "application/octet-stream",
+      "full_download_SHA_verified": true,
+      "name": "uaquad-pressbutton-dp-ema-epoch016-selected-native-v1.zip",
+      "range_content_type": "application/octet-stream",
+      "sha256": "251ed9ea70b364153387409ec0bbba4d85b6c257881271dde42221db4041dce4",
+      "url": "https://github.com/superboySB/ambench/releases/download/research-models-20261015-uaquad-pressbutton/uaquad-pressbutton-dp-ema-epoch016-selected-native-v1.zip"
+    },
+    {
+      "anonymous_range_status": 206,
+      "bytes": 385849,
+      "content_range": "bytes 0-31/385849",
+      "full_content_type": "application/octet-stream",
+      "full_download_SHA_verified": true,
+      "name": "act-110-original330-fullframe-decode.json",
+      "range_content_type": "application/octet-stream",
+      "sha256": "294dbffd929cfd499c3ff082f4e30704140ddf20e53b47c7587a7503df6d0919",
+      "url": "https://github.com/superboySB/ambench/releases/download/research-models-20261015-uaquad-pressbutton/act-110-original330-fullframe-decode.json"
+    },
+    {
+      "anonymous_range_status": 206,
+      "bytes": 378468,
+      "content_range": "bytes 0-31/378468",
+      "full_content_type": "application/octet-stream",
+      "full_download_SHA_verified": true,
+      "name": "dp-110-original330-fullframe-decode.json",
+      "range_content_type": "application/octet-stream",
+      "sha256": "819d08aed01cbf41bf7b95376d49ac8ef2354b1efba53983a800882b605ebf83",
+      "url": "https://github.com/superboySB/ambench/releases/download/research-models-20261015-uaquad-pressbutton/dp-110-original330-fullframe-decode.json"
+    },
+    {
+      "anonymous_range_status": 206,
+      "bytes": 9971,
+      "content_range": "bytes 0-31/9971",
+      "full_content_type": "application/octet-stream",
+      "full_download_SHA_verified": true,
+      "name": "models.json",
+      "range_content_type": "application/octet-stream",
+      "sha256": "bbde78da774fb0ac9f8dba561b4e1d4b1fa8a17587f8ed498cf1fb201b69f698",
+      "url": "https://github.com/superboySB/ambench/releases/download/research-models-20261015-uaquad-pressbutton/models.json"
+    }
+  ],
+  "authentication_sent": false,
+  "finished_at_utc": "2026-10-15T04:31:40.843713+00:00",
+  "release_url": "https://github.com/superboySB/ambench/releases/tag/research-models-20261015-uaquad-pressbutton",
+  "started_at_utc": "2026-10-15T04:30:14.615740+00:00",
+  "status": "passed_anonymous_Range_and_complete_SHA_all_five_model_release_assets"
+}

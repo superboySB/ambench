@@ -14,7 +14,7 @@
 
 上图是本轮新试次的采样预览，点击播放 MP4；[重放来源清单](usage_assets/trained/replay.json)保留两个 seed 的全部原片与录制版本，两个试次不合并为新成功率。
 
-**2026-10-15 追加长训练阶段：** 全部 **18 次正式训练、22 个评估单元**已授权，完整预算与隔离种子见[预声明](usage_assets/extensions_20261015_plan.json)。其中 UAQuad WipeWindow ACT 已完成 40k 更新、80 次选模和 30 次最终测试，最终 **0/30，全部原生超时、未清除污点**；[全部三视角原片](https://zipengdai.com/ambench/extensions/act.html)如实展示失败，选中权重与证据通过 Release 提供。UAQuad DP 继续执行 40 epochs / 88,360 次更新；OpenPI 双卡正式 MT 训练的首个名义 5000 保存点已核实为实际 5001 次更新，完整训练尚未完成。OmniHexa 两任务各 100 条成功示范已通过校验，训练准备与专属 OpenPI 导出继续执行。逐项预算、剩余工作和模型下载步骤集中在[扩展手册](extensions.md)，不把首个完成单元写成整轮完成。
+**2026-10-15 追加长训练阶段：** 全部 **18 次正式训练、22 个评估单元**已授权，完整预算与隔离种子见[预声明](usage_assets/extensions_20261015_plan.json)。其中 UAQuad WipeWindow ACT 已完成 40k 更新、80 次选模和 30 次最终测试，最终 **0/30，全部原生超时、未清除污点**；[全部三视角原片](https://zipengdai.com/ambench/extensions/act.html)如实展示失败，选中权重与证据通过 Release 提供。UAQuad DP 继续执行 40 epochs / 88,360 次更新；OpenPI 双卡正式 MT 训练的首个名义 5000 保存点已核实为实际 5001 次更新，完整训练尚未完成。OmniHexa 两任务各 100 条成功示范、三份 OpenPI 导出和独立统计均已通过校验；新双卡队列等待共同租约，ACT/DP 独立修复及资源排队准备继续。[资源修订](usage_assets/extensions_20261015_resources.json)只调整 GPU 排队。逐项预算、剩余工作和模型下载步骤集中在[扩展手册](extensions.md)，不把首个完成单元写成整轮完成。
 
 Omni Wipe 的原 52001 只清除 2/4 污点；仅加长安装点的 gen02 在 52011 仍失败，另发现工具位置计算遗漏 authored USD scale。采集前预声明的 gen03 保留专属 authored EE 局部坐标中的 `(0, 0, 0.15)` 安装偏移，并用实际 USD scale 修正通用坐标计算，明确绑定两个源码文件 SHA；新数据及评估统一使用 gen03，52021/52022 仅作新预检。原生阈值、UAQuad 物理版本与旧失败证据保留，详见预声明的 `fixture_amendments`。
 

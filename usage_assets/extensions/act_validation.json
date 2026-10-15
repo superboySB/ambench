@@ -2,8 +2,8 @@
   "schema_version": 1,
   "study_id": "extensions-20261015",
   "unit_id": "uaquad_wipewindow_act__WipeWindow",
-  "status": "native_anonymous_assets_and_local_actual_browser_passed_public_Pages_and_Markdown_pending",
-  "snapshot_at_UTC": "2026-10-15T11:38:19.684544+00:00",
+  "status": "passed_complete_native_unit_original_evidence_anonymous_assets_and_actual_local_public_and_GitHub_browser_delivery",
+  "snapshot_at_UTC": "2026-10-15T11:53:16.075008+00:00",
   "whole18_training_objective_complete": false,
   "complete_training_runs_in18": 1,
   "complete_native_units_in22": 1,
@@ -91,7 +91,7 @@
     "release_url": "https://github.com/superboySB/ambench/releases/tag/research-media-20261015-uaquad-wipe-act"
   },
   "actual_browser_checks": {
-    "status": "local_passed_public_delivery_pending",
+    "status": "passed_actual_local_and_public_H264_controls_and_GitHub_three_GIF_animations",
     "local": {
       "schema_version": 1,
       "status": "passed_local_gallery_with_anonymous_public_Release_raw_videos_actual_CPU_Chrome",
@@ -220,8 +220,156 @@
       "screenshot_boundary": "Desktop captures follow99% seek (about19.8s of20s), not the native terminal step2399 or an exact last-frame extraction. Root independently audited original last frames separately.",
       "all330_videos_redecoded_by_this_browser": false
     },
-    "public_Pages": null,
-    "GitHub_Markdown_GIF": null
+    "public_Pages": {
+      "schema_version": 1,
+      "status": "passed_actual_public_ACT_gallery_five_trials_fifteen_raw_videos_and_GitHub_three_animated_GIFs",
+      "actual_public_page": "https://zipengdai.com/ambench/extensions/act.html",
+      "public_browser_receipt_sha256": "de01328950af7472799afdc349d56d97901b39b330687a2e0d10807bcbea2e44",
+      "public_own_cleanup_receipt_sha256": "066e47d4f8b3a03a675fafdc6aa82ecb04bc7849607a9d35bccdcd3526a63bd0",
+      "local_browser_receipt_sha256": "b048633ee6b7e9347e8ee8f09ec466ddf40bcf3b892561165660965dfa3a6ecb",
+      "GitHub_extensions_three_GIF_receipt_sha256": "1a2e0e9e8ba872da23f08d0f47ad7834be7088026790b1e1ffdf8b2f09c295f3",
+      "preserved_strict_local_attempt01_receipt_sha256": "af2f653c4e9227c998dda16f3a3c2e513bc03fa7faa8a159d656dd4f732ddb7e",
+      "detached_currentSrc_actual_Chrome_diagnostic_sha256": "9911bab5cfc370e55e098c315fb75229ed2002dacde5889cc8f9adededc92480",
+      "browser_version": "143.0.7499.169",
+      "public_HTML_sha256": "42e150509c7b7328c1b12e11645783136d2806be703738b726667b88ee182ba9",
+      "public_manifest_sha256": "549a087ca3110cfb5494db648f36defc0dcaeb276512cd6cc99b21bd0ba38513",
+      "manifest_total_trials": 110,
+      "manifest_total_raw_videos": 330,
+      "actual_played_trials": [
+        {
+          "phase": "sealed_final",
+          "candidate_id": "act_step040000",
+          "seed": 53001,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "three_view_drift_seconds": 4.300000000001525e-05
+        },
+        {
+          "phase": "sealed_final",
+          "candidate_id": "act_step040000",
+          "seed": 53015,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "three_view_drift_seconds": 2.399999999991298e-05
+        },
+        {
+          "phase": "sealed_final",
+          "candidate_id": "act_step040000",
+          "seed": 53030,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "three_view_drift_seconds": 0.00048400000000003995
+        },
+        {
+          "phase": "selection",
+          "candidate_id": "act_step005000",
+          "seed": 43001,
+          "native_success": false,
+          "native_stains_cleared": 0,
+          "three_view_drift_seconds": 0.0006109999999999172
+        },
+        {
+          "phase": "selection",
+          "candidate_id": "act_step030000",
+          "seed": 43005,
+          "native_success": false,
+          "native_stains_cleared": 1,
+          "three_view_drift_seconds": 1.6000000000016e-05
+        }
+      ],
+      "actual_played_raw_videos": 15,
+      "half_speed_play_pause_mid_and_near_end_seek_and_sync_passed": true,
+      "phase_candidate_seed_filters_and_previous_media_unload_passed": true,
+      "old_video_currentSrc_cache_not_confused_with_active_resource": true,
+      "old_media_paused_src_removed_readyState0_networkState0or3_and_no_later_play_or_old_requests": true,
+      "only_three_DOM_videos_after_each_switch": true,
+      "one_of_four_selection_progress_labelled_timeout_not_success": true,
+      "mobile_dimensions": {
+        "viewport": 390,
+        "document": 390,
+        "body": 390,
+        "videoElements": 3
+      },
+      "JavaScript_errors": [],
+      "actual_download_HTTP_status_counts": {
+        "206": 59
+      },
+      "actual_download_Content_Type_counts": {
+        "application/octet-stream": 59
+      },
+      "MIME_boundary": "application/octet-stream as actually served; no claim that headers are video/mp4 or image/gif. Chrome actual decode/play and GitHub actual GIF pixel changes checked independently.",
+      "own_CPU_Runtime": "runc",
+      "own_CPU_DeviceRequests": null,
+      "own_container_exactly_stopped": true,
+      "cleanup_errors": [],
+      "GPU_access": false,
+      "authentication_used": false,
+      "mock_or_URL_interception": false,
+      "all330_originals_redecoded_by_this_browser": false,
+      "screenshot_boundary": "99% media seeks near19.8s, not exact last-frame/native terminal-state evidence."
+    },
+    "GitHub_Markdown_GIF": {
+      "status": "passed_actual_GitHub_extensions_three_ACT_GIFs_visible_decoded_and_frame_changes_observed",
+      "public_document": "https://github.com/superboySB/ambench/blob/research/extensions.md",
+      "GPU_access": false,
+      "authentication_used": false,
+      "images": [
+        {
+          "src": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53001_ee_camera.gif",
+          "naturalWidth": 320,
+          "naturalHeight": 356,
+          "complete": true,
+          "alt": "UAQuad Wipe ACT seed53001最终超时EE预览",
+          "seed": 53001,
+          "visible": true,
+          "rendered_frame_SHA256": [
+            "248cc9031b2b27591fdeb432a2a4250e5bc7a31f4a32b89739ccdc99d61e77be",
+            "21ada0ea31ae9b1f53c0ff2c0df413c4f545946a1cb59814f8d27c3bf21e4505"
+          ],
+          "animation_observed": true
+        },
+        {
+          "src": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53015_ee_camera.gif",
+          "naturalWidth": 320,
+          "naturalHeight": 356,
+          "complete": true,
+          "alt": "UAQuad Wipe ACT seed53015最终超时EE预览",
+          "seed": 53015,
+          "visible": true,
+          "rendered_frame_SHA256": [
+            "5bea1db0e4eeb1aaf397deabe17bc4aa8021021b5b209693eaefd0c7b8e1b945",
+            "90a72ff9ffcbd2a04445145e60838c6edfb193f34efdd61bbe5e0f35c928730b"
+          ],
+          "animation_observed": true
+        },
+        {
+          "src": "https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53030_ee_camera.gif",
+          "naturalWidth": 320,
+          "naturalHeight": 356,
+          "complete": true,
+          "alt": "UAQuad Wipe ACT seed53030最终超时EE预览",
+          "seed": 53030,
+          "visible": true,
+          "rendered_frame_SHA256": [
+            "e67352c95e5102375c1ef9ad8e2c24e9f08f3d524bc9c8eb74aea611102d19dd",
+            "6d782ffab7c2a4877584751c879409450839a55c537396c69222c20b2b52b4a8"
+          ],
+          "animation_observed": true
+        }
+      ],
+      "browser_version": "143.0.7499.169",
+      "document_HTTP_status": 200,
+      "URL_mocked_or_intercepted": false,
+      "MIME_boundary": "HTTP Content-Type recorded as served; successful actual image decode/animation does not claim CDN application/octet-stream is image/gif.",
+      "receipt_sha256": "1a2e0e9e8ba872da23f08d0f47ad7834be7088026790b1e1ffdf8b2f09c295f3",
+      "exact_owned_cleanup_receipt_sha256": "2d344c88e150dfb1376174c5bcba0903cd7ae6e132831bbc05e2928cc772b746"
+    },
+    "first_public_deployment": {
+      "research_source_commit": "3537d6cdc65c58665cb71fa83e61a3a9573e9dd5",
+      "gh_pages_commit": "3c0b609ceaa03ea899721dbe6c067617619b5f9a",
+      "official_build_and_deployment_status": "success",
+      "actual_live_HTML_and_manifest_byte_SHAs_match_checked_source": true
+    }
   },
   "claim_limits": [
     "Only1of18 formal training runs and1of22 native evaluation units completed in this extension",

@@ -67,7 +67,7 @@ bash tools/research/train_dp_full.sh --check \
 
 **仍在执行：** UAQuad WipeWindow DP 的完整 40 epochs 目标为 **88,360 次更新**；UAQuad OpenPI 双卡 FSDP2 正式多任务训练已实际保存首个名义 5000 checkpoint，其存储更新和两个 Optax 计数均为 **5001**，尚未完成 40k。MT160 / ST80 数据及各自训练统计已准备，后续单任务阶段使用完整 MT 最终权重，不以这个早期保存点代替母本。旧 exit 139 和后续单卡 full-batch 显式 OOM 分别保留，双卡方案保持完整模型与 global batch 32。
 
-**OmniHexa 数据已完成：** PressButton 与 WipeWindow 各 100 条成功 canonical 示范通过官方校验，分别为 **99,907 / 194,806 原始帧**；每任务固定 80/20，失败采集尝试另留。四组 ACT/DP 的实际 CPU 准备发现统计类型与源码挂载问题，独立修复版本正在验证；OpenPI 专属导出与统计继续执行，尚无这批学习策略的最终成绩。详细训练表、种子、预算和复现步骤集中于[扩展手册](extensions.md)，截至此快照仅完成 **18 次训练中的 1 次、22 个评估单元中的 1 个**。
+**OmniHexa 数据已完成：** PressButton 与 WipeWindow 各 100 条成功 canonical 示范通过官方校验，分别为 **99,907 / 194,806 原始帧**；每任务固定 80/20，失败采集尝试另留。四组 ACT/DP 的实际 CPU 准备发现统计类型与源码挂载问题，独立修复验证和 GPU6 排队准备继续执行。OpenPI 三份专属导出与各自统计已通过独立校验，4/7 双卡队列已获条件 admission，等待另一实验自然释放租约后再启动，尚无这批学习策略的最终成绩。[资源修订](usage_assets/extensions_20261015_resources.json)不改变训练数学和预算。详细训练表、种子、预算和复现步骤集中于[扩展手册](extensions.md)，截至此快照仅完成 **18 次训练中的 1 次、22 个评估单元中的 1 个**。
 
 SpaceMouse/gamepad、人工成功示范、RL、实机飞行和 real2sim2real 全流程仍没有完成证据；这些硬件与额外研究项目不计入本轮 18 次训练。
 

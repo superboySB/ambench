@@ -8,13 +8,15 @@
 | --- | ---: | --- | --- |
 | UAQuad Wipe ACT | 1／1 | 40,000 次 AdamW 更新 | 完整预算、8 个候选的全量留出验证、80 次选模、锁定及 30 次最终测试均已验收；**0/30** |
 | UAQuad Wipe DP | 1／1 | 40 完整 epochs；88,360 次更新 | 正在原训练链运行；11:17 UTC 收据记录实际 **28,700** 次更新、299 个 AdamW 状态一致；最终库存与原生评估未完成 |
-| OmniHexa 两任务 ACT | 2／2 | 每任务 40,000 次更新 | fresh200 数据通过；旧 CPU 准备失败证据保留，新 v3 的真实 CPU 准备验证中，尚无正式训练完成收据 |
-| OmniHexa 两任务 DP | 2／2 | 每任务完整 40 epochs；更新数由自身实际 sampler 计算 | 旧 CPU 准备失败证据保留，新 v3 的转换与接口验证中；不能套用 UA 的 88,360，也尚未完成正式训练 |
+| OmniHexa 两任务 ACT | 2／2 | 每任务 40,000 次更新 | fresh200 数据通过；旧 CPU 准备失败证据保留，v3 真实接口验证与独立 v4 资源排队准备中，尚无正式训练完成收据 |
+| OmniHexa 两任务 DP | 2／2 | 每任务完整 40 epochs；更新数由自身实际 sampler 计算 | v3 已真实转换完整 Press100，后续 profile 验证及独立 v4 准备中；不能套用 UA 的 88,360，也尚未完成正式训练 |
 | UAQuad π₀／π₀.₅ | 6／8 | 两个 MT 各 40,000，四个 ST 各 20,000；合计 160,000 | π₀.₅ MT 正在训练；首次名义 `5000` checkpoint 已实读验证为 **5,001** 次更新，尚未完成 MT 全预算；ST 等待真正 MT final |
-| OmniHexa π₀／π₀.₅ | 6／8 | 同上，合计 160,000 | 同一份 fresh200 已被 CPU sourcefix-v3 消费；MT160 导出已完成，ST 导出与独立统计流程继续，尚无正式 GPU 训练 admission |
+| OmniHexa π₀／π₀.₅ | 6／8 | 同上，合计 160,000 | 三份真实导出、各自统计和独立校验已通过；4/7 双卡队列已获条件 admission，等待另一实验自然释放 GPU7 租约，尚未启动 GPU 训练 |
 | **合计** | **18／22** | ACT 共 120,000 次；OpenPI 共 320,000 次；三个 DP 各完整 40 epochs | **12 次 OpenPI 的完整预算验收均未完成；只有上述 ACT 单元具备完整最终结果** |
 
 [公开预声明](usage_assets/extensions_20261015_plan.json)固定了全部训练清单、候选规则、数据划分和 seeds。已有 UAQuad PressButton 的 [ACT 0/30、DP 30/30](trained_models.md) 属于此前研究，单独保存，**不计入本次 18／22／660**。本页也不把脚本专家预检、CPU tests、8 步 smoke 或独立 ACT absolute-action 消融算作正式模型成绩。
+
+[独立资源修订](usage_assets/extensions_20261015_resources.json)只调整物理 GPU 排队：UA 原双卡 0/3 与 DP GPU6 保持运行；Omni OpenPI 等待 4/7 的共同租约与整卡空闲，四组 Omni ACT/DP 在原 UA DP 完成后串行使用 GPU6，后续原生评估也排 GPU6。模型、源码、数据、完整预算、统计和 seeds 均不变。旧未激活计划完整保留，新 worker 使用独立 generation；显存空闲不等于租约可用，不停止其他实验以腾卡。
 
 ## 1. 先固定源码、数据和动作接口
 
@@ -80,7 +82,7 @@ OpenPI MT 有 8 个、ST 有 4 个名义 5k 间隔候选，含实际 final；实
 
 **每个 ST 的母本必须是同机型、同 π₀／π₀.₅ 变体真正完成的 MT final actual40000。** MT 对 Press、Wipe 分别选中的较早 checkpoint 不改变这个父模型，封存结果也不能用于选择 ST 母本。
 
-Omni 的 CPU 工具准备需要完整 base394 中的公开 converter／exporter，同时逐 SHA 核对原 291 学习文件；GPU 训练继续挂载原学习源码。旧 Torch CPU v2 因 NumPy 统计复制假设和缺少 converter 而失败，未开始正式 GPU 训练，证据保留；独立 v3 修复正在验证。OpenPI 的 sourcefix-v3 同样只修 CPU 工具挂载与来源绑定，原六份请求及训练数学保持冻结。
+Omni 的 CPU 工具准备需要完整 base394 中的公开 converter／exporter，同时逐 SHA 核对原 291 学习文件；GPU 训练继续挂载原学习源码。旧 Torch CPU v2 因 NumPy 统计复制假设和缺少 converter 而失败，未开始正式 GPU 训练，证据保留；独立 v3 修复验证与 v4 资源排队准备分别保留。OpenPI 的 sourcefix-v3 已完成实际 CPU 导出与统计，只修 CPU 工具挂载与来源绑定，原六份请求及训练数学保持冻结。
 
 ## 3. 选模、封存与成功判定
 
@@ -125,13 +127,15 @@ OpenPI 按：**原生成功数降序 → 终态 named progress 均值降序 → 
 
 生产者已对 330 原片完整 CPU 解码；根审查独立重复解码并查看固定三 seeds 的 9 段代表原片，两个验证范围分别记录。原片每 4 个原生步采样一次，末图在第 **2396** 步，终态成绩来自第 **2399** 步的 reset 前物理 journal；末图不等于终态物理时刻，也不追加下一 episode 的 reset 画面。
 
+这批 **353 个 Release 附件**已全部匿名整文件下载验 SHA，证据压缩包 **921 个成员**和推理 ZIP **7 个成员**逐一核对。18 个 GIF／短片预览已独立完整 CPU 解码；本地与线上播放器各实播 5 次试验、15 段原片，并验证筛选、暂停、拖动、0.5 倍速、三视角同步及 390 px 手机布局。GitHub 上三条嵌入 GIF 均实际可见并观察到动画帧变化。首次浏览器测试对 Chrome 已卸载节点的缓存 `currentSrc` 作了过严断言，失败与诊断保留；独立复测确认旧视频已停止、移除资源且无后续请求，页面源码没有为该检查改动。
+
 想查看已经成功的学习策略，可另看 [此前 UAQuad Press DP 的 30/30 成功与视频](trained_models.md)；[Omni 专家夹具成功预检](https://zipengdai.com/ambench/extensions/)属于脚本专家，二者都不改变这里的 ACT 0/30。
 
 ## 5. 下载选中权重并单独重放
 
 [选中 ACT 推理 ZIP](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_selected_step040000_inference.zip)为 191,426,512 bytes，SHA-256 是 `e7640d2b7ef37536e14c7ee2d7be44ae4a3c1489028f2503e8064bc1c0fb21cb`。解压得到原始 `pretrained_model/` 的 **7 个文件、206,396,168 bytes**：权重、配置、训练配置和四个 processor 文件。**这是推理包，不包含恢复训练所需的 optimizer／scheduler／RNG 状态。** 权重与自己的 normalizer 必须一起使用。
 
-先在仓库根目录从清单读取 URL、大小及 SHA，验证 ZIP 和全部成员后解压到新的输出目录。以下是读者使用的下载模板；本轮文档编写没有重复下载或运行实验。
+先在仓库根目录从清单读取 URL、大小及 SHA，验证 ZIP 和全部成员后解压到新的输出目录。以下是读者使用的下载模板；交付流程已匿名下载 ZIP 并核对全部七个成员，但未将下文便捷重放模板作为新实验执行。
 
 ```bash
 python3 - <<'PY'

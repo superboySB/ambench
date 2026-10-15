@@ -16,6 +16,8 @@
 
 **2026-10-15 追加长训练阶段：** 用户已授权全部 **18 次正式训练**，范围、完整预算、80/20 划分和选模/最终测试种子见[公开预声明](usage_assets/extensions_20261015_plan.json)。UAQuad WipeWindow ACT/DP 已在远端 GPU 4/6 启动；OpenPI 的旧 exit 139 环境问题已通过独立探针定位；新的单卡 full-batch 显式 OOM 单独保留。双卡 FSDP2 已通过完整模型真实更新，UAQuad 多任务正式长训已启动。当前进展以真实训练状态与验收记录为准，尚不报告这批训练完成或新成功率；状态详见 [usage.md](usage.md#当前正式训练结果2026-10-15)。
 
+Omni Wipe 的原 52001 只清除 2/4 污点；仅加长安装点的 gen02 在 52011 仍失败，另发现工具位置计算遗漏 authored USD scale。采集前预声明的 gen03 保留专属 authored EE 局部坐标中的 `(0, 0, 0.15)` 安装偏移，并用实际 USD scale 修正通用坐标计算，明确绑定两个源码文件 SHA；新数据及评估统一使用 gen03，52021/52022 仅作新预检。原生阈值、UAQuad 物理版本与旧失败证据保留，详见预声明的 `fixture_amendments`。
+
 ### 先选择复现版本
 
 `research` 会继续变化，Compose 挂载和远端同步会使用当前 checkout；旧 checkpoint 路径和旧镜像标签不能单独固定运行源码。重放历史实验时，从下表指定提交建立独立 worktree，并在该 worktree 中使用相应手册、子模块、镜像依赖和保存的配置。不要切换正在被训练或评估容器挂载的 checkout。

@@ -59,7 +59,9 @@ bash tools/research/train_dp_full.sh --check \
 
 **2026-10-15 追加长训练阶段：** 用户已授权全部 **18 次正式训练**：UAQuad WipeWindow ACT/DP 2 次、OmniHexa 两任务 ACT/DP 4 次，以及 UAQuad / OmniHexa 各 6 次 OpenPI。完整预算、80/20 数据划分、4 组隔离种子和选模规则见[公开预声明](usage_assets/extensions_20261015_plan.json)；22 个模型任务评估单元各需选模锁及 30 次独立最终测试。当前进展以真实状态与验收记录为准，不能把已启动写成已完成。
 
-UAQuad WipeWindow 已有 100 条成功示范与 80/20 数据准备，正式 ACT/DP 已在远端 GPU 4/6 启动，尚未报告最终更新数或成绩。UAQuad OpenPI 的 MT160 / ST80 数据与独立统计已准备；旧 exit 139、`OOMKilled=false` 的原记录保留，不能据此认定 OOM。独立环境修复后的新单卡 72 GB full-model / batch 32 探测出现显式分配 OOM，停在首个更新前；GPU 0/3 双卡 FSDP2 已通过完整模型真实更新并启动 UAQuad 多任务正式长训，保留完整模型、global batch 32 和 40k 预算；其后单任务阶段仍须容量门控与实际训练验收。OmniHexa seed 41001 原生成功与新 CPU 审计通过的证据保留，专属 200 条成功示范和充分训练仍待完成。这些扩展与下文历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
+UAQuad WipeWindow 已有 100 条成功示范与 80/20 数据准备；ACT 已完成 40,000 次真实更新，8 个候选的完整留出集验证通过，正在做原生闭环选模。DP 仍在执行完整 40 epoch（按实际采样器为 88,360 次更新）；最终封存成绩均尚未产生。UAQuad OpenPI 的 MT160 / ST80 数据与独立统计已准备；旧 exit 139、`OOMKilled=false` 的原记录保留，不能据此认定 OOM。独立环境修复后的新单卡 72 GB full-model / batch 32 探测出现显式分配 OOM，停在首个更新前；GPU 0/3 双卡 FSDP2 已通过完整模型真实更新并启动 UAQuad 多任务正式长训，保留完整模型、global batch 32 和 40k 预算；其后单任务阶段仍须容量门控与实际训练验收。OmniHexa seed 41001 原生成功与新 CPU 审计通过的证据保留，专属 200 条成功示范和充分训练仍待完成。这些扩展与下文历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
+
+**Omni Wipe 采集前修订：** 原 `9ab28b0` fixture 的 seed 52001 原生失败，只清除 2/4 污点；夹爪 collider 与海绵重叠。仅加长安装点的 gen02 在 52011 仍失败，另确认工具位置计算遗漏 authored USD scale。经批准，gen03 包含两个显式记录 SHA 的文件变更：Omni 专属 authored EE 局部安装偏移 `(0, 0, 0.15)`（乘 USD scale 前），以及依据实际 USD scale 的通用工具坐标计算；固定关节仍使用 authored 局部坐标，原生 20 秒、4 污点、1.25 N / 80 mm 条件保持原定义。新示范及 ACT/DP/OpenPI 的 Omni Wipe 评估统一绑定 gen03，详见[预声明修订](usage_assets/extensions_20261015_plan.json)的 `fixture_amendments`。52021/52022 仅为采集前新预检，排除在训练、选模和最终测试之外；旧 UAQuad 物理版本及原始/gen02 失败证据保留，本段不宣称 gen03 已通过预检。
 
 ### 本轮逐步复测（2026-10-15）
 

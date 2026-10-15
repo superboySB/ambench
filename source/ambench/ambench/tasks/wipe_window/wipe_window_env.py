@@ -12,7 +12,7 @@ import torch
 from isaaclab.assets import RigidObject
 from isaaclab.sensors import ContactSensor
 from omni.usd import get_context
-from pxr import Gf, Usd, UsdPhysics
+from pxr import Gf, Usd, UsdGeom, UsdPhysics
 
 from ambench.tasks.base.base_env import BaseEnv
 
@@ -36,7 +36,7 @@ class WipeWindow(BaseEnv):
 
     def compute_sponge_attachment_pos_w(self, ee_state_w: torch.Tensor) -> torch.Tensor:
         """Transform the fixed-joint attachment point using measured EE link states."""
-        point_local = ee_state_w.new_tensor(self.sponge_attachment_point_local)
+        point_local = ee_state_w.new_tensor(self._sponge_attachment_point_scaled_local)
         point_local = point_local.unsqueeze(0).expand(ee_state_w.shape[0], -1)
         return ee_state_w[:, :3] + math_utils.quat_apply(ee_state_w[:, 3:7], point_local)
 
@@ -73,7 +73,7 @@ class WipeWindow(BaseEnv):
             else (command_to_link[0], -command_to_link[1], -command_to_link[2], -command_to_link[3])
         )
         stage = get_context().get_stage()
-        for env_path in self.scene.env_prim_paths:
+        for env_index, env_path in enumerate(self.scene.env_prim_paths):
             robot_prim = stage.GetPrimAtPath(f"{env_path}/Robot")
             if not robot_prim.IsValid():
                 raise RuntimeError(f"Missing robot prim in {env_path}.")
@@ -85,6 +85,14 @@ class WipeWindow(BaseEnv):
             sponge_prim = stage.GetPrimAtPath(f"{env_path}/Sponge")
             if len(ee_prims) != 1 or not sponge_prim.IsValid():
                 raise RuntimeError(f"Cannot attach sponge to {spec.ee_body_name} in {env_path}.")
+            # Physics body poses contain rotation/translation but omit authored USD scale.
+            ee_transform = UsdGeom.Xformable(ee_prims[0]).ComputeLocalToWorldTransform(Usd.TimeCode.Default())
+            ee_scale = Gf.Transform(ee_transform).GetScale()
+            scaled_tip_offset = tuple(value * ee_scale[index] for index, value in enumerate(tip_offset))
+            if env_index == 0:
+                self._sponge_attachment_point_scaled_local = scaled_tip_offset
+            elif scaled_tip_offset != self._sponge_attachment_point_scaled_local:
+                raise ValueError("WipeWindow environments must share the same end-effector attachment scale.")
             joint = UsdPhysics.FixedJoint.Define(stage, f"{env_path}/SpongeToolJoint")
             joint.CreateBody0Rel().SetTargets([ee_prims[0].GetPath()])
             joint.CreateBody1Rel().SetTargets([sponge_prim.GetPath()])

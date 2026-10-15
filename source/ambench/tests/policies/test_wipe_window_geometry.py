@@ -108,7 +108,7 @@ def _quat_apply(quat, vector):
     return vector + quat[:, :1] * cross + torch.linalg.cross(quat[:, 1:], cross)
 
 
-def _environment(offset_link, command_to_link, sponge_size, mount_offset):
+def _environment(offset_link, command_to_link, sponge_size, mount_offset, link_scale=(1.0, 1.0, 1.0)):
     """Execute real attachment, reset and geometry methods with simulator I/O stubbed."""
     path = Path(__file__).parents[2] / "ambench/tasks/wipe_window/wipe_window_env.py"
     tree = ast.parse(path.read_text())
@@ -126,11 +126,18 @@ def _environment(offset_link, command_to_link, sponge_size, mount_offset):
         "RigidObject": _RigidObject,
         "ContactSensor": lambda cfg: SimpleNamespace(),
         "get_context": lambda: SimpleNamespace(get_stage=lambda: stage),
-        "Usd": SimpleNamespace(PrimRange=lambda prim: [prim]),
+        "Usd": SimpleNamespace(PrimRange=lambda prim: [prim], TimeCode=SimpleNamespace(Default=lambda: None)),
+        "UsdGeom": SimpleNamespace(
+            Xformable=lambda prim: SimpleNamespace(ComputeLocalToWorldTransform=lambda time: link_scale)
+        ),
         "UsdPhysics": SimpleNamespace(
             RigidBodyAPI=object, FixedJoint=SimpleNamespace(Define=lambda stage, path: joint)
         ),
-        "Gf": SimpleNamespace(Vec3f=lambda *values: values, Quatf=lambda real, imag: (real, *imag)),
+        "Gf": SimpleNamespace(
+            Vec3f=lambda *values: values,
+            Quatf=lambda real, imag: (real, *imag),
+            Transform=lambda matrix: SimpleNamespace(GetScale=lambda: matrix),
+        ),
         "sim_utils": SimpleNamespace(XformPrimView=lambda path, device: _VisibilityView()),
         "math_utils": SimpleNamespace(quat_apply=_quat_apply),
     }
@@ -188,7 +195,14 @@ def _configured_mount_offsets():
     return result
 
 
-def _policy(monkeypatch, offset_link, command_to_link, sponge_size=(0.12, 0.04, 0.08), mount_offset=(0.0, 0.0, 0.0)):
+def _policy(
+    monkeypatch,
+    offset_link,
+    command_to_link,
+    sponge_size=(0.12, 0.04, 0.08),
+    mount_offset=(0.0, 0.0, 0.0),
+    link_scale=(1.0, 1.0, 1.0),
+):
     """Load the real trajectory method with simulator-only imports stubbed."""
     isaaclab = ModuleType("isaaclab")
     isaaclab.sim = ModuleType("isaaclab.sim")
@@ -213,7 +227,7 @@ def _policy(monkeypatch, offset_link, command_to_link, sponge_size=(0.12, 0.04, 
     spec = importlib.util.spec_from_file_location("ambench.policies.scripted.wipe_window", path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    env, _ = _environment(offset_link, command_to_link, sponge_size, mount_offset)
+    env, _ = _environment(offset_link, command_to_link, sponge_size, mount_offset, link_scale)
     robot_io = env.robot_io
     policy = module.WipeWindowPolicy(env)
     dots = [torch.tensor([2.1, y, z]) for y, z in ((0.1, 0.9), (-0.1, 1.0), (0.15, 1.1), (0.0, 1.2))]
@@ -272,6 +286,7 @@ def test_ua_mount_joint_reset_and_trajectory_use_one_physical_attachment(monkeyp
     offsets = _configured_mount_offsets()
     assert offsets == {
         "WipeWindowEnvDefaultCfg": (0.0, 0.0, 0.0),
+        "WipeWindowEnvOmniHexaAbsPIDCfg": (0.0, 0.0, 0.15),
         "WipeWindowEnvUAQuadAbsPIDCfg": (0.0, 0.0, -0.06),
     }
     mount = offsets["WipeWindowEnvUAQuadAbsPIDCfg"]
@@ -315,3 +330,26 @@ def test_zero_mount_offset_preserves_default_attachment_and_reset(offset_link, c
     torch.testing.assert_close(env.compute_sponge_attachment_pos_w(state), env.robot_io.compute_tool_tip_pos_w(state))
     env._reset_idx([0])
     torch.testing.assert_close(env.sponge_object.data.root_state_w[:, :3], env.robot_io.compute_tool_tip_pos_w(state))
+
+
+def test_scaled_omni_mount_uses_metric_offset_without_rescaling_joint_coordinates(monkeypatch):
+    offset = (0.0, 0.0, 0.0445)
+    orientation = (2**-0.5, 0.0, 2**-0.5, 0.0)
+    mount = (0.0, 0.0, 0.15)
+    scale = (1.0, 1.0, 1.65)
+    env, joint = _environment(offset, orientation, (0.12, 0.04, 0.08), mount, scale)
+    assert joint.attributes["CreateLocalPos0Attr"] == pytest.approx((0.0, 0.0, 0.1945))
+    env._reset_idx([0])
+    # The failed native generation measured this 320.925 mm physical lever;
+    # the old reset/teacher transform predicted only 194.5 mm.
+    torch.testing.assert_close(env.sponge_object.data.root_state_w[0, :3], torch.tensor([0.620925, 0.0, 0.7]))
+    pitch = torch.tensor([[3**0.5 / 2.0, 0.0, 0.5, 0.0]])
+    env.robot.data.body_link_state_w[:, 0, 3:7] = env.robot_io.command_to_link_quat(pitch)
+    env._reset_idx([0])
+    expected = torch.tensor([[0.3, 0.0, 0.7]]) + _quat_apply(pitch, torch.tensor([[0.320925, 0.0, 0.0]]))
+    torch.testing.assert_close(env.sponge_object.data.root_state_w[:, :3], expected)
+    policy, _, dots = _policy(monkeypatch, offset, orientation, mount_offset=mount, link_scale=scale)
+    for contact_step, dot in zip((800, 1290, 1780, 2270), dots):
+        contact = next(waypoint for waypoint in policy.waypoints if waypoint.t == contact_step)
+        expected_center = dot + torch.tensor([-0.055, 0.01, 0.0])
+        torch.testing.assert_close(contact.xyz, expected_center - torch.tensor([0.320925, 0.0, 0.0]))

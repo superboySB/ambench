@@ -1417,5 +1417,133 @@
     "inventory_gate": "Verify actual existing checkpoint files, completed epoch, AdamW/EMA/scheduler counters, heldout metric and SHA; freeze the deduplicated retained top4 plus final40 inventory before the first native selection attempt.",
     "epoch1": "May be a candidate only if actually retained in the final top4; no forced recovery-only exclusion or mandatory restart.",
     "execution": "Run the public trainer directly and observe actual AdamW/EMA evidence; no old observer-forced stop/restart or extra retention of every save opportunity."
-  }
+  },
+  "fixture_amendments": [
+    {
+      "amendment_id": "20261015_omni_wipe_mount150mm_predata_v1",
+      "date": "2026-10-15",
+      "stage": "before_new_Omni_Wipe_training_data_collection",
+      "root_approved": true,
+      "base_predeclaration_source_commit": "c9674cdf99f90666535dac1acd77a3a8de2c844c",
+      "base_simulation_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+      "simulation_variant_id": "omni-wipe-sponge-mount150mm-gen02",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "reason": {
+        "original_preflight_seed": 52001,
+        "native_success": false,
+        "stains_cleared": 2,
+        "native_stains": 4,
+        "observation": "The original gripper collider overlapped the attached sponge; preserve this original9ab failure and all its physics/video evidence."
+      },
+      "only_public_simulation_source_change": {
+        "file": "source/ambench/ambench/tasks/wipe_window/wipe_window_env_cfg.py",
+        "class": "WipeWindowEnvOmniHexaAbsPIDCfg",
+        "field": "sponge_attachment_offset_local",
+        "new_value_m": [
+          0.0,
+          0.0,
+          0.15
+        ],
+        "cfg_sha256": "f30d05c7117b4b0a4540e3a105952dc2fc0e800e3d1a681306b9e975be3c83c1",
+        "scope": "Omni Wipe fixture only; not a global default or a UAQuad mount transplant."
+      },
+      "unchanged_native_conditions": {
+        "episode_limit_s": 20,
+        "required_stains_cleared": 4,
+        "force_threshold_N": 1.25,
+        "force_comparison": "strict_gt",
+        "contact_radius_m": 0.08,
+        "contact_count": 1,
+        "reset_grace_steps": 10,
+        "action_frame": "task_command_world_right_v2",
+        "observation_ee_quaternion_frame": "authored_ee_link_world",
+        "object_size_mass_colliders_and_success_definition_changed": false
+      },
+      "new_preflight_seeds": [
+        52011,
+        52012
+      ],
+      "preflight_gate": "Fresh preflights only, excluded from training100, checkpoint selection10 and sealed_final30; no new success outcome is declared here.",
+      "data_and_evaluation_binding": "Collect Omni Wipe train80/heldout20 from this exact fixture variant and use the same variant for every Omni Wipe ACT/DP/OpenPI checkpoint-selection and sealed-final native trial. Record its full-Sim manifest/cfg SHA in data provenance, candidate inventory and explicit simulation_variant_ref.",
+      "multitask_binding": "Omni MT160 combines only80 Omni Press episodes from its original task fixture and80 Omni Wipe episodes from this amended task fixture; evaluate each task on its own declared fixture.",
+      "source_gate": "Original291-file base-source verification remains mandatory. Independently verify the full-Sim variant manifest and permit only this cfg change; serving/learning wrappers stay frozen9ab.",
+      "historical_boundary": "UAQuad data/physics, Omni Press fixtures and all earlier results retain their original source/physics identity. Do not relabel or merge the original52001 failure into new-variant preflight or final scores.",
+      "scope_budget_seed_ranking_changes": false,
+      "simulation_source_variant": "9ab28b0+OmniWipeMount150mm-gen02",
+      "simulation_variant_manifest_ref": {
+        "path": "outputs/research/extensions-20261015/omni-data/fixture-gen02/full-sim-source-manifest.json",
+        "sha256": "451dd1ac4c447c37dd10d929b18247caba564922ec2ff9761ec6763b1050d5af"
+      },
+      "full_sim_source_files": 394,
+      "status": "failed_gen02_preflight_preserved_not_used_for_new_training_data",
+      "observed_new_preflight_failure": {
+        "seed": 52011,
+        "native_success": false,
+        "reason": "Actual authored USD scale was absent from the rigid-body attachment helper; the mount-only fixture is not ready."
+      },
+      "superseded_for_new_data_and_evaluation_by": "20261015_omni_wipe_mount150mm_authored_scale_predata_v2"
+    },
+    {
+      "amendment_id": "20261015_omni_wipe_mount150mm_authored_scale_predata_v2",
+      "date": "2026-10-15",
+      "stage": "before_new_Omni_Wipe_training_data_collection",
+      "root_approved": true,
+      "base_predeclaration_source_commit": "c9674cdf99f90666535dac1acd77a3a8de2c844c",
+      "base_simulation_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+      "simulation_variant_id": "omni-wipe-sponge-mount150mm-scale-math-gen03",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "reason": {
+        "original_preflight_seed": 52001,
+        "original_native_success": false,
+        "original_stains_cleared": 2,
+        "mount_only_gen02_preflight_seed": 52011,
+        "gen02_native_success": false,
+        "diagnosis": "The authored EE USD has nonuniform scale, while the old helper used only measured rigid-body rotation/translation. The actual attachment local point .1945m scales to .320925m; omitting scale creates a .126425m tool-center mismatch. Use generic actual authored-scale composition, without hardcoded1.65 or morphology branches."
+      },
+      "unchanged_native_conditions": {
+        "episode_limit_s": 20,
+        "required_stains_cleared": 4,
+        "force_threshold_N": 1.25,
+        "force_comparison": "strict_gt",
+        "contact_radius_m": 0.08,
+        "contact_count": 1,
+        "reset_grace_steps": 10,
+        "action_frame": "task_command_world_right_v2",
+        "observation_ee_quaternion_frame": "authored_ee_link_world",
+        "object_size_mass_colliders_and_success_definition_changed": false
+      },
+      "new_preflight_seeds": [
+        52021,
+        52022
+      ],
+      "preflight_gate": "Fresh gen03 preflights only, excluded from training100, checkpoint selection10 and sealed_final30. Do not collect the new100 Omni Wipe demonstrations until both required native preflights and recording/physics audits pass; no success result is declared here.",
+      "data_and_evaluation_binding": "Only gen03 Omni Wipe train80/heldout20 data may initialize this study's Omni Wipe ACT/DP/OpenPI models, including its MT160 Wipe component. Use this same gen03 variant for every Omni Wipe checkpoint-selection and sealed-final trial; bind full-Sim manifest and both changed-file hashes in data provenance/candidate inventory/simulation_variant_ref.",
+      "multitask_binding": "Omni MT160 combines only80 Omni Press episodes from its original task fixture and80 Omni Wipe episodes from this amended task fixture; evaluate each task on its own declared fixture.",
+      "source_gate": "Verify the original291-file base tree without exceptions, plus the independent394-file full-Sim gen03 tree. Compare both trees and permit exactly the two recorded changed files. Serving/learning source remains frozen9ab; UAQuad evaluation remains on the original unmodified291 tree.",
+      "historical_boundary": "Preserve original52001 and mount-only gen02/52011 failed physics/video evidence. UAQuad data/physics and Omni Press fixtures retain their original versions; do not relabel prior outcomes as gen03 or merge preflights into final scores.",
+      "scope_budget_seed_ranking_changes": false,
+      "simulation_source_variant": "9ab28b0+OmniWipeMount150mmScaleMath-gen03",
+      "simulation_variant_manifest_ref": {
+        "path": "outputs/research/extensions-20261015/omni-data/fixture-gen03/full-sim-source-manifest.json",
+        "sha256": "08cd3b75da798670ad631d08a6830f252536b21b7f84656644964175f050e395"
+      },
+      "full_sim_source_files": 394,
+      "status": "approved_predata_pending_native_preflight",
+      "only_public_simulation_source_changes": {
+        "source/ambench/ambench/tasks/wipe_window/wipe_window_env_cfg.py": {
+          "sha256": "10751cc359c7cfce26c28eeeb7bb3ab068167b74a2098930229bba0e1b9d8889",
+          "scope": "Only Omni Wipe cfg sponge_attachment_offset_local=(0,0,.15) in authored EE coordinates before USD scale, and its explanatory comment."
+        },
+        "source/ambench/ambench/tasks/wipe_window/wipe_window_env.py": {
+          "sha256": "85cab3e30efb759c476c8c24d465eeddb49672e34d93d999fafe1d68d2f22121",
+          "scope": "Cache authored attachment local point multiplied by actual USD world scale, then apply measured rigid-body quaternion/position in the helper. No hardcoded scale, morphology branches, joint-coordinate or contact-threshold edits."
+        }
+      },
+      "attachment_coordinate_semantics": {
+        "config_offset": "(0,0,.15) in authored EE local coordinates, before the actual USD scale",
+        "fixed_joint_local_position": "Original authored-frame joint construction is retained; its local point follows the config offset",
+        "metric_geometry": "Measured body poses omit scale; multiply the authored local attachment by the actual USD scale before applying its rigid-body rotation and translation"
+      }
+    }
+  ]
 }

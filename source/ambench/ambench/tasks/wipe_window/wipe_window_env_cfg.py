@@ -202,6 +202,8 @@ class WipeWindowEnvOmniHexaAbsPIDCfg(WipeWindowEnvDefaultCfg):
     """Wipe window environment configuration for Omni-Hexa, absolute action with PID controller."""
 
     robot_profile = OMNI_HEXA_ABS_PID
+    # Keep the sponge clear of the scaled gripper collision envelope.
+    sponge_attachment_offset_local = (0.0, 0.0, 0.15)
 
 
 @configclass

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "study_id": "extensions-20261015",
+  "amendment_id": "resource6-20261015",
+  "root_ratified": true,
+  "date": "2026-10-15",
+  "scope": "Physical GPU scheduling only, before any Omni formal GPU training or remaining units' first native attempt",
+  "original_public_protocol_sha256": "90e039f683e484e4199b0181a73cad40e81ea74926ca77177811bc5271a1cdde",
+  "reason": "After successful completion and cleanup of the UA ACT110 evaluation, Omni data collection and all eight stock Wipe smoke probes, GPUs4 and7 were idle while the original UA OpenPI pair0/3 and UA DP GPU6 continued training. Use the idle pair for the long Omni OpenPI suite; queue the four Omni Torch runs and later native evaluation on GPU6. No elapsed-time improvement is claimed before measurement.",
+  "devices": {
+    "UA_OpenPI_pair_unchanged": [
+      "GPU-f80fc114-c9ff-af0a-0ddd-d05ad6b02b7c",
+      "GPU-3ecb00dc-3b1b-7f0b-8ad6-5425b4377ab4"
+    ],
+    "Omni_OpenPI_pair": [
+      "GPU-6b10b3b7-8a1c-726c-b874-b53bf14755d8",
+      "GPU-77a412e2-72c9-aa32-2108-7d49a3820087"
+    ],
+    "UA_DP_then_Omni_Torch_and_remaining_native": "GPU-64dba832-05ea-0415-8efa-a7714498f0c2"
+  },
+  "Omni_Torch_lane_order": [
+    "omnihexa_pressbutton_act",
+    "omnihexa_wipewindow_act",
+    "omnihexa_wipewindow_dp",
+    "omnihexa_pressbutton_dp"
+  ],
+  "requirements_before_new_execution": [
+    "Omni OpenPI: actual full fresh200 handoff, all three official exports and their own train-only normalizers, original six-run preparation and all CPU sourcefix stages must match exact frozen hashes before separate root GPU admission.",
+    "Omni Torch: independent coordinator-v4-resource6 plan, source freeze, CPU checks and root activation; v2 failures and never-activated v3 remain byte-for-byte preserved.",
+    "Omni Torch GPU6: wait for the original UA DP process and its exact container to genuinely complete40 epochs/88360 updates and pass budget verification, then acquire the common physical UUID lease and prove whole-HOST idle.",
+    "Remaining native units: independent GPU6 Torch-worker generations where the previous unused worker was hardcoded toGPU4; OpenPI uses per-unit explicit UUID admission. Actual complete-budget candidate inventories and all protocol gates remain mandatory.",
+    "Bind the exact inference GPU before the first selection attempt and retain it through that unit's sealed final evaluation. The already-completed UA ACT unit remains on its originalGPU4 provenance.",
+    "Use the common physical GPU UUID flock. Before admission inspect whole-HOST compute and graphics processes, not just container NVML. Keep the lease until exact owned cleanup and whole-HOST idle have passed.",
+    "Never overlap a new workload on the active original UA DP GPU6 or stop any unrelated process. Foreign GPUs1/2/5 remain untouched."
+  ],
+  "invariants": {
+    "formal_training_runs": 18,
+    "native_evaluation_units": 22,
+    "sealed_final_episodes": 660,
+    "learning_source_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+    "learning_source_manifest_sha256": "3f546f2f29c86925b6062ff3d27afc49b623986ccebf2b3168f49f60ec2e4410",
+    "Omni_fresh200_data_ready_sha256": "74fad093f24d1e7fe020b3436d0d6d45d0b49f8eea0280b3dd1c1961342bd3d3",
+    "Omni_Wipe_simulation_manifest_sha256": "08cd3b75da798670ad631d08a6830f252536b21b7f84656644964175f050e395",
+    "full_models_and_training_math_unchanged": true,
+    "full_global_batches_and_update_epoch_budgets_unchanged": true,
+    "data_splits_normalizers_and_fixed_seeds_unchanged": true,
+    "candidate_rules_rankings_and_selection_locks_unchanged": true,
+    "native_limits_success_thresholds_and_video_protocol_unchanged": true,
+    "new_partial_checkpoint_evaluation_allowed": false,
+    "failed_native_task_attempt_retries_allowed": false
+  },
+  "claim_limit": "This ratified scheduling policy is not evidence that new GPU training started, budgets completed or native units passed. Those require separate actual activation, process, budget, inventory and result receipts. Original declarations and historical device identities are not rewritten."
+}

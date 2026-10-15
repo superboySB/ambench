@@ -1,12 +1,12 @@
 {
-  "artifact_bytes": 146114236,
-  "artifact_file_count": 640,
+  "artifact_bytes": 146155237,
+  "artifact_file_count": 642,
   "experiment_count": 65,
-  "generated_at_utc": "2026-10-15T03:15:28.870419+00:00",
+  "generated_at_utc": "2026-10-15T04:02:53.319659+00:00",
   "gif_count": 306,
   "maximum_file_bytes": 9411329,
   "mp4_count": 306,
-  "payload_bytes": 145993429,
+  "payload_bytes": 146034105,
   "payload_files": [
     {
       "bytes": 0,
@@ -3154,6 +3154,16 @@
       "sha256": "c88b9409966fe59375d9ce89d654a9b259a954087c7626c3db5a0660615b2831"
     },
     {
+      "bytes": 34818,
+      "path": "trained/replay.json",
+      "sha256": "5dde23ae6c6bdfec1e08eb1f9a661fb7161cbc6618cbe87d868d64786caa7367"
+    },
+    {
+      "bytes": 5858,
+      "path": "trained/replay_animation_specs.json",
+      "sha256": "fd0329b886755b55dee802bf709dc19bdc08497a3f0837eeafc11ab44f627457"
+    },
+    {
       "bytes": 39577,
       "path": "trained/validation.json",
       "sha256": "2a4b82541d51312d09c75b3d5c0a9ee3941f0800f51f2d76d8de3e08b96afc87"
@@ -3204,9 +3214,9 @@
       "sha256": "23ed7f5df62b0d07adb45cd6910b5bb9f062e0cdcce87c29df30f3ba9140c649"
     }
   ],
-  "payload_sha256": "6c79d46c95141af591598d0820c8d56ae3f613998bcf273102d82bfb135f9825",
+  "payload_sha256": "bdb4fc002970d2682abcf667dbfdb0f59fa515e86f31b7b992231e6b9dc798d5",
   "preview_count": 306,
-  "research_commit": "09310ae775ed3ce1da3bf1a0b3c775e899c1a8ae",
+  "research_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
   "source_file_count": 306,
   "source_manifest_sha256": "ea0c34ce1b09006085db9662e9e0a7d1e4336b9ea1b95f94323af2f0d6cadce4",
   "source_worktree_clean": true

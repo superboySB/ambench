@@ -1,0 +1,155 @@
+[
+  {
+    "name": "uaquad_dp_replay_seed34002_scene_camera",
+    "title": "DP fresh | seed34002 | scene",
+    "source_report": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/eval_summary.json",
+    "source_video": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/videos/dp-eval-scene_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Independent fresh reproduction after explicit terminal capture fix. First and last recorded source frames retained. Separate from sealed30; changing seed also changes initial task conditions, so this is not a matched-layout policy comparison. Seed34001 original videos are retained separately with observed reset tail.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_fresh_replay20261015",
+      "category": "models",
+      "trial_id": "uaquad_dp_reproduction20261015_seed34002",
+      "camera": "scene_camera",
+      "source_run_date": "2026-10-15",
+      "source_time_basis": "source MP4 presentation time; simulation duration is executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 8.791666666666666,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "one independent recording-fix verification attempt; separately reported from sealed30 and seed34001"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_replay_seed34002_base_camera",
+    "title": "DP fresh | seed34002 | base",
+    "source_report": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/eval_summary.json",
+    "source_video": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/videos/dp-eval-base_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Independent fresh reproduction after explicit terminal capture fix. First and last recorded source frames retained. Separate from sealed30; changing seed also changes initial task conditions, so this is not a matched-layout policy comparison. Seed34001 original videos are retained separately with observed reset tail.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_fresh_replay20261015",
+      "category": "models",
+      "trial_id": "uaquad_dp_reproduction20261015_seed34002",
+      "camera": "base_camera",
+      "source_run_date": "2026-10-15",
+      "source_time_basis": "source MP4 presentation time; simulation duration is executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 8.791666666666666,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "one independent recording-fix verification attempt; separately reported from sealed30 and seed34001"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  },
+  {
+    "name": "uaquad_dp_replay_seed34002_ee_camera",
+    "title": "DP fresh | seed34002 | ee",
+    "source_report": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/eval_summary.json",
+    "source_video": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/videos/dp-eval-ee_camera-env0-eps0.mp4",
+    "outcome_path": [
+      "rollouts",
+      0,
+      "termination_reason"
+    ],
+    "notes": "Independent fresh reproduction after explicit terminal capture fix. First and last recorded source frames retained. Separate from sealed30; changing seed also changes initial task conditions, so this is not a matched-layout policy comparison. Seed34001 original videos are retained separately with observed reset tail.",
+    "metadata": {
+      "experiment_id": "uaquad_dp_fresh_replay20261015",
+      "category": "models",
+      "trial_id": "uaquad_dp_reproduction20261015_seed34002",
+      "camera": "ee_camera",
+      "source_run_date": "2026-10-15",
+      "source_time_basis": "source MP4 presentation time; simulation duration is executed_steps / 120Hz",
+      "episode_index": 0,
+      "simulation_duration_s": 8.791666666666666,
+      "inference_seed": 42,
+      "inference_device": "cpu",
+      "training_seed": 42,
+      "training_steps": 18592,
+      "geometry_randomized": true,
+      "attempt_selection": "one independent recording-fix verification attempt; separately reported from sealed30 and seed34001"
+    },
+    "metadata_paths": {
+      "task_id": [
+        "metadata",
+        "Task"
+      ],
+      "env_seed": [
+        "metadata",
+        "Seed"
+      ],
+      "steps": [
+        "rollouts",
+        0,
+        "executed_steps"
+      ],
+      "action_semantics": [
+        "metadata",
+        "Action semantics"
+      ],
+      "episode_length_s": [
+        "metadata",
+        "Episode length override (s)"
+      ]
+    }
+  }
+]

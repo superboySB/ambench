@@ -139,14 +139,18 @@ def stage_site(repo_root: Path, research_commit: str, worktree_clean: bool) -> t
             if source.is_symlink() or not source.is_file():
                 raise ValueError(f"Missing regular {topic} documentation file: {filename}")
             (staged_topic / filename).write_bytes(source.read_bytes())
-    trained_dir = repo_root / "usage_assets" / "trained"
-    if (trained_dir / "index.html").is_file():
-        staged_trained = stage / "trained"
-        staged_trained.mkdir()
-        for source in sorted(trained_dir.iterdir()):
+    for topic in ("trained", "extensions"):
+        topic_dir = repo_root / "usage_assets" / topic
+        if not (topic_dir / "index.html").is_file():
+            continue
+        staged_topic = stage / topic
+        staged_topic.mkdir()
+        for source in sorted(topic_dir.iterdir()):
             if source.is_symlink() or not source.is_file() or source.suffix not in {".html", ".json"}:
-                raise ValueError("Trained results must contain only regular HTML/JSON; media belongs in Release assets")
-            (staged_trained / source.name).write_bytes(source.read_bytes())
+                raise ValueError(
+                    f"{topic} results must contain only regular HTML/JSON; media belongs in Release assets"
+                )
+            (staged_topic / source.name).write_bytes(source.read_bytes())
     payload = file_records(stage)
     payload_bytes = sum(int(record["bytes"]) for record in payload)
     release = {

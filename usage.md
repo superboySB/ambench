@@ -61,7 +61,18 @@ bash tools/research/train_dp_full.sh --check \
 
 UAQuad WipeWindow 已有 100 条成功示范与 80/20 数据准备；ACT 已完成 40,000 次真实更新，8 个候选的完整留出集验证通过，正在做原生闭环选模。DP 仍在执行完整 40 epoch（按实际采样器为 88,360 次更新）；最终封存成绩均尚未产生。UAQuad OpenPI 的 MT160 / ST80 数据与独立统计已准备；旧 exit 139、`OOMKilled=false` 的原记录保留，不能据此认定 OOM。独立环境修复后的新单卡 72 GB full-model / batch 32 探测出现显式分配 OOM，停在首个更新前；GPU 0/3 双卡 FSDP2 已通过完整模型真实更新并启动 UAQuad 多任务正式长训，保留完整模型、global batch 32 和 40k 预算；其后单任务阶段仍须容量门控与实际训练验收。OmniHexa seed 41001 原生成功与新 CPU 审计通过的证据保留，专属 200 条成功示范和充分训练仍待完成。这些扩展与下文历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
 
-**Omni Wipe 采集前修订：** 原 `9ab28b0` fixture 的 seed 52001 原生失败，只清除 2/4 污点；夹爪 collider 与海绵重叠。仅加长安装点的 gen02 在 52011 仍失败，另确认工具位置计算遗漏 authored USD scale。经批准，gen03 包含两个显式记录 SHA 的文件变更：Omni 专属 authored EE 局部安装偏移 `(0, 0, 0.15)`（乘 USD scale 前），以及依据实际 USD scale 的通用工具坐标计算；固定关节仍使用 authored 局部坐标，原生 20 秒、4 污点、1.25 N / 80 mm 条件保持原定义。新示范及 ACT/DP/OpenPI 的 Omni Wipe 评估统一绑定 gen03，详见[预声明修订](usage_assets/extensions_20261015_plan.json)的 `fixture_amendments`。52021/52022 仅为采集前新预检，排除在训练、选模和最终测试之外；旧 UAQuad 物理版本及原始/gen02 失败证据保留，本段不宣称 gen03 已通过预检。
+**Omni Wipe 采集前修订：** 原 `9ab28b0` fixture 的 seed 52001 原生失败，只清除 2/4 污点；夹爪 collider 与海绵重叠。仅加长安装点的 gen02 在 52011 仍失败，另确认工具位置计算遗漏 authored USD scale。经批准，gen03 包含两个显式记录 SHA 的文件变更：Omni 专属 authored EE 局部安装偏移 `(0, 0, 0.15)`（乘 USD scale 前），以及依据实际 USD scale 的通用工具坐标计算；固定关节仍使用 authored 局部坐标，原生 20 秒、4 污点、1.25 N / 80 mm 条件保持原定义。新示范及 ACT/DP/OpenPI 的 Omni Wipe 评估统一绑定 gen03，详见[预声明修订](usage_assets/extensions_20261015_plan.json)的 `fixture_amendments`。52021/52022 仅为采集前新预检，排除在训练、选模和最终测试之外；旧 UAQuad 物理版本及原始/gen02 失败证据保留。gen03 的两条独立脚本专家预检现已通过，完整示范采集及学习策略训练/最终测试继续执行中。
+
+### Omni 擦窗夹具修复：独立成功预检
+
+修复后两条预检分别在 **2240 / 1750 步**清除全部 4 个污点。每条都核验全部数值与终止前物理状态，并完整解码三视角录像。它们排除在训练、选模及封存测试之外，**不计入学习策略成功率**。
+
+| 预检 seed | 原生结果 | EE 视角预览 |
+| --- | --- | --- |
+| 52021 | 成功，18.667 仿真秒；原片各 560 帧 | ![Omni 擦窗脚本专家 seed52021 EE 成功预检](https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_ee_camera.gif) |
+| 52022 | 成功，14.583 仿真秒；原片各 438 帧 | ![Omni 擦窗脚本专家 seed52022 EE 成功预检](https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_ee_camera.gif) |
+
+[三视角同步原片与物理审计](https://zipengdai.com/ambench/extensions/) · [全部录像、预览和来源清单](usage_assets/extensions/fixture_manifest.json) · [验证边界](usage_assets/extensions/fixture_validation.json)。预览抽样并停留末帧；原片最后采样步为 2236 / 1748，真实成功终态分别在 2240 / 1750 步、自动重置前测得，不能将最后图像当作终止状态。26 项 Release 资产均已匿名整文件下载并核对 SHA-256，录像与数据不进入 Git。
 
 ### 本轮逐步复测（2026-10-15）
 

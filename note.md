@@ -18,6 +18,10 @@
 
 Omni Wipe 的原 52001 只清除 2/4 污点；仅加长安装点的 gen02 在 52011 仍失败，另发现工具位置计算遗漏 authored USD scale。采集前预声明的 gen03 保留专属 authored EE 局部坐标中的 `(0, 0, 0.15)` 安装偏移，并用实际 USD scale 修正通用坐标计算，明确绑定两个源码文件 SHA；新数据及评估统一使用 gen03，52021/52022 仅作新预检。原生阈值、UAQuad 物理版本与旧失败证据保留，详见预声明的 `fixture_amendments`。
 
+gen03 的两条独立脚本专家预检已在 2240 / 1750 步原生成功，三视角原片及全部物理状态审计通过；这些预检不属于学习策略成绩。[查看三视角原片](https://zipengdai.com/ambench/extensions/)及[完整验收边界](usage_assets/extensions/fixture_validation.json)。
+
+![Omni 擦窗夹具修复后，脚本专家 seed52021 成功预检](https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_ee_camera.gif)
+
 ### 先选择复现版本
 
 `research` 会继续变化，Compose 挂载和远端同步会使用当前 checkout；旧 checkpoint 路径和旧镜像标签不能单独固定运行源码。重放历史实验时，从下表指定提交建立独立 worktree，并在该 worktree 中使用相应手册、子模块、镜像依赖和保存的配置。不要切换正在被训练或评估容器挂载的 checkout。

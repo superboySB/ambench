@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AM-Bench · 长训练扩展与夹具复测</title>
+    <style>
+      :root{font-family:system-ui,sans-serif;color:#193146;background:#f4f7fa}
+      *{box-sizing:border-box}body{margin:0}main{max-width:1280px;margin:auto;padding:24px 18px}
+      h1{font-size:1.7rem}h2{font-size:1.2rem}p{line-height:1.65}a{color:#14589a}
+      article,.panel{background:white;border:1px solid #d4dfe8;border-radius:9px;padding:18px;margin:18px 0}
+      .views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+      figure{margin:0;min-width:0}video{width:100%;height:300px;object-fit:contain;background:#182b3c}
+      figcaption{padding:8px 0}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
+      button,select,input{font:inherit}button,select{padding:7px;border:1px solid #9fb2c4;border-radius:5px;background:white}
+      button{cursor:pointer}input[type=range]{flex:1;min-width:120px}.status{color:#176a36}
+      pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:.85rem}:focus-visible{outline:3px solid #c78900}
+      @media(max-width:750px){.views{grid-template-columns:1fr}video{height:280px}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>长训练扩展与夹具复测</h1>
+      <p><a href="https://github.com/superboySB/ambench/blob/research/usage.md">复现手册</a> ·
+        <a href="../trained/">既有 UAQuad PressButton 正式训练结果</a> · <a href="../">全部历史仿真实验</a></p>
+      <div class="panel">
+        <p>以下是 OmniHexa 擦窗夹具修复后的独立脚本专家预检。它们不属于训练集、模型选择或封存最终测试，不能作为学习策略的成功率。</p>
+        <p>原生条件为 20 秒、清除全部 4 个污点、接触力大于 1.25 N 且距离不大于 80 mm。
+          原始录像为 30 FPS、每 4 个仿真步采一帧；末帧在原生终止之前，成功结果以自动重置前的物理状态为准。
+          GIF 和短片预览经过时间采样并额外停留末帧；SUCCESS 角标表示整次预检的最终结果。</p>
+        <p><a href="fixture_manifest.json">录像与预览 SHA 清单</a> · <a href="fixture_validation.json">来源、物理审计与验证边界</a></p>
+      </div>
+      <div id="trials"></div>
+      <noscript>请启用 JavaScript，或通过录像清单和复现手册打开 GIF、原始 MP4。</noscript>
+    </main>
+    <script>
+      const data = {"trials":[{"seed":52021,"role":"scripted_expert_preflight_not_trained_policy_score","native_steps":2240,"native_success":true,"audit_ref":{"url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_audit.json","sha256":"6af11227c09c270ef13d748e885355c330b5210ad4e322acd6bb872d307719e4"},"videos":[{"camera":"scene_camera","frames":560,"fps":30,"last_sample_step":2236,"raw_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_scene_camera_raw.mp4","raw_mp4_sha256":"8357d6521a432dedf2b00fbea1a5ed6db44b9037068bdfd3f0026374a44968c5","gif_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_scene_camera.gif","gif_sha256":"1f844882966ba43d3c54e157991cd122ca20c0a76b41f6056b4792605cbf2467","preview_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_scene_camera.mp4","preview_mp4_sha256":"d43bb6f67e67e3be0bb08aaf37d0c468dc889a9efbf7991ba100453be59c0b55"},{"camera":"base_camera","frames":560,"fps":30,"last_sample_step":2236,"raw_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_base_camera_raw.mp4","raw_mp4_sha256":"0debe446a74f077c1997f214bbf21a64510ffb8ca9969387eadc5430302a8c93","gif_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_base_camera.gif","gif_sha256":"3ec9210ebabf9e1f03db4fd8609f31f10ba8d76a8e463800a16077202bc89f4e","preview_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_base_camera.mp4","preview_mp4_sha256":"6872030aa666c0a9497942c57b6c7cc19a9d247ae6370e6b63b7e4cde0e06b7c"},{"camera":"ee_camera","frames":560,"fps":30,"last_sample_step":2236,"raw_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_ee_camera_raw.mp4","raw_mp4_sha256":"c2d402bf5146d888ff6c11da39a56c83fc063c91746a6198ef05d75317f8b9e1","gif_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_ee_camera.gif","gif_sha256":"bf13528e61b3073ca32eb340001e82556a7c801af020c971b16cf6f372ae8098","preview_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52021_ee_camera.mp4","preview_mp4_sha256":"4cbe963fd506d4ec291fbfa205d4e75e94dd0e290ac899ca4d2315f481fa2cdd"}],"audit":{"all_native_rows_verified":2240,"native_stains_cleared":4,"off_window_samples":958,"off_window_peak_net_force_N":0.0,"off_window_maximum_full3D_attachment_error_m":8.380719373235479e-05,"terminal_full3D_attachment_error_m":0.0006862647132948041,"terminal_contact_force_N":22.224231719970703,"terminal_state_source":"after_original_get_dones_before_automatic_reset","video_last_sample_is_terminal_state":false}},{"seed":52022,"role":"scripted_expert_preflight_not_trained_policy_score","native_steps":1750,"native_success":true,"audit_ref":{"url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_audit.json","sha256":"1f72fdf9368331a4a9db754a1ec216885129cd0cf1003b5353312e72e3c0ffd0"},"videos":[{"camera":"scene_camera","frames":438,"fps":30,"last_sample_step":1748,"raw_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_scene_camera_raw.mp4","raw_mp4_sha256":"62041b260cbedeb1e60f00935e9964a6e8f0adb537880794e0c9c2f81e16a178","gif_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_scene_camera.gif","gif_sha256":"577c1df551b78aace0da56feb873bfbdff2f8cc7b3fb4242e768250218caeff6","preview_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_scene_camera.mp4","preview_mp4_sha256":"6b66ec49ce4cba23f4d1cb8189c96da26e82bb11be296e0a756f7f4ab9cd9634"},{"camera":"base_camera","frames":438,"fps":30,"last_sample_step":1748,"raw_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_base_camera_raw.mp4","raw_mp4_sha256":"7cabc6e912da69bf603838b921fb829ab5387292ac7474264db35297e94e6437","gif_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_base_camera.gif","gif_sha256":"dcd55bee6bc5229d1ebd9afdca9d8cc854889897e2d48cf3c17cff830f886722","preview_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_base_camera.mp4","preview_mp4_sha256":"1cfbfac411a1e5bfb5ee57a8b23fd1285ae307c493472cb3b49310645283c1ce"},{"camera":"ee_camera","frames":438,"fps":30,"last_sample_step":1748,"raw_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_ee_camera_raw.mp4","raw_mp4_sha256":"aea968107f6317ef4c305be5d92d89093f89e36f97b1bf69aec7a9526701b140","gif_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_ee_camera.gif","gif_sha256":"321a34dd3317108aa33d920f1f4ab3b014125caad804be2795c3ec76b5ef98cc","preview_mp4_url":"https://github.com/superboySB/ambench/releases/download/research-media-20261015-omni-fixture-gen03/omni_wipe_gen03_preflight_seed52022_ee_camera.mp4","preview_mp4_sha256":"81bf2ba89426cdc8f8a1c40ec40fa3e3d18434727020aaf8f659d2ae2b1779e2"}],"audit":{"all_native_rows_verified":1750,"native_stains_cleared":4,"off_window_samples":827,"off_window_peak_net_force_N":0.0,"off_window_maximum_full3D_attachment_error_m":8.380719373235479e-05,"terminal_full3D_attachment_error_m":0.0006159834447316825,"terminal_contact_force_N":18.745784759521484,"terminal_state_source":"after_original_get_dones_before_automatic_reset","video_last_sample_is_terminal_state":false}}]};
+      const node = (tag, text, className) => {
+        const item = document.createElement(tag);
+        if (text !== undefined) item.textContent = text;
+        if (className) item.className = className;
+        return item;
+      };
+      const link = (text, url) => {const item=node("a", text);item.href=url;return item;};
+      for (const trial of data.trials) {
+        const article = node("article");
+        article.id = `seed${trial.seed}`;
+        article.append(node("h2", `OmniHexa WipeWindow · 脚本专家 · seed ${trial.seed}`),
+          node("p", `原生成功 · ${trial.native_steps} 步 / ${(trial.native_steps/120).toFixed(3)} 仿真秒 · 4/4 污点`, "status"));
+        const controls = node("div", undefined, "controls");
+        const play = node("button", "同步播放三视角");play.type="button";
+        const pause = node("button", "暂停");pause.type="button";
+        const speed = node("select");speed.setAttribute("aria-label", `seed ${trial.seed} 播放倍速`);
+        for (const value of [.25,.5,1,2]) {const option=node("option", `${value}×`);option.value=value;option.selected=value===1;speed.append(option);}
+        const seek = node("input");seek.type="range";seek.min=0;seek.max=1;seek.step=.001;seek.value=0;
+        seek.setAttribute("aria-label", `seed ${trial.seed} 同步进度`);
+        const state = node("span", "等待原片加载");state.setAttribute("role", "status");
+        controls.append(play,pause,speed,seek,state);article.append(controls);
+        const views = node("div", undefined, "views");
+        const videos = [];
+        for (const row of trial.videos) {
+          const figure=node("figure"), video=node("video");
+          video.controls=true;video.preload="metadata";video.playsInline=true;video.src=row.raw_mp4_url;
+          video.setAttribute("aria-label", `seed ${trial.seed} ${row.camera} 原始录像`);
+          const caption=node("figcaption");
+          caption.append(node("strong", row.camera),node("p", `${row.frames} 帧 · 30 FPS · 最后采样步 ${row.last_sample_step}`),
+            link("原始 MP4", row.raw_mp4_url),document.createTextNode(" · "),link("GIF 预览", row.gif_url),
+            document.createTextNode(" · "),link("短片预览", row.preview_mp4_url));
+          figure.append(video,caption);views.append(figure);videos.push(video);
+          video.addEventListener("loadedmetadata", () => {state.textContent="原片已加载，可同步播放";});
+          video.addEventListener("error", () => {state.textContent="录像加载失败，请打开原始 MP4 链接";});
+        }
+        const ready = () => videos.filter(video => Number.isFinite(video.duration));
+        const duration = () => Math.min(...ready().map(video => video.duration));
+        play.addEventListener("click", async () => {
+          try {
+            const time=videos[0].currentTime;
+            for (const video of videos) {video.currentTime=time;video.playbackRate=Number(speed.value);}
+            await Promise.all(videos.map(video => video.play()));state.textContent="三视角同步播放中";
+          } catch (_) {state.textContent="同步播放未完成，请先分别加载三段原片";}
+        });
+        pause.addEventListener("click", () => {for (const video of videos) video.pause();state.textContent="已暂停";});
+        speed.addEventListener("change", () => {for (const video of videos) video.playbackRate=Number(speed.value);});
+        seek.addEventListener("input", () => {if(ready().length===videos.length) for(const video of videos) video.currentTime=Number(seek.value)*duration();});
+        videos[0].addEventListener("timeupdate", () => {if(ready().length===videos.length) seek.value=videos[0].currentTime/duration();});
+        article.append(views);
+        const details=node("details"), summary=node("summary", "本次原生结果与物理审计");
+        details.append(summary,node("pre", JSON.stringify(trial.audit,null,2)));article.append(details);
+        document.querySelector("#trials").append(article);
+      }
+    </script>
+  </body>
+</html>

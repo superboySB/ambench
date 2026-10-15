@@ -55,7 +55,9 @@ bash tools/research/train_dp_full.sh --check \
 
 这条命令要求现有 `ambench-policy-training` 容器与数据挂载；首次部署仍先执行 `note.md`。训练和评估都应冻结源码、数据、stats、依赖与实际权重，历史源码选择见 [note.md 的版本表](note.md#先选择复现版本)。只下载仓库不会包含原始数据、完整录像或模型权重。
 
-**尚未完成的扩展：** UAQuad WipeWindow 已有 100 条成功示范、80/20 数据转换与统计，正式 ACT/DP 训练尚未完成；OpenPI 已有 PressButton+WipeWindow 的 MT160 / ST80 数据及独立统计，正式训练尝试以 exit 139 结束，`OOMKilled=false`，尚无已验收的更新数或 checkpoint，未确证失败原因。OmniHexa seed 41001 按钮任务原生成功；原视频审计失败记录保留，2026-10-15 新 CPU 审计已通过，专属多任务数据与充分训练仍未完成。这些扩展与下文已完成的历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
+**2026-10-15 追加长训练阶段：** 用户已授权全部 **18 次正式训练**：UAQuad WipeWindow ACT/DP 2 次、OmniHexa 两任务 ACT/DP 4 次，以及 UAQuad / OmniHexa 各 6 次 OpenPI。完整预算、80/20 数据划分、4 组隔离种子和选模规则见[公开预声明](usage_assets/extensions_20261015_plan.json)；22 个模型任务评估单元各需选模锁及 30 次独立最终测试。当前进展以真实状态与验收记录为准，不能把已启动写成已完成。
+
+UAQuad WipeWindow 已有 100 条成功示范与 80/20 数据准备，正式 ACT/DP 已在远端 GPU 4/6 启动，尚未报告最终更新数或成绩。UAQuad OpenPI 的 MT160 / ST80 数据与独立统计已准备；旧 exit 139、`OOMKilled=false` 的原记录保留，不能据此认定 OOM。独立环境修复后的新单卡 72 GB full-model / batch 32 探测出现显式分配 OOM，停在首个更新前；GPU 0/3 双卡 FSDP2 已通过完整模型真实更新并启动 UAQuad 多任务正式长训，保留完整模型、global batch 32 和 40k 预算；其后单任务阶段仍须容量门控与实际训练验收。OmniHexa seed 41001 原生成功与新 CPU 审计通过的证据保留，专属 200 条成功示范和充分训练仍待完成。这些扩展与下文历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
 
 ### 本轮逐步复测（2026-10-15）
 
@@ -67,7 +69,7 @@ bash tools/research/train_dp_full.sh --check \
 | 已选 DP 的新闭环 | 录像修复后 seed **34002** 首次尝试 **1/1** 原生成功；1055 步，约 **8.792 s**；三路原片各 264 帧全解码 | 单任务 partial functional test；独立于原 30/30，不追加到其分母 |
 | 公开视频交付 | **686** 附件匿名 Range/长度/文件签名通过；38 个完整文件 SHA、24 条 MP4 下载后全解码、24 路真实浏览器加载/跳转/播放、GitHub 文档 2 个 GIF 解码通过 | [在线新实验页](https://zipengdai.com/ambench/trained/)；包括筛选、分页、深链和手机布局 |
 
-来源、逐项日志与 SHA 见[本轮复测快照](usage_assets/reproduction_20261015.json)。本轮复用已有仿真镜像 `sha256:09bb607e…`（烘焙源码 `02d1499`），通过挂载使用当前 research 源码，**没有重新构建镜像或重新训练模型**。新 DP 推理仍用冻结 `875569d` 的已选 epoch 16 权重与归一化，加载前核对 119 个 backend 文件及 3 个 support 文件；仿真侧使用当前坐标/相机实现和修复后的录像写入器。
+来源、逐项日志与 SHA 见[本轮复测快照](usage_assets/reproduction_20261015.json)。上述复测批次复用已有仿真镜像 `sha256:09bb607e…`（烘焙源码 `02d1499`），通过挂载使用当前 research 源码，**上述复测批次没有重新构建镜像或重新训练模型**。新 DP 推理仍用冻结 `875569d` 的已选 epoch 16 权重与归一化，加载前核对 119 个 backend 文件及 3 个 support 文件；仿真侧使用当前坐标/相机实现和修复后的录像写入器。
 
 此前 seed 34001 也首次原生成功（956 步），但视频最后采到了自动 reset 后的初始场景；三路 240 帧原片和失败审计原样保留。现已让 `RecordVideo` 在 done 时跳过返回的 reset 图像，成功/超时及单/双环境 CPU 回归通过；34002 原片末帧经实际检查仍是按钮接触画面。两次 seed 不同，不将步数变化解释为录像修复提高了任务性能。
 

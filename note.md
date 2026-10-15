@@ -6,11 +6,13 @@
 
 当前机器已有历史示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
 
-2026-10-15 按当前挂载源码完成 **106/106** 注册/reset/8 步 smoke、**126 项 CPU 回归**和 **12/12** 历史 canonical 重验；另以已选 DP epoch 16 权重在新 seed 34002 首次闭环成功（1055 步、约 8.792 秒），单独记录，不合入原最终测试 30/30。此前 34001 的原生成功与含 reset 尾帧的视频保留；录像修复后 34002 三路各 264 帧完整解码、末帧接触画面检查通过。本轮复用已有仿真镜像 `sha256:09bb607e…`，其烘焙源码仍为 `02d1499`；当前源码来自挂载，没有重建镜像或重新训练。在线新实验的 686 附件匿名访问、选定视频全解码与实际浏览器播放已验收；CDN 返回 `application/octet-stream`，不宣称媒体 MIME 匹配。逐项来源、哈希与验证边界见 [usage.md 本轮复测](usage.md#本轮逐步复测2026-10-15)和[快照](usage_assets/reproduction_20261015.json)。
+2026-10-15 按当前挂载源码完成 **106/106** 注册/reset/8 步 smoke、**126 项 CPU 回归**和 **12/12** 历史 canonical 重验；另以已选 DP epoch 16 权重在新 seed 34002 首次闭环成功（1055 步、约 8.792 秒），单独记录，不合入原最终测试 30/30。此前 34001 的原生成功与含 reset 尾帧的视频保留；录像修复后 34002 三路各 264 帧完整解码、末帧接触画面检查通过。上述复测批次复用已有仿真镜像 `sha256:09bb607e…`，其烘焙源码仍为 `02d1499`；源码来自挂载，**上述复测批次没有重建镜像或重新训练模型**。在线新实验的 686 附件匿名访问、选定视频全解码与实际浏览器播放已验收；CDN 返回 `application/octet-stream`，不宣称媒体 MIME 匹配。逐项来源、哈希与验证边界见 [usage.md 本轮复测](usage.md#本轮逐步复测2026-10-15)和[快照](usage_assets/reproduction_20261015.json)。
 
 [![本轮DP seed34002按钮成功过程，录像末帧保持接触](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_ee_camera.mp4)
 
 上图是本轮新试次的采样预览，点击播放 MP4；[重放来源清单](usage_assets/trained/replay.json)保留两个 seed 的全部原片与录制版本，两个试次不合并为新成功率。
+
+**2026-10-15 追加长训练阶段：** 用户已授权全部 **18 次正式训练**，范围、完整预算、80/20 划分和选模/最终测试种子见[公开预声明](usage_assets/extensions_20261015_plan.json)。UAQuad WipeWindow ACT/DP 已在远端 GPU 4/6 启动；OpenPI 的旧 exit 139 环境问题已通过独立探针定位；新的单卡 full-batch 显式 OOM 单独保留。双卡 FSDP2 已通过完整模型真实更新，UAQuad 多任务正式长训已启动。当前进展以真实训练状态与验收记录为准，尚不报告这批训练完成或新成功率；状态详见 [usage.md](usage.md#当前正式训练结果2026-10-15)。
 
 ### 先选择复现版本
 

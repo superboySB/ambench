@@ -573,6 +573,9 @@ def main() -> None:
     parser.add_argument("--resume", action="store_true")
     arguments = vars(parser.parse_args())
     action, resume = arguments.pop("action"), arguments.pop("resume")
+    if action == "train" and os.environ.get("JAX_PLATFORMS") == "cuda":
+        # Finite-update observers use host callbacks alongside GPU execution.
+        os.environ["JAX_PLATFORMS"] = "cuda,cpu"
     logging.basicConfig(level=logging.INFO, force=True)
     sys.path.insert(0, arguments["openpi_root"])
     print(json.dumps(run_training(TrainingRequest(**arguments), action=action, resume=resume), indent=2))

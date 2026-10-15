@@ -18,6 +18,8 @@ OPENPI_ROOT="/opt/openpi"
 SEED=42
 FSDP_DEVICES=1
 
+# Use the CUDA libraries installed in the locked OpenPI environment.
+export LD_LIBRARY_PATH=""
 export PYTHONPATH="/workspace/ambench/source/ambench_learn:$OPENPI_ROOT"
 /opt/openpi/.venv/bin/python -m ambench_learn.policies.pi.train \
   --variant "$VARIANT" --stage "$STAGE" --mode "$MODE" --action "$ACTION" \

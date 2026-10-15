@@ -1,0 +1,1421 @@
+{
+  "schema_version": 1,
+  "study_id": "extensions-20261015",
+  "date": "2026-10-15",
+  "status": "root_ratified_predeclaration_before_native_selection",
+  "base_code_commit": "9ab28b02ab332e47e4a15dbeccca31f83452aed8",
+  "source_branch": "research",
+  "root_approved": true,
+  "evaluation_seed_blocks_root_ratified": true,
+  "authorization": {
+    "date": "2026-10-15",
+    "user_instruction": "Explicit authorization for all long-training extensions, including both six-run OpenPI suites.",
+    "scope_ratified_by_root": "18 formal training runs and four fixed selection/final seed blocks",
+    "no_reduction": "Full fine-tuning, full model, prescribed batches, epochs and actual optimizer-update budgets remain mandatory."
+  },
+  "scope": {
+    "formal_training_runs": 18,
+    "UAQuad_Wipe_ACT_DP_runs": 2,
+    "OmniHexa_ACT_DP_runs": 4,
+    "UAQuad_OpenPI_runs": 6,
+    "OmniHexa_OpenPI_runs": 6,
+    "model_task_evaluation_units": 22,
+    "minimum_final_native_episodes": 660,
+    "minimum_final_original_video_streams": 1980,
+    "full_OpenPI_updates_UAQuad": 160000,
+    "full_OpenPI_updates_OmniHexa": 160000,
+    "ACT_updates_total": 120000,
+    "UAQuad_Wipe_DP_updates": 88360,
+    "Omni_DP_updates": "Compute independently after actual task data exist;40full epochs each",
+    "excluded_from_18": [
+      "Already-completed UAQuad PressButton ACT/DP; preserve old30/30 and0/30 unchanged",
+      "Isolated ACT absolute-action ablation unless separately authorized",
+      "Additional ten tasks, UAHexa/FAHexa full benchmark, RL and real-aircraft experiments are separate scope; do not claim these18 jobs cover them"
+    ]
+  },
+  "training_runs": [
+    {
+      "run_id": "uaquad_wipewindow_act",
+      "robot": "UAQuad",
+      "family": "act",
+      "stage": "single_task",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "epochs": null
+      },
+      "candidate_schedule": {
+        "actual_updates": [
+          5000,
+          10000,
+          15000,
+          20000,
+          25000,
+          30000,
+          35000,
+          40000
+        ]
+      },
+      "architecture": "ImageNet ResNet18,chunk16/exec8,batch8,AdamW1e-5,KL10"
+    },
+    {
+      "run_id": "uaquad_wipewindow_dp",
+      "robot": "UAQuad",
+      "family": "dp",
+      "stage": "single_task",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "epochs": 40,
+        "optimizer_updates": 88360,
+        "dynamic_budget_required": true
+      },
+      "candidate_schedule": {
+        "source": "Actual checkpoint inventory after the complete40-epoch training budget",
+        "retained_topk": 4,
+        "topk_monitor": "actual full-heldout20 val_loss",
+        "topk_order": "ascending",
+        "include_latest_completed_epoch": 40,
+        "deduplicate_by": "SHA256",
+        "maximum_distinct_candidates": 5,
+        "checkpoint_save_opportunity_completed_epochs": [
+          1,
+          6,
+          11,
+          16,
+          21,
+          26,
+          31,
+          36,
+          40
+        ],
+        "save_opportunities_are_not_retained_candidates": true,
+        "inventory_gate": "Verify actual existing checkpoint files, completed epoch, AdamW/EMA/scheduler counters, heldout metric and SHA; freeze the deduplicated retained top4 plus final40 inventory before the first native selection attempt.",
+        "epoch1": "May be a candidate only if actually retained in the final top4; no forced recovery-only exclusion or mandatory restart.",
+        "execution": "Run the public trainer directly and observe actual AdamW/EMA evidence; no old observer-forced stop/restart or extra retention of every save opportunity."
+      },
+      "architecture": "Full pretrained CLIP ViT-B/16 and UNet[256,512,1024],EMA,DDIM16/50,effective batch64"
+    },
+    {
+      "run_id": "omnihexa_pressbutton_act",
+      "robot": "OmniHexa",
+      "family": "act",
+      "stage": "single_task",
+      "tasks": [
+        "PressButton"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "epochs": null
+      },
+      "candidate_schedule": {
+        "actual_updates": [
+          5000,
+          10000,
+          15000,
+          20000,
+          25000,
+          30000,
+          35000,
+          40000
+        ]
+      },
+      "architecture": "ImageNet ResNet18,chunk16/exec8,batch8,AdamW1e-5,KL10"
+    },
+    {
+      "run_id": "omnihexa_pressbutton_dp",
+      "robot": "OmniHexa",
+      "family": "dp",
+      "stage": "single_task",
+      "tasks": [
+        "PressButton"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "epochs": 40,
+        "optimizer_updates": null,
+        "dynamic_budget_required": true
+      },
+      "candidate_schedule": {
+        "source": "Actual checkpoint inventory after the complete40-epoch training budget",
+        "retained_topk": 4,
+        "topk_monitor": "actual full-heldout20 val_loss",
+        "topk_order": "ascending",
+        "include_latest_completed_epoch": 40,
+        "deduplicate_by": "SHA256",
+        "maximum_distinct_candidates": 5,
+        "checkpoint_save_opportunity_completed_epochs": [
+          1,
+          6,
+          11,
+          16,
+          21,
+          26,
+          31,
+          36,
+          40
+        ],
+        "save_opportunities_are_not_retained_candidates": true,
+        "inventory_gate": "Verify actual existing checkpoint files, completed epoch, AdamW/EMA/scheduler counters, heldout metric and SHA; freeze the deduplicated retained top4 plus final40 inventory before the first native selection attempt.",
+        "epoch1": "May be a candidate only if actually retained in the final top4; no forced recovery-only exclusion or mandatory restart.",
+        "execution": "Run the public trainer directly and observe actual AdamW/EMA evidence; no old observer-forced stop/restart or extra retention of every save opportunity."
+      },
+      "architecture": "Full pretrained CLIP ViT-B/16 and UNet[256,512,1024],EMA,DDIM16/50,effective batch64"
+    },
+    {
+      "run_id": "omnihexa_wipewindow_act",
+      "robot": "OmniHexa",
+      "family": "act",
+      "stage": "single_task",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "epochs": null
+      },
+      "candidate_schedule": {
+        "actual_updates": [
+          5000,
+          10000,
+          15000,
+          20000,
+          25000,
+          30000,
+          35000,
+          40000
+        ]
+      },
+      "architecture": "ImageNet ResNet18,chunk16/exec8,batch8,AdamW1e-5,KL10"
+    },
+    {
+      "run_id": "omnihexa_wipewindow_dp",
+      "robot": "OmniHexa",
+      "family": "dp",
+      "stage": "single_task",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "epochs": 40,
+        "optimizer_updates": null,
+        "dynamic_budget_required": true
+      },
+      "candidate_schedule": {
+        "source": "Actual checkpoint inventory after the complete40-epoch training budget",
+        "retained_topk": 4,
+        "topk_monitor": "actual full-heldout20 val_loss",
+        "topk_order": "ascending",
+        "include_latest_completed_epoch": 40,
+        "deduplicate_by": "SHA256",
+        "maximum_distinct_candidates": 5,
+        "checkpoint_save_opportunity_completed_epochs": [
+          1,
+          6,
+          11,
+          16,
+          21,
+          26,
+          31,
+          36,
+          40
+        ],
+        "save_opportunities_are_not_retained_candidates": true,
+        "inventory_gate": "Verify actual existing checkpoint files, completed epoch, AdamW/EMA/scheduler counters, heldout metric and SHA; freeze the deduplicated retained top4 plus final40 inventory before the first native selection attempt.",
+        "epoch1": "May be a candidate only if actually retained in the final top4; no forced recovery-only exclusion or mandatory restart.",
+        "execution": "Run the public trainer directly and observe actual AdamW/EMA evidence; no old observer-forced stop/restart or extra retention of every save opportunity."
+      },
+      "architecture": "Full pretrained CLIP ViT-B/16 and UNet[256,512,1024],EMA,DDIM16/50,effective batch64"
+    },
+    {
+      "run_id": "uaquad_pi05_mt160",
+      "robot": "UAQuad",
+      "family": "pi05",
+      "stage": "mt",
+      "tasks": [
+        "PressButton",
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Official same-variant base weights",
+      "parent_run": null,
+      "repo_id": "am_bench/uaquad_pressbutton_wipewindow_train80_20hz",
+      "asset_id": "am_bench/uaquad_pressbutton_wipewindow_mt160_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "uaquad_pi05_press_st80",
+      "robot": "UAQuad",
+      "family": "pi05",
+      "stage": "st",
+      "tasks": [
+        "PressButton"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "uaquad_pi05_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/uaquad_pressbutton_train80_20hz",
+      "asset_id": "am_bench/uaquad_pressbutton_st80_pi05_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "uaquad_pi05_wipe_st80",
+      "robot": "UAQuad",
+      "family": "pi05",
+      "stage": "st",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "uaquad_pi05_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/uaquad_wipewindow_train80_20hz",
+      "asset_id": "am_bench/uaquad_wipewindow_st80_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "uaquad_pi0_mt160",
+      "robot": "UAQuad",
+      "family": "pi0",
+      "stage": "mt",
+      "tasks": [
+        "PressButton",
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Official same-variant base weights",
+      "parent_run": null,
+      "repo_id": "am_bench/uaquad_pressbutton_wipewindow_train80_20hz",
+      "asset_id": "am_bench/uaquad_pressbutton_wipewindow_mt160_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "uaquad_pi0_press_st80",
+      "robot": "UAQuad",
+      "family": "pi0",
+      "stage": "st",
+      "tasks": [
+        "PressButton"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "uaquad_pi0_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/uaquad_pressbutton_train80_20hz",
+      "asset_id": "am_bench/uaquad_pressbutton_st80_pi05_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "uaquad_pi0_wipe_st80",
+      "robot": "UAQuad",
+      "family": "pi0",
+      "stage": "st",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "uaquad_pi0_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/uaquad_wipewindow_train80_20hz",
+      "asset_id": "am_bench/uaquad_wipewindow_st80_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "omnihexa_pi05_mt160",
+      "robot": "OmniHexa",
+      "family": "pi05",
+      "stage": "mt",
+      "tasks": [
+        "PressButton",
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Official same-variant base weights",
+      "parent_run": null,
+      "repo_id": "am_bench/omni_pressbutton_wipewindow_train80_20hz",
+      "asset_id": "am_bench/omni_pressbutton_wipewindow_mt160_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "omnihexa_pi05_press_st80",
+      "robot": "OmniHexa",
+      "family": "pi05",
+      "stage": "st",
+      "tasks": [
+        "PressButton"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "omnihexa_pi05_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/omni_pressbutton_train80_20hz",
+      "asset_id": "am_bench/omni_pressbutton_st80_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "omnihexa_pi05_wipe_st80",
+      "robot": "OmniHexa",
+      "family": "pi05",
+      "stage": "st",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "omnihexa_pi05_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/omni_wipewindow_train80_20hz",
+      "asset_id": "am_bench/omni_wipewindow_st80_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "omnihexa_pi0_mt160",
+      "robot": "OmniHexa",
+      "family": "pi0",
+      "stage": "mt",
+      "tasks": [
+        "PressButton",
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 40000,
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Official same-variant base weights",
+      "parent_run": null,
+      "repo_id": "am_bench/omni_pressbutton_wipewindow_train80_20hz",
+      "asset_id": "am_bench/omni_pressbutton_wipewindow_mt160_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "omnihexa_pi0_press_st80",
+      "robot": "OmniHexa",
+      "family": "pi0",
+      "stage": "st",
+      "tasks": [
+        "PressButton"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "omnihexa_pi0_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/omni_pressbutton_train80_20hz",
+      "asset_id": "am_bench/omni_pressbutton_st80_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "run_id": "omnihexa_pi0_wipe_st80",
+      "robot": "OmniHexa",
+      "family": "pi0",
+      "stage": "st",
+      "tasks": [
+        "WipeWindow"
+      ],
+      "mode": "full",
+      "seed": 42,
+      "budget": {
+        "optimizer_updates": 20000,
+        "batch_size": 8,
+        "ema_decay": 0.99,
+        "horizon": 50,
+        "policy_hz": 20
+      },
+      "candidate_schedule": {
+        "nominal_every_updates": 5000,
+        "minimum_actual_updates": 5000,
+        "include_actual_final_budget": true,
+        "actual_counter_read_from_Orbax": true,
+        "folder_label_is_not_update_counter": true
+      },
+      "initialization": "Same-variant same-morphology completed MT final checkpoint, actual40000updates; never base or UA/Omni cross-initialization",
+      "parent_run": "omnihexa_pi0_mt160",
+      "parent_actual_optimizer_updates": 40000,
+      "native_selected_MT_checkpoint_is_not_ST_parent": true,
+      "repo_id": "am_bench/omni_wipewindow_train80_20hz",
+      "asset_id": "am_bench/omni_wipewindow_st80_20hz_v1",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    }
+  ],
+  "seed_blocks": {
+    "UAQuad/WipeWindow": {
+      "selection": [
+        43001,
+        43002,
+        43003,
+        43004,
+        43005,
+        43006,
+        43007,
+        43008,
+        43009,
+        43010
+      ],
+      "final": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010,
+        53011,
+        53012,
+        53013,
+        53014,
+        53015,
+        53016,
+        53017,
+        53018,
+        53019,
+        53020,
+        53021,
+        53022,
+        53023,
+        53024,
+        53025,
+        53026,
+        53027,
+        53028,
+        53029,
+        53030
+      ],
+      "origin": "Root-ratified on 2026-10-15; frozen before study native selection."
+    },
+    "UAQuad/PressButton": {
+      "selection": [
+        83001,
+        83002,
+        83003,
+        83004,
+        83005,
+        83006,
+        83007,
+        83008,
+        83009,
+        83010
+      ],
+      "final": [
+        93001,
+        93002,
+        93003,
+        93004,
+        93005,
+        93006,
+        93007,
+        93008,
+        93009,
+        93010,
+        93011,
+        93012,
+        93013,
+        93014,
+        93015,
+        93016,
+        93017,
+        93018,
+        93019,
+        93020,
+        93021,
+        93022,
+        93023,
+        93024,
+        93025,
+        93026,
+        93027,
+        93028,
+        93029,
+        93030
+      ],
+      "origin": "Root-ratified on 2026-10-15; frozen before study native selection."
+    },
+    "OmniHexa/PressButton": {
+      "selection": [
+        63001,
+        63002,
+        63003,
+        63004,
+        63005,
+        63006,
+        63007,
+        63008,
+        63009,
+        63010
+      ],
+      "final": [
+        73001,
+        73002,
+        73003,
+        73004,
+        73005,
+        73006,
+        73007,
+        73008,
+        73009,
+        73010,
+        73011,
+        73012,
+        73013,
+        73014,
+        73015,
+        73016,
+        73017,
+        73018,
+        73019,
+        73020,
+        73021,
+        73022,
+        73023,
+        73024,
+        73025,
+        73026,
+        73027,
+        73028,
+        73029,
+        73030
+      ],
+      "origin": "Root-ratified on 2026-10-15; frozen before study native selection."
+    },
+    "OmniHexa/WipeWindow": {
+      "selection": [
+        64001,
+        64002,
+        64003,
+        64004,
+        64005,
+        64006,
+        64007,
+        64008,
+        64009,
+        64010
+      ],
+      "final": [
+        74001,
+        74002,
+        74003,
+        74004,
+        74005,
+        74006,
+        74007,
+        74008,
+        74009,
+        74010,
+        74011,
+        74012,
+        74013,
+        74014,
+        74015,
+        74016,
+        74017,
+        74018,
+        74019,
+        74020,
+        74021,
+        74022,
+        74023,
+        74024,
+        74025,
+        74026,
+        74027,
+        74028,
+        74029,
+        74030
+      ],
+      "origin": "Root-ratified on 2026-10-15; frozen before study native selection."
+    }
+  },
+  "evaluation_units": [
+    {
+      "unit_id": "uaquad_wipewindow_act__WipeWindow",
+      "training_run": "uaquad_wipewindow_act",
+      "robot": "UAQuad",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "act_dp_native_success_heldout_loss_v1"
+    },
+    {
+      "unit_id": "uaquad_wipewindow_dp__WipeWindow",
+      "training_run": "uaquad_wipewindow_dp",
+      "robot": "UAQuad",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "act_dp_native_success_heldout_loss_v1"
+    },
+    {
+      "unit_id": "omnihexa_pressbutton_act__PressButton",
+      "training_run": "omnihexa_pressbutton_act",
+      "robot": "OmniHexa",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "act_dp_native_success_heldout_loss_v1"
+    },
+    {
+      "unit_id": "omnihexa_pressbutton_dp__PressButton",
+      "training_run": "omnihexa_pressbutton_dp",
+      "robot": "OmniHexa",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "act_dp_native_success_heldout_loss_v1"
+    },
+    {
+      "unit_id": "omnihexa_wipewindow_act__WipeWindow",
+      "training_run": "omnihexa_wipewindow_act",
+      "robot": "OmniHexa",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "act_dp_native_success_heldout_loss_v1"
+    },
+    {
+      "unit_id": "omnihexa_wipewindow_dp__WipeWindow",
+      "training_run": "omnihexa_wipewindow_dp",
+      "robot": "OmniHexa",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "act_dp_native_success_heldout_loss_v1"
+    },
+    {
+      "unit_id": "uaquad_pi05_mt160__PressButton",
+      "training_run": "uaquad_pi05_mt160",
+      "robot": "UAQuad",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi05_mt160__WipeWindow",
+      "training_run": "uaquad_pi05_mt160",
+      "robot": "UAQuad",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi05_press_st80__PressButton",
+      "training_run": "uaquad_pi05_press_st80",
+      "robot": "UAQuad",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi05_wipe_st80__WipeWindow",
+      "training_run": "uaquad_pi05_wipe_st80",
+      "robot": "UAQuad",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi0_mt160__PressButton",
+      "training_run": "uaquad_pi0_mt160",
+      "robot": "UAQuad",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi0_mt160__WipeWindow",
+      "training_run": "uaquad_pi0_mt160",
+      "robot": "UAQuad",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi0_press_st80__PressButton",
+      "training_run": "uaquad_pi0_press_st80",
+      "robot": "UAQuad",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "uaquad_pi0_wipe_st80__WipeWindow",
+      "training_run": "uaquad_pi0_wipe_st80",
+      "robot": "UAQuad",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-UAQuad-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi05_mt160__PressButton",
+      "training_run": "omnihexa_pi05_mt160",
+      "robot": "OmniHexa",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi05_mt160__WipeWindow",
+      "training_run": "omnihexa_pi05_mt160",
+      "robot": "OmniHexa",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi05_press_st80__PressButton",
+      "training_run": "omnihexa_pi05_press_st80",
+      "robot": "OmniHexa",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi05_wipe_st80__WipeWindow",
+      "training_run": "omnihexa_pi05_wipe_st80",
+      "robot": "OmniHexa",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi0_mt160__PressButton",
+      "training_run": "omnihexa_pi0_mt160",
+      "robot": "OmniHexa",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi0_mt160__WipeWindow",
+      "training_run": "omnihexa_pi0_mt160",
+      "robot": "OmniHexa",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi0_press_st80__PressButton",
+      "training_run": "omnihexa_pi0_press_st80",
+      "robot": "OmniHexa",
+      "task": "PressButton",
+      "task_id": "PressButton-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    },
+    {
+      "unit_id": "omnihexa_pi0_wipe_st80__WipeWindow",
+      "training_run": "omnihexa_pi0_wipe_st80",
+      "robot": "OmniHexa",
+      "task": "WipeWindow",
+      "task_id": "WipeWindow-Am-OmniHexa-Abs-PID-Direct-v0",
+      "checkpoint_selection_protocol": "openpi_native_only_v1"
+    }
+  ],
+  "data_protocol": {
+    "source_episodes_per_morphology_task": 100,
+    "train_source_episode_range_inclusive": [
+      0,
+      79
+    ],
+    "heldout_source_episode_range_inclusive": [
+      80,
+      99
+    ],
+    "stats_fit": "Own morphology/task training episodes only; MT160 uses only80train episodes from each task, ST80 has its own stats/assets.",
+    "application_seed_split": {
+      "UAQuad/PressButton": {
+        "train": [
+          13001,
+          13002,
+          13003,
+          13004
+        ],
+        "heldout": [
+          13005
+        ]
+      },
+      "UAQuad/WipeWindow": {
+        "train": [
+          17001,
+          17002,
+          17003,
+          17004
+        ],
+        "heldout": [
+          17005
+        ]
+      },
+      "OmniHexa/PressButton": {
+        "train": [
+          41101,
+          41102,
+          41103,
+          41104
+        ],
+        "heldout": [
+          41105
+        ]
+      },
+      "OmniHexa/WipeWindow": {
+        "train": [
+          42101,
+          42102,
+          42103,
+          42104
+        ],
+        "heldout": [
+          42105
+        ]
+      }
+    },
+    "Omni_collection": {
+      "native_preflight_seeds": [
+        41001,
+        41002,
+        42001,
+        42002
+      ],
+      "successful_episodes_per_app": 20,
+      "max_completed_attempts_per_app": 60,
+      "preserve_failed_attempts": true,
+      "source_selection": "First20 successful attempts per app; preserve explicit exported-episode mapping.",
+      "separate_Omni_data_required": true,
+      "canonical_unit": "servo4 observation radians; action normalized -1 close/+1 open",
+      "UA_60mm_sponge_mount_not_implicitly_applied_to_Omni": true
+    },
+    "raw_hz": 120,
+    "policy_hz": 20,
+    "model_input": "384x384 EE RGB; additional recording cameras are not model inputs.",
+    "canonical_action": "8D absolute command",
+    "OpenPI_offline_validation_loss_claim": false
+  },
+  "training_frame": {
+    "action_frame": "task_command_world_right_v2",
+    "observation_ee_quaternion": "authored_ee_link_world",
+    "action_to_link_equation": "q_link = q_command * command_to_link_quat_wxyz",
+    "Wipe": "Existing right-v2 data from source875569d; eight physical-frame/task files unchanged at base9ab28b0.",
+    "legacy_Press": {
+      "all_action_frames_checked": 102307,
+      "all_action_quaternions_identity_up_to_sign": true,
+      "migration_formula": "q_new = O * q_old * inverse(O)",
+      "identity_special_case": "O * (+/-I) * inverse(O) = +/-I",
+      "actions_need_migration": false,
+      "raw_link_observation_ee_quat_unchanged": true,
+      "dataset_bytes_rewritten": false,
+      "scope_limit": "Proof is specific to the fully checked Press action orientations. Other nonidentity trajectories require separate versioned migration.",
+      "source_receipt": {
+        "path": "outputs/research/fulltrain-20261013/runtime_outputs/merged-canonical-identity-actions.json",
+        "sha256": "b3397654b70872715a91ddb9191045060ed5d4420ee2afc950161a0b45aa402c"
+      },
+      "audit_context": {
+        "path": "outputs/research/fulltrain-20261013/data-audit.json",
+        "sha256": "3261d4a276644f34bb1ffd1bb0b992a636e03c6ea20bed8e9194df3bd90a79f6"
+      }
+    },
+    "immutable_base_learning_files_checked": 119,
+    "immutable_base_learning_source_mismatches": [],
+    "training_fix_source_gate": "Reviewed/tested later training fixes must be recorded with a new immutable source manifest; the119-file equality claim applies only to base9ab28b0.",
+    "recording_tail_fix": "Done environments do not append post-reset images; video correction does not alter action semantics or native success thresholds."
+  },
+  "ready_data_at_predeclaration": {
+    "UAQuad_Wipe": {
+      "canonical_relative_path": "outputs/research/fulltrain-20261013/datasets/uaquad_wipe_window_fulltrain_framev2_v1/lerobot",
+      "episodes": 100,
+      "raw_frames": 186870,
+      "info_sha256": "810828a29d8c06be9a7d275f6a71d9516501bc1294bfea902be8fa3219964b9c",
+      "DP_zarr_sha256": "f3046b581a89e7ea224c71d7fab102b353004c96b8f9a8ac82f12bf5e5960426",
+      "DP_normalizer_sha256": "8f92c34be3b42d43aa5764c5f2cc40ef59778a2660327d0d642593f52ad7031f",
+      "DP_optimizer_updates_per_epoch": 2209,
+      "DP_optimizer_updates_full40epochs": 88360,
+      "ACT_train_only_stats": "Must fit independently before training."
+    },
+    "UAQuad_OpenPI": {
+      "exports": [
+        {
+          "repo_id": "am_bench/uaquad_pressbutton_train80_20hz",
+          "episodes": 80,
+          "total_frames": 13555,
+          "export_report_sha256": "d29f782d626b5d4ea559ebf2e4ac41234fe7d4fa33430768674bbdbbbc5a6ad1"
+        },
+        {
+          "repo_id": "am_bench/uaquad_pressbutton_wipewindow_train80_20hz",
+          "episodes": 160,
+          "total_frames": 38281,
+          "export_report_sha256": "07006a7261d4ccce468fac52e8edb36f78d971a455cfd9a6424c35c31f8a9e87"
+        },
+        {
+          "repo_id": "am_bench/uaquad_wipewindow_train80_20hz",
+          "episodes": 80,
+          "total_frames": 24726,
+          "export_report_sha256": "8c683295a2fcc66d46fd94cdaef8f4738679d7ee41f2d23296d0f2533baee6bb"
+        }
+      ],
+      "normalizers": [
+        {
+          "asset_id": "am_bench/uaquad_pressbutton_wipewindow_mt160_20hz_v1",
+          "repo_id": "am_bench/uaquad_pressbutton_wipewindow_train80_20hz",
+          "episodes": 160,
+          "variants": [
+            "pi0",
+            "pi05"
+          ],
+          "normalization_sha256": "d100f503a0968115462eeb7ef3287962d8626a84996d3cdeb4992422fc093b7b",
+          "provenance_sha256": "4b6b51a8c0146731b026259dbd3f5a9739df02497b10175b3b227e3f00ae8c59"
+        },
+        {
+          "asset_id": "am_bench/uaquad_pressbutton_st80_pi05_20hz_v1",
+          "repo_id": "am_bench/uaquad_pressbutton_train80_20hz",
+          "episodes": 80,
+          "variants": [
+            "pi0",
+            "pi05"
+          ],
+          "normalization_sha256": "04f3083b4a62f4c5bfff52f38ce6a5d3f853c5c799852ae83eb0ffef280cb8bc",
+          "provenance_sha256": "364cf0a2196ae3ffabea3497a8363654947a6c9e14ec5ddff82d89fa56967c10"
+        },
+        {
+          "asset_id": "am_bench/uaquad_wipewindow_st80_20hz_v1",
+          "repo_id": "am_bench/uaquad_wipewindow_train80_20hz",
+          "episodes": 80,
+          "variants": [
+            "pi0",
+            "pi05"
+          ],
+          "normalization_sha256": "9911719ee1b856f5e8d9f8c6203ff184babb58e31d126c4cb802b273e1e7a670",
+          "provenance_sha256": "6738d731b864be03d6896890c9260976f6d1106a1b7c6af9423147b564f2f2ac"
+        }
+      ]
+    },
+    "Omni": "Dedicated200 successes, own per-task conversions/stats, and own OpenPI MT160/ST80 exports/stats must pass the gates before any Omni training."
+  },
+  "OpenPI_checkpoint_selection": {
+    "protocol_id": "openpi_native_only_v1",
+    "offline_validation_loss_used": false,
+    "training_loss_used_for_selection": false,
+    "heldout20": "Keep each task's source episodes 80..99 out of training and normalization. This study makes no OpenPI offline validation-loss claim.",
+    "candidate_set": "All retained nominal 5k-cadence checkpoints and the completed final checkpoint; exclude initial/untrained and recovery-only checkpoints. Verify actual Orbax/Optax update counters and freeze the complete candidate SHA list before the first selection rollout.",
+    "candidate_attempts": "The same ten fixed selection seeds, one first native attempt per seed, for every candidate of the same model-task unit.",
+    "ranking_order": [
+      {
+        "metric": "native_success_count",
+        "order": "descending"
+      },
+      {
+        "metric": "mean_terminal_named_subtask_progress",
+        "order": "descending"
+      },
+      {
+        "metric": "mean_native_steps_of_successful_episodes",
+        "order": "ascending",
+        "when_no_success": "+infinity"
+      },
+      {
+        "metric": "actual_optimizer_updates",
+        "order": "ascending"
+      },
+      {
+        "metric": "model_sha256",
+        "order": "lexicographic_ascending"
+      }
+    ],
+    "terminal_named_subtask_progress": {
+      "PressButton": "Raw button displacement in metres on the terminal pre-reset physics state.",
+      "WipeWindow": "Number of cleared stain flags (0..4) on the terminal pre-reset physics state.",
+      "aggregation": "Arithmetic mean over all ten valid native attempts, including native timeouts.",
+      "capture_gate": "Capture from the actual terminal state before automatic reset with an audited hook. A missing/nonfinite progress field is an infrastructure failure, never an inferred zero from reset observations or video."
+    },
+    "failed_episode_steps": "Native failures do not enter successful-episode mean steps; ten failures compare as positive infinity. Serialize an explicit null plus no_success flag rather than nonstandard JSON Infinity.",
+    "infrastructure_failure": "An incomplete attempt does not count as a native failure or zero progress. Retain its evidence, resolve the infrastructure fault, and complete the fixed seed set before ranking; retain the first valid native attempt.",
+    "task_independence": "Rank each MT task independently as a model-task unit; never rank MT jointly using sealed results.",
+    "selection_lock": "Write all candidate per-seed outcomes, exact ranking tuple and selected checkpoint/model/normalizer/data/config/source SHA before any of the unit's sealed30 first attempts. No reselection or tuning from sealed outcomes.",
+    "ST_parent": "Same morphology and same pi0/pi05 variant's completed MT final actual40000-update checkpoint; independently of either task's native-selected MT checkpoint."
+  },
+  "ACT_DP_checkpoint_selection": {
+    "ranking_order": [
+      "native_success_count descending",
+      "own full-heldout20 family-specific loss ascending",
+      "actual_optimizer_updates descending",
+      "model_sha256 lexicographic ascending"
+    ],
+    "heldout_metric": {
+      "act": "Full20 heldout normalized MAE with saved train-only processors and observation-only prior latent.",
+      "dp": "Full20 heldout EMA diffusion validation loss with train-only normalization; identical fixed evaluation randomness for all candidates."
+    },
+    "basis": "Preserves the existing UAQuad Wipe predeclared native-success, heldout-loss, later-update rule and applies it independently to each Omni ACT/DP task.",
+    "selection_lock": "Freeze candidate list/metric configuration before selection; persist exact ranking and model/normalizer/data/config/source SHA before sealed30."
+  },
+  "native_evaluation": {
+    "per_model_task": "Each declared candidate gets the same10 selection seeds; lock its independently selected model before30 sealed first attempts. MT is evaluated on both tasks independently.",
+    "time_limit_s": 20,
+    "num_envs": 1,
+    "inference_seed": 42,
+    "inference_device": "remote CUDA; exact GPU bound before selection and retained through sealed final",
+    "ready_check": "health only; no forward smoke",
+    "reset_rerenders": 1,
+    "disturbance": false,
+    "thresholds": "Unchanged native task criteria; report native success/timeout and infrastructure failures separately.",
+    "application_and_server": "Restart per case and bind the same predeclared inference device through selection/final.",
+    "metrics": "Report per-seed native outcomes, success counts, Wilson95% intervals, terminal pre-reset named progress and successful native steps.",
+    "historical_eval_seeds_excluded": {
+      "selection_range_inclusive": [
+        23001,
+        23010
+      ],
+      "final_range_inclusive": [
+        33001,
+        33030
+      ],
+      "replay": [
+        34001,
+        34002
+      ]
+    }
+  },
+  "policy_execution_contract": {
+    "ACT": {
+      "n_observation_steps": 1,
+      "chunk_size": 16,
+      "executed_policy_actions_per_query": 8,
+      "waypoint_hz": 20,
+      "image_shape": [
+        3,
+        384,
+        384
+      ],
+      "action_representation": "ee_local_relative"
+    },
+    "DP": {
+      "n_observation_steps": 2,
+      "horizon": 16,
+      "raw_frame_stride": 6,
+      "DDIM_inference_steps": 16,
+      "training_diffusion_timesteps": 50,
+      "query_every_native_steps": 48,
+      "predicted_native_steps": 96,
+      "timing_limit": "Preserve and disclose original16target stride6(0..90) versus interpolation output0..95;do not silently change the learned interface."
+    },
+    "OpenPI": {
+      "horizon": 50,
+      "executed_policy_actions_per_query": 8,
+      "waypoint_hz": 20,
+      "padded_internal_dimension": 32,
+      "denoising_steps": "Bind actual saved serving config,do not infer from checkpoint name",
+      "inference_normalizer": "Own exact checkpoint assets/training stats with SHA"
+    },
+    "all": {
+      "default_input_camera": "ee_camera",
+      "recording_cameras": [
+        "scene_camera",
+        "base_camera",
+        "ee_camera"
+      ],
+      "recording_extra_views_are_not_model_inputs": true,
+      "wall_clock_inference_latency_is_not_native_simulation_time": true,
+      "wall_timeout": "Predeclare sufficient budget for chosen CPU/GPU service;incomplete infrastructure timeout is not a scored native task timeout."
+    }
+  },
+  "device_allocation": {
+    "ratified_by_root": true,
+    "location": "remote GPU host",
+    "OpenPI_training_devices": [
+      0,
+      3
+    ],
+    "UAQuad_Wipe_ACT_training_device": 4,
+    "UAQuad_Wipe_DP_training_device": 6,
+    "simulation_device_planned": 7,
+    "local_simulation_migration_reason": "Foreign workload occupied approximately 6 GB on the local GPU; native simulation moves to the remote host.",
+    "reuse_after_completion": "Devices 4 and 6 may serve Omni training or additional isolated simulation after their current training completes.",
+    "admission": "Check actual availability and isolate GPU visibility before each run; do not overlap jobs on one device without explicit capacity proof.",
+    "OpenPI_capacity_gate": "A full-model full-global-batch first-update probe decides topology and parallelism. If MT requires two-card FSDP across devices0/3, run its two variants serially; probe ST batch8 independently before allowing single-card parallel jobs. Never reduce model, global batch or update budget to pass admission.",
+    "FSDP_provenance": "If used, record FSDP2 mesh, shard topology, global batch32 and source/config SHA. Do not claim bitwise equivalence to single-GPU execution.",
+    "inference_device": "Remote CUDA for all new study native cases. Bind the exact GPU device before selection and preserve it through that model-task unit's sealed final evaluation.",
+    "ready_check": "Health-only server readiness; do not run an unrecorded inference forward pass before the first scored native action."
+  },
+  "acceptance": {
+    "data": [
+      "100 validated native successful episodes per task with80train/20heldout; raw failures and capture faults retained",
+      "Stats fit only task/morphology train80; no validation/selection/final leakage",
+      "Canonical bytes/provenance/SHA, episode maps, frame semantics, prompts and gripper units verified",
+      "OpenPI MT160 only80successes per each of2tasks, distinct ST80 repo/assets/stats; not paper FAHexa12x80=960"
+    ],
+    "ACT": [
+      "Fresh ImageNet ResNet18 task training40000 actual AdamW updates;153 saved optimizer counters agree; save config/processors/normalizer/optimizer/RNG",
+      "All8 checkpoints at5k increments retained and reloaded; full20heldout episodes and valid targets scored with saved train processors, observation-only prior latent",
+      "Report normalized MAE as dimensionless; physical pose metrics separately if implemented; no success claim from loss"
+    ],
+    "DP": [
+      "40 complete epochs; actual task-dependent DataLoader/accumulation budget; fulltrain and full20heldout validation with EMA.",
+      "299 AdamW counters, actual EMA count, scheduler and saved step agree with the actual full budget; finalepoch40 mandatory. UAQuad Wipe remains88360updates.",
+      "Native candidates are only the actual retained top4 heldout-val-loss checkpoint files plus latest final40, SHA-deduplicated, maximum5; freeze their actual inventory before native selection. Save opportunities1/6/11/16/21/26/31/36/40 do not imply eight or nine retained candidates.",
+      "Use the public trainer directly; observe saved optimizer/EMA/RNG/split/normalizer state without an observer-forced interruption. Claim a real resume only if its actual save/load/next-update evidence exists; do not require a deliberate restart or reuse hardcodedPress counts."
+    ],
+    "OpenPI": [
+      "JAX FullFT only;MT40000 batch32 then each ST20000 batch8;EMA0.99;no LoRA/small model/budget reduction",
+      "Every actual update has finite loss/grad/parameter diagnostics; saved train_state.step and Optax counters verify actualbudget",
+      "First real full batch/optimizer update and VRAM proof before sustained launch; do not infer OOM from exit139/OOMKilled=false",
+      "Same-variant same-morphology completed MT final actual40000 is fixed ST parent under old queue contract; no sealed-final outcome may choose ST parent",
+      "Preserve and SHA-register5k candidates plusfinal; read actualOrbax counters, not checkpoint directory names; keep source/config/dataset/norm/init lineage",
+      "MT and ST own independent train-only stats/assets; no copying MT stats under a new ST name",
+      "Root-ratified native-only selection follows OpenPI_checkpoint_selection; heldout20 excluded from training/stats, no OpenPI offline validation-loss claim.",
+      "Independent MT task selection does not alter the fixed completed-MT-final40000 parent for either ST child.",
+      "Every selection attempt must expose finite terminal pre-reset named progress; missing reset-sensitive telemetry blocks ranking."
+    ],
+    "native_evaluation": [
+      "Every one of22model-task units, including both MT tasks, gets every declared candidate10 independent native first attempts",
+      "Freeze ranking rule and candidate list before evaluation; full training budget must finish before checkpoint selection",
+      "Lock selected weight/norm/source/data/config SHA before30 final seeds; finalseed never selectionseed and oldfinal33001..33030/diagnostic34001/34002 never selection",
+      "Same family candidate trials restart application/server and inference seed42; same declared inference device and native20s threshold,rerender1",
+      "Keep native success and timeout counts, incomplete infrastructure trials separately; retain every outcome;30final counts/Wilson95%/subtasks",
+      "MT parent choice and all hyperparameters frozen before final tests; no tuning from any study final outcome"
+    ],
+    "media_and_delivery": [
+      "Three synchronized cameras per native episode, one episode denominator; exact source/MP4 SHA and full CPU sequential decode",
+      "Verify sampled frame count with reset plus nonterminal-only capture; reject automatic-reset tail; inspect actual first/contact/final frames",
+      "Show representative success and failures if present, multiple final seeds, all-case machine-readable outcomes; video selection never changes score",
+      "New data/checkpoints/rawvideos/generatedGIF/MP4 remain ignored; external Release assets plus small source HTML/JSON/Markdown",
+      "Verify anonymous Range/fullselectedSHA/actual publicbrowser and GitHub GIF animation; disclose actual octet-stream MIME boundary",
+      "After real training/eval finish update note/usage/uaquad/tilting separately from historical records,scoped hooks,commit/push research,then Pages/live artifact identity"
+    ]
+  },
+  "delivery_constraints": {
+    "release_asset_count_limit": 1000,
+    "release_single_asset_bytes_strictly_below": 2147483648,
+    "recommended_release_split": "Separate by morphology/task/family/stage or candidate protocol so all failures remain published without exceeding asset-count limits.",
+    "selected_inference_reproduction": "After selection,package exact selected weights+normalizer+config+source/data/protocol SHA as external artifacts when feasible. Never put optimizer states or weights in Git;state explicitly when artifacts remain only on owned storage.",
+    "original_686_and_replay13": "Keep all old public bytes/score denominators/source tags intact;new18-run study gets its own source-only catalogs and Releases.",
+    "publication_not_equal_to_playback": "Verify real anonymous browser media loading/seeking/playing and Markdown GIF animation after upload;HTTP200 alone is insufficient."
+  },
+  "predeclaration_checks": {
+    "formal_training_runs": 18,
+    "model_task_evaluation_units": 22,
+    "OpenPI_runs_per_morphology": 6,
+    "OpenPI_actual_updates_per_morphology": 160000,
+    "minimum_sealed_native_episodes": 660,
+    "minimum_sealed_camera_streams": 1980,
+    "unique_selection_seeds": 40,
+    "unique_final_seeds": 120,
+    "selection_final_seed_intersection": [],
+    "evaluation_collection_preflight_historical_seed_intersection": [],
+    "all_units_match_ratified_seed_blocks": true,
+    "all_ST_parents_same_morphology_variant_MT_final40000": true,
+    "train_source_episode_range_inclusive": [
+      0,
+      79
+    ],
+    "heldout_source_episode_range_inclusive": [
+      80,
+      99
+    ],
+    "train_heldout_episode_intersection": [],
+    "maximum_candidate_task_combinations": 135,
+    "maximum_selection_native_episodes": 1350,
+    "maximum_selection_plus_sealed_native_episodes": 2010,
+    "maximum_selection_plus_sealed_original_video_streams": 6030,
+    "candidate_upper_bound_basis": "ACT3x8 +DP3xat_most5 +OpenPI_MT4x8x2tasks +OpenPI_ST8x4 = at_most135. DP actual inventory determines the final smaller-or-equal count; these are capacity bounds, not fixed or completed trial counts."
+  },
+  "claim_boundary": "This source-only document freezes the authorized protocol. It contains no new training, selection or final success result; progress/evidence will be recorded separately without rewriting historical snapshots.",
+  "DP_checkpoint_candidates": {
+    "source": "Actual checkpoint inventory after the complete40-epoch training budget",
+    "retained_topk": 4,
+    "topk_monitor": "actual full-heldout20 val_loss",
+    "topk_order": "ascending",
+    "include_latest_completed_epoch": 40,
+    "deduplicate_by": "SHA256",
+    "maximum_distinct_candidates": 5,
+    "checkpoint_save_opportunity_completed_epochs": [
+      1,
+      6,
+      11,
+      16,
+      21,
+      26,
+      31,
+      36,
+      40
+    ],
+    "save_opportunities_are_not_retained_candidates": true,
+    "inventory_gate": "Verify actual existing checkpoint files, completed epoch, AdamW/EMA/scheduler counters, heldout metric and SHA; freeze the deduplicated retained top4 plus final40 inventory before the first native selection attempt.",
+    "epoch1": "May be a candidate only if actually retained in the final top4; no forced recovery-only exclusion or mandatory restart.",
+    "execution": "Run the public trainer directly and observe actual AdamW/EMA evidence; no old observer-forced stop/restart or extra retention of every save opportunity."
+  }
+}

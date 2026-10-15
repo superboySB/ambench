@@ -116,7 +116,7 @@ docker exec -e CUDA_VISIBLE_DEVICES=-1 -e JAX_PLATFORMS=cpu \
 
 **常规固定旋翼四旋翼加机械臂：** 请看新增独立手册 [uaquad.md](uaquad.md) 和 [UAQuad 交互专题](https://zipengdai.com/ambench/uaquad/)。2026-10-09 的专门实验按独立试次统计，不混入本页的历史结果。
 
-**主动电机倾转六旋翼：** 请看独立手册 [tilting.md](tilting.md) 和 [OmniHexa 交互专题](https://zipengdai.com/ambench/tilting/)。本轮重新录制全部十二任务及模型试次；倾转分配目标和实际关节轨迹分别展示。
+**主动电机倾转六旋翼：** 请看独立手册 [tilting.md](tilting.md) 和 [OmniHexa 交互专题](https://zipengdai.com/ambench/tilting/)。该专题的十二任务与一步模型试次录制于 **2026-10-09**；倾转分配目标和实际关节轨迹分别展示。2026-10-15 的两任务充分训练扩展按页首预声明和验收记录另行报告。
 
 ![AM-Bench 公开总览](assets/ambench-overview.png)
 

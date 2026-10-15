@@ -1,0 +1,913 @@
+{
+  "schema_version": 1,
+  "updated_date": "2026-10-15",
+  "timezone": "Asia/Shanghai",
+  "evidence_level": "verified_full_training_budget_and_independent_native_final_tests",
+  "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+  "action_frame": "task_command_world_right_v2",
+  "observation_ee_quaternion_frame": "authored_ee_link_world",
+  "frame_equation": "q_link = q_command * command_to_link_quat_wxyz",
+  "data_split": {
+    "successful_canonical_episodes": 100,
+    "train_episode_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79
+    ],
+    "offline_validation_episode_indices": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "normalization_uses_train_only": true,
+    "act_train_logical_observations": 13555,
+    "act_validation_logical_observations": 3448,
+    "dp_train_sampler_anchors": 74353,
+    "dp_validation_sampler_anchors": 18954,
+    "canonical_info_sha256": "082fd47e6fc7b94f7918eadc06e925ac2de9223c0644b9282594492e76a88a1a",
+    "dp_zarr_sha256": "4942b5626ad8a1db94e9fda702d81ec37948c5a7913007fa12d7e25511ba9e72"
+  },
+  "runtime": {
+    "physics_hz": 120,
+    "policy_target_hz": 20,
+    "num_envs": 1,
+    "native_episode_limit_seconds": 20,
+    "native_success_thresholds_unchanged": true,
+    "disturbance": false,
+    "num_rerenders_on_reset": 1,
+    "inference_device": "remote CPU",
+    "training_seed": 42,
+    "inference_seed": 42,
+    "fresh_application_and_server_per_case": true,
+    "recorded_cameras": [
+      "scene_camera",
+      "base_camera",
+      "ee_camera"
+    ],
+    "model_input_camera": "ee_camera"
+  },
+  "selection_seeds": [
+    23001,
+    23002,
+    23003,
+    23004,
+    23005,
+    23006,
+    23007,
+    23008,
+    23009,
+    23010
+  ],
+  "final_seeds": [
+    33001,
+    33002,
+    33003,
+    33004,
+    33005,
+    33006,
+    33007,
+    33008,
+    33009,
+    33010,
+    33011,
+    33012,
+    33013,
+    33014,
+    33015,
+    33016,
+    33017,
+    33018,
+    33019,
+    33020,
+    33021,
+    33022,
+    33023,
+    33024,
+    33025,
+    33026,
+    33027,
+    33028,
+    33029,
+    33030
+  ],
+  "models": [
+    {
+      "family": "act",
+      "training_source_commit": "472b096e72bad94bb5ef337dea50656d01c46791",
+      "training_completed_optimizer_updates": 40000,
+      "training_completed_epochs": null,
+      "selected_optimizer_updates": 40000,
+      "selected_completed_epochs": null,
+      "selection_cases": 80,
+      "selection_successes": 0,
+      "selection_lock_path": "outputs/research/fulltrain-20261013/act-corrected-deployment/act-selection-lock.json",
+      "selection_locked_at_utc": "2026-10-14T08:55:57.272996+00:00",
+      "final_started_at_utc": "2026-10-14T08:55:59.277486+00:00",
+      "final_finished_at_utc": "2026-10-14T10:13:42.814135+00:00",
+      "final_cases": 30,
+      "final_successes": 0,
+      "final_timeouts": 30,
+      "success_rate_percent": 0.0,
+      "wilson_95_percent": [
+        0,
+        11.351339
+      ],
+      "final_trials": [
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33001",
+          "seed": 33001,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33001/eval_summary.json",
+          "eval_summary_sha256": "8a030e51b94b5a4ba08a4f84630e3b13dbfa0da71e5f59f9c132d3359eee9096"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33002",
+          "seed": 33002,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33002/eval_summary.json",
+          "eval_summary_sha256": "f009ffd1ae3db4e6122cdca90633c4d2f1a4920c7c174bd4dcc4d7b949812280"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33003",
+          "seed": 33003,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33003/eval_summary.json",
+          "eval_summary_sha256": "9a29849f3dfb4f0f7b1bade6efc963c91c3f27689f0a1254497a81d1bcda6c86"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33004",
+          "seed": 33004,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33004/eval_summary.json",
+          "eval_summary_sha256": "168a10335cb024405c4ce01a3ff00968d344fec87856e537635f7e96d4a19c17"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33005",
+          "seed": 33005,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33005/eval_summary.json",
+          "eval_summary_sha256": "2b798b2c1fa6778a012ebe11681f131a7818611aad2b241d816b949e5f29ed87"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33006",
+          "seed": 33006,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33006/eval_summary.json",
+          "eval_summary_sha256": "36e87102925474c666592117295b39e067c12fa3d473fe963026ce6c4dbc5000"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33007",
+          "seed": 33007,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33007/eval_summary.json",
+          "eval_summary_sha256": "54a4f05531cc2dd3bd5eda1d04cee7887994b1900ce3f5fc94bd67dc8b9f2cef"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33008",
+          "seed": 33008,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33008/eval_summary.json",
+          "eval_summary_sha256": "5b239b53b8b8ff1f90df8e9dafcba4be4898875d139a304005ac7788b8a8b88d"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33009",
+          "seed": 33009,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33009/eval_summary.json",
+          "eval_summary_sha256": "5b748db4542a12b76cc82feba90eae5237694335236701f656074b5171b3a814"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33010",
+          "seed": 33010,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33010/eval_summary.json",
+          "eval_summary_sha256": "09ef1b69284d4d2fa63d2ceb8b042b1fde69eb110e61281fbbc372689df16f36"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33011",
+          "seed": 33011,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33011/eval_summary.json",
+          "eval_summary_sha256": "a50f10df7fab2a1e34b4c0eb993ed4d84f1f5e514c9bde256cf67f50fa1d8e62"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33012",
+          "seed": 33012,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33012/eval_summary.json",
+          "eval_summary_sha256": "4c20e107f333c593926325477a0a9c33d2f7cb276308ed1cb54ce645fa863c42"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33013",
+          "seed": 33013,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33013/eval_summary.json",
+          "eval_summary_sha256": "6cffcbee130186d16d978db8c31b8d9407a5ace3bf82d3d8b3cd11fab0113c6c"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33014",
+          "seed": 33014,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33014/eval_summary.json",
+          "eval_summary_sha256": "7e514733f7c3e7dfed34a579952351f82ea04fd849c29c9ff6c83b26ff18cf85"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33015",
+          "seed": 33015,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33015/eval_summary.json",
+          "eval_summary_sha256": "36510f691478b445d29d168151f816d7e80bced502de6389be1a6e559050d740"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33016",
+          "seed": 33016,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33016/eval_summary.json",
+          "eval_summary_sha256": "b035fa7eab7f41b0b92c7bf48fbdbf9462f49db8642fdba155f54ccb968f0c9b"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33017",
+          "seed": 33017,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33017/eval_summary.json",
+          "eval_summary_sha256": "dab962918adf1d0a85ac951bb66e11900e462755702d514c653df64ecee44659"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33018",
+          "seed": 33018,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33018/eval_summary.json",
+          "eval_summary_sha256": "d9728c6c1aabc7db26fef9e36b955e2f9ecb54d2eb8f7d388b3d974271058aa3"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33019",
+          "seed": 33019,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33019/eval_summary.json",
+          "eval_summary_sha256": "5305f33f993ae956dbdf327f19809d1190f31efc480814ead71ffdba5384df42"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33020",
+          "seed": 33020,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33020/eval_summary.json",
+          "eval_summary_sha256": "b1953ea30ac157d894561c065158b2b6db7f380dabb26ab857f1568a71153811"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33021",
+          "seed": 33021,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33021/eval_summary.json",
+          "eval_summary_sha256": "a05fa18cf99cbd3feb6099cc9c08d65e88fbd4862266874548c6a81bd1ec7891"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33022",
+          "seed": 33022,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33022/eval_summary.json",
+          "eval_summary_sha256": "b6577d9d8f8bc64308de2b92892f0f840a74110668a0cea7498e6af931fdbadd"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33023",
+          "seed": 33023,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33023/eval_summary.json",
+          "eval_summary_sha256": "73435b9ec6b6cab359fe45b8dfa75206715714f959fa1c2266a86ab3408d5222"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33024",
+          "seed": 33024,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33024/eval_summary.json",
+          "eval_summary_sha256": "eb765e03abf37b84ff61fbf408df449583d014e768fa26d07e0e7657479a5787"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33025",
+          "seed": 33025,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33025/eval_summary.json",
+          "eval_summary_sha256": "01cb3373d68c323aa58b7412f843cf65bf698f9a402f2844d6e5c2db3c2f080e"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33026",
+          "seed": 33026,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33026/eval_summary.json",
+          "eval_summary_sha256": "d5e652c69e7e450b27322adbd61a8fb3f241718cd25b7fb82e758c589c565a9f"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33027",
+          "seed": 33027,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33027/eval_summary.json",
+          "eval_summary_sha256": "88a0ccd36ca64f1f41ba7335654cde7953e91c32aac25cb5ae67d63c99a773a4"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33028",
+          "seed": 33028,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33028/eval_summary.json",
+          "eval_summary_sha256": "539bc94e8e5ecc8f952c3440ce84acec25a2584449dd997b799ad6973a30934d"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33029",
+          "seed": 33029,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33029/eval_summary.json",
+          "eval_summary_sha256": "bc1d96af285e868c42c1ee678883cc1b05abe31f78e54b99f1bd11ff3bc3b454"
+        },
+        {
+          "trial_id": "uaquad_act_rerender1_locked_final_seed33030",
+          "seed": 33030,
+          "success": false,
+          "termination_reason": "timeout",
+          "executed_steps": 2399,
+          "simulation_seconds_from_steps": 19.991667,
+          "eval_summary": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/uaquad_act_rerender1_locked_final_seed33030/eval_summary.json",
+          "eval_summary_sha256": "ff82f111dd69bff469968995654043d0318df372af5784ee3f4007df26e0cd91"
+        }
+      ],
+      "evaluation_source_commit": "38d2a3246506363617555fd26fa3d30988b23ff2",
+      "selected_weight_sha256": "405be4ccc9931ae9996627cf85be3fa9760e6bd0353b519f7c72825dbb1aa013",
+      "selected_weight_format": "ACT model.safetensors"
+    },
+    {
+      "family": "dp",
+      "training_source_commit": "875569d125c57a2d17818ec334d605407478cbdc",
+      "training_completed_optimizer_updates": 46480,
+      "training_completed_epochs": 40,
+      "selected_optimizer_updates": 18592,
+      "selected_completed_epochs": 16,
+      "selection_cases": 80,
+      "selection_successes": 79,
+      "selection_lock_path": "outputs/research/fulltrain-20261013/dp-native-evaluation-plan/dp-selection-lock.json",
+      "selection_locked_at_utc": "2026-10-14T17:54:36.330405+00:00",
+      "final_started_at_utc": "2026-10-14T17:54:36.394740+00:00",
+      "final_finished_at_utc": "2026-10-14T18:44:28.895520+00:00",
+      "final_cases": 30,
+      "final_successes": 30,
+      "final_timeouts": 0,
+      "success_rate_percent": 100.0,
+      "wilson_95_percent": [
+        88.648661,
+        100.0
+      ],
+      "final_trials": [
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33001",
+          "seed": 33001,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 953,
+          "simulation_seconds_from_steps": 7.941667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33001/eval_summary.json",
+          "eval_summary_sha256": "ea7d5f008d2e7bec5532577398e5ee2e17ccf89f123366889a8e824356e7479b"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33002",
+          "seed": 33002,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1016,
+          "simulation_seconds_from_steps": 8.466667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33002/eval_summary.json",
+          "eval_summary_sha256": "d31098271a559d75d948ecab4ad05bbc2a4706ad71f9931f48e88ffcde4aaa65"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33003",
+          "seed": 33003,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1109,
+          "simulation_seconds_from_steps": 9.241667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33003/eval_summary.json",
+          "eval_summary_sha256": "7c92a7231bb5e62cab97059d8d5bf070037a174674a66a5689ee52c1d3c60ff6"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33004",
+          "seed": 33004,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1139,
+          "simulation_seconds_from_steps": 9.491667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33004/eval_summary.json",
+          "eval_summary_sha256": "5a09bc0f7bbdd450c5e00d5cd4854a74d20a27865c2964823b69f495a2ed33ae"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33005",
+          "seed": 33005,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 951,
+          "simulation_seconds_from_steps": 7.925,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33005/eval_summary.json",
+          "eval_summary_sha256": "7bc2a827784f71931f182136944f306204517c81b73cbba165c74aff0730004c"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33006",
+          "seed": 33006,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 817,
+          "simulation_seconds_from_steps": 6.808333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33006/eval_summary.json",
+          "eval_summary_sha256": "a9de90e0a17a380c829eceb28178d80ef4867d378cef952cf4e2519629d2a666"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33007",
+          "seed": 33007,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1039,
+          "simulation_seconds_from_steps": 8.658333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33007/eval_summary.json",
+          "eval_summary_sha256": "f7e9b5a7fcddef2dc1604dc9c8c45251b203728fbc26e0bcc10bab89e6042f10"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33008",
+          "seed": 33008,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1044,
+          "simulation_seconds_from_steps": 8.7,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33008/eval_summary.json",
+          "eval_summary_sha256": "a75ee1e957a1f899c873f577ab08379dead6a1320a5c17961e90e133977ca352"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33009",
+          "seed": 33009,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1028,
+          "simulation_seconds_from_steps": 8.566667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33009/eval_summary.json",
+          "eval_summary_sha256": "af383509570505107541f0f06cee20aac0453a3c1a983e77a3abd20fee9f2492"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33010",
+          "seed": 33010,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 971,
+          "simulation_seconds_from_steps": 8.091667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33010/eval_summary.json",
+          "eval_summary_sha256": "4719acea6411ddf6d47fc208dc4589b67e77bf01fe9658004ebd3cc0d5e073bd"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33011",
+          "seed": 33011,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1040,
+          "simulation_seconds_from_steps": 8.666667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33011/eval_summary.json",
+          "eval_summary_sha256": "dc56993678f6085a1f102b056449bd6567d98f0f7ba3ea1409eeb2a67edf6804"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33012",
+          "seed": 33012,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 951,
+          "simulation_seconds_from_steps": 7.925,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33012/eval_summary.json",
+          "eval_summary_sha256": "faef545bcac724b8f3f5a4966f1364f6c0a4f4982c685802a9911b7bdb19aedf"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33013",
+          "seed": 33013,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 987,
+          "simulation_seconds_from_steps": 8.225,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33013/eval_summary.json",
+          "eval_summary_sha256": "7df3235d9b58e4af0eba03c0e457f5082b8991ea82ceef0ac755ac7fac5ba0e7"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33014",
+          "seed": 33014,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 967,
+          "simulation_seconds_from_steps": 8.058333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33014/eval_summary.json",
+          "eval_summary_sha256": "befc305191321bde333a07e056c3f8fef1e3ceb4451de1ac12fa79e926f8974a"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33015",
+          "seed": 33015,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1136,
+          "simulation_seconds_from_steps": 9.466667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33015/eval_summary.json",
+          "eval_summary_sha256": "a596b7e75b212d5a1f6a233e85d6d148c09faef5892658bd1b9fdb78ea40151e"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33016",
+          "seed": 33016,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 953,
+          "simulation_seconds_from_steps": 7.941667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33016/eval_summary.json",
+          "eval_summary_sha256": "8b8488b6e04132b4983e0aabd2761e0607c15cc18f4aa7a68892c88be32275bd"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33017",
+          "seed": 33017,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1015,
+          "simulation_seconds_from_steps": 8.458333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33017/eval_summary.json",
+          "eval_summary_sha256": "2b7d5e88ff3161c074fb4eb203d2a415238cf54cb0ad00ba01857abe0df99b4c"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33018",
+          "seed": 33018,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1040,
+          "simulation_seconds_from_steps": 8.666667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33018/eval_summary.json",
+          "eval_summary_sha256": "578a8af22f5f1e8d83bbb55b98f59d8f7dd97549a8d58323cc7d850c036eb644"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33019",
+          "seed": 33019,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 965,
+          "simulation_seconds_from_steps": 8.041667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33019/eval_summary.json",
+          "eval_summary_sha256": "f04e03d1d8f283c54ca2c8e42df7609ea0cbae36a6d3273090796e912ab6c6e2"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33020",
+          "seed": 33020,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1092,
+          "simulation_seconds_from_steps": 9.1,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33020/eval_summary.json",
+          "eval_summary_sha256": "6cf9991294984cf0c2a4606afedf70377ccdd230f852f6f21415ff17c2fdf072"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33021",
+          "seed": 33021,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 969,
+          "simulation_seconds_from_steps": 8.075,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33021/eval_summary.json",
+          "eval_summary_sha256": "8531635112e66ce3e5232e4916e342a1eb98908a6a3210cde0996631489a3d6f"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33022",
+          "seed": 33022,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1061,
+          "simulation_seconds_from_steps": 8.841667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33022/eval_summary.json",
+          "eval_summary_sha256": "c338cfa9afc333499624573bbbe4a3ffebb427c575a4290c5fbfdbd62e921ee1"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33023",
+          "seed": 33023,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1109,
+          "simulation_seconds_from_steps": 9.241667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33023/eval_summary.json",
+          "eval_summary_sha256": "9cd0a759042ab7abf33223e5ec59426bba3872a5e48d8d1cf336f55158304d94"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33024",
+          "seed": 33024,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1119,
+          "simulation_seconds_from_steps": 9.325,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33024/eval_summary.json",
+          "eval_summary_sha256": "e127fd5c4d1650e6517a7513bee55cb970a893cd9a3a0028a791ddabfcf21f54"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33025",
+          "seed": 33025,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1039,
+          "simulation_seconds_from_steps": 8.658333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33025/eval_summary.json",
+          "eval_summary_sha256": "9c777d152aeb98b2176313f8542aa8f0f7a7f09c0a8de462000d58d698dbd34d"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33026",
+          "seed": 33026,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1013,
+          "simulation_seconds_from_steps": 8.441667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33026/eval_summary.json",
+          "eval_summary_sha256": "0ee1b5ccd004fad97db1f5fdf57516a2012f0367a7a0fd8581273d6120eee65b"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33027",
+          "seed": 33027,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1039,
+          "simulation_seconds_from_steps": 8.658333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33027/eval_summary.json",
+          "eval_summary_sha256": "d8d95a3581cefcbe676fcb790123528e136b8f82b6817c888b4d05828027becc"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33028",
+          "seed": 33028,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1238,
+          "simulation_seconds_from_steps": 10.316667,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33028/eval_summary.json",
+          "eval_summary_sha256": "ded16568b597eac16555d2d40ca7d5519c7473cffd18bda3bed925517fef6ab6"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33029",
+          "seed": 33029,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 966,
+          "simulation_seconds_from_steps": 8.05,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33029/eval_summary.json",
+          "eval_summary_sha256": "a920b0854769a382b840851925d41f5a9b3b890dbed6382709bd2a0ca937456e"
+        },
+        {
+          "trial_id": "uaquad_dp_locked_final_seed33030",
+          "seed": 33030,
+          "success": true,
+          "termination_reason": "success",
+          "executed_steps": 1114,
+          "simulation_seconds_from_steps": 9.283333,
+          "eval_summary": "outputs/research/fulltrain-20261013/dp-native-sealed30/uaquad_dp_locked_final_seed33030/eval_summary.json",
+          "eval_summary_sha256": "ed4c02a5f1e39b242ed007daf5831ca28da827dbf00560566f31e090242f816f"
+        }
+      ],
+      "evaluation_source_commit": "875569d125c57a2d17818ec334d605407478cbdc",
+      "selected_weight_sha256": "512a647965517497e07129d7760d59981c0cfc51420daf359fe6c401afcadd55",
+      "selected_weight_format": "DP EMA inference bundle"
+    }
+  ],
+  "sources": [
+    {
+      "path": "outputs/research/fulltrain-20261013/act-extension-completion-receipt.json",
+      "sha256": "50f93815b48652c5ec95c078c4abd3174afc68d08880868a3c937bc8fa01e4c9"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/checkpoints/uaquad_pressbutton_act_extended_v1/training_provenance.json",
+      "sha256": "b43ba32c38b3284d3ffc2bb7532fc3d30aee7b93375e9a51ad1513e8f100b8f7"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/act-corrected-evaluation-plan/protocol-amendment.json",
+      "sha256": "1a64b71cd288fb908d076bd4c93d76b2904355a4b1db5a757f4a62158b0f05dd"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/act-corrected-evaluation-plan/queue-state.json",
+      "sha256": "6758cfe779e7f2be667e2e30eddb23752689842226e4f30438157a8815dd5209"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/act-corrected-deployment/act-selection-lock.json",
+      "sha256": "160143a0ffcd547604a7ab6a7e2571bb5012214ee91280f7864b9379ba694b59"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/act-corrected-eight-candidates-selection/results.json",
+      "sha256": "b73a31f5b288ad23bf7f1554a0e0827712e4cdeb138c696809e06172ef834bf0"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/act-corrected-sealed30-final/results.json",
+      "sha256": "54192849a6821f69bfcaf085aa3f9fefd468ebfb4b1e3c00d967154c81cfcc2b"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/checkpoints/uaquad_pressbutton_dp_full_v1/training_provenance.json",
+      "sha256": "0669009c25ac38c1cecb25c3155fc5523236c0f77068a86ca5f57553e01b8505"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-evaluation-plan/protocol.json",
+      "sha256": "371792e3baf910da0905b364bb60d7c63ff63452199ffaa4824391e586585e98"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-evaluation-plan/native-completion.json",
+      "sha256": "46402bae5762bb59602667d391d1b3d014ec77e6cc115ac4f6742f455f149b85"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-evaluation-plan/dp-selection-lock.json",
+      "sha256": "bbcf11b426575a466619a633175adf5bf8ff806416bbeac76adc1b637e388da6"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-evaluation-plan/selection80-audit.json",
+      "sha256": "d605a9dee56539e9820b34b0ce603989761b6b5f9df35989fa4db9cde65d4ea9"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-evaluation-plan/sealed30-audit.json",
+      "sha256": "40ede9522b6f88ec69b6b7d06430ff8967fadb5bea77cbad3b5d0e5305985592"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-selection80/results.json",
+      "sha256": "7d8b8efb0638244f8426cafdfd16b57dc9a5fc87683163e3c058160f2a08f65e"
+    },
+    {
+      "path": "outputs/research/fulltrain-20261013/dp-native-sealed30/results.json",
+      "sha256": "c02675342d033c768bef66116e421d26ce76be125cd4e5cd765be812b1aba867"
+    }
+  ],
+  "limits": [
+    "One task and one aircraft; not the paper twelve-task benchmark or a capability upper bound.",
+    "The DP run completed 40 epochs; selected evaluation weights are epoch 16 with 18,592 actual updates.",
+    "ACT optimizer/RNG continuation rebuilds the DataLoader; not bitwise-equivalent to uninterrupted 40k.",
+    "Three recorded camera views per episode do not increase the number of independent trials.",
+    "Historical one-step results and the old camera-reset selection remain separate.",
+    "Datasets, checkpoints and raw videos remain untracked; source paths refer to original owned experiment storage."
+  ]
+}

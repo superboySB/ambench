@@ -77,3 +77,54 @@ def test_published_release_missing_asset_stops_without_upload(tmp_path: Path, mo
         publisher.main()
     assert error.value.code == 2
     assert calls and set(calls) == {"GET"}
+
+
+def test_publish_refreshes_temporary_draft_asset_url(tmp_path: Path, monkeypatch) -> None:
+    source = tmp_path / "evidence.json"
+    source.write_text("{}\n")
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    plan = tmp_path / "plan.json"
+    plan.write_text(
+        json.dumps({
+            "repository": "example/repo",
+            "tag": "media-v1",
+            "assets": [{"name": source.name, "path": str(source), "bytes": source.stat().st_size, "sha256": digest}],
+        })
+    )
+    published = False
+    canonical_url = "https://github.com/example/repo/releases/download/media-v1/evidence.json"
+
+    def request(url: str, token: str, method: str = "GET", data=None, **kwargs) -> dict | list:
+        nonlocal published
+        if "/git/ref/tags/" in url:
+            return {"object": {"type": "commit", "sha": COMMIT}}
+        if "/assets?" in url:
+            return [{
+                "name": source.name,
+                "size": source.stat().st_size,
+                "digest": "sha256:" + digest,
+                "browser_download_url": (
+                    canonical_url
+                    if published
+                    else "https://github.com/example/repo/releases/download/untagged-temporary/evidence.json"
+                ),
+            }]
+        if method == "PATCH":
+            published = True
+        return {
+            "id": 1,
+            "target_commitish": COMMIT,
+            "draft": not published,
+            "html_url": "https://github.com/example/repo/releases/tag/media-v1",
+        }
+
+    receipt = tmp_path / "receipt.json"
+    monkeypatch.setattr(publisher, "request_json", request)
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token")
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [str(MODULE_PATH), "--plan", str(plan), "--target-commit", COMMIT, "--receipt", str(receipt), "--publish"],
+    )
+    assert publisher.main() == 0
+    assert json.loads(receipt.read_text())["assets"][0]["url"] == canonical_url

@@ -2,9 +2,9 @@
   "schema_version": 1,
   "updated_date": "2026-10-15",
   "timezone": "Asia/Shanghai",
-  "status": "CPU_checks_and_Omni_reaudit_completed_matrix_in_progress",
-  "scope": "Current mounted research source; separate from the historical2026-10-07/09 records and the completed trained-policy final tests.",
-  "runtime_source_note": "Simulation image09bb607e was restored from the existing local image, with baked revision02d1499. Current source is mounted separately; no image rebuild is claimed.",
+  "status": "completed_reproduction_checks_with_explicit_remaining_extensions",
+  "scope": "Current mounted research source; separate from the historical 2026-10-07/09 records and the completed trained-policy final tests.",
+  "runtime_source_note": "Existing simulation image sha256:09bb607e2263f3dbbbecb1949e30aee13db85fbdcc0402d68abefdd861ff42d8 was reused, with baked source revision02d1499. Current research source is mounted separately. No image rebuild or model retraining occurred in this reproduction.",
   "registered_environments": {
     "count": 106,
     "families": 12,
@@ -21,13 +21,33 @@
     }
   },
   "matrix": {
-    "status": "in_progress",
-    "expected_environments": 106,
+    "status": "passed",
+    "registry_count": 106,
+    "task_count": 106,
+    "passed_count": 106,
+    "failed_count": 0,
+    "family_count": 12,
     "seed": 42,
+    "num_envs": 1,
     "steps_per_environment": 8,
-    "output_directory": "outputs/research/reproduce-20261015/matrix",
-    "full_matrix_pass_claimed": false,
-    "final_report": null
+    "single_attempt_each": true,
+    "each_exit_code": 0,
+    "source_report": {
+      "path": "outputs/research/reproduce-20261015/matrix/results.json",
+      "sha256": "f6d771d4db0e25a86073a8f08c24307fe5cdbca35791338e11c690fb3f12af53"
+    },
+    "verified_report": {
+      "path": "outputs/research/reproduce-20261015/matrix_verified.json",
+      "sha256": "e61339484d2fe9ab559eacd8960e666eed1139f01dbe41b2229b903d10949553"
+    },
+    "integrity_receipt": {
+      "path": "outputs/research/reproduce-20261015/matrix_integrity.json",
+      "sha256": "3c0057dacf4100d925de6d30b3b5d9d39dc4a211464607c28d90d427bf009a38"
+    },
+    "child_records_and_logs_hashed": 106,
+    "cleanup_after_matrix_verified": true,
+    "validation_level": "registration/construction/reset/8-step smoke",
+    "task_success_assessed": false
   },
   "CPU_test_groups": [
     {
@@ -58,12 +78,30 @@
       }
     },
     {
-      "scope": "Real MP4 frame count and final sampled image",
-      "passed": 2,
+      "scope": "Real MP4 frame counts plus terminated/truncated automatic-reset filtering with one/two environments",
+      "passed": 6,
       "validation_level": "CPU regression tests",
       "source": {
-        "path": "outputs/research/reproduce-20261015/video-regression-final.log",
-        "sha256": "6556b90dde0fc0e2f9cddb80115d74c4dfa983d6195d7c9bee38a121aec2ce52"
+        "path": "outputs/research/reproduce-20261015/video-regression-terminal-final.log",
+        "sha256": "8fd1a5de6c9f111004d7dffa3b31dc72b1819019fd184dcf0ef128ebaf5ad2b6"
+      }
+    },
+    {
+      "scope": "OpenPI adapters",
+      "passed": 17,
+      "validation_level": "CPU regression tests",
+      "source": {
+        "path": "outputs/research/reproduce-20261015/openpi-adapter-tests-retry.log",
+        "sha256": "ee86cf8a2e3093b1895bfdce6364cdb1cdf3fa9faa953a4316b3b5886e74ea69"
+      }
+    },
+    {
+      "scope": "Release publication guards including public URL resolution",
+      "passed": 4,
+      "validation_level": "CPU regression tests",
+      "source": {
+        "path": "outputs/research/reproduce-20261015/release-guards-final4-after-refactor.log",
+        "sha256": "99cef98de12a8b8a90abbcb2033d076bfc563ea7951d4da90263da27288d16f6"
       }
     }
   ],
@@ -77,11 +115,11 @@
   "recording_fix": {
     "source": {
       "path": "source/ambench/ambench/recording/video.py",
-      "sha256": "c9d0d122c47e77c651281980e7036beab734a32f6476e15c910055188952178c"
+      "sha256": "147b5622a555c37f26cf203183a3d7660c853b56ec926d15a2269eb92fc15c4d"
     },
     "regression_test": {
       "path": "source/ambench/tests/recording/test_video.py",
-      "sha256": "e4e9d6781196902bea01508ec1d6c82e9ea070410a4d4ee38e29447f78bd6dd1"
+      "sha256": "8acb580cb5a67927bd94beb56b217a7e048205dbbb5db1a565003c203011e897"
     },
     "sample_counts_tested": [
       30,
@@ -92,7 +130,24 @@
     "last_sample_preserved_by_real_encoding": true,
     "historical_clips_rewritten": false,
     "cause": "MoviePy summed per-image durations and then floored duration times FPS; floating-point accumulation could omit the final sampled image.",
-    "fix": "Compute duration from the image count and round it upward by one representable float before encoding."
+    "fix": "Compute duration from the image count and round it upward by one representable float before encoding.",
+    "regression_case_count": 6,
+    "initial_duration_fix_test_log": {
+      "path": "outputs/research/reproduce-20261015/video-regression-final.log",
+      "sha256": "6556b90dde0fc0e2f9cddb80115d74c4dfa983d6195d7c9bee38a121aec2ce52"
+    },
+    "automatic_reset_filter": {
+      "cause": "Isaac returns the next reset observation when an environment terminates or truncates; the old wrapper could append that next-episode image to the current recording.",
+      "fix": "Capture post-step images only for environments that are not done, then finalize done recordings.",
+      "regression_coverage": [
+        "terminated,one environment",
+        "truncated,one environment",
+        "terminated,two environments",
+        "truncated,two environments"
+      ],
+      "physics_actions_and_success_thresholds_changed": false,
+      "historical_recordings_modified": false
+    }
   },
   "Omni_preflight": {
     "status": "passed_fresh_Omni_preflight",
@@ -165,10 +220,404 @@
     }
   },
   "remaining": [
-    "Finish and verify the current106-environment matrix before claiming a full pass.",
-    "UAQuad WipeWindow formal ACT/DP training has not started;100 successful demonstrations and CPU data preparation are ready.",
-    "OmniHexa full multitask data collection and dedicated formal training have not started; the single preflight is now audited.",
+    "UAQuad WipeWindow formal ACT/DP training has not started; 100 successful demonstrations and CPU data preparation are ready.",
+    "OmniHexa full multitask data collection and dedicated formal training have not started; the single recorded preflight is now audited.",
     "OpenPI proper MT/ST training remains incomplete; data and normalization readiness do not establish trained weights.",
-    "Public media delivery and browser playback require separate post-upload verification."
-  ]
+    "SpaceMouse/gamepad inputs, human teleoperation success, reinforcement learning and real aircraft deployment are not verified."
+  ],
+  "CPU_test_executions_passed": 126,
+  "initial_OpenPI_adapter_test_failure": {
+    "reason": "pytest missing in the selected container environment; original failure retained before the successful rerun.",
+    "source": {
+      "path": "outputs/research/reproduce-20261015/openpi-adapter-tests.log",
+      "sha256": "dc3ab2f256d21a9a73adfa46d5df7916bdcb3c5dd00b2c5be8e1e5a6de035262"
+    }
+  },
+  "scoped_hooks": {
+    "status": "passed",
+    "source": {
+      "path": "outputs/research/reproduce-20261015/hooks-release-final.log",
+      "sha256": "ded7c8f9bbcb61d33d2ff0f68a03e2bea388bece467402e79e841f10f135fcd6"
+    }
+  },
+  "canonical_dataset_revalidation": {
+    "status": "passed",
+    "sessions": 12,
+    "target_hz": 20,
+    "total_raw_frames": 17291,
+    "unchanged_metadata_and_Parquet_files": 48,
+    "dataset_checks_counted_as_CPU_tests": false,
+    "new_recordings_created": false,
+    "source": {
+      "path": "outputs/research/reproduce-20261015/canonical-revalidation/results.json",
+      "sha256": "cf59789295bea50f1d504b703b5e4b39f872b1559520314aaf236759d499793f"
+    },
+    "validator_sha256": "d859f7246a962c336b7f565e8d23f76bb2e5c872ea025fbb6ab8c072de351b41",
+    "sessions_summary": [
+      {
+        "family": "CabinetPickPlace",
+        "task_id": "CabinetPickPlace-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 2755,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/CabinetPickPlace.log",
+          "sha256": "8625bbc456b2b85ddacf7717aa0c105e0cd0299cfa00330b4d22004f6c19e65a"
+        }
+      },
+      {
+        "family": "FrameAssembly",
+        "task_id": "FrameAssembly-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 2995,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/FrameAssembly.log",
+          "sha256": "c377f94c9d424b9dda94dc68d56f7533576b82d031e3cf22a26e01bb0f3a65da"
+        }
+      },
+      {
+        "family": "LemonHarvesting",
+        "task_id": "LemonHarvesting-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 1739,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/LemonHarvesting.log",
+          "sha256": "212467135cea5981c4ca7af931d52ebc5f7750c2d621ffc85997fc9e44036f38"
+        }
+      },
+      {
+        "family": "NDT",
+        "task_id": "NDT-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 1213,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/NDT.log",
+          "sha256": "9c04c48d180f205da2278314ca3dbe2459e84c117b28171ff254dabfc14d6620"
+        }
+      },
+      {
+        "family": "OpenDoor",
+        "task_id": "OpenDoor-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 390,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/OpenDoor.log",
+          "sha256": "60b477507bb25952165fa636681e344566ef0df3b19448e9d397bd478ecc28b2"
+        }
+      },
+      {
+        "family": "PegInHole",
+        "task_id": "PegInHole-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 1043,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/PegInHole.log",
+          "sha256": "49ba754d8b70431f4700a1c089ffdf1b14b1724873a2372c0d861bf1bbf1f315"
+        }
+      },
+      {
+        "family": "PressButton",
+        "task_id": "PressButton-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 994,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/PressButton.log",
+          "sha256": "76f3487bee801ed2fccc63920adb13ad9eebde1421bab18052255a5b2dea204e"
+        }
+      },
+      {
+        "family": "PullLever",
+        "task_id": "PullLever-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 916,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/PullLever.log",
+          "sha256": "b86632ed3cd0f533a639b13be9ae2b7d1c2c64e61271a337f86b2ce799afed03"
+        }
+      },
+      {
+        "family": "PushSlider",
+        "task_id": "PushSlider-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 1353,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/PushSlider.log",
+          "sha256": "4ead1656630001c4fd1e53f92108e5db47870ab8b8c274dee1ec50cdf2566ab9"
+        }
+      },
+      {
+        "family": "RotateValve",
+        "task_id": "RotateValve-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 1039,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/RotateValve.log",
+          "sha256": "da2c20de28d5712d0f562882709b61e7cff9ec192fe42e5b905f8fca90ad791d"
+        }
+      },
+      {
+        "family": "TossBall",
+        "task_id": "TossBall-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 615,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/TossBall.log",
+          "sha256": "289363b523e0f1af068580b6e9a3529ceb46c8652e60e19bf7619cd55092fb60"
+        }
+      },
+      {
+        "family": "WipeWindow",
+        "task_id": "WipeWindow-Am-EE-Abs-PID-Direct-v0",
+        "seed": 42,
+        "raw_frames": 2239,
+        "log": {
+          "path": "outputs/research/reproduce-20261015/canonical-revalidation/WipeWindow.log",
+          "sha256": "a06a3789280d92079ff8315b7dbca382a9d4ac5a4779dd0c8c5a5a1eff5554bd"
+        }
+      }
+    ]
+  },
+  "public_media_delivery": {
+    "status": "passed_public_delivery_and_real_visualization_with_explicit_download_MIME_boundary",
+    "source": {
+      "path": "outputs/research/reproduce-20261015/public-delivery-summary.json",
+      "sha256": "c86708b2b2cdbde8284103b31f5d62dc2e6565cb2ccd265e5b8cfde169d84d34"
+    },
+    "source_receipts": {
+      "delivery": {
+        "path": "outputs/research/reproduce-20261015/public-delivery-qualified/receipt.json",
+        "sha256": "a6c9d22593cf2387ef5cada4dc840419fcb762307bf6002fc2c2031d843f2079"
+      },
+      "decoding": {
+        "path": "outputs/research/reproduce-20261015/public-delivery-decode/receipt.json",
+        "sha256": "c91f133524ac0275649481c867623115b66f4e043e06129e83c59e54502f10c7"
+      },
+      "gallery_browser": {
+        "path": "outputs/research/reproduce-20261015/public-delivery-browser-qualified/receipt.json",
+        "sha256": "9781c5331c551ab0010e50746441c7073884d72fc7c315201416a86d556391b0"
+      },
+      "github_markdown": {
+        "path": "outputs/research/reproduce-20261015/public-delivery-markdown-browser-attempt02/receipt.json",
+        "sha256": "e770d0f7ceb46e7c387534a568e701108f9afb4d86c52e4bd4d60cec696d58ed"
+      }
+    },
+    "release_tag": "research-media-20261015-uaquad-pressbutton",
+    "release_url": "https://github.com/superboySB/ambench/releases/tag/research-media-20261015-uaquad-pressbutton",
+    "release_target_commit": "09310ae775ed3ce1da3bf1a0b3c775e899c1a8ae",
+    "release_receipt": {
+      "path": "outputs/research/reproduce-20261015/release-public-receipt.json",
+      "sha256": "6aa40f3b12863ae04f445e17fe0e4b50aa86d994d3db0f108a2ba2d5cfd4edb0"
+    },
+    "gallery_url": "https://zipengdai.com/ambench/trained/",
+    "Pages_commit": "432d88c9d1ac5744b829020591d9dd1cd2c921be",
+    "Pages_publish_log": {
+      "path": "outputs/research/reproduce-20261015/pages-publish.log",
+      "sha256": "7e87abd227c68aab0344aef9e0cb656a0c76902f6c382929b66c66d5d361b749"
+    },
+    "anonymous_HTTP206_length_and_signature_assets": 686,
+    "full_file_SHA_verified_assets": 38,
+    "public_MP4_downloads_fully_decoded": 24,
+    "real_browser_media_load_seek_syncplay_pause": 24,
+    "GitHub_Markdown_GIFs_decoded": 2,
+    "recorded_native_cases": 220,
+    "original_videos": 660,
+    "representative_preview_MP4s": 12,
+    "representative_preview_GIFs": 12,
+    "all_media_HTTP_content_type": "application/octet-stream",
+    "canonical_media_MIME_matches": 0,
+    "qualification": "Anonymous byte/range checks and actual browser decoding passed. Canonical media MIME matching did not pass and is not claimed.",
+    "first_failures_preserved": true,
+    "new_media_Git_objects": 0,
+    "gallery_HTML_sha256": "541b990b9da90399377bd94c25753659c9139c35184a51d784f612a110370312",
+    "manifest_sha256": "c88b9409966fe59375d9ce89d654a9b259a954087c7626c3db5a0660615b2831"
+  },
+  "fresh_DP_rollout": {
+    "status": "completed",
+    "validation_level": "partial functional test; one task and one first-attempt rollout",
+    "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+    "seed": 34001,
+    "attempts": 1,
+    "native_successes": 1,
+    "native_steps": 956,
+    "simulation_duration_s": 7.966666666666667,
+    "episode_limit_s": 20,
+    "inference_device": "remote CPU",
+    "inference_seed": 42,
+    "selected_completed_epochs": 16,
+    "selected_optimizer_updates": 18592,
+    "complete_training_run_epochs": 40,
+    "inference_source_commit": "875569d125c57a2d17818ec334d605407478cbdc",
+    "frozen_backend_files_verified": 119,
+    "support_files_verified": 3,
+    "model_retrained": false,
+    "sealed30_results_modified": false,
+    "merged_into_sealed30_denominator": false,
+    "source": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/rollout/results.json",
+      "sha256": "8df192f71a144ff401e548f3a0bf782d2e83ed4a624ae565e97bbf69dcac1173"
+    },
+    "eval_summary": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/rollout/uaquad_dp_reproduction20261015_seed34001/eval_summary.json",
+      "sha256": "75d789718c921d645026e89084ae1e9a8ea33ad7627f620b7343c27c5060e2bb"
+    },
+    "server_source_and_weight_gate_log": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/server-start-preflight.log",
+      "sha256": "a9833d5a3335bbc24713464c52080ae83e39d4c96a4481531dd6f87674b8109a"
+    },
+    "driver_log": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/driver.log",
+      "sha256": "f6066c5bccada5e002efa1f17d422a8e91e09309b959d5328a7f9e7dd2eb13b9"
+    },
+    "evaluator_command": [
+      "docker",
+      "exec",
+      "ambench-sim-research",
+      "timeout",
+      "--kill-after=20s",
+      "900s",
+      "python",
+      "-m",
+      "ambench_learn.policies.dp.eval",
+      "--task",
+      "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "--num-envs",
+      "1",
+      "--num-rollouts",
+      "1",
+      "--seed",
+      "34001",
+      "--episode-length-s",
+      "20",
+      "--policy-id",
+      "uaquad_dp_reproduction20261015_seed34001",
+      "--save-video",
+      "--video-camera-names",
+      "scene_camera",
+      "base_camera",
+      "ee_camera",
+      "--output-dir",
+      "/workspace/ambench/outputs/research/reproduce-20261015/fresh-dp/rollout/uaquad_dp_reproduction20261015_seed34001",
+      "--progress-every",
+      "240",
+      "--headless",
+      "--device",
+      "cuda:0",
+      "--remote-url",
+      "http://127.0.0.1:8001"
+    ],
+    "videos_full_decode_status": "passed_full_decode_with_reset_tail_observed",
+    "cleanup_status": "passed_no_remaining_Isaac_process",
+    "video_audit": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/fresh-video-audit34001.json",
+      "sha256": "5f93cc7b89ed068553a2eb7f84d08a385840bc2d8a5d38245f477d88f14de658"
+    },
+    "video_frames_per_view": 240,
+    "reset_tail_observed": true,
+    "recording_source_sha256": "c9d0d122c47e77c651281980e7036beab734a32f6476e15c910055188952178c",
+    "duration_rounding_fix_used": true,
+    "done_frame_filtering_fix_used": false,
+    "cleanup_receipt": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/cleanup.json",
+      "sha256": "4abff200652a64db379e5b7238ab195a96b4d5271958fd456e68c158a1148f7b"
+    }
+  },
+  "fresh_DP_replay_after_recording_fix": {
+    "status": "completed",
+    "validation_level": "partial functional test; one task and one first-attempt rollout",
+    "task_id": "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+    "seed": 34002,
+    "attempts": 1,
+    "native_successes": 1,
+    "native_steps": 1055,
+    "simulation_duration_s": 8.791666666666666,
+    "episode_limit_s": 20,
+    "inference_device": "remote CPU",
+    "inference_seed": 42,
+    "selected_completed_epochs": 16,
+    "selected_optimizer_updates": 18592,
+    "complete_training_run_epochs": 40,
+    "inference_source_commit": "875569d125c57a2d17818ec334d605407478cbdc",
+    "inference_bundle_sha256": "512a647965517497e07129d7760d59981c0cfc51420daf359fe6c401afcadd55",
+    "frozen_backend_files_verified": 119,
+    "support_files_verified": 3,
+    "recording_source_sha256": "147b5622a555c37f26cf203183a3d7660c853b56ec926d15a2269eb92fc15c4d",
+    "done_frame_filtering_fix_used": true,
+    "videos_full_decode_status": "passed_full_decode_after_terminal_frame_fix",
+    "video_frames_per_view": 264,
+    "reset_tail_observed": false,
+    "recordings": [
+      {
+        "camera": "scene_camera",
+        "frames": 264,
+        "sha256": "68b1ac151039c1034aee976ae9b4878f724dc76c1e4c6ab42fca70533a8eae2d"
+      },
+      {
+        "camera": "base_camera",
+        "frames": 264,
+        "sha256": "4b287f0968ba328e347a61bd80b7b3a4121b623efe723e456d03f49b5c9c9f7b"
+      },
+      {
+        "camera": "ee_camera",
+        "frames": 264,
+        "sha256": "745251c1ebed3e6326ab3e4c63dd7ddc190b9dc6821306d34144e5a20d750e1f"
+      }
+    ],
+    "source": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/results.json",
+      "sha256": "d1a100111c7de1574b3535b3d49264ae9381c48fee2bc267c1509a07efcd123d"
+    },
+    "eval_summary": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002/eval_summary.json",
+      "sha256": "5317924a9f779c59317c629a5d4a19faba88b9c53bc73c7b4feac7f1484836f4"
+    },
+    "video_audit": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/fresh-video-audit34002.json",
+      "sha256": "aa145d31ae68dbf71f8d7488340e2e2c2dbbb08609100e7dab502e3d2f480eba"
+    },
+    "evaluator_command": [
+      "docker",
+      "exec",
+      "ambench-sim-research",
+      "timeout",
+      "--kill-after=20s",
+      "900s",
+      "python",
+      "-m",
+      "ambench_learn.policies.dp.eval",
+      "--task",
+      "PressButton-Am-UAQuad-Abs-PID-Direct-v0",
+      "--num-envs",
+      "1",
+      "--num-rollouts",
+      "1",
+      "--seed",
+      "34002",
+      "--episode-length-s",
+      "20",
+      "--policy-id",
+      "uaquad_dp_reproduction20261015_seed34002",
+      "--save-video",
+      "--video-camera-names",
+      "scene_camera",
+      "base_camera",
+      "ee_camera",
+      "--output-dir",
+      "/workspace/ambench/outputs/research/reproduce-20261015/fresh-dp/rollout34002/uaquad_dp_reproduction20261015_seed34002",
+      "--progress-every",
+      "240",
+      "--headless",
+      "--device",
+      "cuda:0",
+      "--remote-url",
+      "http://127.0.0.1:8001"
+    ],
+    "model_retrained": false,
+    "sealed30_results_modified": false,
+    "merged_into_sealed30_denominator": false,
+    "comparison_limit": "Seeds34001/34002 differ; do not infer a task-performance effect from their different steps or frame counts.",
+    "cleanup_status": "passed_no_remaining_Isaac_process",
+    "cleanup_receipt": {
+      "path": "outputs/research/reproduce-20261015/fresh-dp/cleanup.json",
+      "sha256": "4abff200652a64db379e5b7238ab195a96b4d5271958fd456e68c158a1148f7b"
+    }
+  }
 }

@@ -6,6 +6,12 @@
 
 当前机器已有历史示范和 checkpoint，可以核验并复用；需要重新采集或训练时，统一替换所有本地输出、远端数据、stats、checkpoint 和评估路径中的运行名，使用空目录。验证采集入口拒绝非空输出目录，上传入口拒绝同名远端目录；训练也应使用新的目录。
 
+2026-10-15 按当前挂载源码完成 **106/106** 注册/reset/8 步 smoke、**126 项 CPU 回归**和 **12/12** 历史 canonical 重验；另以已选 DP epoch 16 权重在新 seed 34002 首次闭环成功（1055 步、约 8.792 秒），单独记录，不合入原最终测试 30/30。此前 34001 的原生成功与含 reset 尾帧的视频保留；录像修复后 34002 三路各 264 帧完整解码、末帧接触画面检查通过。本轮复用已有仿真镜像 `sha256:09bb607e…`，其烘焙源码仍为 `02d1499`；当前源码来自挂载，没有重建镜像或重新训练。在线新实验的 686 附件匿名访问、选定视频全解码与实际浏览器播放已验收；CDN 返回 `application/octet-stream`，不宣称媒体 MIME 匹配。逐项来源、哈希与验证边界见 [usage.md 本轮复测](usage.md#本轮逐步复测2026-10-15)和[快照](usage_assets/reproduction_20261015.json)。
+
+[![本轮DP seed34002按钮成功过程，录像末帧保持接触](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_ee_camera.mp4)
+
+上图是本轮新试次的采样预览，点击播放 MP4；[重放来源清单](usage_assets/trained/replay.json)保留两个 seed 的全部原片与录制版本，两个试次不合并为新成功率。
+
 ### 先选择复现版本
 
 `research` 会继续变化，Compose 挂载和远端同步会使用当前 checkout；旧 checkpoint 路径和旧镜像标签不能单独固定运行源码。重放历史实验时，从下表指定提交建立独立 worktree，并在该 worktree 中使用相应手册、子模块、镜像依赖和保存的配置。不要切换正在被训练或评估容器挂载的 checkout。

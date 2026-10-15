@@ -77,6 +77,18 @@ def verify_tag(endpoint: str, tag: str, commit: str, token: str, required: bool 
     raise ValueError("Release tag nesting exceeds the verification limit")
 
 
+def release_assets(endpoint: str, release_id: int, token: str) -> dict[str, dict]:
+    """Read the complete paginated inventory before and after publication."""
+    assets = {}
+    page = 1
+    while True:
+        rows = request_json(f"{endpoint}/releases/{release_id}/assets?per_page=100&page={page}", token)
+        assets.update({row["name"]: row for row in rows})
+        if len(rows) < 100:
+            return assets
+        page += 1
+
+
 def main() -> int:
     """Validate a plan and optionally upload and publish its exact assets."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -137,7 +149,7 @@ def main() -> int:
         payload = {
             "tag_name": tag,
             "target_commitish": args.target_commit,
-            "name": "UAQuad PressButton: trained ACT / DP recordings",
+            "name": plan.get("title", "UAQuad PressButton: trained ACT / DP recordings"),
             "body": (
                 args.notes_file.read_text()
                 if args.notes_file
@@ -149,14 +161,7 @@ def main() -> int:
         release = request_json(f"{endpoint}/releases", token, "POST", json.dumps(payload).encode())
     if release["target_commitish"] != args.target_commit:
         parser.error("Existing release targets a different source commit")
-    existing = {}
-    page = 1
-    while True:
-        rows = request_json(f"{endpoint}/releases/{release['id']}/assets?per_page=100&page={page}", token)
-        existing.update({row["name"]: row for row in rows})
-        if len(rows) < 100:
-            break
-        page += 1
+    existing = release_assets(endpoint, release["id"], token)
     if set(existing) - names:
         parser.error("Release contains assets absent from this plan")
     if not release["draft"] and set(existing) != names:
@@ -191,6 +196,19 @@ def main() -> int:
         )
     if not release["draft"]:
         verify_tag(endpoint, tag, args.target_commit, token, required=True)
+        # Upload responses from a draft contain temporary untagged URLs.
+        # Read the published assets again before recording public links.
+        published_assets = release_assets(endpoint, release["id"], token)
+        if set(published_assets) != names:
+            raise ValueError("Published asset inventory differs from the upload plan")
+        for asset in uploaded:
+            row = published_assets[asset["name"]]
+            if row["size"] != asset["bytes"] or row.get("digest") != "sha256:" + asset["sha256"]:
+                raise ValueError(f"Published asset digest mismatch: {asset['name']}")
+            url = row["browser_download_url"]
+            if not url.startswith(f"https://github.com/{repository}/releases/download/{tag}/"):
+                raise ValueError("Published asset still has a temporary draft URL")
+            asset["url"] = url
     receipt = {
         "repository": repository,
         "tag": tag,

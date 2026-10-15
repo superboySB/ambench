@@ -57,7 +57,29 @@ bash tools/research/train_dp_full.sh --check \
 
 **尚未完成的扩展：** UAQuad WipeWindow 已有 100 条成功示范、80/20 数据转换与统计，正式 ACT/DP 训练尚未完成；OpenPI 已有 PressButton+WipeWindow 的 MT160 / ST80 数据及独立统计，正式训练尝试以 exit 139 结束，`OOMKilled=false`，尚无已验收的更新数或 checkpoint，未确证失败原因。OmniHexa seed 41001 按钮任务原生成功；原视频审计失败记录保留，2026-10-15 新 CPU 审计已通过，专属多任务数据与充分训练仍未完成。这些扩展与下文已完成的历史接口验收分开报告。SpaceMouse/gamepad 和人工成功示范需要实际设备/操作；RL、实机飞行与 real2sim2real 全流程均没有完成证据。
 
-**2026-10-15 复测与录像修复。** ACT/shared、DP、坐标/相机、录像的四组 CPU 回归分别通过 **37、22、40、2** 项，日志及来源哈希见[本轮复测快照](usage_assets/reproduction_20261015.json)。Omni 原片按每 4 个仿真步采样一次，1024 步得到 256 个采样图像；旧 MoviePy 逐帧累加时长再向下取整，实际 MP4 只有 255 帧，原审计要求 256 帧因此失败。新审计显式选择旧编码算法，完整解码三路原片，并逐行核对 1024 条 canonical/telemetry/pre-reset 物理记录；末次按钮位移为 0.0050001135 m，超过原生 0.004 m 阈值。旧文件仍缺一个尾部采样，未补造或重写，任务成功由 pre-reset 数值证明。当前写入器修正时长舍入，真实 30 帧/256 帧的 CPU 编码回归均保留最后一个采样图像。
+### 本轮逐步复测（2026-10-15）
+
+| 检查 | 本轮实际结果 | 验证范围 |
+| --- | --- | --- |
+| 注册与场景矩阵 | **106/106**，12 族；每 ID seed 42、单环境、8 步、exit 0 | 注册、构造、reset/step smoke；不计任务成功率 |
+| CPU 回归 | **126 项通过**：ACT/shared 37、DP 22、坐标/相机 40、录像 6、OpenPI adapter 17、发布门禁 4 | 软件契约、实际 MP4 编码与终止帧过滤 |
+| 历史成功 canonical 重验 | **12/12**，共 17,291 帧；48 个 meta/Parquet 源文件前后 SHA 不变 | 当前 validator、20 Hz 适配检查；未重新采集 |
+| 已选 DP 的新闭环 | 录像修复后 seed **34002** 首次尝试 **1/1** 原生成功；1055 步，约 **8.792 s**；三路原片各 264 帧全解码 | 单任务 partial functional test；独立于原 30/30，不追加到其分母 |
+| 公开视频交付 | **686** 附件匿名 Range/长度/文件签名通过；38 个完整文件 SHA、24 条 MP4 下载后全解码、24 路真实浏览器加载/跳转/播放、GitHub 文档 2 个 GIF 解码通过 | [在线新实验页](https://zipengdai.com/ambench/trained/)；包括筛选、分页、深链和手机布局 |
+
+来源、逐项日志与 SHA 见[本轮复测快照](usage_assets/reproduction_20261015.json)。本轮复用已有仿真镜像 `sha256:09bb607e…`（烘焙源码 `02d1499`），通过挂载使用当前 research 源码，**没有重新构建镜像或重新训练模型**。新 DP 推理仍用冻结 `875569d` 的已选 epoch 16 权重与归一化，加载前核对 119 个 backend 文件及 3 个 support 文件；仿真侧使用当前坐标/相机实现和修复后的录像写入器。
+
+此前 seed 34001 也首次原生成功（956 步），但视频最后采到了自动 reset 后的初始场景；三路 240 帧原片和失败审计原样保留。现已让 `RecordVideo` 在 done 时跳过返回的 reset 图像，成功/超时及单/双环境 CPU 回归通过；34002 原片末帧经实际检查仍是按钮接触画面。两次 seed 不同，不将步数变化解释为录像修复提高了任务性能。
+
+| 本轮 seed 34002：末端视角 | 同一次成功试次：外部场景 |
+| --- | --- |
+| [![2026-10-15 DP重放按钮成功，EE视角保持接触末帧](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_ee_camera.mp4) | [![2026-10-15 同一DP成功试次的外部场景视角](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_scene_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-replay/uaquad_dp_replay_seed34002_scene_camera.mp4) |
+
+点击 GIF 播放压缩预览；三视角原片与旧 34001 片段的来源见[本轮重放清单](usage_assets/trained/replay.json)。预览采样播放，两个视角只算一条试次，独立于历史训练最终成绩。
+
+公开 Release 绑定研究提交 `09310ae`，新媒体保持 Git 未跟踪。GitHub 附件 CDN 实际返回 `application/octet-stream`；这里报告的是已实测的浏览器播放与字节校验，不宣称媒体 MIME 匹配。首轮 MIME 断言失败和一次 CDN 500 保留，后者仅重试该附件。
+
+**录像修复。** Omni 原片按每 4 个仿真步采样一次，1024 步得到 256 个采样图像；旧 MoviePy 逐帧累加时长再向下取整，实际 MP4 只有 255 帧，原审计要求 256 帧因此失败。新审计显式选择旧编码算法，完整解码三路原片，并逐行核对 1024 条 canonical/telemetry/pre-reset 物理记录；末次按钮位移为 0.0050001135 m，超过原生 0.004 m 阈值。旧文件仍缺一个尾部采样，未补造或重写，任务成功由 pre-reset 数值证明。当前写入器修正时长舍入，真实 30 帧/256 帧的 CPU 编码回归均保留最后一个采样图像。
 
 在保存原始 session 的机器上，用新的输出路径重复 CPU 审计；该命令不启动 Isaac，也不重新录制，`--legacy-moviepy-timing` 只用于旧编码片段：
 

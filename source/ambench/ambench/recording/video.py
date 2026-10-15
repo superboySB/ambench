@@ -92,10 +92,10 @@ class RecordVideo(gym.Wrapper):
             truncated_np = truncated.detach().cpu().numpy() if torch.is_tensor(truncated) else np.asarray(truncated)
             done_mask = np.logical_or(terminated_np, truncated_np).reshape(-1)
 
-            # Capture the post-step frame before finalizing done envs so the
-            # terminal frame stays with the current episode instead of creating
-            # a one-frame "next episode" clip.
-            self._capture_frame()
+            # Isaac Lab resets done environments inside step(). Their sensors
+            # can already show the next episode rather than the terminal state.
+            if not done_mask.all():
+                self._capture_frame(capture_mask=~done_mask)
 
             for env_id, writer in enumerate(self._writers):
                 if env_id < len(done_mask) and done_mask[env_id]:
@@ -112,9 +112,11 @@ class RecordVideo(gym.Wrapper):
                     writer.finalize_episode(self.episode_ids[env_id])
         super().close()
 
-    def _capture_frame(self) -> None:
+    def _capture_frame(self, capture_mask: np.ndarray | None = None) -> None:
         captured_any = False
         for env_id, writer in enumerate(self._writers):
+            if capture_mask is not None and not capture_mask[env_id]:
+                continue
             images = capture_camera_frames(self.env, env_id, self.camera_names, data_types=("rgb", "depth"))
             if images:
                 captured_any = True

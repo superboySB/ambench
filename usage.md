@@ -6,6 +6,8 @@
 
 最新已完成的学习实验是 **UAQuad / PressButton / EE absolute / PID**，原生任务 ID 为 `PressButton-Am-UAQuad-Abs-PID-Direct-v0`。下表来自全部最终试次的 `eval_summary.json`；`completed` 与任务成功分别核验。[独立播放页](https://zipengdai.com/ambench/trained/)展示成功与失败的真实过程，[小型证据快照](usage_assets/trained/validation.json)保存协议、来源 SHA-256、选中权重身份和全部 60 条最终结果。仓库内有[本地页面副本](usage_assets/trained/index.html)，视频通过 Release 外链加载，仍需网络。原有 2026-10-07–09 的视频、一步模型与结果表保留历史身份。
 
+这里的 `EE absolute` 指环境和规范数据集的世界坐标动作接口；表中原 ACT 策略学习的是 `ee_local_relative`，后处理还原世界坐标动作后再交给控制器。各模型的动作表示与归一化身份见[模型清单](usage_assets/trained/models.json)。
+
 | 模型 | 完成的训练预算 | 测试前锁定的权重 | 独立最终测试 | 95% Wilson 区间 |
 | --- | --- | --- | --- | --- |
 | ACT，ImageNet ResNet18 | 20k 基线后续训到 **40,000** 次 AdamW 更新 | step 40,000 | **0/30，0%**；全部原生超时 | 0–11.35% |

@@ -4,7 +4,7 @@
 
 **版本与训练状态（2026-10-15）：** 本页十二任务、双 seed 与一步模型结果属于 **2026-10-09 历史专题**，首轮发布源码为 `aea900e4000cb85d3e8f774108552ea2bb1b6282`；该版本与 `ee291c8` 均匹配已记录的十个训练来源文件。当前充分训练的新成绩只属于 UAQuad PressButton（DP 30/30、ACT 0/30），见[新实验页](https://zipengdai.com/ambench/trained/)与 [usage.md](usage.md#当前正式训练结果2026-10-15)，不能作为 OmniHexa 的专属训练成绩。
 
-OmniHexa 的当前 right-v2 新预检中，seed 41001 按钮任务原生成功（1024 步、约 8.533 秒）。旧 MoviePy 时长舍入使 256 个采样图像只编码成 255 帧，原审计的 256 帧断言失败；原文件和失败记录保留，2026-10-15 新 CPU 审计显式按旧算法完整解码三路原片、逐行核对 canonical/telemetry/pre-reset 物理记录后通过。缺失的尾部采样未补造，成功由末次按钮位移 0.0050001135 m ≥0.004 m 证明。当前视频写入器已修复舍入，30/256 帧真实编码回归通过。复核命令见 [usage.md](usage.md#当前正式训练结果2026-10-15)，来源见[本轮快照](usage_assets/reproduction_20261015.json)。新多任务数据与 ACT/DP/OpenPI 专属充分训练仍未启动；下文旧结果、失败录像与原始训练来源全部保留。
+OmniHexa 的当前 right-v2 新预检中，seed 41001 按钮任务原生成功（1024 步、约 8.533 秒）。旧 MoviePy 时长舍入使 256 个采样图像只编码成 255 帧，原审计的 256 帧断言失败；原文件和失败记录保留，2026-10-15 新 CPU 审计显式按旧算法完整解码三路原片、逐行核对 canonical/telemetry/pre-reset 物理记录后通过。缺失的尾部采样未补造，成功由末次按钮位移 0.0050001135 m ≥0.004 m 证明。当前视频写入器已修复舍入，30/256 帧真实编码回归通过。复核命令见 [usage.md](usage.md#当前正式训练结果2026-10-15)，来源见[本轮快照](usage_assets/reproduction_20261015.json)。新的两任务专属示范正在采集，ACT/DP/OpenPI 专属充分训练仍待数据验收；[新的双 seed 擦窗专家预检与录像](usage.md#omni-擦窗夹具修复独立成功预检)不计入学习策略成功率。下文旧结果、失败录像与原始训练来源全部保留。
 
 **[在线交互与多视角实验](https://zipengdai.com/ambench/tilting/)** · [离线交互页](usage_assets/tilting/index.html) · [本轮录制配置](usage_assets/tilting/recording_specs.json)
 

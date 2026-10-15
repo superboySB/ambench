@@ -11,6 +11,8 @@
 | ACT，ImageNet ResNet18 | 20k 基线后续训到 **40,000** 次 AdamW 更新 | step 40,000 | **0/30，0%**；全部原生超时 | 0–11.35% |
 | DP，CLIP ViT-B/16 + 完整 U-Net、EMA | **40 完整 epochs，46,480** 次 AdamW/EMA 更新 | **epoch 16，18,592 次更新**的 EMA | **30/30，100%** | 88.65–100% |
 
+**重放已完成训练的模型：** [下载与重放手册](trained_models.md)提供实际选中 ACT/DP 权重、各自归一化与配置、完整 SHA-256 和双容器启动步骤。[模型 Release](https://github.com/superboySB/ambench/releases/tag/research-models-20261015-uaquad-pressbutton)的 5 个附件均已匿名完整下载核对 SHA；两个模型全部 660 段原片已逐帧解码，验证记录随 Release 提供。权重与媒体保持 Git 未跟踪。
+
 | DP：seed 33001 原生成功 | ACT：同一 reset seed 原生超时 |
 | --- | --- |
 | [![DP 已选 epoch16 EMA 的按钮成功过程](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_dp_sealed_seed33001_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_dp_locked_final_seed33001_ee_camera.mp4) | [![ACT 已选 step40000 的按钮超时过程](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_act_sealed_seed33001_ee_camera.gif)](https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-pressbutton/uaquad_act_rerender1_locked_final_seed33001_ee_camera.mp4) |

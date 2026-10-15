@@ -4,6 +4,8 @@
 
 **2026-10-15 更新：** UAQuad PressButton 已完成充分训练后的独立最终测试：选中 ACT step 40,000 为 **0/30**，选中 DP EMA epoch 16 / 18,592 次更新为 **30/30**；DP 的完整训练链已完成 40 epochs / 46,480 次更新。查看[新训练实验与三视角来源](https://zipengdai.com/ambench/trained/)、[第 7.0 节](#70-充分训练与独立最终测试2026-10-15)及[证据快照](usage_assets/trained/validation.json)；[本地页面](usage_assets/trained/index.html)使用同一份外链媒体，播放仍需网络。
 
+[实际选中权重的下载与重放](trained_models.md)已开放，包括原始 ACT/DP 推理包、各自的归一化与配置、逐成员 SHA 和两个模型全部 660 段原片的全帧验证记录。匿名完整下载验真通过；ACT 失败边界同样保留，不以精选片段替代最终测试。
+
 除这次新增的训练结果外，本文的“本轮”、原专家表与一步模型表均指 **2026-10-09 历史专题**，源码冻结为 `042e2f2ec079505ab9a386634c419d9ce564a482`。旧失败和旧录像保留原条件；当前源码修复后重新运行须使用新试次 ID，不覆盖历史记录。冻结 worktree 的方法见 [note.md](note.md#先选择复现版本)。
 
 **[在线交互流程与三视角实验](https://zipengdai.com/ambench/uaquad/)** · [离线交互页](usage_assets/uaquad/index.html) · [录制配置](usage_assets/uaquad/recording_specs.json)

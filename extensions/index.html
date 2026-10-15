@@ -11,6 +11,7 @@
       article,.panel{background:white;border:1px solid #d4dfe8;border-radius:9px;padding:18px;margin:18px 0}
       .views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
       figure{margin:0;min-width:0}video{width:100%;height:300px;object-fit:contain;background:#182b3c}
+      .preview{width:100%;height:280px;object-fit:contain;background:#182b3c}.timeout{color:#934123}
       figcaption{padding:8px 0}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}
       button,select,input{font:inherit}button,select{padding:7px;border:1px solid #9fb2c4;border-radius:5px;background:white}
       button{cursor:pointer}input[type=range]{flex:1;min-width:120px}.status{color:#176a36}
@@ -23,7 +24,22 @@
       <h1>长训练扩展与夹具复测</h1>
       <p><a href="https://github.com/superboySB/ambench/blob/research/usage.md">复现手册</a> ·
         <a href="../trained/">既有 UAQuad PressButton 正式训练结果</a> · <a href="../">全部历史仿真实验</a></p>
+      <section aria-labelledby="learned-results" class="panel">
+        <h2 id="learned-results">已完成扩展：UAQuad WipeWindow ACT</h2>
+        <p><strong>完整训练 40,000 次更新；最终 0/30，全部原生超时。</strong>8 个候选共完成 80 次选模，最终锁定 step 40,000 后运行 30 个封存 seeds。最终每次均未清除污点，没有成功录像可展示。</p>
+        <p>下列为固定首、中、末最终 seeds 的 EE 采样预览，TIMEOUT 表示整次试验结果。
+          <a href="act.html">切换全部 110 次试验、同步播放三视角原片</a> ·
+          <a href="act_manifest.json">330 段原片与模型清单</a> · <a href="act_validation.json">验证记录</a></p>
+        <div class="views">
+          <figure><a href="act.html"><img class="preview" loading="lazy" alt="ACT WipeWindow 最终 seed53001，原生超时" src="https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53001_ee_camera.gif" /></a><figcaption>seed 53001 · 0/4 污点 · 超时</figcaption></figure>
+          <figure><a href="act.html"><img class="preview" loading="lazy" alt="ACT WipeWindow 最终 seed53015，原生超时" src="https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53015_ee_camera.gif" /></a><figcaption>seed 53015 · 0/4 污点 · 超时</figcaption></figure>
+          <figure><a href="act.html"><img class="preview" loading="lazy" alt="ACT WipeWindow 最终 seed53030，原生超时" src="https://github.com/superboySB/ambench/releases/download/research-media-20261015-uaquad-wipe-act/uaquad_wipe_act_sealed_seed53030_ee_camera.gif" /></a><figcaption>seed 53030 · 0/4 污点 · 超时</figcaption></figure>
+        </div>
+        <p>本轮共声明 18 次训练、22 个模型任务评估单元；上述仅完成其中 1 个。
+          <a href="https://github.com/superboySB/ambench/blob/research/extensions.md">完整预算、数据划分与剩余工作</a>另列；其他扩展尚未验收，不以零分代替未完成。</p>
+      </section>
       <div class="panel">
+        <h2>OmniHexa 擦窗夹具：脚本专家成功预检</h2>
         <p>以下是 OmniHexa 擦窗夹具修复后的独立脚本专家预检。它们不属于训练集、模型选择或封存最终测试，不能作为学习策略的成功率。</p>
         <p>原生条件为 20 秒、清除全部 4 个污点、接触力大于 1.25 N 且距离不大于 80 mm。
           原始录像为 30 FPS、每 4 个仿真步采一帧；末帧在原生终止之前，成功结果以自动重置前的物理状态为准。

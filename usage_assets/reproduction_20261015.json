@@ -100,8 +100,8 @@
       "passed": 4,
       "validation_level": "CPU regression tests",
       "source": {
-        "path": "outputs/research/reproduce-20261015/release-guards-final4-after-refactor.log",
-        "sha256": "99cef98de12a8b8a90abbcb2033d076bfc563ea7951d4da90263da27288d16f6"
+        "path": "outputs/research/reproduce-20261015/release-guards-final4-before-replay.log",
+        "sha256": "130ea9fa973440723972b5bd54f92bd1c617151b25ab7b0430504465953c2dc5"
       }
     }
   ],
@@ -235,9 +235,10 @@
   },
   "scoped_hooks": {
     "status": "passed",
+    "scope": "Final source and document gate before the evidence-only metadata update.",
     "source": {
-      "path": "outputs/research/reproduce-20261015/hooks-release-final.log",
-      "sha256": "ded7c8f9bbcb61d33d2ff0f68a03e2bea388bece467402e79e841f10f135fcd6"
+      "path": "outputs/research/reproduce-20261015/hooks-final.log",
+      "sha256": "6c240579f99bdbe2da3d3a087533168ec0699c2b7b6ef9299ff38b2752abcfb1"
     }
   },
   "canonical_dataset_revalidation": {
@@ -619,5 +620,87 @@
       "path": "outputs/research/reproduce-20261015/fresh-dp/cleanup.json",
       "sha256": "4abff200652a64db379e5b7238ab195a96b4d5271958fd456e68c158a1148f7b"
     }
+  },
+  "final_source_commit": "50c74f8998c12dce205d547d293bfa42cafd460f",
+  "fresh_replay_publication": {
+    "status": "passed_public_replay13_and_real_Markdown_animation",
+    "release_url": "https://github.com/superboySB/ambench/releases/tag/research-media-20261015-uaquad-replay",
+    "release_tag": "research-media-20261015-uaquad-replay",
+    "release_target_commit": "50c74f8998c12dce205d547d293bfa42cafd460f",
+    "published_assets": 13,
+    "total_asset_bytes": 6411305,
+    "original_recordings": 6,
+    "preview_GIFs": 3,
+    "preview_MP4s": 3,
+    "metadata_files": 1,
+    "anonymous_HTTP206_length_and_signature_passed": 13,
+    "full_download_SHA_verified_assets": 13,
+    "GitHub_documents_checked": [
+      "usage.md",
+      "note.md"
+    ],
+    "new_GIF_occurrences_decoded_and_animated": 3,
+    "unique_new_GIF_assets": 2,
+    "image_natural_sizes": [
+      [
+        180,
+        208
+      ],
+      [
+        384,
+        256
+      ],
+      [
+        180,
+        208
+      ]
+    ],
+    "actual_HTTP_content_type": "application/octet-stream",
+    "canonical_media_MIME_pass_claimed": false,
+    "source": {
+      "path": "outputs/research/reproduce-20261015/replay-public-summary.json",
+      "sha256": "42ca7fed30e32475178ceee48a43cadebc380e28f50cd4d0051be154ef9f7c1b"
+    },
+    "source_receipts": {
+      "delivery": {
+        "path": "outputs/research/reproduce-20261015/replay-public-delivery-attempt01/receipt.json",
+        "sha256": "805ce6c147ea80530fdc7f883f8cd3094f9f57605ce9068c0caad13d3ba5c2dd"
+      },
+      "browser": {
+        "path": "outputs/research/reproduce-20261015/replay-public-markdown-attempt01/receipt.json",
+        "sha256": "295788e093b222b78e8920267ff152cda941deb6c9d0123275c011550352d596"
+      }
+    },
+    "publication_receipt": {
+      "path": "outputs/research/reproduce-20261015/replay-upload-receipt.json",
+      "sha256": "e24c5c14b489d4545865db989c5d24476f54b2447b6a00d65ffbb9fb8259a41b"
+    },
+    "replay_manifest": {
+      "path": "usage_assets/trained/replay.json",
+      "sha256": "5dde23ae6c6bdfec1e08eb1f9a661fb7161cbc6618cbe87d868d64786caa7367"
+    },
+    "main686_Release_retested_in_this_check": false,
+    "sealed30_denominators_modified": false,
+    "new_generated_media_Git_objects": 0
+  },
+  "media_Git_history_guard": {
+    "status": "passed",
+    "reachable_blobs_checked": 1273,
+    "largest_blob_bytes": 28728079,
+    "tracked_historical_media_checked": 612,
+    "largest_historical_preview_bytes": 460604,
+    "new_generated_media_Git_objects": 0,
+    "source": {
+      "path": "outputs/research/reproduce-20261015/media-release-final.log",
+      "sha256": "ffd54891af241d07863b71bea456ddba1c29929ea461e16f3ac855bacce73b72"
+    }
+  },
+  "documentation_relative_link_checks": {
+    "documents": [
+      "note.md",
+      "usage.md"
+    ],
+    "relative_targets_and_anchors_verified": 85,
+    "status": "passed"
   }
 }

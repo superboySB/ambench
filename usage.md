@@ -77,7 +77,9 @@ bash tools/research/train_dp_full.sh --check \
 
 点击 GIF 播放压缩预览；三视角原片与旧 34001 片段的来源见[本轮重放清单](usage_assets/trained/replay.json)。预览采样播放，两个视角只算一条试次，独立于历史训练最终成绩。
 
-公开 Release 绑定研究提交 `09310ae`，新媒体保持 Git 未跟踪。GitHub 附件 CDN 实际返回 `application/octet-stream`；这里报告的是已实测的浏览器播放与字节校验，不宣称媒体 MIME 匹配。首轮 MIME 断言失败和一次 CDN 500 保留，后者仅重试该附件。
+主 Release（660 段原片等 **686 个附件**）绑定研究提交 `09310ae`；本轮独立 replay Release（**13 个附件**）绑定 `50c74f8`，新媒体保持 Git 未跟踪。GitHub 附件 CDN 实际返回 `application/octet-stream`；这里报告的是已实测的浏览器播放与字节校验，不宣称媒体 MIME 匹配。首轮 MIME 断言失败和一次 CDN 500 保留，后者仅重试该附件。
+
+新 13 个附件也全部通过匿名 Range 与完整 SHA 校验；`note.md` / `usage.md` 的三处新 GIF 均通过解码及实际动画播放验收，MIME 边界相同。
 
 **录像修复。** Omni 原片按每 4 个仿真步采样一次，1024 步得到 256 个采样图像；旧 MoviePy 逐帧累加时长再向下取整，实际 MP4 只有 255 帧，原审计要求 256 帧因此失败。新审计显式选择旧编码算法，完整解码三路原片，并逐行核对 1024 条 canonical/telemetry/pre-reset 物理记录；末次按钮位移为 0.0050001135 m，超过原生 0.004 m 阈值。旧文件仍缺一个尾部采样，未补造或重写，任务成功由 pre-reset 数值证明。当前写入器修正时长舍入，真实 30 帧/256 帧的 CPU 编码回归均保留最后一个采样图像。
 
